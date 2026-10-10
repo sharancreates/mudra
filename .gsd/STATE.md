@@ -22,7 +22,7 @@
 - **Wave 2:**
   - [x] Plan 1.3: User Onboarding, Wallet Trigger & Immutable Ledger (`03-PLAN.md`) — Completed
   - [x] Plan 1.4: Row Level Security & Anti-Tampering Hardening (`04-PLAN.md`) — Completed
-  - [ ] Plan 1.5: 50-Stock Sample Data & Market Adapter Architecture (`05-PLAN.md`)
+  - [x] Plan 1.5: 50-Stock Sample Data & Market Adapter Architecture (`05-PLAN.md`) — Completed
 - **Wave 3:**
   - [ ] Plan 1.6: Trading Math Engine & Acceptance Scenario Unit Tests (`06-PLAN.md`)
   - [ ] Plan 1.7: Virtual Trading Engine `place_order()` Stored Procedure (`07-PLAN.md`)
