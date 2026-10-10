@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mudra — NSE &amp; BSE Virtual Paper Trading</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              bg: "#14191c",
+              bgAlt: "#1b242a",
+              card: "#212d35",
+              yale: "#284b63",
+              graphite: "#353535",
+              teal: "#3c6e71",
+              tealHover: "#346063",
+              alabaster: "#d9d9d9",
+              white: "#ffffff",
+              amber: "#e09f3e"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
+            display: ["Space Grotesk", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    body {
+      background-color: #14191c;
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="bg-[#14191c] text-[#ffffff] min-h-screen antialiased selection:bg-[#3c6e71]/30 selection:text-white">
+<!-- TOP NAVIGATION BAR -->
+<header class="sticky top-0 z-40 bg-[#14191c]/95 backdrop-blur-md border-b border-[#284b63]/30">
+<div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+<!-- Mudra Brand Identity -->
+<a class="flex items-center gap-2.5 text-white hover:text-[#d9d9d9] transition-colors group" href="#">
+<!-- Minimal Teal Rupee-inspired geometric vector mark -->
+<span class="w-8 h-8 rounded-lg bg-[#3c6e71]/20 border border-[#3c6e71]/50 flex items-center justify-center text-[#9cd0d3] font-semibold text-lg tracking-tight group-hover:border-[#3c6e71] transition-colors">
+          ₹
+        </span>
+<div class="flex flex-col">
+<span class="text-base font-semibold tracking-tight text-white leading-tight">Mudra</span>
+<span class="text-[11px] text-[#d9d9d9]/70 tracking-wide font-normal">Equities Lab</span>
+</div>
+</a>
+<!-- Market Status Indicator & Actions -->
+<div class="flex items-center gap-4 sm:gap-6">
+<div class="flex items-center gap-2 text-xs text-[#d9d9d9]/75">
+<span class="w-2 h-2 rounded-full bg-[#e09f3e] shrink-0"></span>
+<span class="hidden sm:inline">Market Closed · Reopens 09:15 IST</span>
+<span class="sm:hidden">Closed · 09:15 IST</span>
+</div>
+<button class="js-open-auth text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-md border border-[#284b63]/60 bg-[#1b242a]/80 hover:bg-[#284b63]/40 text-[#d9d9d9] hover:text-white transition-all cursor-pointer" type="button">
+          Sign In
+        </button>
+</div>
+</div>
+<!-- Slim full-width educational warning strip directly below nav -->
+<div class="w-full bg-[#1b242a]/90 border-t border-[#284b63]/30 py-1.5 px-5">
+<div class="max-w-6xl mx-auto flex items-center justify-center gap-2 text-[12px] text-[#d9d9d9]/80">
+<span class="material-symbols-outlined text-[#e09f3e] text-[14px]">flag</span>
+<span>100% Virtual Simulator. Zero real money or broker integration. For learning only.</span>
+</div>
+</div>
+</header>
+<main class="w-full">
+<!-- HERO SECTION (Open two-column desktop composition) -->
+<section class="max-w-6xl mx-auto px-5 pt-12 md:pt-20 pb-16 md:pb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+<!-- Left Column: Copy & Actions -->
+<div class="lg:col-span-7 flex flex-col items-start">
+<!-- Eyebrow -->
+<div class="text-[11px] font-medium uppercase tracking-wider text-[#9cd0d3] mb-4">
+            YOUR FIRST STEP INTO THE MARKETS
+          </div>
+<!-- Main Headline -->
+<h1 class="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-[1.18] mb-5">
+            Master the Indian Stock Market with ₹1,00,000 Virtual Capital.
+          </h1>
+<!-- Supporting Copy -->
+<p class="text-[#d9d9d9] text-base sm:text-lg leading-relaxed max-w-xl mb-8">
+            Practise buying and selling NSE &amp; BSE equities without risking a single rupee. Honest next-close execution, explainable P&amp;L, zero hidden advice.
+          </p>
+<!-- Primary CTA Button -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+<button class="js-open-auth px-6 py-3 rounded-lg bg-[#3c6e71] hover:bg-[#346063] text-white font-semibold text-sm transition-all cursor-pointer text-center shadow-sm" type="button">
+              Start Trading with ₹1,00,000 Virtual
+            </button>
+</div>
+<!-- Reassurance line -->
+<p class="text-[#d9d9d9]/70 text-xs sm:text-sm mt-3.5">
+            Free forever · No PAN or bank account required · 18+ only
+          </p>
+</div>
+<!-- Right Column: Demo Portfolio Preview -->
+<div class="lg:col-span-5 w-full">
+<div class="bg-[#212d35]/90 border border-[#284b63]/50 rounded-xl p-6 sm:p-7 backdrop-blur-sm shadow-xl shadow-black/30">
+<!-- Header -->
+<div class="flex items-center justify-between pb-4 border-b border-[#284b63]/40">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#d9d9d9]/70">MY VIRTUAL PORTFOLIO</span>
+<span class="text-[11px] font-medium px-2 py-0.5 rounded bg-[#1b242a] text-[#d9d9d9] border border-[#284b63]/40">DEMO ACCOUNT</span>
+</div>
+<!-- Main Portfolio Value -->
+<div class="py-5 border-b border-[#284b63]/40">
+<div class="flex items-baseline justify-between gap-2 flex-wrap">
+<div>
+<div class="text-xs text-[#d9d9d9]/70 mb-1">Total Value</div>
+<div class="text-2xl sm:text-3xl font-bold tracking-tight text-white tabular-nums font-mono">₹1,04,280.00</div>
+</div>
+<div class="text-right">
+<div class="text-xs text-[#d9d9d9]/70 mb-1">Unrealized P&amp;L</div>
+<div class="text-sm sm:text-base font-semibold text-[#9cd0d3] tabular-nums font-mono">+₹4,280.00 (+4.28%)</div>
+</div>
+</div>
+<!-- Cash Available -->
+<div class="mt-4 pt-3 border-t border-[#284b63]/30 flex items-center justify-between text-xs">
+<span class="text-[#d9d9d9]/70">Cash Available</span>
+<span class="font-mono text-[#ffffff] tabular-nums font-medium">₹72,500.00</span>
+</div>
+</div>
+<!-- Holdings Breakdown -->
+<div class="pt-4">
+<div class="flex items-center justify-between text-[11px] uppercase tracking-wider text-[#9cd0d3] mb-2.5">
+<span>Holdings (3 Equities)</span>
+<span>Valuation &amp; Gain</span>
+</div>
+<div class="divide-y divide-[#284b63]/30 text-xs">
+<!-- RELIANCE -->
+<div class="py-2.5 flex items-center justify-between hover:bg-[#284b63]/20 px-1 rounded transition-colors">
+<div>
+<div class="font-semibold text-white">RELIANCE <span class="text-[10px] text-[#d9d9d9]/60 font-normal">NSE</span></div>
+<div class="text-[#d9d9d9]/70 text-[11px]">Qty 10 · Last ₹1,450.00</div>
+</div>
+<div class="text-right">
+<div class="font-mono font-medium text-white tabular-nums">₹14,500.00</div>
+<div class="font-mono text-[#9cd0d3] text-[11px] tabular-nums">+₹1,200.00</div>
+</div>
+</div>
+<!-- TCS -->
+<div class="py-2.5 flex items-center justify-between hover:bg-[#284b63]/20 px-1 rounded transition-colors">
+<div>
+<div class="font-semibold text-white">TCS <span class="text-[10px] text-[#d9d9d9]/60 font-normal">NSE</span></div>
+<div class="text-[#d9d9d9]/70 text-[11px]">Qty 2 · Last ₹3,800.00</div>
+</div>
+<div class="text-right">
+<div class="font-mono font-medium text-white tabular-nums">₹7,600.00</div>
+<div class="font-mono text-[#9cd0d3] text-[11px] tabular-nums">+₹380.00</div>
+</div>
+</div>
+<!-- INFY -->
+<div class="py-2.5 flex items-center justify-between hover:bg-[#284b63]/20 px-1 rounded transition-colors">
+<div>
+<div class="font-semibold text-white">INFY <span class="text-[10px] text-[#d9d9d9]/60 font-normal">NSE</span></div>
+<div class="text-[#d9d9d9]/70 text-[11px]">Qty 7 · Last ₹1,382.85</div>
+</div>
+<div class="text-right">
+<div class="font-mono font-medium text-white tabular-nums">₹9,680.00</div>
+<div class="font-mono text-[#9cd0d3] text-[11px] tabular-nums">+₹140.00</div>
+</div>
+</div>
+</div>
+<!-- Reconciled math note -->
+<div class="mt-4 pt-3 border-t border-[#284b63]/30 flex items-center justify-between text-[11px] text-[#d9d9d9]/70">
+<span>Holdings Total: <strong class="font-mono text-white font-medium">₹31,780.00</strong></span>
+<span class="text-[#d9d9d9]/60">Simulated next-close pricing</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION DIVIDER -->
+<div class="max-w-6xl mx-auto px-5">
+<div class="border-t border-[#284b63]/30"></div>
+</div>
+<!-- THREE-STEP EXPLAINER (Open Editorial Layout - No boxes, no cards) -->
+<section class="max-w-6xl mx-auto px-5 py-16 md:py-24">
+<!-- Left-aligned Header -->
+<div class="max-w-2xl mb-14 md:mb-16">
+<h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-3">
+          Learn by doing. Understand as you go.
+        </h2>
+<p class="text-[#d9d9d9] text-base leading-relaxed">
+          A simple way to explore the markets, make mistakes safely, and learn what every number actually means.
+        </p>
+</div>
+<!-- Sequential 3-column Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
+<!-- Step 01 -->
+<div class="flex flex-col">
+<div class="text-3xl font-mono font-light text-[#284b63] mb-5">01</div>
+<h3 class="text-lg font-semibold text-white tracking-tight mb-2.5">Get ₹1,00,000 Virtual Cash</h3>
+<p class="text-[#d9d9d9] text-sm leading-relaxed mb-4">
+            Create an account and receive a virtual starting balance to practise without depositing real money.
+          </p>
+<div class="text-xs text-[#d9d9d9]/80 flex items-center gap-1.5 mt-auto pt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3c6e71]"></span>
+            Instant virtual wallet on login
+          </div>
+</div>
+<!-- Step 02 -->
+<div class="flex flex-col border-t md:border-t-0 md:border-l border-[#284b63]/30 pt-8 md:pt-0 md:pl-8 lg:pl-10">
+<div class="text-3xl font-mono font-light text-[#284b63] mb-5">02</div>
+<h3 class="text-lg font-semibold text-white tracking-tight mb-2.5">Place Real Next-Close Orders</h3>
+<p class="text-[#d9d9d9] text-sm leading-relaxed mb-4">
+            Explore 500+ NSE stocks and practise placing orders before the 15:30 IST cutoff. Eligible orders execute using the simulator’s next-close rules.
+          </p>
+<div class="text-xs text-[#d9d9d9]/80 flex items-center gap-1.5 mt-auto pt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3c6e71]"></span>
+            Clear cutoffs. Transparent execution.
+          </div>
+</div>
+<!-- Step 03 -->
+<div class="flex flex-col border-t md:border-t-0 md:border-l border-[#284b63]/30 pt-8 md:pt-0 md:pl-8 lg:pl-10">
+<div class="text-3xl font-mono font-light text-[#284b63] mb-5">03</div>
+<h3 class="text-lg font-semibold text-white tracking-tight mb-2.5">Understand Every Number</h3>
+<p class="text-[#d9d9d9] text-sm leading-relaxed mb-4">
+            Learn how weighted-average cost, simulated fees, realized profit, and unrealized profit affect your portfolio.
+          </p>
+<div class="text-xs text-[#d9d9d9]/80 flex items-center gap-1.5 mt-auto pt-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3c6e71]"></span>
+            Every calculation explained
+          </div>
+</div>
+</div>
+</section>
+<!-- SECTION DIVIDER -->
+<div class="max-w-6xl mx-auto px-5">
+<div class="border-t border-[#284b63]/30"></div>
+</div>
+<!-- DISCIPLINE & EDUCATIONAL VALUE (Open Typographic Comparison - No heavy cards) -->
+<section class="max-w-6xl mx-auto px-5 py-16 md:py-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14">
+<!-- Left Column: Context -->
+<div class="lg:col-span-5">
+<div class="text-[11px] font-medium uppercase tracking-wider text-[#9cd0d3] mb-3">
+            MARKET MECHANICS
+          </div>
+<h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug mb-4">
+            Why next-close execution builds enduring investing discipline.
+          </h2>
+<p class="text-[#d9d9d9] text-sm sm:text-base leading-relaxed">
+            Fast-paced retail apps treat the stock market like a casino table. Mudra is deliberately designed around patient end-of-day valuation so you build rational investor habits before risking real capital.
+          </p>
+</div>
+<!-- Right Column: Open Editorial Comparison List -->
+<div class="lg:col-span-7 flex flex-col justify-center space-y-8">
+<!-- Row 1 -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-6 border-b border-[#284b63]/30">
+<div>
+<div class="text-xs font-semibold text-[#9cd0d3] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3c6e71]"></span>
+                Next-Close Discipline
+              </div>
+<p class="text-[#ffffff] text-sm leading-relaxed">
+                Orders clear at official 15:30 IST market close prices. This teaches conviction, multi-day holding patience, and fundamental analysis.
+              </p>
+</div>
+<div>
+<div class="text-xs font-semibold text-[#d9d9d9]/70 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#353535]"></span>
+                Gamified Trading Apps
+              </div>
+<p class="text-[#d9d9d9] text-sm leading-relaxed">
+                Instant fills at stale quotes feed hyperactive dopamine loops and false expectations of immediate execution liquidity.
+              </p>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-6 border-b border-[#284b63]/30">
+<div>
+<div class="text-xs font-semibold text-[#9cd0d3] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3c6e71]"></span>
+                Statutory Friction Modeled
+              </div>
+<p class="text-[#ffffff] text-sm leading-relaxed">
+                STT (0.1%), GST, stamp duties, and exchange turnover fees are accounted for transparently in every simulated ledger.
+              </p>
+</div>
+<div>
+<div class="text-xs font-semibold text-[#d9d9d9]/70 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#353535]"></span>
+                Hidden Reality
+              </div>
+<p class="text-[#d9d9d9] text-sm leading-relaxed">
+                Omitting taxes and regulatory costs hides break-even hurdles, making marginal intraday trades appear artificially profitable.
+              </p>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<div class="text-xs font-semibold text-[#9cd0d3] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3c6e71]"></span>
+                100% Educational Autonomy
+              </div>
+<p class="text-[#ffffff] text-sm leading-relaxed">
+                Zero stock recommendations, zero paid signal groups, and zero commission kickbacks from external brokers.
+              </p>
+</div>
+<div>
+<div class="text-xs font-semibold text-[#d9d9d9]/70 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#353535]"></span>
+                Predatory Upsells
+              </div>
+<p class="text-[#d9d9d9] text-sm leading-relaxed">
+                Aggressive funnels steering beginners into unverified derivatives channels, high-risk leverage, or affiliate account openings.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION DIVIDER -->
+<div class="max-w-6xl mx-auto px-5">
+<div class="border-t border-[#284b63]/30"></div>
+</div>
+<!-- REFINED CLOSING BANNER / CALL TO ACTION (Restrained, no neon orbs) -->
+<section class="max-w-6xl mx-auto px-5 py-16 md:py-20 text-center">
+<div class="max-w-2xl mx-auto flex flex-col items-center">
+<h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-3">
+          Begin your virtual paper trading journey.
+        </h2>
+<p class="text-[#d9d9d9] text-sm sm:text-base leading-relaxed mb-8">
+          Claim ₹1,00,000 in virtual sandbox capital. No credit cards, no KYC, and zero real money exposure.
+        </p>
+<button class="js-open-auth px-6 py-3 rounded-lg bg-[#3c6e71] hover:bg-[#346063] text-white font-semibold text-sm transition-all cursor-pointer" type="button">
+          Start Trading with ₹1,00,000 Virtual
+        </button>
+</div>
+</section>
+</main>
+<!-- TRUST & EDUCATIONAL FOOTER -->
+<footer class="w-full border-t border-[#284b63]/30 bg-[#14191c] py-12">
+<div class="max-w-6xl mx-auto px-5 flex flex-col gap-8">
+<!-- Top Row: Brand Statement -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded bg-[#3c6e71]/20 border border-[#3c6e71]/40 flex items-center justify-center text-[#9cd0d3] font-semibold text-xs">
+            ₹
+          </span>
+<span class="text-base font-semibold text-white">Mudra</span>
+<span class="text-[#284b63] text-sm">·</span>
+<span class="text-xs sm:text-sm text-[#d9d9d9]/80">Practise with virtual money. Build confidence through understanding.</span>
+</div>
+<button class="js-open-auth text-xs text-[#d9d9d9]/80 hover:text-[#9cd0d3] transition-colors self-start sm:self-auto cursor-pointer" type="button">
+          Access Demo Account →
+        </button>
+</div>
+<!-- Exact Statutory Disclaimer -->
+<div class="pt-4 border-t border-[#284b63]/30">
+<p class="text-xs text-[#d9d9d9]/70 leading-relaxed max-w-4xl">
+          Mudra is an educational simulator. It is not a broker, investment adviser or research analyst and is not registered with SEBI. Data is for learning purposes.
+        </p>
+</div>
+<!-- Bottom Row: Dynamic Copyright -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-[#d9d9d9]/60 gap-2">
+<span>© 2025 Mudra Equities Lab. Simulated learning environment.</span>
+<div class="flex items-center gap-4 text-[#d9d9d9]/60">
+<span>NSE / BSE EOD Simulation</span>
+<span>·</span>
+<span>Zero Real Capital Risk</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- FUNCTIONAL AUTHENTICATION MODAL -->
+<div aria-labelledby="modal-title" aria-modal="true" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6" id="auth-modal" role="dialog">
+<!-- Overlay backdrop -->
+<div class="fixed inset-0 bg-[#14191c]/80 backdrop-blur-sm transition-opacity" id="auth-overlay"></div>
+<!-- Modal Content Box -->
+<div class="relative w-full max-w-md bg-[#212d35] border border-[#284b63]/60 rounded-xl p-6 sm:p-7 shadow-2xl z-10">
+<!-- Close button -->
+<button aria-label="Close modal" class="absolute top-5 right-5 text-[#d9d9d9]/60 hover:text-white transition-colors cursor-pointer" id="auth-close-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<!-- Header -->
+<div class="mb-5">
+<div class="w-8 h-8 rounded-lg bg-[#3c6e71]/20 border border-[#3c6e71]/40 flex items-center justify-center text-[#9cd0d3] font-semibold text-base mb-3">
+          ₹
+        </div>
+<h3 class="text-xl font-bold text-white tracking-tight" id="modal-title">Your learning portfolio starts here.</h3>
+<p class="text-[#d9d9d9] text-xs mt-1">Sign in to explore the markets with virtual capital.</p>
+</div>
+<!-- Tab Switcher -->
+<div class="flex border-b border-[#284b63]/40 mb-5">
+<button class="pb-2.5 px-1 text-xs font-semibold text-[#9cd0d3] border-b-2 border-[#3c6e71] mr-5 transition-colors cursor-pointer" id="tab-signin" type="button">
+          Sign In
+        </button>
+<button class="pb-2.5 px-1 text-xs font-medium text-[#d9d9d9]/70 hover:text-white border-b-2 border-transparent transition-colors cursor-pointer" id="tab-create" type="button">
+          Create Account
+        </button>
+</div>
+<!-- Form -->
+<form class="space-y-4" id="auth-form">
+<div>
+<label class="block text-xs font-medium text-[#d9d9d9] mb-1" for="auth-email">Email address</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-[#1b242a] border border-[#284b63]/60 text-white placeholder-[#d9d9d9]/40 text-xs sm:text-sm focus:outline-none focus:border-[#3c6e71] focus:ring-1 focus:ring-[#3c6e71]" id="auth-email" placeholder="investor@example.com" required="" type="email"/>
+</div>
+<div>
+<label class="block text-xs font-medium text-[#d9d9d9] mb-1" for="auth-password">Password</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-[#1b242a] border border-[#284b63]/60 text-white placeholder-[#d9d9d9]/40 text-xs sm:text-sm focus:outline-none focus:border-[#3c6e71] focus:ring-1 focus:ring-[#3c6e71]" id="auth-password" placeholder="••••••••" required="" type="password"/>
+</div>
+<!-- Feedback message area -->
+<div class="hidden p-3 rounded-lg text-xs font-medium" id="auth-message"></div>
+<button class="w-full py-2.5 rounded-lg bg-[#3c6e71] hover:bg-[#346063] text-white font-semibold text-xs sm:text-sm transition-colors cursor-pointer" id="auth-submit-btn" type="submit">
+          Sign In to Mudra
+        </button>
+</form>
+<!-- Educational demo notice -->
+<p class="text-[11px] text-[#d9d9d9]/70 mt-4 text-center leading-normal">
+        Educational demo environment. No PAN, bank account, or payment details required.
+      </p>
+</div>
+</div>
+<!-- INTERACTIVE JAVASCRIPT -->
+<script>
+    (function initMudraApp() {
+      const modal = document.getElementById('auth-modal');
+      const overlay = document.getElementById('auth-overlay');
+      const closeBtn = document.getElementById('auth-close-btn');
+      const tabSignIn = document.getElementById('tab-signin');
+      const tabCreate = document.getElementById('tab-create');
+      const authForm = document.getElementById('auth-form');
+      const authSubmitBtn = document.getElementById('auth-submit-btn');
+      const authMessage = document.getElementById('auth-message');
+      const authEmail = document.getElementById('auth-email');
+      const authPassword = document.getElementById('auth-password');
+
+      let currentMode = 'signin'; // 'signin' or 'create'
+
+      function openModal() {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          if (authEmail) authEmail.focus();
+        }, 100);
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (authMessage) {
+          authMessage.classList.add('hidden');
+          authMessage.textContent = '';
+        }
+      }
+
+      // Attach open modal handler to all matching CTA buttons
+      document.querySelectorAll('.js-open-auth').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
+      // Close handlers
+      if (overlay) overlay.addEventListener('click', closeModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      // Tab Switchers
+      function setAuthMode(mode) {
+        currentMode = mode;
+        if (mode === 'signin') {
+          tabSignIn.classList.add('text-[#9cd0d3]', 'border-[#3c6e71]', 'font-semibold');
+          tabSignIn.classList.remove('text-[#d9d9d9]/70', 'border-transparent', 'font-medium');
+          tabCreate.classList.remove('text-[#9cd0d3]', 'border-[#3c6e71]', 'font-semibold');
+          tabCreate.classList.add('text-[#d9d9d9]/70', 'border-transparent', 'font-medium');
+          authSubmitBtn.textContent = 'Sign In to Mudra';
+        } else {
+          tabCreate.classList.add('text-[#9cd0d3]', 'border-[#3c6e71]', 'font-semibold');
+          tabCreate.classList.remove('text-[#d9d9d9]/70', 'border-transparent', 'font-medium');
+          tabSignIn.classList.remove('text-[#9cd0d3]', 'border-[#3c6e71]', 'font-semibold');
+          tabSignIn.classList.add('text-[#d9d9d9]/70', 'border-transparent', 'font-medium');
+          authSubmitBtn.textContent = 'Create Virtual Demo Account';
+        }
+        if (authMessage) {
+          authMessage.classList.add('hidden');
+          authMessage.textContent = '';
+        }
+      }
+
+      if (tabSignIn) tabSignIn.addEventListener('click', () => setAuthMode('signin'));
+      if (tabCreate) tabCreate.addEventListener('click', () => setAuthMode('create'));
+
+      // Form validation & simulated demo login
+      if (authForm) {
+        authForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailVal = authEmail.value.trim();
+          const passVal = authPassword.value;
+
+          if (!emailVal || !passVal) {
+            authMessage.className = 'p-3 rounded-lg text-xs font-medium bg-[#93000a]/20 text-[#ffb4ab] border border-[#93000a]/40';
+            authMessage.textContent = 'Please enter both email and password.';
+            authMessage.classList.remove('hidden');
+            return;
+          }
+
+          authSubmitBtn.disabled = true;
+          authSubmitBtn.textContent = currentMode === 'signin' ? 'Authenticating...' : 'Provisioning ₹1,00,000 demo...';
+
+          setTimeout(() => {
+            authMessage.className = 'p-3 rounded-lg text-xs font-medium bg-[#3c6e71]/20 text-[#9cd0d3] border border-[#3c6e71]/40';
+            authMessage.textContent = currentMode === 'signin'
+              ? 'Welcome back to Mudra Demo Sandbox! Redirecting...'
+              : 'Demo account created with ₹1,00,000 virtual balance. Ready to simulate!';
+            authMessage.classList.remove('hidden');
+
+            setTimeout(() => {
+              authSubmitBtn.disabled = false;
+              authSubmitBtn.textContent = currentMode === 'signin' ? 'Sign In to Mudra' : 'Create Virtual Demo Account';
+              closeModal();
+            }, 1400);
+          }, 800);
+        });
+      }
+    })();
+  </script>
+</body></html>

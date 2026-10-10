@@ -1,21 +1,31 @@
 # STATE.md — Current Project State: Mudra
 
 > **Last Updated:** 2026-10-10  
-> **Active Persona:** Person B (Backend and Data)  
+> **Active Persona:** Person A (Frontend and UX Lead) & Person B (Backend and Data)  
 > **Active Milestone:** v1.0 MVP  
 > **Active Phase:** Phase 1 (Week 1: Foundation and Trade Loop)  
-> **Phase Status:** `ready_for_execution`
+> **Status:** Executing
 
 ---
 
 ## Current Position
-- **Phase**: 1 (Week 1: Foundation & Backend Trade Loop)
-- **Task**: Planning complete (Plans 1.1 through 1.9 generated across 5 waves)
-- **Status**: Ready for execution
+- **Phase**: Phase 1 (Week 1: Foundation & Trade Loop)
+- **Person A Focus**: Frontend UI/UX, Stitch screen integration, Next.js scaffold, and mock API client.
+- **Person B Focus**: Backend Supabase schemas, triggers, RLS, 50-stock data adapter, and trading stored procedures.
 
 ---
 
-## Week 1 Execution Waves (Person B)
+## Person A — Week 1 Frontend Plans (`.gsd/phases/frontend/1/`)
+- **Wave 1 (Scaffolding & Data Layer):**
+  - [ ] Plan 1.1: Project Scaffolding & Custom Design System Setup (Palette: Graphite, Stormy Teal, White, Alabaster Grey, Yale Blue)
+  - [ ] Plan 1.2: Mock Data Fixtures & Typed Client-Side API Layer (50 NSE stocks, paise accounting)
+- **Wave 2 (UI Implementation from Stitch HTML):**
+  - [ ] Plan 1.3: Landing Page, Auth Modal & Market Explorer (Adapted from Stitch screens 01, 02, 05)
+  - [ ] Plan 1.4: Stock Detail Page & Buy/Sell Order Modals (Adapted from Stitch screens 04, 06, 07)
+
+---
+
+## Person B — Week 1 Backend Status (`.gsd/phases/1/`)
 - **Wave 1:**
   - [x] Plan 1.1: Data Licensing Enquiries & Contract Synchronization (`01-PLAN.md`) — Completed
   - [x] Plan 1.2: Database Migration Scaffold & Schema DDL Definition (`02-PLAN.md`) — Completed
@@ -33,6 +43,26 @@
 
 ---
 
-## Next Steps
-1. Execute Plan 1.1: Send data licensing enquiries & freeze ADR decisions (`/execute 1`)
-2. Execute Plan 1.2: Establish Supabase configuration and initial database schema DDL
+## Assets & References
+- **Stitch Project ID**: `11131285847390341983`
+- **Downloaded Design Artifacts**: All 7 screens and HTML files saved in `designs/stitch/`:
+  - `01-landing-page.png` / `.html`
+  - `02-auth-modal.png` / `.html`
+  - `03-dashboard.png` / `.html`
+  - `04-stock-detail.png` / `.html`
+  - `05-market-explorer.png` / `.html`
+  - `06-sell-order-modal.png` / `.html`
+  - `07-buy-order-modal.png` / `.html`
+- **Color Palette Tokens**:
+  - Graphite: `#353535`
+  - Stormy Teal: `#3c6e71`
+  - White: `#ffffff`
+  - Alabaster Grey: `#d9d9d9`
+  - Yale Blue: `#284b63`
+
+---
+
+## Next Steps (Person A)
+1. Execute Plan 1.1: Next.js 14 scaffold + Tailwind color palette configuration.
+2. Execute Plan 1.2: 50-instrument mock fixtures and typed API client.
+3. Execute Plan 1.3 & 1.4: Assemble interactive React components from Stitch HTML.

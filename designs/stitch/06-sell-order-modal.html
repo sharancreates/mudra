@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-secondary": "#0c344a",
+          "primary-fixed": "#b8ecef",
+          "secondary": "#a8cbe7",
+          "surface-dim": "#131313",
+          "surface-container-high": "#2a2a2a",
+          "secondary-container": "#2a4c65",
+          "secondary-fixed": "#c9e6ff",
+          "primary-fixed-dim": "#9cd0d3",
+          "inverse-on-surface": "#303030",
+          "on-background": "#e4e2e1",
+          "on-primary": "#003739",
+          "surface-variant": "#353535",
+          "surface-container-highest": "#353535",
+          "on-secondary-fixed": "#001e2f",
+          "background": "#131313",
+          "on-primary-fixed": "#002021",
+          "surface-container": "#1f2020",
+          "tertiary-container": "#656666",
+          "error-container": "#93000a",
+          "primary": "#9cd0d3",
+          "on-tertiary-fixed-variant": "#454747",
+          "on-surface-variant": "#c0c8c8",
+          "on-tertiary-container": "#e5e5e4",
+          "tertiary": "#c6c6c6",
+          "tertiary-fixed-dim": "#c6c6c6",
+          "error": "#ffb4ab",
+          "surface-bright": "#393939",
+          "tertiary-fixed": "#e2e2e2",
+          "outline": "#8a9293",
+          "on-secondary-fixed-variant": "#274a62",
+          "on-surface": "#e4e2e1",
+          "on-error": "#690005",
+          "on-tertiary-fixed": "#1a1c1c",
+          "secondary-fixed-dim": "#a8cbe7",
+          "surface-container-lowest": "#0e0e0e",
+          "on-primary-fixed-variant": "#184e51",
+          "primary-container": "#3c6e71",
+          "inverse-surface": "#e4e2e1",
+          "surface-tint": "#9cd0d3",
+          "on-secondary-container": "#9abdd9",
+          "outline-variant": "#404849",
+          "on-primary-container": "#bbeef1",
+          "on-tertiary": "#2f3131",
+          "surface": "#131313",
+          "inverse-primary": "#346669",
+          "on-error-container": "#ffdad6",
+          "surface-container-low": "#1b1c1c",
+          "yale-blue": "#284b63",
+          "dark-graphite": "#222d35",
+          "stormy-teal": "#3c6e71",
+          "alabaster": "#d9d9d9"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "margin": "1rem",
+          "margin-tablet": "1.5rem",
+          "space-xs": "0.25rem",
+          "margin-desktop": "2rem",
+          "space-xl": "1.5rem",
+          "gutter": "1rem",
+          "gutter-mobile": "0.75rem",
+          "space-sm": "0.5rem",
+          "space-xxs": "0.125rem",
+          "gutter-desktop": "1.25rem",
+          "space-lg": "1rem",
+          "space-md": "0.75rem",
+          "space-xxl": "2rem"
+        },
+        "fontFamily": {
+          "headline-lg-mobile": [ "Space Grotesk" ],
+          "headline-md": [ "Space Grotesk" ],
+          "display-lg": [ "Space Grotesk" ],
+          "data-mono-lg": [ "Geist" ],
+          "display-lg-mobile": [ "Space Grotesk" ],
+          "body-lg": [ "Inter" ],
+          "data-mono-md": [ "Geist" ],
+          "data-mono-sm": [ "Geist" ],
+          "label-lg": [ "Geist" ],
+          "headline-sm": [ "Space Grotesk" ],
+          "headline-lg": [ "Space Grotesk" ],
+          "body-sm": [ "Inter" ],
+          "body-md": [ "Inter" ],
+          "label-md": [ "Geist" ],
+          "label-sm": [ "Geist" ]
+        }
+      }
+    }
+  };
+</script></head><body class="bg-[#0e1418] font-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-on-primary-container"><aside class="hidden md:flex fixed top-0 left-0 bottom-0 w-60 z-30 flex-col bg-[#141c22] border-r border-slate-800/80"><div class="h-20 px-space-lg flex items-center justify-between border-b border-white/5"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-[#3c6e71]/20 flex items-center justify-center border border-[#3c6e71]/40"><span class="font-headline-sm text-headline-sm text-[#9cd0d3] font-semibold">₹</span></div><div><div class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold leading-none">Mudra</div><div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-0.5">Equities Lab</div></div></div></div><nav class="flex-1 py-space-md px-space-xs flex flex-col gap-1 overflow-y-auto" data-active-classes="bg-surface-container-high text-primary font-semibold border-l-2 border-primary"><a class="flex items-center gap-3 px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="">Home</span></a><a class="flex items-center gap-3 px-space-md py-2.5 rounded-lg bg-surface-container-high text-[#9cd0d3] font-semibold border-l-2 border-[#9cd0d3] transition-colors font-label-md text-label-md" data-path="explore" href="#"><span class="material-symbols-outlined text-[20px]">travel_explore</span><span class="">Explore</span></a><a class="flex items-center gap-3 px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="portfolio" href="#"><span class="material-symbols-outlined text-[20px]">pie_chart</span><span class="">Portfolio</span></a><a class="flex items-center gap-3 px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="watchlist" href="#"><span class="material-symbols-outlined text-[20px]">bookmark</span><span class="">Watchlist</span></a><a class="flex items-center gap-3 px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-md text-label-md" data-path="leaderboard" href="#"><span class="material-symbols-outlined text-[20px]">leaderboard</span><span class="">Leaderboard</span></a></nav><div class="p-space-sm border-t border-white/5"><div class="flex items-center justify-between p-2 rounded-lg bg-[#222d35]/60"><div class="flex items-center gap-2.5 min-w-0"><div class="w-8 h-8 rounded-full bg-[#3c6e71] flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-white text-[18px]">person</span></div><div class="min-w-0"><div class="font-label-md text-label-md text-on-surface truncate font-medium">Aarav</div><div class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-secondary-container/50 font-label-sm text-label-sm text-secondary-fixed-dim leading-none">Paper Trader</div></div></div><button aria-label="Account Settings" class="p-1 text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[18px]">settings</span></button></div></div></aside><div class="md:pl-60 min-h-screen flex flex-col"><aside class="sticky top-0 z-30 h-9 bg-[#284b63]/40 border-b border-[#3c6e71]/30 backdrop-blur-md px-4 flex items-center justify-between"><div class="flex items-center gap-2 font-data-mono-sm text-[#9cd0d3]"><span class="material-symbols-outlined text-[15px]">info</span><span class="font-medium">Simulated Money • Prices are End-of-Day (09 Oct 2026) • Fresh</span></div><div class="hidden lg:flex items-center gap-3 font-label-sm text-label-sm text-on-surface-variant"><span class="inline-block w-1.5 h-1.5 rounded-full bg-[#9cd0d3] animate-pulse"></span><span class="">Regulatory Simulator Mode · Not Investment Advice</span></div></aside><header class="sticky top-9 z-20 h-20 bg-[#141c22]/90 backdrop-blur-xl border-b border-slate-800/80"><div class="w-full max-w-[1300px] mx-auto h-full px-space-md lg:px-space-xl flex items-center justify-between gap-4"><div><div class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-semibold">Welcome back, Aarav 👋</div><div class="flex items-center gap-2 mt-1"><div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#3c6e71]/20 border border-[#3c6e71]/40 font-label-sm text-label-sm text-[#9cd0d3]"><span class="w-1.5 h-1.5 rounded-full bg-[#9cd0d3] animate-ping"></span><span class="">Market Open · Closes 15:30 IST</span></div><span class="hidden sm:inline font-data-mono-sm text-on-surface-variant">NSE &amp; BSE Sync Active</span></div></div><div class="flex items-center gap-space-sm"><a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#222d35] border border-white/10 hover:bg-[#284b63]/60 text-on-surface hover:text-white font-label-md text-label-md transition-colors" data-path="explore" href="#"><span class="material-symbols-outlined text-[16px]">search</span><span class="">Explore Markets</span></a><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-transparent border border-white/10 hover:bg-[#222d35] text-on-surface-variant hover:text-white font-label-md text-label-md transition-colors"><span class="material-symbols-outlined text-[16px]">help_outline</span><span class="hidden sm:inline">Help &amp; Simulation Rules</span></button><div class="md:hidden w-8 h-8 rounded-full bg-[#3c6e71] flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-white text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full max-w-[1300px] mx-auto px-space-md lg:px-space-xl py-space-lg pb-24 md:pb-space-xl"><div class="flex flex-col w-full relative">
+<!-- Mudra Stock Detail for RELIANCE (Background) -->
+<div class="w-full space-y-6">
+<!-- Stock Header Card -->
+<div class="w-full rounded-2xl bg-[#141c22] border border-slate-800/80 p-6 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-2xl bg-[#222d35] border border-white/10 flex items-center justify-center font-display-lg text-headline-md text-[#9cd0d3] font-bold shadow-lg">
+        R
+      </div>
+<div>
+<div class="flex items-center gap-2.5">
+<h1 class="font-headline-md text-headline-md text-on-surface font-semibold">RELIANCE</h1>
+<span class="px-2.5 py-0.5 rounded-md text-label-sm font-label-sm bg-surface-container-highest text-secondary font-medium">NSE: RELIANCE</span>
+<span class="px-2.5 py-0.5 rounded-md text-label-sm font-label-sm bg-[#3c6e71]/20 text-[#9cd0d3] font-semibold border border-[#3c6e71]/30">Large Cap</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Reliance Industries Limited · Oil, Gas &amp; Consumable Fuels · NIFTY 50</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<div class="font-data-mono-lg text-2xl text-on-surface font-bold">₹1,400.00</div>
+<div class="font-data-mono-md text-[#9cd0d3] flex items-center justify-end gap-1 font-semibold">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+          +₹24.80 (+1.80%)
+        </div>
+</div>
+<button class="px-6 py-2.5 rounded-xl bg-[#3c6e71] text-white font-label-md text-label-md font-bold hover:brightness-110 transition-all shadow-lg flex items-center gap-2 cursor-pointer" id="open-order-modal-btn">
+<span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+        Trade Order
+      </button>
+</div>
+</div>
+<!-- Chart & Metrics Grid Background -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 rounded-2xl bg-[#141c22] border border-slate-800/80 p-6 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Performance Overview</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-[#222d35] px-2 py-0.5 rounded">1D Intraday Simulated</span>
+</div>
+<div class="flex items-center gap-1 bg-[#0e1418] p-1 rounded-lg">
+<span class="px-2.5 py-1 rounded text-label-sm font-semibold bg-[#284b63] text-white">1D</span>
+<span class="px-2.5 py-1 rounded text-label-sm text-on-surface-variant hover:text-on-surface cursor-pointer">1W</span>
+<span class="px-2.5 py-1 rounded text-label-sm text-on-surface-variant hover:text-on-surface cursor-pointer">1M</span>
+<span class="px-2.5 py-1 rounded text-label-sm text-on-surface-variant hover:text-on-surface cursor-pointer">1Y</span>
+<span class="px-2.5 py-1 rounded text-label-sm text-on-surface-variant hover:text-on-surface cursor-pointer">5Y</span>
+</div>
+</div>
+<div class="h-56 w-full flex items-end gap-2 py-3 px-1 border-b border-white/5">
+<div class="flex-1 bg-[#3c6e71]/20 hover:bg-[#3c6e71]/40 transition-colors rounded-t h-[42%]"></div>
+<div class="flex-1 bg-[#3c6e71]/25 hover:bg-[#3c6e71]/40 transition-colors rounded-t h-[55%]"></div>
+<div class="flex-1 bg-[#3c6e71]/30 hover:bg-[#3c6e71]/40 transition-colors rounded-t h-[48%]"></div>
+<div class="flex-1 bg-[#3c6e71]/35 hover:bg-[#3c6e71]/40 transition-colors rounded-t h-[63%]"></div>
+<div class="flex-1 bg-[#3c6e71]/40 hover:bg-[#3c6e71]/50 transition-colors rounded-t h-[72%]"></div>
+<div class="flex-1 bg-[#3c6e71]/45 hover:bg-[#3c6e71]/50 transition-colors rounded-t h-[69%]"></div>
+<div class="flex-1 bg-[#3c6e71]/50 hover:bg-[#3c6e71]/60 transition-colors rounded-t h-[81%]"></div>
+<div class="flex-1 bg-[#3c6e71]/60 hover:bg-[#3c6e71]/70 transition-colors rounded-t h-[78%]"></div>
+<div class="flex-1 bg-[#3c6e71]/70 hover:bg-[#3c6e71]/80 transition-colors rounded-t h-[89%]"></div>
+<div class="flex-1 bg-[#3c6e71] hover:bg-[#3c6e71]/90 transition-colors rounded-t h-[94%]"></div>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant pt-3">
+<span class="">09:15 Open: ₹1,376.50</span>
+<span class="">Day Low: ₹1,372.10</span>
+<span class="">Day High: ₹1,408.00</span>
+<span class="">15:30 Benchmark: ₹1,400.00</span>
+</div>
+</div>
+<!-- Quick Stats Card -->
+<div class="rounded-2xl bg-[#141c22] border border-slate-800/80 p-6 flex flex-col gap-4">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Key Lab Statistics</h3>
+<div class="divide-y divide-white/5 flex flex-col">
+<div class="py-2.5 flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">52 Week High</span>
+<span class="font-data-mono-md font-medium text-white">₹1,608.80</span>
+</div>
+<div class="py-2.5 flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">52 Week Low</span>
+<span class="font-data-mono-md font-medium text-white">₹1,215.30</span>
+</div>
+<div class="py-2.5 flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Lab Holdings</span>
+<span class="font-data-mono-md font-semibold text-white">9 Shares</span>
+</div>
+<div class="py-2.5 flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Avg. Purchase Price</span>
+<span class="font-data-mono-md font-medium text-white">₹1,365.20</span>
+</div>
+<div class="py-2.5 flex justify-between items-center text-body-sm">
+<span class="text-on-surface-variant">Unrealized P&amp;L</span>
+<span class="font-data-mono-md font-semibold text-[#9cd0d3]">+₹313.20 (+2.55%)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Backdrop Overlay: Deep Yale Blue / Charcoal blur (#0e1418 / #141c22) -->
+<div class="fixed inset-0 bg-[#0e1418]/85 backdrop-blur-md z-40 flex items-center justify-center p-4 overflow-y-auto" id="order-modal-backdrop">
+<!-- The Order Modal Dialog: Dark Graphite container (#222d35 / #353535) -->
+<div class="relative w-full max-w-[540px] bg-[#222d35] border border-[#284b63]/60 rounded-2xl shadow-2xl p-6 text-[#d9d9d9] z-50 my-auto" id="order-dialog-card">
+<!-- Drag handle on top -->
+<div class="w-12 h-1 bg-[#284b63] rounded-full mx-auto mb-4"></div>
+<!-- Active Form View (Styled for SELL State) -->
+<div class="flex flex-col gap-4" id="order-form-panel">
+<!-- Header row -->
+<div class="flex items-start justify-between">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-white font-bold tracking-tight">Place Order: RELIANCE</h2>
+<p class="font-body-sm text-body-sm text-[#d9d9d9]/70 mt-0.5">Reliance Industries Ltd · NSE</p>
+</div>
+<button aria-label="Close" class="w-8 h-8 rounded-full bg-[#141c22] hover:bg-[#284b63] text-[#d9d9d9] hover:text-white border border-[#284b63]/50 flex items-center justify-center transition-colors text-base font-bold cursor-pointer" id="modal-close-btn">
+          ✕
+        </button>
+</div>
+<!-- Segmented Switcher (BUY Inactive Pill in Yale Blue / SELL Active Pill in Coral-Rose) -->
+<div class="p-1.5 rounded-xl bg-[#141c22] border border-[#284b63]/60 flex gap-2" role="tablist">
+<button aria-selected="false" class="py-2 rounded-lg w-1/2 font-label-md text-label-md font-bold transition-all flex items-center justify-center gap-2 bg-[#284b63]/50 text-[#d9d9d9] hover:bg-[#284b63] hover:text-white cursor-pointer" id="tab-buy" role="tab">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">BUY</span>
+</button>
+<button aria-selected="true" class="py-2 rounded-lg w-1/2 font-label-md text-label-md font-bold transition-all flex items-center justify-center gap-2 bg-[#e05666] text-white shadow-md cursor-pointer" id="tab-sell" role="tab">
+<span class="material-symbols-outlined text-[18px]">remove_circle</span>
+<span class="">SELL</span>
+</button>
+</div>
+<!-- Reference Price & Execution badge -->
+<div class="rounded-xl bg-[#141c22] border border-[#284b63]/60 p-3.5 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-label-md text-label-md text-white font-semibold">Current Reference Close: <span class="text-white font-bold font-data-mono-md">₹1,400.00</span></div>
+<div class="font-body-sm text-xs text-[#d9d9d9]/70">as of yesterday's close (09 Oct 2026 EOD benchmark)</div>
+</div>
+<span class="px-2.5 py-0.5 rounded bg-[#3c6e71]/20 border border-[#3c6e71]/40 text-[#9cd0d3] text-xs font-semibold uppercase font-data-mono-sm">EOD Sync</span>
+</div>
+<div class="pt-2 border-t border-[#284b63]/40 flex flex-col gap-1">
+<div class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#9cd0d3]">
+<span class="material-symbols-outlined text-[15px] text-[#3c6e71]">event_repeat</span>
+<span class="">Market Order · Next Eligible Market Close</span>
+</div>
+<p class="text-[11px] leading-relaxed text-[#d9d9d9]/75">Orders fill at 15:30 IST. Since 10-11 Oct is the weekend, next eligible session is <span class="text-white font-medium">Monday, 12 Oct 2026 · 15:30 IST</span>.</p>
+</div>
+</div>
+<!-- Quantity Input section (Holdings in White #ffffff, notes in Alabaster Grey #d9d9d9) -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-white font-semibold" for="share-quantity-input">Quantity (Whole shares only)</label>
+<span class="font-body-sm text-xs text-[#d9d9d9]" id="shares-held-label">Owned in Lab: <span class="text-white font-bold font-data-mono-md" id="shares-held-count">9</span> shares</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 flex items-center bg-[#141c22] border border-[#284b63]/70 rounded-xl p-1">
+<button aria-label="Decrease quantity" class="w-10 h-10 rounded-lg bg-[#222d35] hover:bg-[#284b63] text-white flex items-center justify-center transition-colors cursor-pointer font-bold border border-white/5" id="qty-decrement">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="w-full bg-transparent text-center font-data-mono-lg text-xl text-white focus:outline-none font-bold" id="share-quantity-input" min="1" step="1" type="number" value="9"/>
+<button aria-label="Increase quantity" class="w-10 h-10 rounded-lg bg-[#222d35] hover:bg-[#284b63] text-white flex items-center justify-center transition-colors cursor-pointer font-bold border border-white/5" id="qty-increment">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="qty-chip px-3 py-2 rounded-lg bg-[#141c22] hover:bg-[#284b63] text-xs font-semibold text-[#d9d9d9] transition-colors cursor-pointer border border-[#284b63]/60" data-val="1">1</button>
+<button class="qty-chip px-3 py-2 rounded-lg bg-[#141c22] hover:bg-[#284b63] text-xs font-semibold text-[#d9d9d9] transition-colors cursor-pointer border border-[#284b63]/60" data-val="5">5</button>
+<button class="qty-chip px-3 py-2 rounded-lg bg-[#e05666]/20 border border-[#e05666]/60 text-white text-xs font-bold transition-colors cursor-pointer" data-val="9">9</button>
+<button class="px-3 py-2 rounded-lg bg-[#284b63] hover:bg-[#3c6e71] text-xs font-semibold text-white transition-colors cursor-pointer border border-[#3c6e71]/50" id="qty-max-chip">Max (9)</button>
+</div>
+</div>
+</div>
+<!-- Dynamic Calculation Breakdown -->
+<div class="py-2.5 border-y border-[#284b63]/60 flex flex-col gap-1.5 text-xs">
+<div class="flex items-center justify-between text-[#d9d9d9]">
+<span class="" id="label-trade-value">Reference Trade Value (9 × ₹1,400.00)</span>
+<span class="font-data-mono-md text-white font-medium" id="val-trade-value">₹12,600.00</span>
+</div>
+<div class="flex items-center justify-between text-[#d9d9d9]">
+<span class="flex items-center gap-1">Estimated Fee (0.1% simulated friction)</span>
+<span class="font-data-mono-md text-white font-medium" id="val-fee">₹12.60</span>
+</div>
+<div class="hidden items-center justify-between text-[#d9d9d9]" id="row-buffer">
+<span class="flex items-center gap-1 text-[#d9d9d9]">Cash Reservation Buffer (+10%)<span class="material-symbols-outlined text-[13px] text-[#8a9293] cursor-help" title="Accounts for potential divergence between reference close and execution price">info</span></span>
+<span class="font-data-mono-md text-white font-medium" id="val-buffer">₹0.00</span>
+</div>
+<div class="flex items-center justify-between text-[#d9d9d9]" id="row-sell-remaining">
+<span class="">Shares Remaining in Lab After Sale</span>
+<span class="font-data-mono-md text-white font-semibold" id="val-shares-left">0 shares</span>
+</div>
+<div class="h-px w-full bg-[#284b63]/50 my-1"></div>
+<div class="flex items-center justify-between text-sm font-semibold">
+<span class="text-white" id="label-total-reserved">Estimated Net Credit</span>
+<span class="font-data-mono-md text-[#ffffff] text-base font-bold" id="val-grand-total">₹12,587.40</span>
+</div>
+</div>
+<!-- Wallet Impact section -->
+<div class="flex items-center justify-between text-xs bg-[#141c22] rounded-lg p-2.5 border border-[#284b63]/60">
+<div>
+<span class="text-[#d9d9d9]/70">Available Virtual Cash: </span>
+<span class="font-data-mono-md text-white font-semibold">₹1,00,000.00</span>
+</div>
+<div>
+<span class="text-[#d9d9d9]/70">Est. Cash Balance: </span>
+<span class="font-data-mono-md text-white font-bold" id="val-cash-remaining">₹1,12,587.40</span>
+</div>
+</div>
+<!-- Execution Warning: Yale Blue (#284b63) container with Stormy Teal (#3c6e71) indicator -->
+<div class="bg-[#284b63]/50 border border-[#3c6e71]/70 rounded-xl p-3 text-xs text-[#d9d9d9] flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-full bg-[#3c6e71] flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-white text-[15px]">info</span>
+</div>
+<p class="leading-relaxed">
+<strong class="font-semibold text-white">Pending Execution:</strong> Your order will enter the queue as <span class="font-bold text-white uppercase tracking-wider">Pending</span> and execute at the official closing benchmark on <span class="font-semibold text-white">Mon, 12 Oct 2026 · 15:30 IST</span>. Final fill price may differ from reference price. Mudra operates with zero real capital risk.
+  </p>
+</div>
+<!-- Mandatory Checkbox -->
+<label class="flex items-start gap-2.5 cursor-pointer group select-none">
+<input checked="" class="mt-0.5 w-4 h-4 rounded bg-[#141c22] border-[#284b63] text-[#3c6e71] focus:ring-[#3c6e71] cursor-pointer" id="ack-checkbox" type="checkbox"/>
+<span class="text-xs text-[#d9d9d9] leading-snug group-hover:text-white transition-colors">I understand this is a simulated order and the final execution price may differ from the reference price.</span>
+</label>
+<!-- Primary Confirmation Button: High-contrast action button with White (#ffffff) text -->
+<button class="w-full py-3.5 px-6 rounded-xl bg-[#e05666] hover:bg-[#c94454] text-white font-label-md text-label-md font-bold tracking-wide transition-all shadow-lg shadow-[#e05666]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed" id="confirm-order-btn">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span class="" id="cta-button-label">Confirm Virtual Sell Order (9 Shares)</span>
+</button>
+</div>
+<!-- Order Submitted / Received Success State Dialog: Clean Stormy Teal (#3c6e71) checkmark and badges -->
+<div class="hidden py-4 flex flex-col items-center text-center gap-5" id="order-success-panel">
+<div class="w-16 h-16 rounded-full bg-[#3c6e71]/20 border-2 border-[#3c6e71] flex items-center justify-center text-[#9cd0d3]">
+<span class="material-symbols-outlined text-[36px] text-white">check_circle</span>
+</div>
+<div>
+<span class="text-xs font-data-mono-sm text-[#9cd0d3] uppercase tracking-widest font-semibold px-2.5 py-0.5 rounded-full bg-[#3c6e71]/30 border border-[#3c6e71]/50">Order Placed</span>
+<h3 class="font-headline-md text-headline-md text-white font-bold tracking-tight mt-2">Order Received! (Order #b2e9)</h3>
+<p class="font-body-sm text-sm text-[#d9d9d9] mt-1" id="success-summary">9 shares of RELIANCE queued successfully.</p>
+</div>
+<div class="w-full p-4 rounded-xl bg-[#141c22] border border-[#284b63]/60 text-left text-xs flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[#d9d9d9]">Status</span>
+<span class="px-2.5 py-0.5 rounded-full bg-[#3c6e71]/30 text-white font-semibold font-data-mono-sm text-[11px] flex items-center gap-1.5 border border-[#3c6e71]/60">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9cd0d3] animate-pulse"></span>STATUS: PENDING
+      </span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[#d9d9d9]">Execution Schedule</span>
+<span class="font-data-mono-md text-white font-medium">Mon, 12 Oct 2026 · 15:30 IST</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[#d9d9d9]" id="success-financial-label">Estimated Net Credit</span>
+<span class="font-data-mono-md text-white font-bold text-sm" id="success-financial-val">₹12,587.40</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-3 w-full pt-1">
+<button class="w-full py-3 rounded-xl bg-[#141c22] hover:bg-[#284b63] text-white border border-[#284b63]/60 font-label-md text-label-md font-semibold transition-colors cursor-pointer" id="success-done-btn">Back to Stock Details</button>
+<button class="w-full py-3 rounded-xl bg-[#3c6e71] hover:bg-[#346669] text-white font-label-md text-label-md font-bold transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg" id="order-history-btn">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>View in Order History
+    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Simulator Engine -->
+<script>
+  (function initOrderDialog() {
+    let mode = 'SELL'; // Default in requested SELL State
+    let quantity = 9;
+    const refPrice = 1400.00;
+    const feeRate = 0.001; // 0.1% simulated friction
+    const bufferRate = 0.10; // 10% buffer
+    const availableCash = 100000.00;
+    const userSharesHeld = 9;
+
+    const tabBuy = document.getElementById('tab-buy');
+    const tabSell = document.getElementById('tab-sell');
+    const qtyInput = document.getElementById('share-quantity-input');
+    const btnMinus = document.getElementById('qty-decrement');
+    const btnPlus = document.getElementById('qty-increment');
+    const quickChips = document.querySelectorAll('.qty-chip');
+    const maxChip = document.getElementById('qty-max-chip');
+    const ackCheckbox = document.getElementById('ack-checkbox');
+    const confirmBtn = document.getElementById('confirm-order-btn');
+    const ctaLabel = document.getElementById('cta-button-label');
+
+    const labelTradeValue = document.getElementById('label-trade-value');
+    const valTradeValue = document.getElementById('val-trade-value');
+    const valFee = document.getElementById('val-fee');
+    const rowBuffer = document.getElementById('row-buffer');
+    const valBuffer = document.getElementById('val-buffer');
+    const rowSellRemaining = document.getElementById('row-sell-remaining');
+    const valSharesLeft = document.getElementById('val-shares-left');
+    const labelTotalReserved = document.getElementById('label-total-reserved');
+    const valGrandTotal = document.getElementById('val-grand-total');
+    const valCashRemaining = document.getElementById('val-cash-remaining');
+
+    const formPanel = document.getElementById('order-form-panel');
+    const successPanel = document.getElementById('order-success-panel');
+    const successSummary = document.getElementById('success-summary');
+    const successFinancialLabel = document.getElementById('success-financial-label');
+    const successFinancialVal = document.getElementById('success-financial-val');
+
+    const modalBackdrop = document.getElementById('order-modal-backdrop');
+    const closeBtn = document.getElementById('modal-close-btn');
+    const openModalBtn = document.getElementById('open-order-modal-btn');
+    const successDoneBtn = document.getElementById('success-done-btn');
+    const orderHistoryBtn = document.getElementById('order-history-btn');
+
+    function formatINR(val) {
+      return '₹' + Number(val).toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function updateCalculations() {
+      if (quantity < 1) quantity = 1;
+      qtyInput.value = quantity;
+
+      const tradeValue = quantity * refPrice;
+      const fee = tradeValue * feeRate;
+
+      quickChips.forEach(chip => {
+        const val = parseInt(chip.getAttribute('data-val'), 10);
+        if (val === quantity) {
+          chip.className = mode === 'BUY'
+            ? 'qty-chip px-3 py-2 rounded-lg bg-[#3c6e71]/40 border border-[#3c6e71] text-white text-xs font-bold transition-colors cursor-pointer'
+            : 'qty-chip px-3 py-2 rounded-lg bg-[#e05666]/20 border border-[#e05666]/60 text-white text-xs font-bold transition-colors cursor-pointer';
+        } else {
+          chip.className = 'qty-chip px-3 py-2 rounded-lg bg-[#141c22] hover:bg-[#284b63] text-xs font-semibold text-[#d9d9d9] transition-colors cursor-pointer border border-[#284b63]/60';
+        }
+      });
+
+      if (mode === 'BUY') {
+        const buffer = tradeValue * bufferRate;
+        const totalReserved = tradeValue + fee + buffer;
+        const remainingCash = availableCash - totalReserved;
+
+        labelTradeValue.textContent = `Reference Trade Value (${quantity} × ₹1,400.00)`;
+        valTradeValue.textContent = formatINR(tradeValue);
+        valFee.textContent = formatINR(fee);
+        valBuffer.textContent = formatINR(buffer);
+        labelTotalReserved.textContent = 'Total Cash Reserved';
+        valGrandTotal.textContent = formatINR(totalReserved);
+        valGrandTotal.className = 'font-data-mono-md text-white text-base font-bold';
+        valCashRemaining.textContent = formatINR(Math.max(0, remainingCash));
+
+        ctaLabel.textContent = `Confirm Virtual Buy Order (${formatINR(totalReserved)})`;
+      } else {
+        const netCredit = tradeValue - fee;
+        const sharesLeft = userSharesHeld - quantity;
+
+        labelTradeValue.textContent = `Reference Trade Value (${quantity} × ₹1,400.00)`;
+        valTradeValue.textContent = formatINR(tradeValue);
+        valFee.textContent = formatINR(fee);
+        labelTotalReserved.textContent = 'Estimated Net Credit';
+        valGrandTotal.textContent = formatINR(netCredit);
+        valGrandTotal.className = 'font-data-mono-md text-white text-base font-bold';
+        valSharesLeft.textContent = `${Math.max(0, sharesLeft)} shares`;
+        valCashRemaining.textContent = formatINR(availableCash + netCredit);
+
+        ctaLabel.textContent = `Confirm Virtual Sell Order (${quantity} Shares)`;
+      }
+
+      validateButtonState();
+    }
+
+    function validateButtonState() {
+      const isValid = mode === 'BUY' 
+        ? ((quantity * refPrice * 1.101) <= availableCash) 
+        : (quantity <= userSharesHeld);
+
+      if (ackCheckbox.checked && isValid && quantity > 0) {
+        confirmBtn.disabled = false;
+      } else {
+        confirmBtn.disabled = true;
+      }
+    }
+
+    // Toggle BUY mode
+    tabBuy.addEventListener('click', () => {
+      mode = 'BUY';
+      tabBuy.className = 'py-2 rounded-lg w-1/2 font-label-md text-label-md font-bold transition-all flex items-center justify-center gap-2 bg-[#3c6e71] text-white shadow-md cursor-pointer';
+      tabBuy.setAttribute('aria-selected', 'true');
+
+      tabSell.className = 'py-2 rounded-lg w-1/2 font-label-md text-label-md font-bold transition-all flex items-center justify-center gap-2 bg-[#284b63]/50 text-[#d9d9d9] hover:bg-[#284b63] hover:text-white cursor-pointer';
+      tabSell.setAttribute('aria-selected', 'false');
+
+      confirmBtn.className = 'w-full py-3.5 px-6 rounded-xl bg-[#3c6e71] hover:bg-[#346669] text-white font-label-md text-label-md font-bold tracking-wide transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed';
+
+      rowBuffer.classList.remove('hidden');
+      rowSellRemaining.classList.add('hidden');
+      maxChip.textContent = 'Max (64)';
+      maxChip.className = 'px-3 py-2 rounded-lg bg-[#284b63] hover:bg-[#3c6e71] text-xs font-semibold text-white transition-colors cursor-pointer border border-[#3c6e71]/50';
+
+      updateCalculations();
+    });
+
+    // Toggle SELL mode
+    tabSell.addEventListener('click', () => {
+      mode = 'SELL';
+      tabSell.className = 'py-2 rounded-lg w-1/2 font-label-md text-label-md font-bold transition-all flex items-center justify-center gap-2 bg-[#e05666] text-white shadow-md cursor-pointer';
+      tabSell.setAttribute('aria-selected', 'true');
+
+      tabBuy.className = 'py-2 rounded-lg w-1/2 font-label-md text-label-md font-bold transition-all flex items-center justify-center gap-2 bg-[#284b63]/50 text-[#d9d9d9] hover:bg-[#284b63] hover:text-white cursor-pointer';
+      tabBuy.setAttribute('aria-selected', 'false');
+
+      confirmBtn.className = 'w-full py-3.5 px-6 rounded-xl bg-[#e05666] hover:bg-[#c94454] text-white font-label-md text-label-md font-bold tracking-wide transition-all shadow-lg shadow-[#e05666]/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed';
+
+      rowBuffer.classList.add('hidden');
+      rowSellRemaining.classList.remove('hidden');
+      maxChip.textContent = `Max (${userSharesHeld})`;
+      maxChip.className = 'px-3 py-2 rounded-lg bg-[#284b63] hover:bg-[#3c6e71] text-xs font-semibold text-white transition-colors cursor-pointer border border-[#3c6e71]/50';
+
+      if (quantity > userSharesHeld) {
+        quantity = userSharesHeld;
+      }
+      updateCalculations();
+    });
+
+    btnMinus.addEventListener('click', () => {
+      if (quantity > 1) {
+        quantity -= 1;
+        updateCalculations();
+      }
+    });
+
+    btnPlus.addEventListener('click', () => {
+      quantity += 1;
+      updateCalculations();
+    });
+
+    qtyInput.addEventListener('input', (e) => {
+      const val = parseInt(e.target.value, 10);
+      if (!isNaN(val) && val > 0) {
+        quantity = val;
+        updateCalculations();
+      }
+    });
+
+    quickChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        quantity = parseInt(chip.getAttribute('data-val'), 10);
+        updateCalculations();
+      });
+    });
+
+    maxChip.addEventListener('click', () => {
+      if (mode === 'BUY') {
+        const maxAfford = Math.floor(availableCash / (refPrice * (1 + bufferRate + feeRate)));
+        quantity = Math.max(1, maxAfford);
+      } else {
+        quantity = userSharesHeld;
+      }
+      updateCalculations();
+    });
+
+    ackCheckbox.addEventListener('change', validateButtonState);
+
+    // Place order confirmation transition
+    confirmBtn.addEventListener('click', () => {
+      if (confirmBtn.disabled) return;
+
+      formPanel.classList.add('hidden');
+      successPanel.classList.remove('hidden');
+
+      successSummary.textContent = `${quantity} shares of RELIANCE (${mode}) queued successfully.`;
+      if (mode === 'BUY') {
+        const total = (quantity * refPrice) * (1 + feeRate + bufferRate);
+        successFinancialLabel.textContent = 'Total Cash Reserved';
+        successFinancialVal.textContent = formatINR(total);
+      } else {
+        const net = (quantity * refPrice) * (1 - feeRate);
+        successFinancialLabel.textContent = 'Estimated Net Credit';
+        successFinancialVal.textContent = formatINR(net);
+      }
+    });
+
+    function closeModal() {
+      modalBackdrop.classList.add('hidden');
+    }
+
+    function openModal() {
+      modalBackdrop.classList.remove('hidden');
+      formPanel.classList.remove('hidden');
+      successPanel.classList.add('hidden');
+      ackCheckbox.checked = true;
+      updateCalculations();
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    successDoneBtn.addEventListener('click', closeModal);
+    orderHistoryBtn.addEventListener('click', closeModal);
+    openModalBtn.addEventListener('click', openModal);
+
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) {
+        closeModal();
+      }
+    });
+
+    updateCalculations();
+  })();
+</script>
+</div></main></div><nav class="md:hidden fixed bottom-0 left-0 right-0 z-30 h-16 bg-[#141c22]/95 backdrop-blur-xl border-t border-slate-800/80 flex items-center justify-around px-2 pb-safe" data-active-classes="text-primary font-semibold"><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-sm text-label-sm">Home</span></a><a class="flex flex-col items-center justify-center gap-1 text-[#9cd0d3] font-semibold" data-path="explore" href="#"><span class="material-symbols-outlined text-[20px]">travel_explore</span><span class="font-label-sm text-label-sm">Explore</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface" data-path="portfolio" href="#"><span class="material-symbols-outlined text-[20px]">pie_chart</span><span class="font-label-sm text-label-sm">Portfolio</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface" data-path="watchlist" href="#"><span class="material-symbols-outlined text-[20px]">bookmark</span><span class="font-label-sm text-label-sm">Watchlist</span></a><a class="flex flex-col items-center justify-center gap-1 text-on-surface-variant hover:text-on-surface" data-path="leaderboard" href="#"><span class="material-symbols-outlined text-[20px]">leaderboard</span><span class="font-label-sm text-label-sm">Rankings</span></a></nav>
+</body></html>

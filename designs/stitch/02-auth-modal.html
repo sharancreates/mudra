@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mudra — NSE &amp; BSE Virtual Paper Trading</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-secondary": "#0c344a",
+          "primary-fixed": "#b8ecef",
+          "secondary": "#a8cbe7",
+          "surface-dim": "#131313",
+          "surface-container-high": "#2a2a2a",
+          "secondary-container": "#2a4c65",
+          "secondary-fixed": "#c9e6ff",
+          "primary-fixed-dim": "#9cd0d3",
+          "inverse-on-surface": "#303030",
+          "on-background": "#e4e2e1",
+          "on-primary": "#003739",
+          "surface-variant": "#353535",
+          "surface-container-highest": "#353535",
+          "on-secondary-fixed": "#001e2f",
+          "background": "#14191c",
+          "on-primary-fixed": "#002021",
+          "surface-container": "#1f262c",
+          "tertiary-container": "#656666",
+          "error-container": "#93000a",
+          "primary": "#3c6e71",
+          "primary-light": "#9cd0d3",
+          "on-tertiary-fixed-variant": "#454747",
+          "on-surface-variant": "#d9d9d9",
+          "on-tertiary-container": "#e5e5e4",
+          "tertiary": "#c6c6c6",
+          "tertiary-fixed-dim": "#c6c6c6",
+          "error": "#ffb4ab",
+          "surface-bright": "#393939",
+          "tertiary-fixed": "#e2e2e2",
+          "outline": "#8a9293",
+          "on-secondary-fixed-variant": "#274a62",
+          "on-surface": "#ffffff",
+          "on-error": "#690005",
+          "on-tertiary-fixed": "#1a1c1c",
+          "secondary-fixed-dim": "#a8cbe7",
+          "surface-container-lowest": "#14191c",
+          "on-primary-fixed-variant": "#184e51",
+          "primary-container": "#3c6e71",
+          "inverse-surface": "#e4e2e1",
+          "surface-tint": "#3c6e71",
+          "on-secondary-container": "#9abdd9",
+          "outline-variant": "#404849",
+          "on-primary-container": "#ffffff",
+          "on-tertiary": "#2f3131",
+          "surface": "#1c272e",
+          "inverse-primary": "#346669",
+          "on-error-container": "#ffdad6",
+          "surface-container-low": "#252e35",
+          "graphite": "#252e35",
+          "graphite-dark": "#1c272e",
+          "stormy-teal": "#3c6e71",
+          "alabaster": "#d9d9d9"
+        },
+        fontFamily: {
+          sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+          headline: ["Space Grotesk", "sans-serif"],
+          mono: ["Geist", "ui-monospace", "monospace"]
+        }
+      }
+    }
+  };
+</script>
+<style>
+    body {
+      background-color: #14191c;
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+</style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="bg-[#14191c] text-[#ffffff] min-h-screen antialiased selection:bg-[#3c6e71]/30 selection:text-[#b8ecef]">
+<!-- TOP NAVIGATION BAR -->
+<header class="sticky top-0 z-40 bg-[#1c272e]/95 backdrop-blur-md border-b border-[#3c6e71]/30">
+<div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+<!-- Mudra Brand Identity -->
+<a class="flex items-center gap-2.5 text-white hover:text-[#b8ecef] transition-colors group" href="#">
+<!-- Rupee mark in Stormy Teal theme -->
+<span class="w-8 h-8 rounded-lg bg-[#3c6e71]/20 border border-[#3c6e71]/50 flex items-center justify-center text-[#9cd0d3] font-semibold text-lg tracking-tight group-hover:border-[#3c6e71] transition-colors">
+          ₹
+        </span>
+<div class="flex flex-col">
+<span class="text-base font-semibold tracking-tight text-white leading-tight font-headline">Mudra</span>
+<span class="text-[11px] text-[#d9d9d9] tracking-wide font-normal">Equities Lab</span>
+</div>
+</a>
+<!-- Market Status Indicator & Actions -->
+<div class="flex items-center gap-4 sm:gap-6">
+<div class="flex items-center gap-2 text-xs text-[#d9d9d9]">
+<span class="w-2 h-2 rounded-full bg-amber-400/90 shrink-0"></span>
+<span class="hidden sm:inline">Market Closed · Reopens 09:15 IST</span>
+<span class="sm:hidden">Closed · 09:15 IST</span>
+</div>
+<button class="js-open-auth text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-md border border-[#d9d9d9]/30 bg-[#252e35] hover:bg-[#3c6e71]/30 text-white hover:border-[#3c6e71] transition-all cursor-pointer" type="button">
+          Sign In
+        </button>
+</div>
+</div>
+<!-- Slim full-width educational warning strip directly below nav -->
+<div class="w-full bg-[#14191c]/90 border-t border-[#3c6e71]/20 py-1.5 px-5 text-[#d9d9d9]">
+<div class="max-w-6xl mx-auto flex items-center justify-center gap-2 text-[12px]">
+<span class="material-symbols-outlined text-[#3c6e71] text-[14px]">flag</span>
+<span>100% Virtual Simulator. Zero real money or broker integration. For learning only.</span>
+</div>
+</div>
+</header>
+<main class="w-full"><div class="flex flex-col w-full relative">
+<!-- ATMOSPHERIC BACKGROUND SIMULATION SHOWCASING MUDRA TERMINAL IN DEPTH -->
+<div aria-hidden="true" class="w-full max-w-6xl mx-auto px-5 py-8 opacity-30 blur-[1px] pointer-events-none select-none transition-all duration-700" id="mudra-background-preview">
+<!-- Top Market Ticker Strip -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+<div class="bg-[#252e35]/80 border border-[#3c6e71]/30 p-4 rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-xs text-[#d9d9d9] tracking-wider uppercase font-medium">NIFTY 50</span>
+<span class="text-xs text-[#9cd0d3] bg-[#3c6e71]/30 px-2 py-0.5 rounded-full">+0.84%</span>
+</div>
+<p class="text-xl font-bold text-white mt-2 tabular-nums">24,311.60</p>
+<span class="text-xs text-[#d9d9d9]">+202.40 pts</span>
+</div>
+<div class="bg-[#252e35]/80 border border-[#3c6e71]/30 p-4 rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-xs text-[#d9d9d9] tracking-wider uppercase font-medium">SENSEX</span>
+<span class="text-xs text-[#9cd0d3] bg-[#3c6e71]/30 px-2 py-0.5 rounded-full">+0.72%</span>
+</div>
+<p class="text-xl font-bold text-white mt-2 tabular-nums">79,845.20</p>
+<span class="text-xs text-[#d9d9d9]">+570.15 pts</span>
+</div>
+<div class="bg-[#252e35]/80 border border-[#3c6e71]/30 p-4 rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-xs text-[#d9d9d9] tracking-wider uppercase font-medium">BANK NIFTY</span>
+<span class="text-xs text-rose-300 bg-rose-950/40 px-2 py-0.5 rounded-full">-0.19%</span>
+</div>
+<p class="text-xl font-bold text-white mt-2 tabular-nums">51,890.10</p>
+<span class="text-xs text-[#d9d9d9]">-98.30 pts</span>
+</div>
+<div class="bg-[#252e35]/80 border border-[#3c6e71]/30 p-4 rounded-xl">
+<div class="flex items-center justify-between">
+<span class="text-xs text-[#d9d9d9] tracking-wider uppercase font-medium">INDIA VIX</span>
+<span class="text-xs text-amber-300 bg-amber-950/40 px-2 py-0.5 rounded-full">13.45</span>
+</div>
+<p class="text-xl font-bold text-white mt-2 tabular-nums">Low Volatility</p>
+<span class="text-xs text-[#d9d9d9]">Calm Session</span>
+</div>
+</div>
+<!-- Terminal Split Preview -->
+<div class="grid grid-cols-12 gap-6">
+<div class="col-span-12 lg:col-span-8 bg-[#252e35]/70 border border-[#3c6e71]/20 rounded-xl p-6">
+<div class="flex justify-between items-center mb-4">
+<div>
+<h3 class="text-lg font-semibold text-white">RELIANCE IND. LTD</h3>
+<span class="text-xs text-[#d9d9d9] uppercase">NSE · EQ · Large Cap</span>
+</div>
+<div class="text-right">
+<div class="text-xl font-bold text-[#9cd0d3] tabular-nums">₹2,984.45</div>
+<span class="text-xs text-[#9cd0d3]">+₹38.60 (1.31%)</span>
+</div>
+</div>
+<!-- Sparkline SVG -->
+<div class="w-full h-44 flex items-end">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 600 120">
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#3c6e71" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#3c6e71" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,100 Q40,95 80,70 T160,80 T240,40 T320,65 T400,30 T480,45 T560,15 L600,20 L600,120 L0,120 Z" fill="url(#chartGradient)"></path>
+<path d="M0,100 Q40,95 80,70 T160,80 T240,40 T320,65 T400,30 T480,45 T560,15 L600,20" fill="none" stroke="#3c6e71" stroke-width="2.5"></path>
+</svg>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-[#252e35]/70 border border-[#3c6e71]/20 rounded-xl p-6 flex flex-col justify-between">
+<div>
+<span class="text-xs text-[#d9d9d9] uppercase tracking-wider">Demo Portfolio</span>
+<div class="text-2xl font-bold text-white mt-2 tabular-nums">₹1,00,000.00</div>
+<span class="text-xs text-[#9cd0d3] mt-1 inline-block">Unallocated Virtual Reserves</span>
+</div>
+<div class="bg-[#1c272e] p-4 rounded-lg mt-6 border border-[#3c6e71]/20">
+<span class="text-xs text-[#d9d9d9] uppercase">Paper Execution Mode</span>
+<p class="text-xs text-[#d9d9d9] mt-1">Direct order book simulations with zero slippage on standard market hours.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- AUTHENTICATION DIALOG BACKDROP & CONTAINER -->
+<div aria-describedby="auth-modal-subheading" aria-labelledby="auth-modal-heading" aria-modal="true" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-[#14191c]/90 backdrop-blur-md overflow-y-auto" id="auth-experience-dialog" role="dialog">
+<!-- RE-STYLED MODAL CARD: Dark Graphite container (#252e35) with Yale Blue & Stormy Teal accents -->
+<div class="relative w-full sm:max-w-[480px] bg-[#252e35] rounded-t-3xl sm:rounded-2xl p-6 sm:p-9 shadow-2xl transition-all duration-300 max-h-[94vh] sm:max-h-none overflow-y-auto border border-[#3c6e71]/40" id="auth-panel-card" style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(60, 110, 113, 0.35);">
+<!-- Top Mobile Drag Pill Indicator -->
+<div class="w-12 h-1 bg-[#d9d9d9]/30 rounded-full mx-auto mb-4 sm:hidden"></div>
+<!-- Close Button -->
+<button aria-label="Close dialog" class="absolute top-5 right-5 sm:top-6 sm:right-6 w-9 h-9 flex items-center justify-center rounded-full bg-[#1c272e] hover:bg-[#3c6e71]/30 text-[#d9d9d9] hover:text-white transition-colors cursor-pointer border border-[#d9d9d9]/20" id="auth-dialog-close-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<!-- BRAND HEADER -->
+<div class="flex items-center gap-2.5 mb-5">
+<div class="w-8 h-8 rounded-lg bg-[#3c6e71]/25 border border-[#3c6e71] flex items-center justify-center text-white font-semibold text-base">
+          ₹
+        </div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-headline font-semibold text-white tracking-tight leading-none text-base">Mudra</span>
+<span class="text-[11px] font-semibold text-white bg-[#3c6e71] px-2 py-0.5 rounded tracking-wide">VIRTUAL</span>
+</div>
+<span class="text-xs text-[#d9d9d9] leading-none">NSE &amp; BSE Equities Lab</span>
+</div>
+</div>
+<!-- EDITORIAL HEADLINE & SUBTEXT -->
+<div class="mb-6">
+<h2 class="text-2xl font-bold font-headline text-[#ffffff] tracking-tight leading-tight transition-all" id="auth-modal-heading">
+          Start Your Virtual Trading Journey
+        </h2>
+<p class="text-sm text-[#d9d9d9] mt-1.5 leading-relaxed transition-all" id="auth-modal-subheading">Create your free practice wallet with <span class="font-semibold text-white bg-[#3c6e71]/30 border border-[#3c6e71]/60 px-1.5 py-0.5 rounded tabular-nums">₹1,00,000</span> virtual balance.</p>
+</div>
+<!-- GOOGLE AUTH BUTTON -->
+<button class="w-full min-h-[44px] flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-[#1c272e] hover:bg-[#14191c] text-[#ffffff] text-sm font-medium transition-colors cursor-pointer group active:scale-[0.99] border border-[#d9d9d9]/40 hover:border-[#3c6e71]" id="google-auth-btn" type="button">
+<svg aria-hidden="true" class="w-4 h-4 shrink-0 transition-transform group-hover:scale-110" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+<span>Continue with Google</span>
+</button>
+<!-- TOAST MESSAGE CONTAINER FOR GOOGLE / DEMO FEEDBACK -->
+<div class="hidden my-3 p-3 rounded-lg text-xs font-medium transition-all" id="inline-toast" role="status"></div>
+<!-- RESTRAINED SEPARATOR -->
+<div class="relative my-5 flex items-center justify-center">
+<div class="w-full h-px bg-[#d9d9d9]/25"></div>
+<span class="absolute px-3 bg-[#252e35] text-xs font-medium text-[#d9d9d9] uppercase tracking-wider">
+          or continue with email
+        </span>
+</div>
+<!-- MAIN DEDICATED FORM -->
+<form class="space-y-4" id="mudra-auth-form" novalidate="">
+<!-- EMAIL ADDRESS FIELD -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="text-xs font-medium text-[#ffffff]" for="input-email">Email address</label>
+<span class="text-[11px] font-medium text-[#ffffff] bg-[#3c6e71] px-2 py-0.5 rounded hidden flex items-center gap-1" id="email-valid-indicator">
+<span class="material-symbols-outlined text-[13px]">check</span> Valid format
+            </span>
+</div>
+<div class="relative">
+<input autocomplete="email" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-[#1c272e] text-[#ffffff] placeholder:text-[#d9d9d9]/60 text-sm tabular-nums border border-[#d9d9d9] focus:outline-none focus:border-[#3c6e71] focus:ring-1 focus:ring-[#3c6e71] transition-all" id="input-email" name="email" placeholder="you@example.com" required="" type="email"/>
+</div>
+<p class="text-xs text-[#ffb4ab] mt-1 hidden" id="email-error-msg"></p>
+</div>
+<!-- REGISTRATION SPECIFIC FIELDS (COLLAPSIBLE / TOGGLEABLE) -->
+<div class="space-y-4 transition-all duration-300" id="registration-specific-section">
+<!-- LEADERBOARD DISPLAY NAME FIELD -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="text-xs font-medium text-[#ffffff]" for="input-displayname">Leaderboard Display Name</label>
+<span class="text-[11px] font-medium text-[#ffffff] bg-[#3c6e71] px-2 py-0.5 rounded transition-all" id="username-badge">
+                3-20 chars
+              </span>
+</div>
+<div class="relative">
+<input autocomplete="off" class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-[#1c272e] text-[#ffffff] placeholder:text-[#d9d9d9]/60 text-sm border border-[#d9d9d9] focus:outline-none focus:border-[#3c6e71] focus:ring-1 focus:ring-[#3c6e71] transition-all" id="input-displayname" maxlength="20" name="displayname" placeholder="e.g. BullishAarav" type="text"/>
+<div class="absolute right-3.5 top-1/2 -translate-y-1/2 hidden" id="username-icon">
+<span class="material-symbols-outlined text-[#3c6e71] text-[18px]">verified</span>
+</div>
+</div>
+<!-- DPDP Privacy Detail -->
+<p class="text-xs text-[#d9d9d9] mt-1.5 flex items-start gap-1 leading-relaxed">
+<span class="material-symbols-outlined text-[15px] text-[#3c6e71] shrink-0 mt-0.5">privacy_tip</span>
+<span>Your email is never shown publicly. Your display name appears on rankings.</span>
+</p>
+<p class="text-xs text-[#ffb4ab] mt-1 hidden" id="username-error-msg"></p>
+</div>
+<!-- TWO MANDATORY INDEPENDENT CHECKBOXES -->
+<div class="pt-1 space-y-3">
+<!-- Checkbox 1: Age Eligibility -->
+<label class="flex items-start gap-3 cursor-pointer group select-none">
+<input class="sr-only" id="check-age" type="checkbox"/>
+<div class="w-5 h-5 rounded-md bg-[#1c272e] border border-[#d9d9d9] group-hover:border-[#3c6e71] flex items-center justify-center shrink-0 mt-0.5 transition-colors" id="box-check-age">
+<span class="material-symbols-outlined text-white text-[15px] font-bold opacity-0 transition-opacity" id="icon-check-age">check</span>
+</div>
+<span class="text-xs text-[#d9d9d9] leading-snug">
+                I am <span class="font-semibold text-[#ffffff]">18 years of age or older</span>.
+              </span>
+</label>
+<!-- Checkbox 2: Simulation Acknowledgement -->
+<label class="flex items-start gap-3 cursor-pointer group select-none">
+<input class="sr-only" id="check-simulation" type="checkbox"/>
+<div class="w-5 h-5 rounded-md bg-[#1c272e] border border-[#d9d9d9] group-hover:border-[#3c6e71] flex items-center justify-center shrink-0 mt-0.5 transition-colors" id="box-check-simulation">
+<span class="material-symbols-outlined text-white text-[15px] font-bold opacity-0 transition-opacity" id="icon-check-simulation">check</span>
+</div>
+<span class="text-xs text-[#d9d9d9] leading-snug">
+                I understand that Mudra is a <span class="text-[#ffffff] underline decoration-[#3c6e71] decoration-2 underline-offset-2 font-medium">simulation with zero cash value</span>. No real money or broker accounts are involved.
+              </span>
+</label>
+<!-- Checkbox validation error notice -->
+<p class="text-xs text-[#ffb4ab] hidden" id="checkbox-error-msg"></p>
+</div>
+<!-- LEGAL & DPDP COMPLIANCE TRIGGER -->
+<div class="pt-1">
+<p class="text-xs text-[#d9d9d9] text-center leading-relaxed">
+              By creating an account, you acknowledge our
+              <button class="text-white underline decoration-[#3c6e71] hover:text-[#9cd0d3] font-medium cursor-pointer ml-0.5 transition-colors" id="trigger-terms-modal" type="button">Terms of Service</button>
+              and
+              <button class="text-white underline decoration-[#3c6e71] hover:text-[#9cd0d3] font-medium cursor-pointer transition-colors" id="trigger-privacy-modal" type="button">Privacy Notice</button>.
+            </p>
+</div>
+</div>
+<!-- LOGIN SPECIFIC MICROCOPY -->
+<div class="hidden py-1" id="login-specific-section">
+<p class="text-xs text-[#d9d9d9] flex items-start gap-2">
+<span class="material-symbols-outlined text-[#3c6e71] text-[18px] shrink-0 mt-0.5">mark_email_read</span>
+<span>We’ll send an instant passwordless magic link to resume trading without credentials.</span>
+</p>
+</div>
+<!-- PRIMARY SUBMIT CTA: Stormy Teal (#3c6e71) with White (#ffffff) text -->
+<div class="pt-2">
+<button class="w-full min-h-[48px] py-3 px-5 rounded-xl bg-[#3c6e71] hover:bg-[#346063] active:bg-[#2b5052] text-[#ffffff] font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#3c6e71]/25 hover:shadow-[#3c6e71]/40 transition-all cursor-pointer active:scale-[0.99] border border-[#3c6e71]" id="submit-auth-btn" type="submit">
+<span class="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin hidden" id="btn-spinner"></span>
+<span id="btn-label-text">Create Free Account</span>
+<span class="material-symbols-outlined text-[18px]" id="btn-icon">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- MODE TOGGLE FOOTER -->
+<div class="mt-6 pt-5 border-t border-[#d9d9d9]/20 text-center">
+<p class="text-sm text-[#d9d9d9]" id="auth-toggle-container">
+<span id="toggle-prefix">Already have an account?</span>
+<button class="text-white font-semibold hover:text-[#9cd0d3] cursor-pointer ml-1.5 focus:outline-none underline decoration-[#3c6e71] underline-offset-4" id="toggle-auth-mode-btn" type="button">
+            Sign in
+          </button>
+</p>
+</div>
+</div>
+</div>
+<!-- LEGAL & DPDP DIALOG DRAWER (PURPOSE LIMITATION & RIGHTS MODAL) -->
+<div aria-labelledby="legal-dialog-title" aria-modal="true" class="fixed inset-0 z-60 hidden flex items-center justify-center p-4 bg-[#14191c]/90 backdrop-blur-sm" id="legal-dialog" role="dialog">
+<div class="w-full max-w-lg bg-[#252e35] rounded-2xl p-6 sm:p-7 shadow-2xl relative max-h-[85vh] flex flex-col border border-[#3c6e71]/40">
+<div class="flex items-center justify-between pb-4 border-b border-[#d9d9d9]/20 shrink-0">
+<h3 class="text-lg font-bold text-white font-headline" id="legal-dialog-title">Terms of Service &amp; DPDP 2023 Notice</h3>
+<button class="w-8 h-8 rounded-full bg-[#1c272e] border border-[#d9d9d9]/20 flex items-center justify-center text-[#d9d9d9] hover:text-white transition-colors cursor-pointer" id="legal-dialog-close" type="button">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="overflow-y-auto py-4 space-y-4 text-xs text-[#d9d9d9] pr-1 leading-relaxed">
+<div class="bg-[#1c272e] border border-[#3c6e71]/40 p-3 rounded-xl text-[#ffffff]">
+<span class="font-semibold block mb-0.5 text-[#9cd0d3]">Statutory Simulator Notice</span>
+          Mudra is purely an educational tool. We are not a SEBI-registered broker, research analyst, or investment adviser. No actual rupee transactions or equity allocations occur.
+        </div>
+<div>
+<h4 class="font-semibold text-white mb-1">1. DPDP Act 2023 Compliance &amp; Purpose Limitation</h4>
+<p>In accordance with the Digital Personal Data Protection Act (DPDP) 2023 of India, we collect only minimal credentials (email and your pseudonym display name). This information is utilized solely to maintain session state, track simulated portfolio balances, and render the optional public leaderboard.</p>
+</div>
+<div>
+<h4 class="font-semibold text-white mb-1">2. Data Retention &amp; Rights</h4>
+<p>Your email identifier is never indexed or exhibited publicly. You hold the right to erasure, correction, and grievance redressal. You can reset or purge your virtual portfolio record anytime in profile settings.</p>
+</div>
+<div>
+<h4 class="font-semibold text-white mb-1">3. Virtual Wallet Valuation</h4>
+<p>The ₹1,00,000 initial balance is strictly promotional learning currency with zero cash equivalent. It cannot be withdrawn, redeemed, or transferred to any bank or Demat account.</p>
+</div>
+</div>
+<div class="pt-3 border-t border-[#d9d9d9]/20 shrink-0 flex justify-end">
+<button class="px-5 py-2.5 rounded-xl bg-[#3c6e71] hover:bg-[#346063] text-white font-semibold text-xs cursor-pointer border border-[#3c6e71]" id="legal-dialog-accept" type="button">
+          I Understand &amp; Agree
+        </button>
+</div>
+</div>
+</div>
+<!-- SUCCESS CONGRATULATORY OVERLAY -->
+<div class="fixed top-6 right-6 z-70 hidden max-w-sm w-full bg-[#252e35] rounded-2xl p-4 shadow-2xl transition-all border border-[#3c6e71]" id="success-wallet-toast">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#3c6e71]/30 border border-[#3c6e71] flex items-center justify-center text-white shrink-0">
+<span class="material-symbols-outlined text-lg">account_balance_wallet</span>
+</div>
+<div>
+<h4 class="text-xs text-white font-semibold">₹1,00,000 Demo Credit Unlocked</h4>
+<p class="text-xs text-[#d9d9d9] mt-0.5">Your sandbox terminal is ready with live EOD NSE/BSE simulations.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE AUTH ENGINE -->
+<script>
+  (function initMudraAuthEngine() {
+    let authMode = 'register';
+
+    const dialog = document.getElementById('auth-experience-dialog');
+    const closeBtn = document.getElementById('auth-dialog-close-btn');
+    const heading = document.getElementById('auth-modal-heading');
+    const subheading = document.getElementById('auth-modal-subheading');
+    const toggleBtn = document.getElementById('toggle-auth-mode-btn');
+    const togglePrefix = document.getElementById('toggle-prefix');
+    const form = document.getElementById('mudra-auth-form');
+    const googleBtn = document.getElementById('google-auth-btn');
+    const toast = document.getElementById('inline-toast');
+
+    const inputEmail = document.getElementById('input-email');
+    const emailValidInd = document.getElementById('email-valid-indicator');
+    const emailError = document.getElementById('email-error-msg');
+
+    const regSection = document.getElementById('registration-specific-section');
+    const loginSection = document.getElementById('login-specific-section');
+    const inputDisplay = document.getElementById('input-displayname');
+    const usernameBadge = document.getElementById('username-badge');
+    const usernameIcon = document.getElementById('username-icon');
+    const usernameError = document.getElementById('username-error-msg');
+
+    const checkAge = document.getElementById('check-age');
+    const checkAgeBox = document.getElementById('box-check-age');
+    const checkAgeIcon = document.getElementById('icon-check-age');
+
+    const checkSim = document.getElementById('check-simulation');
+    const checkSimBox = document.getElementById('box-check-simulation');
+    const checkSimIcon = document.getElementById('icon-check-simulation');
+    const checkboxError = document.getElementById('checkbox-error-msg');
+
+    const submitBtn = document.getElementById('submit-auth-btn');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const btnLabelText = document.getElementById('btn-label-text');
+    const btnIcon = document.getElementById('btn-icon');
+
+    const legalDialog = document.getElementById('legal-dialog');
+    const triggerTerms = document.getElementById('trigger-terms-modal');
+    const triggerPrivacy = document.getElementById('trigger-privacy-modal');
+    const legalClose = document.getElementById('legal-dialog-close');
+    const legalAccept = document.getElementById('legal-dialog-accept');
+
+    const successToast = document.getElementById('success-wallet-toast');
+
+    function showToast(message, type = 'info') {
+      toast.className = 'my-3 p-3 rounded-lg text-xs transition-all ' + 
+        (type === 'error' ? 'bg-[#93000a]/50 text-[#ffb4ab] border border-[#ffb4ab]/30' : 
+         type === 'warning' ? 'bg-amber-950/60 text-amber-300 border border-amber-500/30' : 
+         'bg-[#1c272e] text-white border border-[#3c6e71]/40');
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+    }
+
+    function clearToast() {
+      toast.classList.add('hidden');
+      toast.textContent = '';
+    }
+
+    function applyAuthMode(mode) {
+      authMode = mode;
+      clearToast();
+      emailError.classList.add('hidden');
+      if (usernameError) usernameError.classList.add('hidden');
+      if (checkboxError) checkboxError.classList.add('hidden');
+
+      if (authMode === 'register') {
+        heading.textContent = 'Start Your Virtual Trading Journey';
+        subheading.innerHTML = 'Create your free practice wallet with <span class="font-semibold text-white bg-[#3c6e71]/30 border border-[#3c6e71]/60 px-1.5 py-0.5 rounded tabular-nums">₹1,00,000</span> virtual balance.';
+        regSection.classList.remove('hidden');
+        loginSection.classList.add('hidden');
+        btnLabelText.textContent = 'Create Free Account';
+        btnIcon.textContent = 'arrow_forward';
+        togglePrefix.textContent = 'Already have an account?';
+        toggleBtn.textContent = 'Sign in';
+      } else {
+        heading.textContent = 'Welcome back to Mudra';
+        subheading.textContent = 'Pick up where your Indian equity market learning left off.';
+        regSection.classList.add('hidden');
+        loginSection.classList.remove('hidden');
+        btnLabelText.textContent = 'Get Magic Link';
+        btnIcon.textContent = 'send';
+        togglePrefix.textContent = 'New to Mudra?';
+        toggleBtn.textContent = 'Create free account';
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      applyAuthMode(authMode === 'register' ? 'login' : 'register');
+    });
+
+    googleBtn.addEventListener('click', () => {
+      showToast('Google OAuth is not enabled in this sandbox. Please enter your email below to proceed immediately.', 'warning');
+    });
+
+    function isEmailValid(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    }
+
+    inputEmail.addEventListener('input', () => {
+      const val = inputEmail.value.trim();
+      if (!val) {
+        emailValidInd.classList.add('hidden');
+        emailError.classList.add('hidden');
+        return;
+      }
+      if (isEmailValid(val)) {
+        emailValidInd.classList.remove('hidden');
+        emailError.classList.add('hidden');
+      } else {
+        emailValidInd.classList.add('hidden');
+      }
+    });
+
+    function isUsernameValid(name) {
+      return /^[a-zA-Z0-9_]{3,20}$/.test(name);
+    }
+
+    if (inputDisplay) {
+      inputDisplay.addEventListener('input', () => {
+        const val = inputDisplay.value.trim();
+        if (val.length === 0) {
+          usernameBadge.className = 'text-[11px] font-medium text-[#ffffff] bg-[#3c6e71] px-2 py-0.5 rounded';
+          usernameBadge.textContent = '3-20 chars';
+          usernameIcon.classList.add('hidden');
+          usernameError.classList.add('hidden');
+          return;
+        }
+
+        if (val.length < 3) {
+          usernameBadge.className = 'text-[11px] font-medium text-[#ffb4ab] bg-rose-950/60 border border-rose-500/40 px-2 py-0.5 rounded';
+          usernameBadge.textContent = 'Too short';
+          usernameIcon.classList.add('hidden');
+        } else if (!isUsernameValid(val)) {
+          usernameBadge.className = 'text-[11px] font-medium text-[#ffb4ab] bg-rose-950/60 border border-rose-500/40 px-2 py-0.5 rounded';
+          usernameBadge.textContent = 'Letters, digits, _ only';
+          usernameIcon.classList.add('hidden');
+        } else {
+          usernameBadge.className = 'text-[11px] font-medium text-white bg-[#3c6e71] px-2 py-0.5 rounded';
+          usernameBadge.textContent = 'Available';
+          usernameIcon.classList.remove('hidden');
+          usernameError.classList.add('hidden');
+        }
+      });
+    }
+
+    function setupCheckbox(inputEl, boxEl, iconEl) {
+      inputEl.addEventListener('change', () => {
+        if (inputEl.checked) {
+          boxEl.classList.remove('bg-[#1c272e]');
+          boxEl.classList.add('bg-[#3c6e71]', 'border-[#3c6e71]');
+          iconEl.classList.remove('opacity-0');
+        } else {
+          boxEl.classList.remove('bg-[#3c6e71]', 'border-[#3c6e71]');
+          boxEl.classList.add('bg-[#1c272e]');
+          iconEl.classList.add('opacity-0');
+        }
+        if (checkboxError) checkboxError.classList.add('hidden');
+      });
+    }
+
+    setupCheckbox(checkAge, checkAgeBox, checkAgeIcon);
+    setupCheckbox(checkSim, checkSimBox, checkSimIcon);
+
+    function openLegal() {
+      legalDialog.classList.remove('hidden');
+    }
+    function closeLegal() {
+      legalDialog.classList.add('hidden');
+    }
+
+    triggerTerms.addEventListener('click', openLegal);
+    triggerPrivacy.addEventListener('click', openLegal);
+    legalClose.addEventListener('click', closeLegal);
+    legalAccept.addEventListener('click', closeLegal);
+
+    function closeMainDialog() {
+      dialog.classList.add('opacity-0', 'pointer-events-none');
+      const bg = document.getElementById('mudra-background-preview');
+      if (bg) {
+        bg.classList.remove('opacity-30', 'blur-[1px]', 'pointer-events-none', 'select-none');
+      }
+    }
+
+    closeBtn.addEventListener('click', closeMainDialog);
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) {
+        closeMainDialog();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (!legalDialog.classList.contains('hidden')) {
+          closeLegal();
+        } else {
+          closeMainDialog();
+        }
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearToast();
+
+      const emailVal = inputEmail.value.trim();
+
+      if (!isEmailValid(emailVal)) {
+        emailError.textContent = 'Please enter a valid email address (e.g. trader@domain.in).';
+        emailError.classList.remove('hidden');
+        inputEmail.focus();
+        return;
+      } else {
+        emailError.classList.add('hidden');
+      }
+
+      if (authMode === 'register') {
+        const usernameVal = inputDisplay.value.trim();
+        if (!isUsernameValid(usernameVal)) {
+          usernameError.textContent = 'Please choose a leaderboard display name between 3-20 characters.';
+          usernameError.classList.remove('hidden');
+          inputDisplay.focus();
+          return;
+        } else {
+          usernameError.classList.add('hidden');
+        }
+
+        if (!checkAge.checked || !checkSim.checked) {
+          checkboxError.textContent = 'Please confirm both declarations (18+ age and virtual simulation notice) to proceed.';
+          checkboxError.classList.remove('hidden');
+          return;
+        } else {
+          checkboxError.classList.add('hidden');
+        }
+      }
+
+      submitBtn.disabled = true;
+      btnSpinner.classList.remove('hidden');
+      btnIcon.classList.add('hidden');
+      btnLabelText.textContent = authMode === 'register' ? 'Initializing ₹1,00,000 Wallet...' : 'Dispatching Magic Link...';
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        btnSpinner.classList.add('hidden');
+        btnIcon.classList.remove('hidden');
+
+        if (authMode === 'register') {
+          btnLabelText.textContent = 'Account Ready!';
+          showToast('Virtual account registered! ₹1,00,000 credit loaded.', 'info');
+          
+          successToast.classList.remove('hidden');
+          setTimeout(() => {
+            closeMainDialog();
+          }, 1200);
+        } else {
+          btnLabelText.textContent = 'Magic Link Dispatched';
+          showToast('Sign-in link sent to ' + emailVal + '. Valid for 15 minutes.', 'info');
+          setTimeout(() => {
+            closeMainDialog();
+          }, 1400);
+        }
+      }, 900);
+    });
+  })();
+</script></main>
+<!-- TRUST & EDUCATIONAL FOOTER -->
+<footer class="w-full border-t border-[#3c6e71]/30 bg-[#14191c] py-12">
+<div class="max-w-6xl mx-auto px-5 flex flex-col gap-8">
+<!-- Top Row: Brand Statement -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded bg-[#3c6e71]/20 border border-[#3c6e71]/50 flex items-center justify-center text-[#9cd0d3] font-semibold text-xs">
+            ₹
+          </span>
+<span class="text-base font-semibold text-white font-headline">Mudra</span>
+<span class="text-[#d9d9d9]/60 text-sm">·</span>
+<span class="text-xs sm:text-sm text-[#d9d9d9]">Practise with virtual money. Build confidence through understanding.</span>
+</div>
+<button class="js-open-auth text-xs text-[#d9d9d9] hover:text-[#9cd0d3] transition-colors self-start sm:self-auto cursor-pointer" type="button">
+          Access Demo Account →
+        </button>
+</div>
+<!-- Exact Statutory Disclaimer -->
+<div class="pt-4 border-t border-[#3c6e71]/20">
+<p class="text-xs text-[#d9d9d9] leading-relaxed max-w-4xl">
+          Mudra is an educational simulator. It is not a broker, investment adviser or research analyst and is not registered with SEBI. Data is for learning purposes.
+        </p>
+</div>
+<!-- Bottom Row: Dynamic Copyright -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-[#d9d9d9] gap-2">
+<span>© 2025 Mudra Equities Lab. Simulated learning environment.</span>
+<div class="flex items-center gap-4 text-[#d9d9d9]">
+<span>NSE / BSE EOD Simulation</span>
+<span>·</span>
+<span>Zero Real Capital Risk</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- BACKUP/STANDALONE AUTH MODAL RESTYLED CONSISTENTLY -->
+<div aria-labelledby="modal-title" aria-modal="true" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6" id="auth-modal" role="dialog">
+<!-- Overlay backdrop -->
+<div class="fixed inset-0 bg-[#14191c]/90 backdrop-blur-sm transition-opacity" id="auth-overlay"></div>
+<!-- Modal Content Box -->
+<div class="relative w-full max-w-md bg-[#252e35] border border-[#3c6e71]/40 rounded-2xl p-6 sm:p-7 shadow-2xl z-10">
+<!-- Close button -->
+<button aria-label="Close modal" class="absolute top-5 right-5 text-[#d9d9d9] hover:text-white transition-colors cursor-pointer w-8 h-8 rounded-full bg-[#1c272e] flex items-center justify-center border border-[#d9d9d9]/20" id="auth-close-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<!-- Header -->
+<div class="mb-5">
+<div class="w-8 h-8 rounded-lg bg-[#3c6e71]/25 border border-[#3c6e71] flex items-center justify-center text-white font-semibold text-base mb-3">
+          ₹
+        </div>
+<h3 class="text-xl font-bold text-white tracking-tight font-headline" id="modal-title">Your learning portfolio starts here.</h3>
+<p class="text-[#d9d9d9] text-xs mt-1">Sign in to explore the markets with virtual capital.</p>
+</div>
+<!-- Tab Switcher -->
+<div class="flex border-b border-[#d9d9d9]/20 mb-5">
+<button class="pb-2.5 px-1 text-xs font-semibold text-white border-b-2 border-[#3c6e71] mr-5 transition-colors cursor-pointer" id="tab-signin" type="button">
+          Sign In
+        </button>
+<button class="pb-2.5 px-1 text-xs font-medium text-[#d9d9d9] hover:text-white border-b-2 border-transparent transition-colors cursor-pointer" id="tab-create" type="button">
+          Create Account
+        </button>
+</div>
+<!-- Form -->
+<form class="space-y-4" id="auth-form">
+<div>
+<label class="block text-xs font-medium text-white mb-1" for="auth-email">Email address</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-[#1c272e] border border-[#d9d9d9] text-white placeholder-[#d9d9d9]/60 text-xs sm:text-sm focus:outline-none focus:border-[#3c6e71] focus:ring-1 focus:ring-[#3c6e71]" id="auth-email" placeholder="investor@example.com" required="" type="email"/>
+</div>
+<div>
+<label class="block text-xs font-medium text-white mb-1" for="auth-password">Password</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-[#1c272e] border border-[#d9d9d9] text-white placeholder-[#d9d9d9]/60 text-xs sm:text-sm focus:outline-none focus:border-[#3c6e71] focus:ring-1 focus:ring-[#3c6e71]" id="auth-password" placeholder="••••••••" required="" type="password"/>
+</div>
+<!-- Feedback message area -->
+<div class="hidden p-3 rounded-lg text-xs font-medium" id="auth-message"></div>
+<button class="w-full py-2.5 rounded-xl bg-[#3c6e71] hover:bg-[#346063] text-white font-semibold text-xs sm:text-sm transition-colors cursor-pointer border border-[#3c6e71] shadow-lg shadow-[#3c6e71]/25" id="auth-submit-btn" type="submit">
+          Sign In to Mudra
+        </button>
+</form>
+<!-- Educational demo notice -->
+<p class="text-[11px] text-[#d9d9d9] mt-4 text-center leading-normal">
+        Educational demo environment. No PAN, bank account, or payment details required.
+      </p>
+</div>
+</div>
+<!-- INTERACTIVE JAVASCRIPT FOR SECONDARY MODAL -->
+<script>
+    (function initMudraApp() {
+      const modal = document.getElementById('auth-modal');
+      const overlay = document.getElementById('auth-overlay');
+      const closeBtn = document.getElementById('auth-close-btn');
+      const tabSignIn = document.getElementById('tab-signin');
+      const tabCreate = document.getElementById('tab-create');
+      const authForm = document.getElementById('auth-form');
+      const authSubmitBtn = document.getElementById('auth-submit-btn');
+      const authMessage = document.getElementById('auth-message');
+      const authEmail = document.getElementById('auth-email');
+      const authPassword = document.getElementById('auth-password');
+
+      let currentMode = 'signin';
+
+      function openModal() {
+        const mainDialog = document.getElementById('auth-experience-dialog');
+        if (mainDialog && !mainDialog.classList.contains('pointer-events-none') && !mainDialog.classList.contains('opacity-0')) {
+          return;
+        }
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          if (authEmail) authEmail.focus();
+        }, 100);
+      }
+
+      function closeModal() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        if (authMessage) {
+          authMessage.classList.add('hidden');
+          authMessage.textContent = '';
+        }
+      }
+
+      document.querySelectorAll('.js-open-auth').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const mainDialog = document.getElementById('auth-experience-dialog');
+          if (mainDialog && mainDialog.classList.contains('pointer-events-none')) {
+            mainDialog.classList.remove('opacity-0', 'pointer-events-none');
+            const bg = document.getElementById('mudra-background-preview');
+            if (bg) bg.classList.add('opacity-30', 'blur-[1px]', 'pointer-events-none', 'select-none');
+          } else if (!mainDialog) {
+            openModal();
+          }
+        });
+      });
+
+      if (overlay) overlay.addEventListener('click', closeModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      function setAuthMode(mode) {
+        currentMode = mode;
+        if (mode === 'signin') {
+          tabSignIn.classList.add('text-white', 'border-[#3c6e71]', 'font-semibold');
+          tabSignIn.classList.remove('text-[#d9d9d9]', 'border-transparent', 'font-medium');
+          tabCreate.classList.remove('text-white', 'border-[#3c6e71]', 'font-semibold');
+          tabCreate.classList.add('text-[#d9d9d9]', 'border-transparent', 'font-medium');
+          authSubmitBtn.textContent = 'Sign In to Mudra';
+        } else {
+          tabCreate.classList.add('text-white', 'border-[#3c6e71]', 'font-semibold');
+          tabCreate.classList.remove('text-[#d9d9d9]', 'border-transparent', 'font-medium');
+          tabSignIn.classList.remove('text-white', 'border-[#3c6e71]', 'font-semibold');
+          tabSignIn.classList.add('text-[#d9d9d9]', 'border-transparent', 'font-medium');
+          authSubmitBtn.textContent = 'Create Virtual Demo Account';
+        }
+        if (authMessage) {
+          authMessage.classList.add('hidden');
+          authMessage.textContent = '';
+        }
+      }
+
+      if (tabSignIn) tabSignIn.addEventListener('click', () => setAuthMode('signin'));
+      if (tabCreate) tabCreate.addEventListener('click', () => setAuthMode('create'));
+
+      if (authForm) {
+        authForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailVal = authEmail.value.trim();
+          const passVal = authPassword.value;
+
+          if (!emailVal || !passVal) {
+            authMessage.className = 'p-3 rounded-lg text-xs font-medium bg-[#93000a]/50 text-[#ffb4ab] border border-[#ffb4ab]/30';
+            authMessage.textContent = 'Please enter both email and password.';
+            authMessage.classList.remove('hidden');
+            return;
+          }
+
+          authSubmitBtn.disabled = true;
+          authSubmitBtn.textContent = currentMode === 'signin' ? 'Authenticating...' : 'Provisioning ₹1,00,000 demo...';
+
+          setTimeout(() => {
+            authMessage.className = 'p-3 rounded-lg text-xs font-medium bg-[#1c272e] text-white border border-[#3c6e71]';
+            authMessage.textContent = currentMode === 'signin'
+              ? 'Welcome back to Mudra Demo Sandbox! Redirecting...'
+              : 'Demo account created with ₹1,00,000 virtual balance. Ready to simulate!';
+            authMessage.classList.remove('hidden');
+
+            setTimeout(() => {
+              authSubmitBtn.disabled = false;
+              authSubmitBtn.textContent = currentMode === 'signin' ? 'Sign In to Mudra' : 'Create Virtual Demo Account';
+              closeModal();
+            }, 1400);
+          }, 800);
+        });
+      }
+    })();
+  </script>
+</body></html>

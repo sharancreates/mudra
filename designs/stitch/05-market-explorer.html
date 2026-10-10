@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "stormy-teal": "#3c6e71", "stormy-teal-hover": "#2f5759", "stormy-teal-surface": "rgba(60, 110, 113, 0.18)", "alabaster": "#d9d9d9", "alabaster-muted": "#a8b1b5", "yale-blue": "#284b63", "yale-blue-light": "#355b75", "yale-border": "rgba(40, 75, 99, 0.35)", "graphite": "#353535", "graphite-surface": "#222c34", "bg-deep": "#12171a", "bg-sidebar": "#1a2329", "loss-rose": "#f43f5e", "loss-rose-surface": "rgba(244, 63, 94, 0.12)", "warning-amber": "#F59E0B", "warning-amber-surface": "rgba(245, 158, 11, 0.12)" }, "fontFamily": { "display": [ "Space Grotesk", "sans-serif" ], "body": [ "Inter", "sans-serif" ], "mono": [ "Geist", "monospace" ] } } } };</script></head><body class="bg-bg-deep font-body text-alabaster min-h-screen selection:bg-stormy-teal selection:text-white"><aside class="hidden md:flex fixed top-0 left-0 bottom-0 w-60 z-50 flex-col bg-bg-sidebar border-r border-yale-blue/30"><div class="h-20 px-5 flex items-center justify-between border-b border-yale-blue/20"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-lg bg-stormy-teal-surface flex items-center justify-center border border-stormy-teal/40"><span class="font-display text-lg text-stormy-teal font-semibold">₹</span></div><div><div class="font-display text-base text-white tracking-tight font-semibold leading-none">Mudra</div><div class="text-[11px] font-mono text-alabaster-muted uppercase tracking-wider mt-0.5">Equities Lab</div></div></div></div><nav class="flex-1 py-4 px-2 flex flex-col gap-1 overflow-y-auto"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-alabaster-muted hover:bg-graphite-surface hover:text-white transition-colors text-sm font-medium" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Home</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-graphite-surface text-white font-semibold border-l-2 border-stormy-teal transition-colors text-sm" data-path="explore" href="#"><span class="material-symbols-outlined text-[20px] text-stormy-teal">travel_explore</span><span>Explore</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-alabaster-muted hover:bg-graphite-surface hover:text-white transition-colors text-sm font-medium" data-path="portfolio" href="#"><span class="material-symbols-outlined text-[20px]">pie_chart</span><span>Portfolio</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-alabaster-muted hover:bg-graphite-surface hover:text-white transition-colors text-sm font-medium" data-path="watchlist" href="#"><span class="material-symbols-outlined text-[20px]">bookmark</span><span>Watchlist</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-alabaster-muted hover:bg-graphite-surface hover:text-white transition-colors text-sm font-medium" data-path="leaderboard" href="#"><span class="material-symbols-outlined text-[20px]">leaderboard</span><span>Leaderboard</span></a></nav><div class="p-3 border-t border-yale-blue/20"><div class="flex items-center justify-between p-2 rounded-lg bg-graphite-surface/70 border border-yale-blue/20"><div class="flex items-center gap-2.5 min-w-0"><div class="w-8 h-8 rounded-full bg-stormy-teal flex items-center justify-center shrink-0 text-white font-semibold"><span class="material-symbols-outlined text-[18px]">person</span></div><div class="min-w-0"><div class="text-sm text-white truncate font-medium">Aarav</div><div class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-yale-blue/40 text-[10px] text-alabaster-muted leading-none">Paper Trader</div></div></div><button aria-label="Account Settings" class="p-1 text-alabaster-muted hover:text-white transition-colors"><span class="material-symbols-outlined text-[18px]">settings</span></button></div></div></aside><div class="md:pl-60 min-h-screen flex flex-col"><aside class="sticky top-0 z-50 h-9 bg-warning-amber-surface border-b border-warning-amber/20 backdrop-blur-md px-4 flex items-center justify-between"><div class="flex items-center gap-2 font-mono text-xs text-warning-amber"><span class="material-symbols-outlined text-[15px]">warning</span><span class="font-medium">Simulated Money • Prices are End-of-Day (09 Oct 2026) • Fresh</span></div><div class="hidden lg:flex items-center gap-3 text-xs text-warning-amber/90 font-mono"><span class="inline-block w-1.5 h-1.5 rounded-full bg-warning-amber animate-pulse"></span><span>Regulatory Simulator Mode · Not Investment Advice</span></div></aside><header class="sticky top-9 z-40 h-20 bg-bg-deep/95 backdrop-blur-xl border-b border-yale-blue/30"><div class="w-full max-w-[1300px] mx-auto h-full px-4 lg:px-8 flex items-center justify-between gap-4"><div><div class="font-display text-lg sm:text-xl text-white tracking-tight font-semibold">Welcome back, Aarav 👋</div><div class="flex items-center gap-2 mt-1"><div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-stormy-teal-surface border border-stormy-teal/30 text-xs text-alabaster font-mono"><span class="w-1.5 h-1.5 rounded-full bg-stormy-teal animate-ping"></span><span>Market Open · Closes 15:30 IST</span></div><span class="hidden sm:inline font-mono text-xs text-alabaster-muted">NSE &amp; BSE Sync Active</span></div></div><div class="flex items-center gap-3"><a class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-graphite-surface border border-yale-blue/40 hover:border-stormy-teal text-alabaster hover:text-white text-xs font-medium transition-colors" data-path="explore" href="#"><span class="material-symbols-outlined text-[16px] text-stormy-teal">search</span><span>Explore Markets</span></a><button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-transparent border border-yale-blue/30 hover:bg-graphite-surface text-alabaster-muted hover:text-white text-xs transition-colors"><span class="material-symbols-outlined text-[16px]">help_outline</span><span class="hidden sm:inline">Help &amp; Simulation Rules</span></button><div class="md:hidden w-8 h-8 rounded-full bg-stormy-teal flex items-center justify-center shrink-0 text-white"><span class="material-symbols-outlined text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full max-w-[1300px] mx-auto px-4 lg:px-8 py-6 pb-24 md:pb-8"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-6">
+<!-- Header & Transparency Framing -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-1.5">
+<div class="flex items-center gap-3">
+<h1 class="font-display text-2xl sm:text-3xl text-white tracking-tight font-semibold">Explore Markets</h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-yale-blue/40 border border-yale-blue/50 text-xs text-alabaster font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-stormy-teal animate-pulse"></span>
+            NSE Feed
+          </span>
+</div>
+<p class="text-sm text-alabaster max-w-2xl">
+          Search NSE and BSE instruments and practise trading with virtual money.
+        </p>
+<p class="text-xs text-alabaster-muted font-mono">
+          Showing sample NSE instruments • Prices as of 09 Oct 2026 Close <span class="text-alabaster-muted/80">(Sample data · Illustrative closing prices)</span>
+</p>
+</div>
+<!-- Quick Virtual Cash Reminder Pill -->
+<div class="flex items-center gap-3 self-start md:self-auto bg-graphite-surface px-4 py-2.5 rounded-lg border border-yale-blue/40 shadow-sm backdrop-blur-md">
+<div class="w-8 h-8 rounded-full bg-stormy-teal-surface flex items-center justify-center text-stormy-teal border border-stormy-teal/30">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+</div>
+<div>
+<div class="text-[11px] text-alabaster-muted uppercase tracking-wider font-mono">Free Virtual Cash</div>
+<div class="text-base sm:text-lg text-white font-semibold font-mono" id="user-cash-display">₹87,570.20</div>
+</div>
+</div>
+</div>
+<!-- Stock Search Control Bar -->
+<div class="flex flex-col gap-3">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-alabaster-muted">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</div>
+<input autocomplete="off" class="w-full pl-12 pr-12 py-3.5 bg-graphite-surface text-white placeholder:text-alabaster-muted/70 rounded-xl border border-alabaster focus:outline-none focus:border-stormy-teal focus:ring-1 focus:ring-stormy-teal transition-all text-sm font-medium shadow-inner" id="stock-search-input" placeholder="Search NSE/BSE stocks by name or ticker (e.g., RELIANCE, TCS, INFY)..." type="text"/>
+<button aria-label="Clear search query" class="absolute inset-y-0 right-0 pr-4 items-center text-alabaster-muted hover:text-white hidden transition-colors" id="clear-search-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Keyboard Accessible Quick Filters -->
+<div class="flex flex-wrap items-center gap-2 pt-1 text-xs">
+<span class="text-alabaster-muted font-medium flex items-center gap-1 uppercase tracking-wider font-mono text-[11px]">
+<span class="material-symbols-outlined text-[14px]">history</span> Recent:
+        </span>
+<button class="recent-pill px-2.5 py-1 rounded-md bg-graphite-surface text-alabaster hover:text-white hover:bg-yale-blue/60 transition-colors font-mono border border-yale-blue/30" data-ticker="RELIANCE" type="button">RELIANCE</button>
+<button class="recent-pill px-2.5 py-1 rounded-md bg-graphite-surface text-alabaster hover:text-white hover:bg-yale-blue/60 transition-colors font-mono border border-yale-blue/30" data-ticker="TCS" type="button">TCS</button>
+<button class="recent-pill px-2.5 py-1 rounded-md bg-graphite-surface text-alabaster hover:text-white hover:bg-yale-blue/60 transition-colors font-mono border border-yale-blue/30" data-ticker="INFY" type="button">INFY</button>
+<button class="recent-pill px-2.5 py-1 rounded-md bg-graphite-surface text-alabaster hover:text-white hover:bg-yale-blue/60 transition-colors font-mono border border-yale-blue/30" data-ticker="HDFCBANK" type="button">HDFCBANK</button>
+</div>
+</div>
+<!-- Sector Filter Tabs & Sort Controls -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pt-2 border-b border-yale-blue/30 pb-4">
+<!-- Sector Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+<button class="sector-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stormy-teal text-white transition-colors whitespace-nowrap shadow-sm" data-sector="ALL">All</button>
+<button class="sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap" data-sector="IT">IT</button>
+<button class="sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap" data-sector="Banking">Banking</button>
+<button class="sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap" data-sector="Energy">Energy</button>
+<button class="sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap" data-sector="Automobile">Automobile</button>
+<button class="sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap" data-sector="Pharma">Pharma</button>
+<button class="sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap" data-sector="FMCG">FMCG</button>
+</div>
+<!-- Neutral Metadata & Sorter -->
+<div class="flex items-center justify-between lg:justify-end gap-4 shrink-0">
+<span class="font-mono text-xs text-alabaster-muted" id="results-count">Showing 20 instruments</span>
+<div class="flex items-center gap-2">
+<label class="text-[11px] font-mono text-alabaster-muted uppercase tracking-wider whitespace-nowrap" for="sort-select">Sort by</label>
+<div class="relative">
+<select class="appearance-none bg-graphite-surface text-alabaster text-xs pl-3 pr-8 py-1.5 rounded-lg border border-yale-blue/40 focus:outline-none focus:border-stormy-teal cursor-pointer" id="sort-select">
+<option value="alpha">Alphabetical (A–Z)</option>
+<option value="price-desc">Price (High to Low)</option>
+<option value="price-asc">Price (Low to High)</option>
+<option value="change-desc">Change % (Top Gainers)</option>
+<option value="change-asc">Change % (Top Decliners)</option>
+</select>
+<span class="material-symbols-outlined text-[16px] text-alabaster-muted absolute right-2 top-2 pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stock Listing Table (Clean, Open, Yale Blue Row Dividers) -->
+<div class="w-full overflow-x-auto">
+<table class="w-full border-collapse text-left" id="instruments-table">
+<thead>
+<tr class="border-b border-yale-blue/40 text-alabaster-muted font-mono text-xs uppercase tracking-wider">
+<th class="py-3 px-3 font-semibold">Instrument / Security</th>
+<th class="py-3 px-3 font-semibold hidden sm:table-cell">Sector</th>
+<th class="py-3 px-3 font-semibold text-right">EOD Close Price</th>
+<th class="py-3 px-3 font-semibold text-right">Day Change</th>
+<th class="py-3 px-3 font-semibold text-right w-36">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-yale-blue/30 text-sm font-body" id="instruments-body">
+<!-- Populated dynamically via script with complete 20 stocks -->
+</tbody>
+</table>
+<!-- Empty State -->
+<div class="hidden py-16 text-center" id="no-results-state">
+<span class="material-symbols-outlined text-[44px] text-alabaster-muted/40 mb-2">manage_search</span>
+<h3 class="font-display text-lg text-white font-medium">No matching instruments found</h3>
+<p class="text-sm text-alabaster-muted mt-1">Try adjusting your search query or selecting 'All' sectors.</p>
+<button class="mt-4 px-4 py-2 rounded-lg bg-graphite-surface border border-yale-blue/50 text-alabaster hover:text-white hover:bg-yale-blue/40 transition-colors text-xs font-mono" id="reset-filter-btn">
+          Reset Search Filters
+        </button>
+</div>
+</div>
+<!-- Informational Footer Note -->
+<div class="mt-4 p-4 rounded-xl bg-graphite-surface/70 border border-yale-blue/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-alabaster">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-stormy-teal">info</span>
+<span class="text-xs">
+          Orders are simulated on Mudra Paper Trader against the official closing prices of 09 Oct 2026. Execution reflects settlement principles.
+        </span>
+</div>
+<span class="text-[11px] font-mono uppercase tracking-wider text-alabaster-muted shrink-0">Indian Equity Simulator</span>
+</div>
+</div>
+<!-- Simulated Order-Entry Modal -->
+<div aria-modal="true" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg-deep/80 backdrop-blur-md hidden transition-opacity opacity-0" id="trade-modal" role="dialog">
+<div class="relative w-full max-w-lg bg-bg-sidebar rounded-2xl border border-yale-blue/50 shadow-2xl p-6 overflow-hidden">
+<!-- Modal Header -->
+<div class="flex items-start justify-between border-b border-yale-blue/30 pb-4">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-display text-xl text-white font-semibold" id="modal-symbol">RELIANCE</span>
+<span class="px-1.5 py-0.5 rounded bg-graphite text-alabaster font-mono text-[11px] uppercase">NSE</span>
+</div>
+<div class="text-xs text-alabaster mt-0.5" id="modal-company">Reliance Industries Ltd</div>
+</div>
+<button aria-label="Close Order Dialog" class="p-1 rounded-lg text-alabaster-muted hover:text-white hover:bg-graphite-surface transition-colors" id="close-modal-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Execution Notice -->
+<div class="my-4 p-3 rounded-lg bg-graphite-surface/90 border border-yale-blue/30 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-stormy-teal shrink-0 mt-0.5">verified</span>
+<div class="text-xs text-alabaster">
+<span class="text-white font-medium">Simulated Execution:</span> Orders clear against next available market close. 
+          Reference EOD Close: <span class="text-white font-semibold font-mono" id="modal-price">₹1,460.00</span>
+</div>
+</div>
+<!-- Buy / Sell Intent Tabs -->
+<div class="grid grid-cols-2 p-1 rounded-xl bg-bg-deep border border-yale-blue/40 mb-5">
+<button class="py-2 rounded-lg text-xs font-semibold text-white bg-stormy-teal transition-all shadow-sm" id="modal-buy-tab">
+          BUY
+        </button>
+<button class="py-2 rounded-lg text-xs font-medium text-alabaster-muted hover:text-white transition-all" id="modal-sell-tab">
+          SELL
+        </button>
+</div>
+<!-- Form Inputs -->
+<div class="space-y-4">
+<div>
+<div class="flex justify-between items-center mb-1.5">
+<label class="text-xs text-white font-medium" for="order-quantity">Quantity (Units)</label>
+<span class="font-mono text-xs text-alabaster-muted">Lot size: 1 share</span>
+</div>
+<div class="relative">
+<input class="w-full px-4 py-2.5 bg-bg-deep text-white font-mono text-sm rounded-xl border border-alabaster focus:outline-none focus:border-stormy-teal focus:ring-1 focus:ring-stormy-teal" id="order-quantity" min="1" type="number" value="10"/>
+<span class="absolute right-3.5 top-3 text-alabaster-muted font-mono text-xs">Shares</span>
+</div>
+</div>
+<!-- Cost Calculation Breakdown -->
+<div class="p-3.5 rounded-xl bg-bg-deep/80 border border-yale-blue/40 space-y-2 text-alabaster text-xs">
+<div class="flex justify-between items-center">
+<span>Gross Simulated Value:</span>
+<span class="font-mono text-white font-medium" id="modal-gross-value">₹14,600.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span>Est. STT &amp; Regulatory Friction (0.1%):</span>
+<span class="font-mono text-white font-medium" id="modal-friction">₹14.60</span>
+</div>
+<div class="flex justify-between items-center border-t border-yale-blue/30 pt-2 text-white font-medium">
+<span>Estimated Total Required:</span>
+<span class="font-mono text-stormy-teal text-sm font-semibold" id="modal-total-value">₹14,614.60</span>
+</div>
+<div class="flex justify-between items-center pt-1 text-alabaster-muted text-[11px] font-mono">
+<span>Available Virtual Cash:</span>
+<span class="font-mono text-alabaster" id="modal-cash-avail">₹87,570.20</span>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full py-3 px-4 rounded-xl text-xs font-semibold bg-stormy-teal text-white hover:bg-stormy-teal-hover transition-colors shadow-lg active:scale-[0.99] flex items-center justify-center gap-2" id="confirm-order-btn">
+<span class="material-symbols-outlined text-[18px]">shopping_cart_checkout</span>
+<span id="modal-submit-label">Submit Simulated Buy Order</span>
+</button>
+<p class="text-center text-xs text-alabaster-muted/80">
+          Zero real money or broker integration. 100% paper trading simulation.
+        </p>
+</div>
+</div>
+</div>
+<!-- Simulated Order Confirmation Toast -->
+<div class="fixed bottom-20 md:bottom-8 right-6 z-50 flex items-center gap-3 px-4 py-3 rounded-xl bg-bg-sidebar border border-stormy-teal/50 text-white shadow-2xl transition-all transform translate-y-10 opacity-0 pointer-events-none" id="toast">
+<div class="w-7 h-7 rounded-full bg-stormy-teal-surface flex items-center justify-center text-stormy-teal shrink-0 border border-stormy-teal/30">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div class="text-xs">
+<div class="font-semibold text-white" id="toast-title">Simulated Order Placed</div>
+<div class="text-alabaster" id="toast-message">Order for 10 shares of RELIANCE queued for EOD sync.</div>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    // Complete dataset of 20 realistic NSE instruments across key sectors
+    const instruments = [
+      { symbol: "ASIANPAINT", name: "Asian Paints Ltd", sector: "FMCG", price: 2950.00, change: -0.70, exchange: "NSE", inWatchlist: false },
+      { symbol: "AXISBANK", name: "Axis Bank Ltd", sector: "Banking", price: 1180.00, change: 0.65, exchange: "NSE", inWatchlist: false },
+      { symbol: "BAJFINANCE", name: "Bajaj Finance Ltd", sector: "Banking", price: 7120.00, change: -1.15, exchange: "NSE", inWatchlist: false },
+      { symbol: "BHARTIARTL", name: "Bharti Airtel Ltd", sector: "Telecom", price: 1640.00, change: 1.40, exchange: "NSE", inWatchlist: false },
+      { symbol: "CIPLA", name: "Cipla Ltd", sector: "Pharma", price: 1510.00, change: -0.20, exchange: "NSE", inWatchlist: false },
+      { symbol: "DRREDDY", name: "Dr. Reddy's Laboratories", sector: "Pharma", price: 6450.00, change: 0.40, exchange: "NSE", inWatchlist: false },
+      { symbol: "HDFCBANK", name: "HDFC Bank Ltd", sector: "Banking", price: 1682.40, change: -0.35, exchange: "NSE", inWatchlist: true },
+      { symbol: "HINDUNILVR", name: "Hindustan Unilever Ltd", sector: "FMCG", price: 2390.00, change: -0.45, exchange: "NSE", inWatchlist: false },
+      { symbol: "ICICIBANK", name: "ICICI Bank Ltd", sector: "Banking", price: 1245.10, change: 1.10, exchange: "NSE", inWatchlist: false },
+      { symbol: "INFY", name: "Infosys Ltd", sector: "IT", price: 1382.85, change: 0.42, exchange: "NSE", inWatchlist: false },
+      { symbol: "ITC", name: "ITC Ltd", sector: "FMCG", price: 482.30, change: 0.30, exchange: "NSE", inWatchlist: false },
+      { symbol: "KOTAKBANK", name: "Kotak Mahindra Bank", sector: "Banking", price: 1795.00, change: -0.15, exchange: "NSE", inWatchlist: false },
+      { symbol: "LT", name: "Larsen & Toubro Ltd", sector: "Infra", price: 3520.00, change: 0.85, exchange: "NSE", inWatchlist: false },
+      { symbol: "MARUTI", name: "Maruti Suzuki India Ltd", sector: "Automobile", price: 11850.00, change: -0.60, exchange: "NSE", inWatchlist: false },
+      { symbol: "RELIANCE", name: "Reliance Industries Ltd", sector: "Energy", price: 1460.00, change: 1.25, exchange: "NSE", inWatchlist: false },
+      { symbol: "SUNPHARMA", name: "Sun Pharmaceutical Ind Ltd", sector: "Pharma", price: 1740.20, change: 0.95, exchange: "NSE", inWatchlist: false },
+      { symbol: "TATAMOTORS", name: "Tata Motors Ltd", sector: "Automobile", price: 920.50, change: 2.15, exchange: "NSE", inWatchlist: false },
+      { symbol: "TCS", name: "Tata Consultancy Services Ltd", sector: "IT", price: 3810.00, change: 0.78, exchange: "NSE", inWatchlist: true },
+      { symbol: "TITAN", name: "Titan Company Ltd", sector: "Consumer", price: 3410.00, change: 1.05, exchange: "NSE", inWatchlist: false },
+      { symbol: "WIPRO", name: "Wipro Ltd", sector: "IT", price: 540.20, change: 0.10, exchange: "NSE", inWatchlist: false }
+    ];
+
+    let currentSector = "ALL";
+    let searchQuery = "";
+    let currentSort = "alpha";
+    let availableVirtualCash = 87570.20;
+    let selectedStock = null;
+    let orderType = "BUY";
+
+    // DOM Elements
+    const searchInput = document.getElementById("stock-search-input");
+    const clearSearchBtn = document.getElementById("clear-search-btn");
+    const sectorPills = document.querySelectorAll(".sector-pill");
+    const recentPills = document.querySelectorAll(".recent-pill");
+    const sortSelect = document.getElementById("sort-select");
+    const resultsCount = document.getElementById("results-count");
+    const tableBody = document.getElementById("instruments-body");
+    const emptyState = document.getElementById("no-results-state");
+    const resetFilterBtn = document.getElementById("reset-filter-btn");
+
+    // Modal DOM Elements
+    const tradeModal = document.getElementById("trade-modal");
+    const closeModalBtn = document.getElementById("close-modal-btn");
+    const modalBuyTab = document.getElementById("modal-buy-tab");
+    const modalSellTab = document.getElementById("modal-sell-tab");
+    const modalSymbol = document.getElementById("modal-symbol");
+    const modalCompany = document.getElementById("modal-company");
+    const modalPrice = document.getElementById("modal-price");
+    const orderQtyInput = document.getElementById("order-quantity");
+    const modalGross = document.getElementById("modal-gross-value");
+    const modalFriction = document.getElementById("modal-friction");
+    const modalTotal = document.getElementById("modal-total-value");
+    const modalSubmitBtn = document.getElementById("confirm-order-btn");
+    const modalSubmitLabel = document.getElementById("modal-submit-label");
+
+    // Helper: Format INR
+    function formatINR(val) {
+      return "₹" + Number(val).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Render Table
+    function renderInstruments() {
+      // 1. Filter
+      let filtered = instruments.filter(item => {
+        const matchesSector = (currentSector === "ALL") || (item.sector.toLowerCase() === currentSector.toLowerCase());
+        const query = searchQuery.trim().toLowerCase();
+        const matchesQuery = query === "" || 
+          item.symbol.toLowerCase().includes(query) || 
+          item.name.toLowerCase().includes(query) ||
+          item.sector.toLowerCase().includes(query);
+        return matchesSector && matchesQuery;
+      });
+
+      // 2. Sort
+      filtered.sort((a, b) => {
+        if (currentSort === "alpha") return a.symbol.localeCompare(b.symbol);
+        if (currentSort === "price-desc") return b.price - a.price;
+        if (currentSort === "price-asc") return a.price - b.price;
+        if (currentSort === "change-desc") return b.change - a.change;
+        if (currentSort === "change-asc") return a.change - b.change;
+        return 0;
+      });
+
+      // 3. Update count
+      resultsCount.textContent = `Showing ${filtered.length} instruments`;
+
+      // 4. Render or show empty
+      if (filtered.length === 0) {
+        tableBody.innerHTML = "";
+        emptyState.classList.remove("hidden");
+        return;
+      }
+
+      emptyState.classList.add("hidden");
+      tableBody.innerHTML = filtered.map(item => {
+        const isPositive = item.change > 0;
+        const isNegative = item.change < 0;
+        // Day Change Positive %: Stormy Teal (#3c6e71)
+        const changeColor = isPositive ? "text-stormy-teal bg-stormy-teal-surface border border-stormy-teal/30" : isNegative ? "text-loss-rose bg-loss-rose-surface border border-loss-rose/30" : "text-alabaster-muted bg-graphite";
+        const arrow = isPositive ? "↑" : isNegative ? "↓" : "•";
+        const sign = isPositive ? "+" : "";
+
+        return `
+          <tr class="hover:bg-graphite-surface/50 transition-colors group">
+            <td class="py-3 px-3">
+              <div class="flex items-center gap-2.5">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-semibold text-white tracking-tight font-display">${item.symbol}</span>
+                    <span class="px-1.5 py-0.2 rounded bg-graphite text-alabaster font-mono text-[10px] uppercase">NSE</span>
+                  </div>
+                  <div class="text-xs text-alabaster truncate max-w-[200px] sm:max-w-xs mt-0.5">${item.name}</div>
+                </div>
+              </div>
+            </td>
+            <td class="py-3 px-3 hidden sm:table-cell">
+              <span class="px-2.5 py-1 rounded-md bg-graphite-surface text-alabaster font-mono text-[11px] border border-yale-blue/30">${item.sector}</span>
+            </td>
+            <td class="py-3 px-3 text-right">
+              <span class="font-mono font-medium text-white tabular-nums">${formatINR(item.price)}</span>
+              <div class="text-[11px] font-mono text-alabaster-muted leading-none mt-0.5">EOD Close</div>
+            </td>
+            <td class="py-3 px-3 text-right">
+              <span class="inline-flex items-center gap-1 font-mono px-2 py-0.5 rounded-full font-medium text-xs tabular-nums ${changeColor}">
+                <span>${arrow}</span>
+                <span>${sign}${item.change.toFixed(2)}%</span>
+              </span>
+            </td>
+            <td class="py-3 px-3 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button 
+                  class="watchlist-btn p-1.5 rounded-lg transition-colors hover:bg-graphite-surface ${item.inWatchlist ? 'text-stormy-teal' : 'text-alabaster'}" 
+                  data-symbol="${item.symbol}"
+                  title="${item.inWatchlist ? 'Remove from Watchlist' : 'Add to Watchlist'}"
+                  aria-label="Toggle Watchlist for ${item.symbol}"
+                >
+                  <span class="material-symbols-outlined text-[19px]" style="${item.inWatchlist ? "font-variation-settings: 'FILL' 1;" : ''}">
+                    star
+                  </span>
+                </button>
+                <button 
+                  class="trade-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-stormy-teal text-white hover:bg-stormy-teal-hover active:scale-95 transition-all shadow-sm"
+                  data-symbol="${item.symbol}"
+                >
+                  Trade
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      // Bind dynamic row actions
+      attachRowEvents();
+    }
+
+    function attachRowEvents() {
+      // Watchlist toggles
+      document.querySelectorAll(".watchlist-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const sym = btn.getAttribute("data-symbol");
+          const target = instruments.find(i => i.symbol === sym);
+          if (target) {
+            target.inWatchlist = !target.inWatchlist;
+            renderInstruments();
+            showToast(
+              target.inWatchlist ? "Added to Watchlist" : "Removed from Watchlist",
+              `${sym} ${target.inWatchlist ? 'is now being tracked in your Watchlist.' : 'removed from your Watchlist.'}`
+            );
+          }
+        });
+      });
+
+      // Trade buttons
+      document.querySelectorAll(".trade-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const sym = btn.getAttribute("data-symbol");
+          const stock = instruments.find(i => i.symbol === sym);
+          if (stock) {
+            openTradeModal(stock);
+          }
+        });
+      });
+    }
+
+    // Modal logic
+    function openTradeModal(stock) {
+      selectedStock = stock;
+      orderType = "BUY";
+      modalSymbol.textContent = stock.symbol;
+      modalCompany.textContent = stock.name;
+      modalPrice.textContent = formatINR(stock.price);
+      orderQtyInput.value = 10;
+      updateModalTabs();
+      calculateModalTotals();
+      
+      tradeModal.classList.remove("hidden");
+      setTimeout(() => {
+        tradeModal.classList.remove("opacity-0");
+      }, 10);
+    }
+
+    function closeTradeModal() {
+      tradeModal.classList.add("opacity-0");
+      setTimeout(() => {
+        tradeModal.classList.add("hidden");
+      }, 200);
+    }
+
+    function updateModalTabs() {
+      if (orderType === "BUY") {
+        modalBuyTab.className = "py-2 rounded-lg text-xs font-semibold text-white bg-stormy-teal transition-all shadow-sm";
+        modalSellTab.className = "py-2 rounded-lg text-xs font-medium text-alabaster-muted hover:text-white transition-all";
+        modalSubmitBtn.className = "w-full py-3 px-4 rounded-xl text-xs font-semibold bg-stormy-teal text-white hover:bg-stormy-teal-hover transition-colors shadow-lg active:scale-[0.99] flex items-center justify-center gap-2";
+        modalSubmitLabel.textContent = "Submit Simulated Buy Order";
+      } else {
+        modalSellTab.className = "py-2 rounded-lg text-xs font-semibold text-white bg-loss-rose transition-all shadow-sm";
+        modalBuyTab.className = "py-2 rounded-lg text-xs font-medium text-alabaster-muted hover:text-white transition-all";
+        modalSubmitBtn.className = "w-full py-3 px-4 rounded-xl text-xs font-semibold bg-loss-rose text-white hover:bg-rose-600 transition-colors shadow-lg active:scale-[0.99] flex items-center justify-center gap-2";
+        modalSubmitLabel.textContent = "Submit Simulated Sell Order";
+      }
+      calculateModalTotals();
+    }
+
+    function calculateModalTotals() {
+      if (!selectedStock) return;
+      const qty = Math.max(1, parseInt(orderQtyInput.value) || 1);
+      const gross = selectedStock.price * qty;
+      const friction = gross * 0.001;
+      const total = orderType === "BUY" ? gross + friction : gross - friction;
+
+      modalGross.textContent = formatINR(gross);
+      modalFriction.textContent = formatINR(friction);
+      modalTotal.textContent = formatINR(total);
+    }
+
+    // Modal events
+    closeModalBtn.addEventListener("click", closeTradeModal);
+    tradeModal.addEventListener("click", (e) => {
+      if (e.target === tradeModal) closeTradeModal();
+    });
+
+    modalBuyTab.addEventListener("click", () => {
+      orderType = "BUY";
+      updateModalTabs();
+    });
+
+    modalSellTab.addEventListener("click", () => {
+      orderType = "SELL";
+      updateModalTabs();
+    });
+
+    orderQtyInput.addEventListener("input", calculateModalTotals);
+
+    modalSubmitBtn.addEventListener("click", () => {
+      if (!selectedStock) return;
+      const qty = parseInt(orderQtyInput.value) || 1;
+      const gross = selectedStock.price * qty;
+      const friction = gross * 0.001;
+      const totalReq = gross + friction;
+
+      if (orderType === "BUY" && totalReq > availableVirtualCash) {
+        showToast("Insufficient Simulated Cash", "Order exceeds your available virtual cash balance.");
+        return;
+      }
+
+      if (orderType === "BUY") {
+        availableVirtualCash -= totalReq;
+      } else {
+        availableVirtualCash += (gross - friction);
+      }
+
+      // Update cash displays
+      document.getElementById("user-cash-display").textContent = formatINR(availableVirtualCash);
+      document.getElementById("modal-cash-avail").textContent = formatINR(availableVirtualCash);
+
+      closeTradeModal();
+      showToast(
+        "Simulated Order Placed!", 
+        `${orderType} ${qty} shares of ${selectedStock.symbol} queued at ${formatINR(selectedStock.price)}.`
+      );
+    });
+
+    // Toast logic
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toast-title");
+    const toastMsg = document.getElementById("toast-message");
+    let toastTimeout;
+
+    function showToast(title, message) {
+      clearTimeout(toastTimeout);
+      toastTitle.textContent = title;
+      toastMsg.textContent = message;
+      toast.classList.remove("opacity-0", "translate-y-10", "pointer-events-none");
+      toastTimeout = setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-10", "pointer-events-none");
+      }, 4000);
+    }
+
+    // Search Input Events
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value;
+      if (searchQuery.trim().length > 0) {
+        clearSearchBtn.classList.remove("hidden");
+        clearSearchBtn.classList.add("flex");
+      } else {
+        clearSearchBtn.classList.remove("flex");
+        clearSearchBtn.classList.add("hidden");
+      }
+      renderInstruments();
+    });
+
+    clearSearchBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      searchQuery = "";
+      clearSearchBtn.classList.remove("flex");
+      clearSearchBtn.classList.add("hidden");
+      renderInstruments();
+      searchInput.focus();
+    });
+
+    // Sector Filter Pills
+    sectorPills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        sectorPills.forEach(p => {
+          p.className = "sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap";
+        });
+        pill.className = "sector-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stormy-teal text-white transition-colors whitespace-nowrap shadow-sm";
+        currentSector = pill.getAttribute("data-sector");
+        renderInstruments();
+      });
+    });
+
+    // Recent Pills Shortcut
+    recentPills.forEach(pill => {
+      pill.addEventListener("click", () => {
+        const ticker = pill.getAttribute("data-ticker");
+        searchInput.value = ticker;
+        searchQuery = ticker;
+        clearSearchBtn.classList.remove("hidden");
+        clearSearchBtn.classList.add("flex");
+        renderInstruments();
+      });
+    });
+
+    // Sort Dropdown
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      renderInstruments();
+    });
+
+    // Reset Filters
+    resetFilterBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      searchQuery = "";
+      clearSearchBtn.classList.remove("flex");
+      clearSearchBtn.classList.add("hidden");
+      currentSector = "ALL";
+      sectorPills.forEach((p, idx) => {
+        if (idx === 0) {
+          p.className = "sector-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stormy-teal text-white transition-colors whitespace-nowrap shadow-sm";
+        } else {
+          p.className = "sector-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-graphite-surface border border-yale-blue/40 text-alabaster hover:text-white hover:bg-yale-blue/50 transition-colors whitespace-nowrap";
+        }
+      });
+      renderInstruments();
+    });
+
+    // Initial render
+    renderInstruments();
+  })();
+</script></main></div><nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 h-16 bg-bg-sidebar/95 backdrop-blur-xl border-t border-yale-blue/30 flex items-center justify-around px-2 pb-safe"><a class="flex flex-col items-center justify-center gap-1 text-alabaster-muted hover:text-white" data-path="home" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="text-[11px] font-mono">Home</span></a><a class="flex flex-col items-center justify-center gap-1 text-stormy-teal font-semibold" data-path="explore" href="#"><span class="material-symbols-outlined text-[20px]">travel_explore</span><span class="text-[11px] font-mono">Explore</span></a><a class="flex flex-col items-center justify-center gap-1 text-alabaster-muted hover:text-white" data-path="portfolio" href="#"><span class="material-symbols-outlined text-[20px]">pie_chart</span><span class="text-[11px] font-mono">Portfolio</span></a><a class="flex flex-col items-center justify-center gap-1 text-alabaster-muted hover:text-white" data-path="watchlist" href="#"><span class="material-symbols-outlined text-[20px]">bookmark</span><span class="text-[11px] font-mono">Watchlist</span></a><a class="flex flex-col items-center justify-center gap-1 text-alabaster-muted hover:text-white" data-path="leaderboard" href="#"><span class="material-symbols-outlined text-[20px]">leaderboard</span><span class="text-[11px] font-mono">Rankings</span></a></nav></body></html>
