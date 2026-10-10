@@ -1,75 +1,74 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { TrendingUp, ShieldCheck, BookOpen, ArrowRight } from "lucide-react";
+import { HeroSection } from "@/components/landing/HeroSection";
+import { FeaturesExplainer } from "@/components/landing/FeaturesExplainer";
+import { AuthModal } from "@/components/auth/AuthModal";
 import { MarketStatusBadge } from "@/components/common/MarketStatusBadge";
 
-export default function HomePage() {
+export default function LandingPage() {
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [user, setUser] = useState<{ email: string; displayName: string } | null>(null);
+
   return (
-    <main className="flex-1 flex flex-col items-center justify-center px-4 py-16 text-center max-w-5xl mx-auto">
-      <div className="mb-6">
-        <MarketStatusBadge isOpen={false} freshness="FRESH" asOfDate="09 Oct 2026" />
-      </div>
+    <div className="flex-1 flex flex-col w-full">
+      {/* Top Navbar */}
+      <header className="sticky top-0 z-40 bg-graphite/95 backdrop-blur-md border-b border-yaleBlue/40">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <span className="w-8 h-8 rounded-lg bg-stormyTeal/20 border border-stormyTeal/50 flex items-center justify-center text-stormyTeal-light font-bold text-lg group-hover:border-stormyTeal transition-colors">
+              ₹
+            </span>
+            <div className="flex flex-col">
+              <span className="text-base font-bold text-white tracking-tight leading-none">
+                Mudra
+              </span>
+              <span className="text-[10px] text-alabaster/60 font-mono">
+                Equities Lab
+              </span>
+            </div>
+          </Link>
 
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-stormyTeal/20 text-stormyTeal-light border border-stormyTeal/30 mb-6">
-        <ShieldCheck className="w-3.5 h-3.5" />
-        100% Virtual Simulator • ₹0 Real Money
-      </div>
-
-      <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
-        Master Indian Equities with{" "}
-        <span className="text-stormyTeal-light">₹1,00,000 Virtual Capital</span>
-      </h1>
-
-      <p className="text-lg sm:text-xl text-alabaster/80 max-w-2xl mb-10 leading-relaxed">
-        Practise trading NSE & BSE stocks with authentic next-close execution. Learn position sizing, fees, and portfolio behavior without risking a single rupee.
-      </p>
-
-      <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-        <Link
-          href="/explore"
-          className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-bold bg-stormyTeal hover:bg-stormyTeal-light text-white shadow-lg transition-all"
-        >
-          Explore Market <ArrowRight className="w-4 h-4" />
-        </Link>
-        <Link
-          href="/dashboard"
-          className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold bg-graphite hover:bg-graphite-light text-alabaster border border-alabaster/20 transition-all"
-        >
-          View Demo Dashboard
-        </Link>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-20 w-full text-left">
-        <div className="bg-graphite/40 border border-alabaster/10 rounded-2xl p-6">
-          <div className="w-10 h-10 rounded-lg bg-yaleBlue/30 text-yaleBlue-light flex items-center justify-center mb-4">
-            <TrendingUp className="w-5 h-5 text-teal-300" />
+          <div className="flex items-center gap-3 sm:gap-5">
+            <MarketStatusBadge isOpen={false} freshness="FRESH" asOfDate="09 Oct 2026" />
+            <Link
+              href="/explore"
+              className="text-xs sm:text-sm font-medium text-alabaster/80 hover:text-white transition-colors hidden sm:inline"
+            >
+              Explore
+            </Link>
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-lg bg-stormyTeal text-white hover:bg-stormyTeal-light transition-all"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <button
+                onClick={() => setIsAuthOpen(true)}
+                className="text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-lg border border-yaleBlue/60 bg-[#1b242a]/80 hover:bg-yaleBlue/40 text-alabaster hover:text-white transition-all cursor-pointer"
+              >
+                Sign In
+              </button>
+            )}
           </div>
-          <h3 className="text-lg font-bold text-white mb-2">Next-Close Execution</h3>
-          <p className="text-sm text-alabaster/70">
-            Orders fill at official 15:30 IST market close prices. No fake instant fills or unrealistic paper illusions.
-          </p>
         </div>
+      </header>
 
-        <div className="bg-graphite/40 border border-alabaster/10 rounded-2xl p-6">
-          <div className="w-10 h-10 rounded-lg bg-stormyTeal/20 text-stormyTeal-light flex items-center justify-center mb-4">
-            <ShieldCheck className="w-5 h-5" />
-          </div>
-          <h3 className="text-lg font-bold text-white mb-2">Tamper-Proof Ledger</h3>
-          <p className="text-sm text-alabaster/70">
-            Every transaction is recorded in integer paise into an append-only audit ledger with zero rounding drift.
-          </p>
-        </div>
+      {/* Main Landing Sections */}
+      <main className="flex-1">
+        <HeroSection onOpenAuth={() => setIsAuthOpen(true)} />
+        <FeaturesExplainer />
+      </main>
 
-        <div className="bg-graphite/40 border border-alabaster/10 rounded-2xl p-6">
-          <div className="w-10 h-10 rounded-lg bg-yaleBlue/30 text-yaleBlue-light flex items-center justify-center mb-4">
-            <BookOpen className="w-5 h-5 text-teal-300" />
-          </div>
-          <h3 className="text-lg font-bold text-white mb-2">Explainable P&L</h3>
-          <p className="text-sm text-alabaster/70">
-            Weighted-average cost basis and 0.1% simulated fees calculated with full formula transparency.
-          </p>
-        </div>
-      </div>
-    </main>
+      {/* Auth Modal with 18+ and Simulation Acknowledgement */}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onSuccess={(u) => setUser(u)}
+      />
+    </div>
   );
 }

@@ -20,8 +20,8 @@
   - [x] Plan 1.1: Project Scaffolding & Custom Design System Setup (`1-PLAN.md`) — Completed
   - [x] Plan 1.2: Mock Data Fixtures & Typed Client-Side API Layer (`2-PLAN.md`) — Completed
 - **Wave 2 (UI Implementation from Stitch HTML):**
-  - [ ] Plan 1.3: Landing Page, Auth Modal & Market Explorer (Adapted from Stitch screens 01, 02, 05)
-  - [ ] Plan 1.4: Stock Detail Page & Buy/Sell Order Modals (Adapted from Stitch screens 04, 06, 07)
+  - [x] Plan 1.3: Landing Page, Auth Modal & Market Explorer (`3-PLAN.md`) — Completed
+  - [ ] Plan 1.4: Stock Detail Page & Buy/Sell Order Modals (`4-PLAN.md`)
 
 ---
 
