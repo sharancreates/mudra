@@ -21,7 +21,7 @@
   - [x] Plan 1.2: Mock Data Fixtures & Typed Client-Side API Layer (`2-PLAN.md`) — Completed
 - **Wave 2 (UI Implementation from Stitch HTML):**
   - [x] Plan 1.3: Landing Page, Auth Modal & Market Explorer (`3-PLAN.md`) — Completed
-  - [ ] Plan 1.4: Stock Detail Page & Buy/Sell Order Modals (`4-PLAN.md`)
+  - [x] Plan 1.4: Stock Detail Page & Buy/Sell Order Modals (`4-PLAN.md`) — Completed
 
 ---
 
