@@ -64,13 +64,13 @@ mudra/
 - [x] **Plan 1.5**: 50-Stock Sample Data & Market Adapter Architecture (`05-PLAN.md`)
 - [x] **Plan 1.6**: Trading Math Engine & Acceptance Scenario Unit Tests (`06-PLAN.md`) — **Done (All 7 Tests Passed)**
 - [x] **Plan 1.7**: Virtual Trading Engine `place_order()` Stored Procedure (`07-PLAN.md`) — **Done (All 5 Tests Passed)**
-- [ ] **Plan 1.8**: Next.js Route Handlers & JSON Contract Conformance (`08-PLAN.md`) — **NEXT UP**
-- [ ] **Plan 1.9**: Week 1 Integration Verification & Ledger Reconciliation (`09-PLAN.md`)
+- [x] **Plan 1.8**: Next.js Route Handlers & JSON Contract Conformance (`08-PLAN.md`) — **Done (Route Handlers & Tests Verified)**
+- [ ] **Plan 1.9**: Week 1 Integration Verification & Ledger Reconciliation (`09-PLAN.md`) — **NEXT UP**
 
 ---
 
 ## Handoff Instructions for Person B
-1. **Next Plan to Execute**: `.gsd/phases/1/08-PLAN.md` (Next.js Route Handlers & JSON Contract Conformance).
+1. **Next Plan to Execute**: `.gsd/phases/1/09-PLAN.md` (Week 1 Integration Verification & Ledger Reconciliation).
 2. **Key Math Formulas to Test**:
    - `trade_value = price_paise * qty`
    - `fee = round(0.001 * trade_value)`

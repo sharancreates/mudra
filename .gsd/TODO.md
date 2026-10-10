@@ -23,9 +23,9 @@
 - [x] **Day 5-6: Virtual Trading Engine `place_order()` (Wave 3)**
   - [x] Author `place_order()` stored procedure with row locks, 10% buy buffer, and idempotency (Plan 1.7)
   - [x] Author tests for order placement, idempotency, and balance checks in `tests/trading/place_order.test.ts` (Plan 1.7)
-- [ ] **Day 6: Next.js Route Handlers & API Integration (Wave 4)**
-  - [ ] Implement `POST` and `GET` `/api/orders` with error formatting (Plan 1.8)
-  - [ ] Implement `GET` `/api/instruments` and `GET` `/api/status` route handlers (Plan 1.8)
+- [x] **Day 6: Next.js Route Handlers & API Integration (Wave 4)**
+  - [x] Implement `POST` and `GET` `/api/orders` with error formatting (Plan 1.8)
+  - [x] Implement `GET` `/api/instruments` and `GET` `/api/status` route handlers (Plan 1.8)
 - [ ] **Day 7: Integration Verification & Ledger Reconciliation (Wave 5)**
   - [ ] Implement nightly ledger reconciliation audit script `scripts/reconcile_wallets.ts` (Plan 1.9)
   - [ ] Execute full end-to-end integration test `tests/integration/week1_trade_loop.test.ts` (Plan 1.9)
