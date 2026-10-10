@@ -27,7 +27,7 @@ updated: 2026-10-10T16:30:00+05:30
 ## Phases
 
 ### Phase 1: Foundation & Week 1 Trade Loop (Week 1)
-**Status:** 🔄 Planned / Ready for Execution  
+**Status:** ✅ Complete (Milestone M1 Verified)  
 **Objective:** Establish PostgreSQL schema, RLS anti-tampering perimeter, Supabase auth wallet triggers, 50-stock sample market data adapter, trading math engine, transactional `place_order()` stored procedure, Next.js API routes, and nightly ledger reconciliation.
 
 **Person B Execution Plans (Active):**
@@ -94,6 +94,6 @@ updated: 2026-10-10T16:30:00+05:30
 
 | Phase | Description | Active Lead | Status | Target |
 |-------|-------------|-------------|--------|--------|
-| Phase 1 | Foundation & Week 1 Backend Trade Loop | Person B | 🔄 Ready for Execution | Week 1 |
-| Phase 2 | Full Trade Experience & Settlement | Person B | ⬜ Not Started | Week 2 |
+| Phase 1 | Foundation & Week 1 Backend Trade Loop | Person B | ✅ Complete | Week 1 |
+| Phase 2 | Full Trade Experience & Settlement | Person B | 🔄 Ready for Execution | Week 2 |
 | Phase 3 | Leaderboard, Hardening & Launch | Person B | ⬜ Not Started | Week 3 |

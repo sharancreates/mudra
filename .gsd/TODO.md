@@ -26,6 +26,6 @@
 - [x] **Day 6: Next.js Route Handlers & API Integration (Wave 4)**
   - [x] Implement `POST` and `GET` `/api/orders` with error formatting (Plan 1.8)
   - [x] Implement `GET` `/api/instruments` and `GET` `/api/status` route handlers (Plan 1.8)
-- [ ] **Day 7: Integration Verification & Ledger Reconciliation (Wave 5)**
-  - [ ] Implement nightly ledger reconciliation audit script `scripts/reconcile_wallets.ts` (Plan 1.9)
-  - [ ] Execute full end-to-end integration test `tests/integration/week1_trade_loop.test.ts` (Plan 1.9)
+- [x] **Day 7: Integration Verification & Ledger Reconciliation (Wave 5)**
+  - [x] Implement nightly ledger reconciliation audit script `scripts/reconcile_wallets.ts` (Plan 1.9)
+  - [x] Execute full end-to-end integration test `tests/integration/week1_trade_loop.test.ts` (Plan 1.9)
