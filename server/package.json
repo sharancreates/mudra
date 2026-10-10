@@ -1,0 +1,10 @@
+{
+  "name": "mudra-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Mudra Backend Engine, Supabase Migrations, and Market Data Adapters",
+  "scripts": {
+    "generate-data": "node scripts/generate_sample_data.mjs",
+    "seed": "echo 'Run supabase db reset or supabase db seed'"
+  }
+}
