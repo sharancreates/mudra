@@ -20,9 +20,9 @@
 - [x] **Day 4-5: Trading Math & Acceptance Scenario Tests (Wave 3)**
   - [x] Implement `calculateFee()`, `getNextExecutionDate()`, and holding math in `src/lib/trading/math.ts` (Plan 1.6)
   - [x] Author unit tests in `tests/trading/math.test.ts` reproducing PRD Section 7.3 reference scenario to the paisa (Plan 1.6)
-- [ ] **Day 5-6: Virtual Trading Engine `place_order()` (Wave 3)**
-  - [ ] Author `place_order()` stored procedure with row locks, 10% buy buffer, and idempotency (Plan 1.7)
-  - [ ] Author tests for order placement, idempotency, and balance checks in `tests/trading/place_order.test.ts` (Plan 1.7)
+- [x] **Day 5-6: Virtual Trading Engine `place_order()` (Wave 3)**
+  - [x] Author `place_order()` stored procedure with row locks, 10% buy buffer, and idempotency (Plan 1.7)
+  - [x] Author tests for order placement, idempotency, and balance checks in `tests/trading/place_order.test.ts` (Plan 1.7)
 - [ ] **Day 6: Next.js Route Handlers & API Integration (Wave 4)**
   - [ ] Implement `POST` and `GET` `/api/orders` with error formatting (Plan 1.8)
   - [ ] Implement `GET` `/api/instruments` and `GET` `/api/status` route handlers (Plan 1.8)
