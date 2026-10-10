@@ -11,9 +11,9 @@
 - [x] **Day 2-3: User Onboarding & Auth Triggers (Wave 2)**
   - [x] Author auth trigger `handle_new_user()` creating profile, ₹1,00,000 wallet, and `INIT` ledger row (Plan 1.3)
   - [x] Implement `prevent_ledger_modification()` trigger for append-only ledger security (Plan 1.3)
-- [ ] **Day 3: Anti-Tampering & RLS Policies (Wave 2)**
-  - [ ] Enable RLS and revoke direct write privileges on money tables (Plan 1.4)
-  - [ ] Write automated security test `tests/security/rls_tamper_test.ts` (Plan 1.4)
+- [x] **Day 3: Anti-Tampering & RLS Policies (Wave 2)**
+  - [x] Enable RLS and revoke direct write privileges on money tables (Plan 1.4)
+  - [x] Write automated security test `tests/security/rls_tamper_test.ts` (Plan 1.4)
 - [ ] **Day 3-4: 50-Stock Sample Data & Market Adapter (Wave 2)**
   - [ ] Generate `data/sample_prices.csv` (50 stocks, 1-year history in paise) and `supabase/seed.sql` (Plan 1.5)
   - [ ] Implement `IMarketDataAdapter` with Sample/Simulated modes and Freshness calculation (Plan 1.5)
