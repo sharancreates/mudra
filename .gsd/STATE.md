@@ -17,7 +17,7 @@
 
 ## Week 1 Execution Waves (Person B)
 - **Wave 1:**
-  - [ ] Plan 1.1: Data Licensing Enquiries & Contract Synchronization (`01-PLAN.md`)
+  - [x] Plan 1.1: Data Licensing Enquiries & Contract Synchronization (`01-PLAN.md`) — Completed
   - [ ] Plan 1.2: Database Migration Scaffold & Schema DDL Definition (`02-PLAN.md`)
 - **Wave 2:**
   - [ ] Plan 1.3: User Onboarding, Wallet Trigger & Immutable Ledger (`03-PLAN.md`)

@@ -2,9 +2,9 @@
 
 ## Week 1 Tasks (Person B: Backend & Data Lead)
 
-- [ ] **Day 1: Enquiries & Contract Freeze (Wave 1)**
-  - [ ] Draft & track data licensing enquiries in `docs/data-licensing/enquiries.md` (Plan 1.1)
-  - [ ] Freeze ADRs (ADR-004 to ADR-007) and API contracts in `docs/decisions.md` (Plan 1.1)
+- [x] **Day 1: Enquiries & Contract Freeze (Wave 1)**
+  - [x] Draft & track data licensing enquiries in `docs/data-licensing/enquiries.md` (Plan 1.1)
+  - [x] Freeze ADRs (ADR-004 to ADR-007) and API contracts in `docs/decisions.md` (Plan 1.1)
 - [ ] **Day 1-2: Database Foundation & Schema DDL (Wave 1)**
   - [ ] Initialize Supabase configuration in `supabase/config.toml` (Plan 1.2)
   - [ ] Author core tables migration `supabase/migrations/20261010000001_initial_schema.sql` (Plan 1.2)
