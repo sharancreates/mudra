@@ -17,9 +17,9 @@
 - [x] **Day 3-4: 50-Stock Sample Data & Market Adapter (Wave 2)**
   - [x] Generate `data/sample_prices.csv` (50 stocks, 1-year history in paise) and `supabase/seed.sql` (Plan 1.5)
   - [x] Implement `IMarketDataAdapter` with Sample/Simulated modes and Freshness calculation (Plan 1.5)
-- [ ] **Day 4-5: Trading Math & Acceptance Scenario Tests (Wave 3)**
-  - [ ] Implement `calculateFee()`, `getNextExecutionDate()`, and holding math in `src/lib/trading/math.ts` (Plan 1.6)
-  - [ ] Author unit tests in `tests/trading/math.test.ts` reproducing PRD Section 7.3 reference scenario to the paisa (Plan 1.6)
+- [x] **Day 4-5: Trading Math & Acceptance Scenario Tests (Wave 3)**
+  - [x] Implement `calculateFee()`, `getNextExecutionDate()`, and holding math in `src/lib/trading/math.ts` (Plan 1.6)
+  - [x] Author unit tests in `tests/trading/math.test.ts` reproducing PRD Section 7.3 reference scenario to the paisa (Plan 1.6)
 - [ ] **Day 5-6: Virtual Trading Engine `place_order()` (Wave 3)**
   - [ ] Author `place_order()` stored procedure with row locks, 10% buy buffer, and idempotency (Plan 1.7)
   - [ ] Author tests for order placement, idempotency, and balance checks in `tests/trading/place_order.test.ts` (Plan 1.7)
