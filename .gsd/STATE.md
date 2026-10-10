@@ -17,8 +17,8 @@
 
 ## Person A — Week 1 Frontend Plans (`.gsd/phases/frontend/1/`)
 - **Wave 1 (Scaffolding & Data Layer):**
-  - [ ] Plan 1.1: Project Scaffolding & Custom Design System Setup (Palette: Graphite, Stormy Teal, White, Alabaster Grey, Yale Blue)
-  - [ ] Plan 1.2: Mock Data Fixtures & Typed Client-Side API Layer (50 NSE stocks, paise accounting)
+  - [x] Plan 1.1: Project Scaffolding & Custom Design System Setup (`1-PLAN.md`) — Completed
+  - [x] Plan 1.2: Mock Data Fixtures & Typed Client-Side API Layer (`2-PLAN.md`) — Completed
 - **Wave 2 (UI Implementation from Stitch HTML):**
   - [ ] Plan 1.3: Landing Page, Auth Modal & Market Explorer (Adapted from Stitch screens 01, 02, 05)
   - [ ] Plan 1.4: Stock Detail Page & Buy/Sell Order Modals (Adapted from Stitch screens 04, 06, 07)

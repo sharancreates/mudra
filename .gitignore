@@ -211,3 +211,4 @@ node_modules/
 out/
 coverage/
 .env*.local
+*.tsbuildinfo

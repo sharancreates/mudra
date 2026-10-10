@@ -1,0 +1,19 @@
+{
+  "cash_paise": 8757020,
+  "reserved_paise": 0,
+  "holdings": [
+    {
+      "symbol": "RELIANCE",
+      "name": "Reliance Industries Ltd",
+      "qty": 9,
+      "avg_paise": 140807,
+      "invested_paise": 1267266,
+      "value_paise": 1314000,
+      "unrealized_paise": 46734,
+      "unrealized_bps": 368
+    }
+  ],
+  "equity_paise": 10071020,
+  "realized_paise": 24286,
+  "prices_as_of": "2026-10-09"
+}

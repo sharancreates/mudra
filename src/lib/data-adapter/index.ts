@@ -82,13 +82,13 @@ export class SampleMarketDataAdapter implements IMarketDataAdapter {
 
     // Populate instrument current quotes
     for (const [symbol, history] of this.priceHistoryMap.entries()) {
-      history.sort((a, b) => a.date.localeCompare(b.date));
+      (history as PricePoint[]).sort((a: PricePoint, b: PricePoint) => a.date.localeCompare(b.date));
       const latest = history[history.length - 1];
       const prev = history.length > 1 ? history[history.length - 2] : latest;
 
       let change_bps = 0;
       if (prev.close_paise > 0n) {
-        change_bps = Number(((latest.close_paise - prev.close_paise) * 10000n) / prev.close_paise);
+        change_bps = Number(((BigInt(latest.close_paise) - BigInt(prev.close_paise)) * 10000n) / BigInt(prev.close_paise));
       }
 
       const sampleRow = history[0]; // has first metadata
@@ -123,7 +123,7 @@ export class SampleMarketDataAdapter implements IMarketDataAdapter {
   async getDailyCloses(date: string): Promise<Map<string, bigint>> {
     const result = new Map<string, bigint>();
     for (const [symbol, history] of this.priceHistoryMap.entries()) {
-      const match = history.find(p => p.date === date);
+      const match = (history as PricePoint[]).find((p: PricePoint) => p.date === date);
       if (match) {
         result.set(symbol, match.close_paise);
       }
