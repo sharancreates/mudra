@@ -8,9 +8,9 @@
 - [x] **Day 1-2: Database Foundation & Schema DDL (Wave 1)**
   - [x] Initialize Supabase configuration in `supabase/config.toml` (Plan 1.2)
   - [x] Author core tables migration `supabase/migrations/20261010000001_initial_schema.sql` (Plan 1.2)
-- [ ] **Day 2-3: User Onboarding & Auth Triggers (Wave 2)**
-  - [ ] Author auth trigger `handle_new_user()` creating profile, ₹1,00,000 wallet, and `INIT` ledger row (Plan 1.3)
-  - [ ] Implement `prevent_ledger_modification()` trigger for append-only ledger security (Plan 1.3)
+- [x] **Day 2-3: User Onboarding & Auth Triggers (Wave 2)**
+  - [x] Author auth trigger `handle_new_user()` creating profile, ₹1,00,000 wallet, and `INIT` ledger row (Plan 1.3)
+  - [x] Implement `prevent_ledger_modification()` trigger for append-only ledger security (Plan 1.3)
 - [ ] **Day 3: Anti-Tampering & RLS Policies (Wave 2)**
   - [ ] Enable RLS and revoke direct write privileges on money tables (Plan 1.4)
   - [ ] Write automated security test `tests/security/rls_tamper_test.ts` (Plan 1.4)
