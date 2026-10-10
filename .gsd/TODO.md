@@ -1,21 +1,31 @@
 # TODO.md — Active Task Board
 
-## Week 1 Tasks (Person A: Frontend & UX)
+## Week 1 Tasks (Person B: Backend & Data Lead)
 
-- [ ] **Wireframing & AI Design Generation**:
-  - [ ] Generate wireframes for Screen 1: Landing Page
-  - [ ] Generate wireframes for Screen 2: Sign-up / Login & 18+ Acknowledgement Modal
-  - [ ] Generate wireframes for Screen 3: Dashboard Overview
-  - [ ] Generate wireframes for Screen 4: Market Explorer (Search & Stock Filters)
-  - [ ] Generate wireframes for Screen 5: Stock Detail Page (Charts & Key Metrics)
-  - [ ] Generate wireframes for Screen 6: Buy/Sell Order Sheet with 0.1% Fee Breakdown
-- [ ] **Frontend Foundation**:
-  - [ ] Initialize Next.js (App Router) + TypeScript + Tailwind CSS
-  - [ ] Define Indian Rupee formatting utility (`formatINR()`) and Paise conversion (`paiseToRupees()`)
-  - [ ] Set up design system tokens (Emerald primary, Slate neutral, Rose danger, Amber warning)
-  - [ ] Add persistent simulation warning banner component
-- [ ] **Mocking & Integration**:
-  - [ ] Create mock JSON fixtures for instruments and order submission
-  - [ ] Build search & filter component for stock discovery
-  - [ ] Build interactive Order Sheet with quantity stepper, reservation calculator, and confirmation modal
-  - [ ] Prepare Week 1 demo with mocked trade submission
+- [ ] **Day 1: Enquiries & Contract Freeze (Wave 1)**
+  - [ ] Draft & track data licensing enquiries in `docs/data-licensing/enquiries.md` (Plan 1.1)
+  - [ ] Freeze ADRs (ADR-004 to ADR-007) and API contracts in `docs/decisions.md` (Plan 1.1)
+- [ ] **Day 1-2: Database Foundation & Schema DDL (Wave 1)**
+  - [ ] Initialize Supabase configuration in `supabase/config.toml` (Plan 1.2)
+  - [ ] Author core tables migration `supabase/migrations/20261010000001_initial_schema.sql` (Plan 1.2)
+- [ ] **Day 2-3: User Onboarding & Auth Triggers (Wave 2)**
+  - [ ] Author auth trigger `handle_new_user()` creating profile, ₹1,00,000 wallet, and `INIT` ledger row (Plan 1.3)
+  - [ ] Implement `prevent_ledger_modification()` trigger for append-only ledger security (Plan 1.3)
+- [ ] **Day 3: Anti-Tampering & RLS Policies (Wave 2)**
+  - [ ] Enable RLS and revoke direct write privileges on money tables (Plan 1.4)
+  - [ ] Write automated security test `tests/security/rls_tamper_test.ts` (Plan 1.4)
+- [ ] **Day 3-4: 50-Stock Sample Data & Market Adapter (Wave 2)**
+  - [ ] Generate `data/sample_prices.csv` (50 stocks, 1-year history in paise) and `supabase/seed.sql` (Plan 1.5)
+  - [ ] Implement `IMarketDataAdapter` with Sample/Simulated modes and Freshness calculation (Plan 1.5)
+- [ ] **Day 4-5: Trading Math & Acceptance Scenario Tests (Wave 3)**
+  - [ ] Implement `calculateFee()`, `getNextExecutionDate()`, and holding math in `src/lib/trading/math.ts` (Plan 1.6)
+  - [ ] Author unit tests in `tests/trading/math.test.ts` reproducing PRD Section 7.3 reference scenario to the paisa (Plan 1.6)
+- [ ] **Day 5-6: Virtual Trading Engine `place_order()` (Wave 3)**
+  - [ ] Author `place_order()` stored procedure with row locks, 10% buy buffer, and idempotency (Plan 1.7)
+  - [ ] Author tests for order placement, idempotency, and balance checks in `tests/trading/place_order.test.ts` (Plan 1.7)
+- [ ] **Day 6: Next.js Route Handlers & API Integration (Wave 4)**
+  - [ ] Implement `POST` and `GET` `/api/orders` with error formatting (Plan 1.8)
+  - [ ] Implement `GET` `/api/instruments` and `GET` `/api/status` route handlers (Plan 1.8)
+- [ ] **Day 7: Integration Verification & Ledger Reconciliation (Wave 5)**
+  - [ ] Implement nightly ledger reconciliation audit script `scripts/reconcile_wallets.ts` (Plan 1.9)
+  - [ ] Execute full end-to-end integration test `tests/integration/week1_trade_loop.test.ts` (Plan 1.9)

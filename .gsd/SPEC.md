@@ -3,7 +3,7 @@
 > **Status**: `FINALIZED`
 >
 > **Project Name**: Mudra (Virtual Stock Market Simulator for NSE / BSE Equities)
-> **Active Persona**: Person A (Frontend and UX Lead)
+> **Active Persona**: Person B (Backend & Data Lead)
 > **Team**: 2-person team (Person A: Frontend & UX, Person B: Backend & Data)
 > **Budget**: ₹0 (Permanent free tiers & open source)
 

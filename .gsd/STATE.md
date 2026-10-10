@@ -1,28 +1,38 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-10
-> **Active Persona:** Person A (Frontend and UX)
-> **Active Milestone:** v1.0 MVP
-> **Active Phase:** Phase 1 (Week 1: Foundation and Trade Loop)
+> **Last Updated:** 2026-10-10  
+> **Active Persona:** Person B (Backend and Data)  
+> **Active Milestone:** v1.0 MVP  
+> **Active Phase:** Phase 1 (Week 1: Foundation and Trade Loop)  
+> **Phase Status:** `ready_for_execution`
 
 ---
 
-## Current Focus
-Executing Week 1 deliverables for Person A:
-1. Freezing API contracts and project architectural conventions.
-2. Formulating high-fidelity AI wireframe prompts for the 6 primary screens to be generated in Stitch / Figma Make.
-3. Setting up Next.js 14 App Router project foundation with Tailwind CSS and design tokens.
-4. Implementing UI components for Landing, Market Explorer, Stock Detail, and Buy/Sell Order Sheet with mocks.
+## Current Position
+- **Phase**: 1 (Week 1: Foundation & Backend Trade Loop)
+- **Task**: Planning complete (Plans 1.1 through 1.9 generated across 5 waves)
+- **Status**: Ready for execution
 
 ---
 
-## Known Blockers & Dependencies
-- None currently. Person A's frontend flow is decoupled from Person B's database setup using mock JSON contracts defined in `docs/api.md`.
+## Week 1 Execution Waves (Person B)
+- **Wave 1:**
+  - [ ] Plan 1.1: Data Licensing Enquiries & Contract Synchronization (`01-PLAN.md`)
+  - [ ] Plan 1.2: Database Migration Scaffold & Schema DDL Definition (`02-PLAN.md`)
+- **Wave 2:**
+  - [ ] Plan 1.3: User Onboarding, Wallet Trigger & Immutable Ledger (`03-PLAN.md`)
+  - [ ] Plan 1.4: Row Level Security & Anti-Tampering Hardening (`04-PLAN.md`)
+  - [ ] Plan 1.5: 50-Stock Sample Data & Market Adapter Architecture (`05-PLAN.md`)
+- **Wave 3:**
+  - [ ] Plan 1.6: Trading Math Engine & Acceptance Scenario Unit Tests (`06-PLAN.md`)
+  - [ ] Plan 1.7: Virtual Trading Engine `place_order()` Stored Procedure (`07-PLAN.md`)
+- **Wave 4:**
+  - [ ] Plan 1.8: Next.js Route Handlers & JSON Contract Conformance (`08-PLAN.md`)
+- **Wave 5:**
+  - [ ] Plan 1.9: Week 1 Integration Verification & Ledger Reconciliation (`09-PLAN.md`)
 
 ---
 
-## Key Context
-- Project: Mudra (Paper Trading Simulator for Indian Equities - NSE/BSE).
-- Starting Wallet: ₹1,00,000 virtual rupees.
-- Currency rule: All money stored in integer paise (`bigint`), converted to ₹ with Indian formatting (`en-IN`) on display.
-- Order type: Next-close market order with 15:30 IST cutoff and 0.1% simulated fee.
+## Next Steps
+1. Execute Plan 1.1: Send data licensing enquiries & freeze ADR decisions (`/execute 1`)
+2. Execute Plan 1.2: Establish Supabase configuration and initial database schema DDL
