@@ -72,8 +72,20 @@
 
 ---
 
-## ADR-008: Indisea Website Pixel-Perfect Frontend Architecture
+## ADR-008: Mudra Swiss Design System Architecture
 - **Date**: 2026-10-11
 - **Status**: Accepted
-- **Context**: Recreate reference website https://indisea.com/ with pixel-perfect visual fidelity, layout, typography, animations, interactions, and responsive behavior.
+- **Context**: Deliver a high-contrast, institutional-grade Swiss design language for Mudra across all routes.
 - **Decision**: Implement as a Next.js 14 client application with exact CSS tokens, fluid clamp scales, Google Fonts IBM Plex, and interactive SVG diagrams.
+
+---
+
+## ADR-009: Interactive Geometric Swiss Snake Companion ("Mudra Navigator")
+- **Date**: 2026-10-11
+- **Status**: Accepted
+- **Context**: User requested an interactive web snake or virtual avatar that dynamically accompanies navigation, scrolling, and interaction.
+- **Decision**:
+  1. **Visual Form**: Articulated multi-segment geometric ribbon snake with calibrated node segments, styled in Mudra Sky Blue (`#3BBFF7`) and Signal Yellow (`#EEA02B`) with hairline node borders.
+  2. **Kinematic Behavior**: Smooth scroll-driven progression that glides along the vertical spine as the user scrolls, combined with elastic spring-damped momentum toward cursor movement on desktop.
+  3. **Omnipresent Deployment**: Embedded inside `MudraShell` and `page.tsx` so it follows users across all application routes (`/`, `/explore`, `/dashboard`, `/stock/[symbol]`).
+  4. **Non-Intrusive Performance**: Rendered on a hardware-accelerated 2D canvas with `pointer-events: none` (zero click interference), adaptive frame throttling, and mobile touch support.

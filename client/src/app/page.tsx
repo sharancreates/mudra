@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { MudraHeader } from "@/components/mudra/MudraHeader";
@@ -14,6 +14,7 @@ import { MudraProof } from "@/components/mudra/MudraProof";
 import { MudraFinalCTA } from "@/components/mudra/MudraFinalCTA";
 import { MudraFooter } from "@/components/mudra/MudraFooter";
 import { MudraSpine } from "@/components/mudra/MudraSpine";
+import { MudraSnake } from "@/components/mudra/MudraSnake";
 import { AuthModal } from "@/components/auth/AuthModal";
 
 export default function MudraHomePage() {
@@ -110,6 +111,9 @@ export default function MudraHomePage() {
     >
       {/* Background Orthogonal Spine Line */}
       <MudraSpine />
+
+      {/* Interactive Geometric Swiss Snake Navigator */}
+      <MudraSnake />
 
       {/* Fixed Header */}
       <MudraHeader

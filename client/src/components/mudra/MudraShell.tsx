@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { MudraHeader } from "./MudraHeader";
 import { MudraMenu } from "./MudraMenu";
 import { MudraSpine } from "./MudraSpine";
+import { MudraSnake } from "./MudraSnake";
 import { MudraFooter } from "./MudraFooter";
 import { AuthModal } from "@/components/auth/AuthModal";
 
@@ -79,6 +80,9 @@ export function MudraShell({
     >
       {/* Background Orthogonal Spine Line */}
       <MudraSpine />
+
+      {/* Interactive Geometric Swiss Snake Navigator */}
+      <MudraSnake />
 
       {/* Fixed Swiss Header */}
       <MudraHeader
