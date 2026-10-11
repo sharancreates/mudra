@@ -64,7 +64,7 @@ export function MudraShell({
 
   return (
     <div
-      data-Mudra-shell=""
+      data-mudra-shell=""
       data-theme={theme}
       style={{
         position: "relative",

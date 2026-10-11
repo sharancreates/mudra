@@ -97,7 +97,7 @@ export default function MudraHomePage() {
 
   return (
     <div
-      data-Mudra-home=""
+      data-mudra-home=""
       data-theme={theme}
       style={{
         position: "relative",

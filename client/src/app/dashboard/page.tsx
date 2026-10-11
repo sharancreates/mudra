@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -68,7 +68,7 @@ export default function DashboardPage() {
       <div data-wrap="" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
         {/* Eyebrow */}
         <div style={{ marginBottom: "16px" }}>
-          <span className="Mudra-eyebrow">01 / virtual capital ledger</span>
+          <span className="mudra-eyebrow">01 / virtual capital ledger</span>
         </div>
 
         {/* Display Heading & Actions */}
@@ -155,13 +155,13 @@ export default function DashboardPage() {
               gap: "12px",
             }}
           >
-            <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+            <span className="mudra-eyebrow" style={{ fontSize: "11px" }}>
               Total Portfolio Equity
             </span>
             <div style={{ fontSize: "28px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--text-heading)" }}>
               {formatINR(totalValue)}
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "var(--Mudra-link-green)", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "var(--mudra-link-green)", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
               <ArrowUpRight className="w-4 h-4" />
               <span>+{formatINR(totalGain)} (+0.71%)</span>
             </div>
@@ -183,13 +183,13 @@ export default function DashboardPage() {
               gap: "12px",
             }}
           >
-            <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+            <span className="mudra-eyebrow" style={{ fontSize: "11px" }}>
               Available Virtual Cash
             </span>
             <div style={{ fontSize: "28px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--text-heading)" }}>
               {formatINR(freeCash)}
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "var(--Mudra-sky-blue)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "var(--mudra-sky-blue)" }}>
               <ShieldCheck className="w-4 h-4" />
               <span>Instant order liquidity</span>
             </div>
@@ -211,13 +211,13 @@ export default function DashboardPage() {
               gap: "12px",
             }}
           >
-            <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+            <span className="mudra-eyebrow" style={{ fontSize: "11px" }}>
               Reserved for Orders (10% Buffer)
             </span>
             <div style={{ fontSize: "28px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--text-heading)" }}>
               {formatINR(reservedCash)}
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "var(--Mudra-signal-yellow)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", color: "var(--mudra-signal-yellow)" }}>
               <Clock className="w-4 h-4" />
               <span>Pending queue buffer</span>
             </div>
@@ -240,7 +240,7 @@ export default function DashboardPage() {
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+              <span className="mudra-eyebrow" style={{ fontSize: "11px" }}>
                 Total Realized P&amp;L
               </span>
               <button
@@ -252,10 +252,10 @@ export default function DashboardPage() {
                 <Info className="w-3.5 h-3.5" />
               </button>
             </div>
-            <div style={{ fontSize: "28px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--Mudra-link-green)" }}>
+            <div style={{ fontSize: "28px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--mudra-link-green)" }}>
               +{formatINR(realizedPl)}
             </div>
-            <div style={{ fontSize: "12px", color: "var(--Mudra-link-green)", fontWeight: 500 }}>
+            <div style={{ fontSize: "12px", color: "var(--mudra-link-green)", fontWeight: 500 }}>
               From closed trades
             </div>
             <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>
@@ -282,14 +282,14 @@ export default function DashboardPage() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span className="Mudra-mono" style={{ color: "var(--text-heading)", fontWeight: 700 }}>
+            <span className="mudra-mono" style={{ color: "var(--text-heading)", fontWeight: 700 }}>
               Audit Formula:
             </span>
             <span>
               Portfolio ({formatINR(totalValue)}) = Free Cash ({formatINR(freeCash)}) + Holdings ({formatINR(holdingsValue)})
             </span>
           </div>
-          <div className="Mudra-mono" style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "12px" }}>
+          <div className="mudra-mono" style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "12px" }}>
             <span>Net Gain: +{formatINR(totalGain)}</span>
             <span>·</span>
             <span>Zero ledger drift</span>
@@ -358,15 +358,15 @@ export default function DashboardPage() {
             >
               <defs>
                 <linearGradient id="equityGrad" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0.35" />
-                  <stop offset="75%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0.08" />
-                  <stop offset="100%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0" />
+                  <stop offset="0%" stopColor="var(--mudra-sky-blue)" stopOpacity="0.35" />
+                  <stop offset="75%" stopColor="var(--mudra-sky-blue)" stopOpacity="0.08" />
+                  <stop offset="100%" stopColor="var(--mudra-sky-blue)" stopOpacity="0" />
                 </linearGradient>
               </defs>
               <polygon fill="url(#equityGrad)" points={polygonStr} />
               <polyline
                 fill="none"
-                stroke="var(--Mudra-sky-blue)"
+                stroke="var(--mudra-sky-blue)"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -377,7 +377,7 @@ export default function DashboardPage() {
                   cx={width - padX}
                   cy={svgCoords[svgCoords.length - 1].split(",")[1]}
                   r="5"
-                  fill="var(--Mudra-sky-blue)"
+                  fill="var(--mudra-sky-blue)"
                   stroke="var(--surface-card)"
                   strokeWidth="2.5"
                 />
@@ -386,7 +386,7 @@ export default function DashboardPage() {
           </div>
 
           <div
-            className="Mudra-mono"
+            className="mudra-mono"
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -422,7 +422,7 @@ export default function DashboardPage() {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <Briefcase className="w-5 h-5" style={{ color: "var(--Mudra-signal-yellow)" }} />
+              <Briefcase className="w-5 h-5" style={{ color: "var(--mudra-signal-yellow)" }} />
               <h2 style={{ margin: 0, fontSize: "20px", fontWeight: 700, color: "var(--text-heading)" }}>
                 Active Holdings
               </h2>
@@ -444,7 +444,7 @@ export default function DashboardPage() {
             <table style={{ width: "100%", textAlign: "left", borderCollapse: "collapse", fontSize: "14px" }}>
               <thead>
                 <tr
-                  className="Mudra-mono"
+                  className="mudra-mono"
                   style={{
                     borderBottom: "1.5px solid var(--border-hairline)",
                     fontSize: "11px",
@@ -506,7 +506,7 @@ export default function DashboardPage() {
                             fontSize: "12px",
                             fontWeight: 600,
                             background: isPositive ? "rgba(7, 162, 64, 0.12)" : "rgba(201, 33, 33, 0.12)",
-                            color: isPositive ? "var(--Mudra-link-green)" : "var(--Mudra-node-red)",
+                            color: isPositive ? "var(--mudra-link-green)" : "var(--mudra-node-red)",
                           }}
                         >
                           {isPositive ? "+" : ""}
@@ -558,12 +558,12 @@ export default function DashboardPage() {
             }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <Clock className="w-5 h-5" style={{ color: "var(--Mudra-sky-blue)" }} />
+              <Clock className="w-5 h-5" style={{ color: "var(--mudra-sky-blue)" }} />
               <h2 style={{ margin: 0, fontSize: "20px", fontWeight: 700, color: "var(--text-heading)" }}>
                 Order Queue &amp; History
               </h2>
             </div>
-            <span className="Mudra-mono" style={{ fontSize: "12px", color: "var(--text-muted)" }}>
+            <span className="mudra-mono" style={{ fontSize: "12px", color: "var(--text-muted)" }}>
               Next settlement: 15:30 IST
             </span>
           </div>
@@ -577,7 +577,7 @@ export default function DashboardPage() {
               <table style={{ width: "100%", textAlign: "left", borderCollapse: "collapse", fontSize: "14px" }}>
                 <thead>
                   <tr
-                    className="Mudra-mono"
+                    className="mudra-mono"
                     style={{
                       borderBottom: "1.5px solid var(--border-hairline)",
                       fontSize: "11px",
@@ -605,7 +605,7 @@ export default function DashboardPage() {
                       onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-sunken)")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                     >
-                      <td className="Mudra-mono" style={{ padding: "16px", fontSize: "12px", color: "var(--text-muted)" }}>
+                      <td className="mudra-mono" style={{ padding: "16px", fontSize: "12px", color: "var(--text-muted)" }}>
                         {ord.id}
                       </td>
                       <td style={{ padding: "16px", fontWeight: 700 }}>
@@ -615,7 +615,7 @@ export default function DashboardPage() {
                       </td>
                       <td style={{ padding: "16px" }}>
                         <span
-                          className="Mudra-mono"
+                          className="mudra-mono"
                           style={{
                             display: "inline-block",
                             padding: "3px 8px",
@@ -623,7 +623,7 @@ export default function DashboardPage() {
                             fontSize: "11px",
                             fontWeight: 700,
                             background: ord.side === "BUY" ? "rgba(59, 191, 247, 0.15)" : "rgba(201, 33, 33, 0.15)",
-                            color: ord.side === "BUY" ? "var(--Mudra-sky-blue)" : "var(--Mudra-node-red)",
+                            color: ord.side === "BUY" ? "var(--mudra-sky-blue)" : "var(--mudra-node-red)",
                           }}
                         >
                           {ord.side}
@@ -634,7 +634,7 @@ export default function DashboardPage() {
                       </td>
                       <td style={{ padding: "16px", textAlign: "right" }}>
                         <span
-                          className="Mudra-mono"
+                          className="mudra-mono"
                           style={{
                             display: "inline-block",
                             padding: "3px 8px",
@@ -649,16 +649,16 @@ export default function DashboardPage() {
                                 : "rgba(201, 33, 33, 0.15)",
                             color:
                               ord.status === "PENDING"
-                                ? "var(--Mudra-signal-yellow)"
+                                ? "var(--mudra-signal-yellow)"
                                 : ord.status === "FILLED"
-                                ? "var(--Mudra-link-green)"
-                                : "var(--Mudra-node-red)",
+                                ? "var(--mudra-link-green)"
+                                : "var(--mudra-node-red)",
                           }}
                         >
                           {ord.status}
                         </span>
                       </td>
-                      <td className="Mudra-mono" style={{ padding: "16px", textAlign: "right", fontSize: "12px", color: "var(--text-muted)" }}>
+                      <td className="mudra-mono" style={{ padding: "16px", textAlign: "right", fontSize: "12px", color: "var(--text-muted)" }}>
                         Next Close (15:30 IST)
                       </td>
                     </tr>

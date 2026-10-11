@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { NseLogoBadge } from "./MudraLogos";
 
 interface MudraProofProps {
@@ -12,9 +12,11 @@ export function MudraProof({ theme }: MudraProofProps) {
     <section
       data-theme={altTheme}
       data-screen-label="08 Proof"
-      className="Mudra-block"
+      className="mudra-block"
       style={{
         position: "relative",
+        background: altTheme === "dark" ? "#181A1D" : "var(--surface-canvas)",
+        color: altTheme === "dark" ? "#FAFAF9" : "var(--text-body)",
         padding: "var(--section) 0",
       }}
     >
@@ -22,7 +24,7 @@ export function MudraProof({ theme }: MudraProofProps) {
         {/* Eyebrow & Headline */}
         <div data-g="" style={{ rowGap: "24px", marginBottom: "clamp(40px, 6vh, 72px)" }}>
           <div data-col="half">
-            <span className="Mudra-eyebrow">08 / proof</span>
+            <span className="mudra-eyebrow">08 / proof</span>
             <h2
               data-reveal=""
               style={{
@@ -173,5 +175,3 @@ export function MudraProof({ theme }: MudraProofProps) {
     </section>
   );
 }
-
-

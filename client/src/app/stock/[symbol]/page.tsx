@@ -31,7 +31,7 @@ export default function StockDetailPage() {
     return (
       <MudraShell activeNav="explore">
         <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 text-center max-w-lg mx-auto">
-          <div className="w-12 h-12 rounded-full bg-[var(--surface-muted)] text-[var(--Mudra-signal-yellow)] flex items-center justify-center mb-4 border border-[var(--border-hairline)] font-mono text-xl">
+          <div className="w-12 h-12 rounded-full bg-[var(--surface-muted)] text-[var(--mudra-signal-yellow)] flex items-center justify-center mb-4 border border-[var(--border-hairline)] font-mono text-xl">
             !
           </div>
           <h2 className="text-xl font-bold text-[var(--text-heading)] mb-2">
@@ -42,7 +42,7 @@ export default function StockDetailPage() {
           </p>
           <Link
             href="/explore"
-            className="px-6 py-2.5 rounded-full bg-[var(--Mudra-sky-blue)] text-[#0A0D10] text-xs font-bold tracking-wide transition-transform hover:scale-[1.02]"
+            className="px-6 py-2.5 rounded-full bg-[var(--mudra-sky-blue)] text-[#0A0D10] text-xs font-bold tracking-wide transition-transform hover:scale-[1.02]"
           >
             Return to Market Explorer
           </Link>
@@ -82,13 +82,13 @@ export default function StockDetailPage() {
         {currentHolding && (
           <div className="my-6 p-5 rounded-2xl bg-[var(--surface-card)] border border-[var(--border-hairline)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[var(--Mudra-link-green)]/10 text-[var(--Mudra-link-green)] border border-[var(--Mudra-link-green)]/20 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-full bg-[var(--mudra-link-green)]/10 text-[var(--mudra-link-green)] border border-[var(--mudra-link-green)]/20 flex items-center justify-center font-bold">
                 <ShoppingBag className="w-5 h-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-bold text-[var(--text-heading)]">Your Position</span>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-[var(--Mudra-link-green)]/15 text-[var(--Mudra-link-green)] font-bold border border-[var(--Mudra-link-green)]/30">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-[var(--mudra-link-green)]/15 text-[var(--mudra-link-green)] font-bold border border-[var(--mudra-link-green)]/30">
                     LONG
                   </span>
                 </div>
@@ -100,7 +100,7 @@ export default function StockDetailPage() {
             <div className="flex items-center gap-6 text-xs font-mono">
               <div>
                 <span className="text-[var(--text-muted)] block text-[11px]">Unrealized P&amp;L</span>
-                <span className="font-semibold text-[var(--Mudra-link-green)]">
+                <span className="font-semibold text-[var(--mudra-link-green)]">
                   +{formatINR(currentHolding.unrealized_paise)}
                 </span>
               </div>
@@ -128,7 +128,7 @@ export default function StockDetailPage() {
             {/* Educational Explainer */}
             <div className="p-6 rounded-2xl bg-[var(--surface-card)] border border-[var(--border-hairline)] text-xs space-y-2.5 text-[var(--text-body)] shadow-sm">
               <div className="flex items-center gap-2 text-[var(--text-heading)] font-bold text-sm">
-                <AlertCircle className="w-4 h-4 text-[var(--Mudra-signal-yellow)]" />
+                <AlertCircle className="w-4 h-4 text-[var(--mudra-signal-yellow)]" />
                 <span>Deterministic 15:30 IST Execution</span>
               </div>
               <p className="leading-relaxed text-[var(--text-muted)]">
@@ -158,7 +158,7 @@ export default function StockDetailPage() {
             </button>
             <button
               onClick={() => openOrder("BUY")}
-              className="flex-1 sm:flex-initial px-8 py-3 rounded-full bg-[var(--Mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-sm flex items-center justify-center gap-2"
+              className="flex-1 sm:flex-initial px-8 py-3 rounded-full bg-[var(--mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-sm flex items-center justify-center gap-2"
             >
               Buy / Long
               <ArrowRight className="w-4 h-4" />

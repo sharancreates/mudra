@@ -32,7 +32,7 @@ export const KeyStatistics: React.FC<KeyStatisticsProps> = ({ instrument }) => {
       }}
     >
       <h3
-        className="Mudra-eyebrow"
+        className="mudra-eyebrow"
         style={{
           fontSize: "11px",
           marginBottom: "16px",

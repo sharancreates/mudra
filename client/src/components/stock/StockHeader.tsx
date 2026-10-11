@@ -53,7 +53,7 @@ export const StockHeader: React.FC<StockHeaderProps> = ({ instrument }) => {
               {instrument.symbol}
             </h1>
             <span
-              className="Mudra-mono"
+              className="mudra-mono"
               style={{
                 fontSize: "12px",
                 fontWeight: 700,
@@ -66,7 +66,7 @@ export const StockHeader: React.FC<StockHeaderProps> = ({ instrument }) => {
               {instrument.exchange}
             </span>
             <span
-              className="Mudra-eyebrow"
+              className="mudra-eyebrow"
               style={{
                 fontSize: "11px",
                 padding: "3px 10px",
@@ -83,7 +83,7 @@ export const StockHeader: React.FC<StockHeaderProps> = ({ instrument }) => {
               style={{
                 background: "none",
                 border: "none",
-                color: isStarred ? "var(--Mudra-signal-yellow)" : "var(--text-muted)",
+                color: isStarred ? "var(--mudra-signal-yellow)" : "var(--text-muted)",
                 cursor: "pointer",
                 padding: 0,
               }}
@@ -92,7 +92,7 @@ export const StockHeader: React.FC<StockHeaderProps> = ({ instrument }) => {
               <Star
                 className="w-5 h-5"
                 style={{
-                  fill: isStarred ? "var(--Mudra-signal-yellow)" : "none",
+                  fill: isStarred ? "var(--mudra-signal-yellow)" : "none",
                 }}
               />
             </button>
@@ -127,14 +127,14 @@ export const StockHeader: React.FC<StockHeaderProps> = ({ instrument }) => {
                 fontSize: "13px",
                 fontWeight: 600,
                 background: isPositive ? "rgba(7, 162, 64, 0.12)" : "rgba(201, 33, 33, 0.12)",
-                color: isPositive ? "var(--Mudra-link-green)" : "var(--Mudra-node-red)",
+                color: isPositive ? "var(--mudra-link-green)" : "var(--mudra-node-red)",
               }}
             >
               {isPositive ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
               {formatBps(instrument.change_bps)}
             </span>
           </div>
-          <span className="Mudra-mono" style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>
+          <span className="mudra-mono" style={{ display: "block", fontSize: "12px", color: "var(--text-muted)", marginTop: "4px" }}>
             NSE Official Close · As of {instrument.as_of}
           </span>
         </div>

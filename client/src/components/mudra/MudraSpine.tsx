@@ -35,8 +35,8 @@ export function MudraSpine() {
     >
       <defs>
         <linearGradient id="spine-hue" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="100%">
-          <stop offset="0" stopColor="var(--Mudra-sky-blue)" />
-          <stop offset="90%" stopColor="var(--Mudra-sky-blue)" />
+          <stop offset="0" stopColor="var(--mudra-sky-blue)" />
+          <stop offset="90%" stopColor="var(--mudra-sky-blue)" />
           <stop offset="100%" stopColor="#8B8A88" />
         </linearGradient>
       </defs>
@@ -61,7 +61,7 @@ export function MudraSpine() {
         cy="240"
         r="32"
         fill="var(--surface-canvas)"
-        stroke="var(--Mudra-sky-blue)"
+        stroke="var(--mudra-sky-blue)"
         strokeWidth="16"
       />
     </svg>

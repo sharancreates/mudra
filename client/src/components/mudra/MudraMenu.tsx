@@ -22,15 +22,15 @@ export function MudraMenu({
     { num: "01", label: "Home", href: "/", field: "blue", color: "var(--accent-type-blue)" },
     { num: "02", label: "Explore Market", href: "/explore", field: "yellow", color: "var(--accent-type-yellow)" },
     { num: "03", label: "Portfolio", href: "/dashboard", field: "green", color: "var(--accent-type-green)" },
-    { num: "04", label: "Trade Stock", href: "/stock/RELIANCE", field: "red", color: "var(--Mudra-node-red)" },
+    { num: "04", label: "Trade Stock", href: "/stock/RELIANCE", field: "red", color: "var(--mudra-node-red)" },
   ];
 
   const getFieldBg = () => {
     switch (activeField) {
-      case "blue": return "var(--Mudra-sky-blue)";
-      case "yellow": return "var(--Mudra-signal-yellow)";
-      case "green": return "var(--Mudra-link-green)";
-      case "red": return "var(--Mudra-node-red)";
+      case "blue": return "var(--mudra-sky-blue)";
+      case "yellow": return "var(--mudra-signal-yellow)";
+      case "green": return "var(--mudra-link-green)";
+      case "red": return "var(--mudra-node-red)";
       default: return "var(--surface-card)";
     }
   };
@@ -149,7 +149,7 @@ export function MudraMenu({
         }}
       >
         <div>
-          <div className="Mudra-eyebrow">Virtual Capital</div>
+          <div className="mudra-eyebrow">Virtual Capital</div>
           <span style={{ display: "block", marginTop: "8px", fontSize: "15px", fontWeight: 600, color: "var(--text-heading)" }}>
             ₹1,00,000.00 Credit
           </span>
@@ -157,7 +157,7 @@ export function MudraMenu({
         </div>
 
         <div>
-          <div className="Mudra-eyebrow">Settlement Cutoff</div>
+          <div className="mudra-eyebrow">Settlement Cutoff</div>
           <span style={{ display: "block", marginTop: "8px", fontSize: "15px", color: "var(--text-body)" }}>
             15:30 IST Daily Close
           </span>
@@ -165,7 +165,7 @@ export function MudraMenu({
         </div>
 
         <div>
-          <div className="Mudra-eyebrow">Sandbox Policy</div>
+          <div className="mudra-eyebrow">Sandbox Policy</div>
           <p style={{ margin: "8px 0 0 0", fontSize: "14px", lineHeight: 1.4, color: "var(--text-muted)" }}>
             Educational simulation.
             <br />

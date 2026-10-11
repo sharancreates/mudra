@@ -47,14 +47,14 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
         <>
           <div className="flex justify-between items-center text-[var(--text-muted)]">
             <span>Safety Headroom Buffer (+10%):</span>
-            <span className="font-mono text-[var(--Mudra-signal-yellow)] font-semibold">
+            <span className="font-mono text-[var(--mudra-signal-yellow)] font-semibold">
               {formatINR(safetyBuffer)}
             </span>
           </div>
 
           <div className="pt-2 border-t border-[var(--border-hairline)] flex justify-between items-center font-bold text-[var(--text-heading)] text-sm">
             <span>Total Cash to Reserve:</span>
-            <span className="font-mono text-[var(--Mudra-sky-blue)]">
+            <span className="font-mono text-[var(--mudra-sky-blue)]">
               {formatINR(totalReserved)}
             </span>
           </div>
@@ -83,7 +83,7 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
         <>
           <div className="pt-2 border-t border-[var(--border-hairline)] flex justify-between items-center font-bold text-[var(--text-heading)] text-sm">
             <span>Estimated Net Proceeds:</span>
-            <span className="font-mono text-[var(--Mudra-link-green)]">
+            <span className="font-mono text-[var(--mudra-link-green)]">
               {formatINR(netProceeds)}
             </span>
           </div>

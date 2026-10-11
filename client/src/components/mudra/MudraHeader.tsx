@@ -98,7 +98,7 @@ export function MudraHeader({
                 fontSize: "13px",
                 fontWeight: 600,
                 color: "#262626",
-                background: "var(--Mudra-signal-yellow)",
+                background: "var(--mudra-signal-yellow)",
                 textDecoration: "none",
                 padding: "8px 16px",
                 borderRadius: "var(--radius-pill)",

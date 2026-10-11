@@ -19,12 +19,12 @@ export const OrderSuccessState: React.FC<OrderSuccessStateProps> = ({
 }) => {
   return (
     <div className="py-6 text-center space-y-4 text-[var(--text-heading)]">
-      <div className="w-14 h-14 rounded-full bg-[var(--Mudra-link-green)]/15 border border-[var(--Mudra-link-green)]/30 text-[var(--Mudra-link-green)] flex items-center justify-center mx-auto">
+      <div className="w-14 h-14 rounded-full bg-[var(--mudra-link-green)]/15 border border-[var(--mudra-link-green)]/30 text-[var(--mudra-link-green)] flex items-center justify-center mx-auto">
         <CheckCircle2 className="w-8 h-8" />
       </div>
 
       <div>
-        <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--Mudra-link-green)] font-bold block mb-1">
+        <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--mudra-link-green)] font-bold block mb-1">
           Order Queued Successfully
         </span>
         <h3 className="text-xl font-bold tracking-tight">
@@ -38,17 +38,17 @@ export const OrderSuccessState: React.FC<OrderSuccessStateProps> = ({
       <div className="p-4 rounded-xl bg-[var(--surface-muted)]/70 border border-[var(--border-hairline)] text-left text-xs space-y-2.5 max-w-sm mx-auto">
         <div className="flex items-center justify-between">
           <span className="text-[var(--text-muted)] flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-[var(--Mudra-signal-yellow)]" />
+            <Clock className="w-3.5 h-3.5 text-[var(--mudra-signal-yellow)]" />
             Execution Status:
           </span>
-          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--Mudra-signal-yellow)]/15 text-[var(--Mudra-signal-yellow)] border border-[var(--Mudra-signal-yellow)]/30">
+          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--mudra-signal-yellow)]/15 text-[var(--mudra-signal-yellow)] border border-[var(--mudra-signal-yellow)]/30">
             {order.status}
           </span>
         </div>
 
         <div className="flex items-center justify-between">
           <span className="text-[var(--text-muted)] flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5 text-[var(--Mudra-sky-blue)]" />
+            <Calendar className="w-3.5 h-3.5 text-[var(--mudra-sky-blue)]" />
             Target Settlement Date:
           </span>
           <span className="font-mono text-[var(--text-heading)] font-semibold">
@@ -64,7 +64,7 @@ export const OrderSuccessState: React.FC<OrderSuccessStateProps> = ({
       <button
         type="button"
         onClick={onDone}
-        className="w-full py-3 px-6 rounded-full bg-[var(--Mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs tracking-wide transition-all shadow-sm flex items-center justify-center gap-2 mt-4"
+        className="w-full py-3 px-6 rounded-full bg-[var(--mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs tracking-wide transition-all shadow-sm flex items-center justify-center gap-2 mt-4"
       >
         <span>Back to Instrument</span>
         <ArrowRight className="w-4 h-4" />

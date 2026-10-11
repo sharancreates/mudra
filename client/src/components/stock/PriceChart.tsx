@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { formatINR } from "@/lib/formatters";
@@ -64,7 +64,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({
       {/* Chart Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px", marginBottom: "20px" }}>
         <div>
-          <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+          <span className="mudra-eyebrow" style={{ fontSize: "11px" }}>
             EOD Historical Price Chart
           </span>
           <span style={{ display: "block", fontSize: "15px", fontWeight: 700, color: "var(--text-heading)", marginTop: "4px" }}>
@@ -116,16 +116,16 @@ export const PriceChart: React.FC<PriceChartProps> = ({
         >
           <defs>
             <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0.32" />
-              <stop offset="70%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0.08" />
-              <stop offset="100%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--mudra-sky-blue)" stopOpacity="0.32" />
+              <stop offset="70%" stopColor="var(--mudra-sky-blue)" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="var(--mudra-sky-blue)" stopOpacity="0" />
             </linearGradient>
           </defs>
 
           <polygon fill="url(#chartGradient)" points={polygonStr} />
           <polyline
             fill="none"
-            stroke="var(--Mudra-sky-blue)"
+            stroke="var(--mudra-sky-blue)"
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -137,7 +137,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({
               cx={width - paddingX}
               cy={svgPoints[svgPoints.length - 1].split(",")[1]}
               r="5"
-              fill="var(--Mudra-sky-blue)"
+              fill="var(--mudra-sky-blue)"
               stroke="var(--surface-card)"
               strokeWidth="2.5"
             />
@@ -147,7 +147,7 @@ export const PriceChart: React.FC<PriceChartProps> = ({
 
       {/* Chart Footer Notice */}
       <div
-        className="Mudra-mono"
+        className="mudra-mono"
         style={{
           marginTop: "16px",
           display: "flex",

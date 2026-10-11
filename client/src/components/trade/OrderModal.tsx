@@ -112,7 +112,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
             {/* Next-Close Execution Info Strip */}
             <div className="mb-5 p-3.5 rounded-xl bg-[var(--surface-muted)]/70 border border-[var(--border-hairline)] flex items-start gap-2.5 text-xs text-[var(--text-body)]">
-              <Clock className="w-4 h-4 text-[var(--Mudra-sky-blue)] shrink-0 mt-0.5" />
+              <Clock className="w-4 h-4 text-[var(--mudra-sky-blue)] shrink-0 mt-0.5" />
               <div>
                 <span className="font-semibold text-[var(--text-heading)]">Deterministic Next-Close: </span>
                 Orders clear against official 15:30 IST NSE closing auction. Free cash is held in reserve until settlement.
@@ -126,7 +126,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 onClick={() => setSide("BUY")}
                 className={`py-2 rounded-full text-xs font-bold transition-all shadow-sm ${
                   side === "BUY"
-                    ? "bg-[var(--Mudra-sky-blue)] text-[#0A0D10]"
+                    ? "bg-[var(--mudra-sky-blue)] text-[#0A0D10]"
                     : "text-[var(--text-muted)] hover:text-[var(--text-heading)]"
                 }`}
               >
@@ -137,7 +137,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 onClick={() => setSide("SELL")}
                 className={`py-2 rounded-full text-xs font-bold transition-all shadow-sm ${
                   side === "SELL"
-                    ? "bg-[var(--Mudra-node-red)] text-white"
+                    ? "bg-[var(--mudra-node-red)] text-white"
                     : "text-[var(--text-muted)] hover:text-[var(--text-heading)]"
                 }`}
               >
@@ -161,7 +161,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   </label>
                   <span className="font-mono text-[var(--text-muted)] text-[11px]">Lot size: 1 share</span>
                 </div>
-                <div className="flex items-stretch rounded-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] overflow-hidden focus-within:border-[var(--Mudra-sky-blue)] transition-colors">
+                <div className="flex items-stretch rounded-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] overflow-hidden focus-within:border-[var(--mudra-sky-blue)] transition-colors">
                   <button
                     type="button"
                     onClick={() => handleQtyChange(-1)}
@@ -203,8 +203,8 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 disabled={isSubmitting}
                 className={`w-full py-3.5 px-4 rounded-full font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer ${
                   side === "BUY"
-                    ? "bg-[var(--Mudra-sky-blue)] hover:brightness-105 text-[#0A0D10]"
-                    : "bg-[var(--Mudra-node-red)] hover:brightness-110 text-white"
+                    ? "bg-[var(--mudra-sky-blue)] hover:brightness-105 text-[#0A0D10]"
+                    : "bg-[var(--mudra-node-red)] hover:brightness-110 text-white"
                 } ${isSubmitting ? "opacity-60 cursor-not-allowed" : ""}`}
               >
                 {isSubmitting ? (

@@ -62,10 +62,10 @@ export function MudraImpact() {
       const trunkPath = route([[S.r, S.cy], [trunkX, S.cy], [trunkX, H.cy], [H.l, H.cy]], radius);
 
       const hues = [
-        "var(--Mudra-sky-blue)",
-        "var(--Mudra-link-green)",
-        "var(--Mudra-signal-yellow)",
-        "var(--Mudra-node-red)",
+        "var(--mudra-sky-blue)",
+        "var(--mudra-link-green)",
+        "var(--mudra-signal-yellow)",
+        "var(--mudra-node-red)",
       ];
 
       const minTargetLeft = Math.min(...targets.map((t) => t.l));
@@ -115,7 +115,7 @@ export function MudraImpact() {
         {/* Eyebrow */}
         <div data-g="" style={{ marginBottom: "var(--section-half)" }}>
           <div data-col="wide">
-            <span className="Mudra-eyebrow">05 / the mudra engine</span>
+            <span className="mudra-eyebrow">05 / the mudra engine</span>
           </div>
         </div>
 
@@ -310,7 +310,7 @@ export function MudraImpact() {
                       width: "clamp(56px, min(5vw, 66.4px), 84px)",
                       height: "clamp(56px, min(5vw, 66.4px), 84px)",
                       borderRadius: "999px",
-                      border: "4px solid var(--Mudra-sky-blue)",
+                      border: "4px solid var(--mudra-sky-blue)",
                       background: "var(--surface-card)",
                       display: "flex",
                       alignItems: "center",
@@ -318,7 +318,7 @@ export function MudraImpact() {
                       padding: "clamp(13px, min(1.1vw, 14.6px), 19px)",
                     }}
                   >
-                    <span style={{ fontSize: "12px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--Mudra-sky-blue)" }}>15:30</span>
+                    <span style={{ fontSize: "12px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--mudra-sky-blue)" }}>15:30</span>
                   </div>
                   <span
                     style={{
@@ -349,7 +349,7 @@ export function MudraImpact() {
                       width: "clamp(56px, min(5vw, 66.4px), 84px)",
                       height: "clamp(56px, min(5vw, 66.4px), 84px)",
                       borderRadius: "999px",
-                      border: "4px solid var(--Mudra-link-green)",
+                      border: "4px solid var(--mudra-link-green)",
                       background: "var(--surface-card)",
                       display: "flex",
                       alignItems: "center",
@@ -357,7 +357,7 @@ export function MudraImpact() {
                       padding: "clamp(13px, min(1.1vw, 14.6px), 19px)",
                     }}
                   >
-                    <span style={{ fontSize: "14px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--Mudra-link-green)" }}>10%</span>
+                    <span style={{ fontSize: "14px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--mudra-link-green)" }}>10%</span>
                   </div>
                   <span
                     style={{
@@ -388,7 +388,7 @@ export function MudraImpact() {
                       width: "clamp(56px, min(5vw, 66.4px), 84px)",
                       height: "clamp(56px, min(5vw, 66.4px), 84px)",
                       borderRadius: "999px",
-                      border: "4px solid var(--Mudra-signal-yellow)",
+                      border: "4px solid var(--mudra-signal-yellow)",
                       background: "var(--surface-card)",
                       display: "flex",
                       alignItems: "center",
@@ -396,7 +396,7 @@ export function MudraImpact() {
                       padding: "clamp(13px, min(1.1vw, 14.6px), 19px)",
                     }}
                   >
-                    <span style={{ fontSize: "13px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--Mudra-signal-yellow)" }}>NSE</span>
+                    <span style={{ fontSize: "13px", fontWeight: 700, fontFamily: "var(--font-mono)", color: "var(--mudra-signal-yellow)" }}>NSE</span>
                   </div>
                   <span
                     style={{
@@ -427,7 +427,7 @@ export function MudraImpact() {
                       width: "clamp(56px, min(5vw, 66.4px), 84px)",
                       height: "clamp(56px, min(5vw, 66.4px), 84px)",
                       borderRadius: "999px",
-                      border: "4px solid var(--Mudra-node-red)",
+                      border: "4px solid var(--mudra-node-red)",
                       background: "var(--surface-card)",
                       display: "flex",
                       alignItems: "center",
@@ -435,7 +435,7 @@ export function MudraImpact() {
                       padding: "clamp(13px, min(1.1vw, 14.6px), 19px)",
                     }}
                   >
-                    <span style={{ fontSize: "15px", fontWeight: 700, color: "var(--Mudra-node-red)" }}>₹</span>
+                    <span style={{ fontSize: "15px", fontWeight: 700, color: "var(--mudra-node-red)" }}>₹</span>
                   </div>
                   <span
                     style={{

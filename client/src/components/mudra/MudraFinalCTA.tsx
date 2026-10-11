@@ -12,17 +12,17 @@ export function MudraFinalCTA({ onOpenAuth }: MudraFinalCTAProps) {
       data-mode="blue"
       data-cta=""
       data-screen-label="09 Final CTA"
-      className="Mudra-block"
+      className="mudra-block"
       style={{
         position: "relative",
-        background: "var(--Mudra-sky-blue)",
+        background: "var(--mudra-sky-blue)",
         padding: "var(--section) 0 var(--section-half) 0",
         overflow: "hidden",
       }}
     >
       <div data-wrap="">
         {/* Eyebrow */}
-        <span className="Mudra-eyebrow" style={{ color: "#262626" }}>
+        <span className="mudra-eyebrow" style={{ color: "#262626" }}>
           09 / start trading
         </span>
 
@@ -88,7 +88,7 @@ export function MudraFinalCTA({ onOpenAuth }: MudraFinalCTAProps) {
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
             <span>Claim ₹1,00,000 Capital</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--Mudra-sky-blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mudra-sky-blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
@@ -109,7 +109,7 @@ export function MudraFinalCTA({ onOpenAuth }: MudraFinalCTAProps) {
           </a>
 
           <span
-            className="Mudra-mono"
+            className="mudra-mono"
             style={{
               fontSize: "13px",
               fontWeight: 600,

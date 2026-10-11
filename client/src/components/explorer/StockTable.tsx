@@ -126,7 +126,7 @@ export const StockTable: React.FC<StockTableProps> = ({
                     style={{
                       background: "none",
                       border: "none",
-                      color: isStarred ? "var(--Mudra-signal-yellow)" : "var(--text-muted)",
+                      color: isStarred ? "var(--mudra-signal-yellow)" : "var(--text-muted)",
                       cursor: "pointer",
                       padding: 0,
                     }}
@@ -135,7 +135,7 @@ export const StockTable: React.FC<StockTableProps> = ({
                     <Star
                       className="w-4 h-4"
                       style={{
-                        fill: isStarred ? "var(--Mudra-signal-yellow)" : "none",
+                        fill: isStarred ? "var(--mudra-signal-yellow)" : "none",
                       }}
                     />
                   </button>
@@ -152,7 +152,7 @@ export const StockTable: React.FC<StockTableProps> = ({
                         {stock.symbol}
                       </span>
                       <span
-                        className="Mudra-mono"
+                        className="mudra-mono"
                         style={{
                           fontSize: "10px",
                           fontWeight: 600,
@@ -184,7 +184,7 @@ export const StockTable: React.FC<StockTableProps> = ({
                 {/* Sector */}
                 <td className="hidden md:table-cell" style={{ padding: "16px" }}>
                   <span
-                    className="Mudra-eyebrow"
+                    className="mudra-eyebrow"
                     style={{
                       fontSize: "11px",
                       padding: "3px 10px",
@@ -224,7 +224,7 @@ export const StockTable: React.FC<StockTableProps> = ({
                       fontSize: "12px",
                       fontWeight: 600,
                       background: isPositive ? "rgba(7, 162, 64, 0.12)" : "rgba(201, 33, 33, 0.12)",
-                      color: isPositive ? "var(--Mudra-link-green)" : "var(--Mudra-node-red)",
+                      color: isPositive ? "var(--mudra-link-green)" : "var(--mudra-node-red)",
                     }}
                   >
                     {isPositive ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}

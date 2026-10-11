@@ -86,7 +86,7 @@ export function MudraConnectorWall() {
       }}
     >
       <div data-wrap="" style={{ paddingBottom: "40px" }}>
-        <span className="Mudra-eyebrow">02 / 50 nse instruments, live simulated close</span>
+        <span className="mudra-eyebrow">02 / 50 nse instruments, live simulated close</span>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
@@ -190,7 +190,7 @@ export function MudraConnectorWall() {
                       {formatINR(item.last_close_paise)}
                     </span>
 
-                    <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+                    <span className="mudra-eyebrow" style={{ fontSize: "11px" }}>
                       {item.sector}
                     </span>
                   </div>
@@ -300,7 +300,7 @@ export function MudraConnectorWall() {
                       {formatINR(item.last_close_paise)}
                     </span>
 
-                    <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+                    <span className="mudra-eyebrow" style={{ fontSize: "11px" }}>
                       {item.sector}
                     </span>
                   </div>

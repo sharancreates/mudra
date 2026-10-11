@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 interface MudraProblemProps {
   theme: "light" | "dark";
@@ -13,9 +13,11 @@ export function MudraProblem({ theme }: MudraProblemProps) {
       data-manifesto=""
       data-theme={altTheme}
       data-screen-label="04 The problem"
-      className="Mudra-block"
+      className="mudra-block"
       style={{
         position: "relative",
+        background: altTheme === "dark" ? "#181A1D" : "var(--surface-canvas)",
+        color: altTheme === "dark" ? "#FAFAF9" : "var(--text-body)",
         padding: "var(--section) 0",
       }}
     >
@@ -23,7 +25,7 @@ export function MudraProblem({ theme }: MudraProblemProps) {
         {/* Eyebrow */}
         <div data-g="" style={{ marginBottom: "var(--section-half)" }}>
           <div data-col="wide">
-            <span className="Mudra-eyebrow">04 / the problem</span>
+            <span className="mudra-eyebrow">04 / the problem</span>
           </div>
         </div>
 
@@ -62,7 +64,7 @@ export function MudraProblem({ theme }: MudraProblemProps) {
                 width: "72px",
                 height: "4px",
                 borderRadius: "999px",
-                background: "var(--Mudra-signal-yellow)",
+                background: "var(--mudra-signal-yellow)",
               }}
             />
             <p
@@ -91,5 +93,3 @@ export function MudraProblem({ theme }: MudraProblemProps) {
     </section>
   );
 }
-
-

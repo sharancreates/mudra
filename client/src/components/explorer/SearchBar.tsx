@@ -44,7 +44,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           transition: "border-color 160ms ease, box-shadow 160ms ease",
         }}
         onFocus={(e) => {
-          e.currentTarget.style.borderColor = "var(--Mudra-sky-blue)";
+          e.currentTarget.style.borderColor = "var(--mudra-sky-blue)";
           e.currentTarget.style.boxShadow = "0 0 0 3px rgba(59, 191, 247, 0.15)";
         }}
         onBlur={(e) => {

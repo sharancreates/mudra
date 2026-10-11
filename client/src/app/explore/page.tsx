@@ -63,7 +63,7 @@ export default function ExplorePage() {
       <div data-wrap="" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
         {/* Eyebrow */}
         <div style={{ marginBottom: "16px" }}>
-          <span className="Mudra-eyebrow">01 / nse 50 equities directory</span>
+          <span className="mudra-eyebrow">01 / nse 50 equities directory</span>
         </div>
 
         {/* Display Heading & Market Status */}
@@ -193,7 +193,7 @@ export default function ExplorePage() {
             lineHeight: 1.5,
           }}
         >
-          <Info className="w-4 h-4 shrink-0" style={{ color: "var(--Mudra-sky-blue)" }} />
+          <Info className="w-4 h-4 shrink-0" style={{ color: "var(--mudra-sky-blue)" }} />
           <span>
             Orders placed on any instrument will execute at the official closing price during the next session settlement (15:30 IST) with 0.1% simulated brokerage fee.
           </span>

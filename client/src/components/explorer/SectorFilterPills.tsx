@@ -36,8 +36,8 @@ export const SectorFilterPills: React.FC<SectorFilterPillsProps> = ({
               whiteSpace: "nowrap",
               cursor: "pointer",
               transition: "all 160ms ease",
-              border: isSelected ? "1.5px solid var(--Mudra-signal-yellow)" : "1.5px solid var(--border-hairline)",
-              background: isSelected ? "var(--Mudra-signal-yellow)" : "var(--surface-card)",
+              border: isSelected ? "1.5px solid var(--mudra-signal-yellow)" : "1.5px solid var(--border-hairline)",
+              background: isSelected ? "var(--mudra-signal-yellow)" : "var(--surface-card)",
               color: isSelected ? "#262626" : "var(--text-body)",
             }}
           >

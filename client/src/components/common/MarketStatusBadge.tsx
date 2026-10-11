@@ -20,21 +20,21 @@ export const MarketStatusBadge: React.FC<MarketStatusBadgeProps> = ({
     switch (freshness) {
       case "FRESH":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--Mudra-link-green)]/15 text-[var(--Mudra-link-green)] border border-[var(--Mudra-link-green)]/30">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--mudra-link-green)]/15 text-[var(--mudra-link-green)] border border-[var(--mudra-link-green)]/30">
             <CheckCircle2 className="w-3 h-3" />
             Fresh EOD
           </span>
         );
       case "DELAYED":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--Mudra-signal-yellow)]/15 text-[var(--Mudra-signal-yellow)] border border-[var(--Mudra-signal-yellow)]/30">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--mudra-signal-yellow)]/15 text-[var(--mudra-signal-yellow)] border border-[var(--mudra-signal-yellow)]/30">
             <AlertTriangle className="w-3 h-3" />
             Delayed
           </span>
         );
       case "OUTDATED":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--Mudra-node-red)]/15 text-[var(--Mudra-node-red)] border border-[var(--Mudra-node-red)]/30">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--mudra-node-red)]/15 text-[var(--mudra-node-red)] border border-[var(--mudra-node-red)]/30">
             <XCircle className="w-3 h-3" />
             Outdated
           </span>
@@ -47,7 +47,7 @@ export const MarketStatusBadge: React.FC<MarketStatusBadgeProps> = ({
       <span
         className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
           isOpen
-            ? "bg-[var(--Mudra-link-green)]/15 text-[var(--Mudra-link-green)] border border-[var(--Mudra-link-green)]/30"
+            ? "bg-[var(--mudra-link-green)]/15 text-[var(--mudra-link-green)] border border-[var(--mudra-link-green)]/30"
             : "bg-[var(--surface-muted)] text-[var(--text-muted)] border border-[var(--border-hairline)]"
         }`}
       >

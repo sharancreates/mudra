@@ -13,7 +13,7 @@ export function MudraReasons() {
         {/* Eyebrow */}
         <div data-spine-wp="reasons" data-g="" style={{ marginBottom: "40px" }}>
           <div data-col="wide">
-            <span className="Mudra-eyebrow">06 / why traders choose mudra</span>
+            <span className="mudra-eyebrow">06 / why traders choose mudra</span>
           </div>
         </div>
 
@@ -37,14 +37,14 @@ export function MudraReasons() {
               overflow: "hidden",
               display: "flex",
               flexDirection: "column",
-              background: "var(--Mudra-sky-blue)",
+              background: "var(--mudra-sky-blue)",
               paddingTop: "12px",
             }}
           >
             <div
               style={{
                 flex: 1,
-                background: "var(--Mudra-blue-800)",
+                background: "var(--mudra-blue-800)",
                 color: "#FAFAF9",
                 padding: "clamp(24px, min(2.6vw, 34.5px), 44px)",
                 display: "flex",
@@ -99,14 +99,14 @@ export function MudraReasons() {
               overflow: "hidden",
               display: "flex",
               flexDirection: "column",
-              background: "var(--Mudra-signal-yellow)",
+              background: "var(--mudra-signal-yellow)",
               paddingTop: "12px",
             }}
           >
             <div
               style={{
                 flex: 1,
-                background: "var(--Mudra-yellow-800)",
+                background: "var(--mudra-yellow-800)",
                 color: "#FAFAF9",
                 padding: "clamp(24px, min(2.6vw, 34.5px), 44px)",
                 display: "flex",
@@ -161,14 +161,14 @@ export function MudraReasons() {
               overflow: "hidden",
               display: "flex",
               flexDirection: "column",
-              background: "var(--Mudra-link-green)",
+              background: "var(--mudra-link-green)",
               paddingTop: "12px",
             }}
           >
             <div
               style={{
                 flex: 1,
-                background: "var(--Mudra-green-800)",
+                background: "var(--mudra-green-800)",
                 color: "#FAFAF9",
                 padding: "clamp(24px, min(2.6vw, 34.5px), 44px)",
                 display: "flex",

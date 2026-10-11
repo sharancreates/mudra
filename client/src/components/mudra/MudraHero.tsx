@@ -36,7 +36,7 @@ export function MudraHero({ onOpenAuth }: MudraHeroProps) {
         {/* Eyebrow */}
         <div data-g="" style={{ marginBottom: "clamp(20px, 3vh, 40px)" }}>
           <div data-spine-front="" data-col="wide">
-            <span className="Mudra-eyebrow">01 / indian equities sandbox</span>
+            <span className="mudra-eyebrow">01 / indian equities sandbox</span>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export function MudraHero({ onOpenAuth }: MudraHeroProps) {
                     padding: "0 0.08em",
                     margin: "0 -0.08em",
                     borderRadius: "var(--radius-xs)",
-                    background: activeVerbIndex === 0 ? "var(--Mudra-signal-yellow)" : "transparent",
+                    background: activeVerbIndex === 0 ? "var(--mudra-signal-yellow)" : "transparent",
                     color: activeVerbIndex === 0 ? "#262626" : "inherit",
                     transition: "background 240ms ease, color 240ms ease",
                   }}
@@ -80,7 +80,7 @@ export function MudraHero({ onOpenAuth }: MudraHeroProps) {
                     padding: "0 0.08em",
                     margin: "0 -0.08em",
                     borderRadius: "var(--radius-xs)",
-                    background: activeVerbIndex === 1 ? "var(--Mudra-signal-yellow)" : "transparent",
+                    background: activeVerbIndex === 1 ? "var(--mudra-signal-yellow)" : "transparent",
                     color: activeVerbIndex === 1 ? "#262626" : "inherit",
                     transition: "background 240ms ease, color 240ms ease",
                   }}
@@ -102,7 +102,7 @@ export function MudraHero({ onOpenAuth }: MudraHeroProps) {
                     padding: "0 0.08em",
                     margin: "0 -0.08em",
                     borderRadius: "var(--radius-xs)",
-                    background: activeVerbIndex === 2 ? "var(--Mudra-signal-yellow)" : "transparent",
+                    background: activeVerbIndex === 2 ? "var(--mudra-signal-yellow)" : "transparent",
                     color: activeVerbIndex === 2 ? "#262626" : "inherit",
                     transition: "background 240ms ease, color 240ms ease",
                   }}
@@ -162,7 +162,7 @@ export function MudraHero({ onOpenAuth }: MudraHeroProps) {
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
               <span>Start Trading · ₹1,00,000</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--Mudra-sky-blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mudra-sky-blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
               </svg>

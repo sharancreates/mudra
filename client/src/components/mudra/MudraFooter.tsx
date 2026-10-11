@@ -25,9 +25,11 @@ export function MudraFooter({ theme, onBackToTop }: MudraFooterProps) {
     <footer
       data-footer=""
       data-theme={altTheme}
-      className="Mudra-block"
+      className="mudra-block"
       style={{
         position: "relative",
+        background: altTheme === "dark" ? "#181A1D" : "var(--surface-canvas)",
+        color: altTheme === "dark" ? "#FAFAF9" : "var(--text-body)",
         padding: "var(--section) 0 24px 0",
       }}
     >
@@ -62,7 +64,7 @@ export function MudraFooter({ theme, onBackToTop }: MudraFooterProps) {
 
           {/* Navigation Column */}
           <div data-col="foot" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <span className="Mudra-eyebrow">Platform</span>
+            <span className="mudra-eyebrow">Platform</span>
             <Link href="/" style={{ fontSize: "15px", color: "var(--text-body)", textDecoration: "none" }}>
               Home
             </Link>
@@ -79,7 +81,7 @@ export function MudraFooter({ theme, onBackToTop }: MudraFooterProps) {
 
           {/* Rules & Compliance Column */}
           <div data-col="foot" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <span className="Mudra-eyebrow">Rules &amp; Terms</span>
+            <span className="mudra-eyebrow">Rules &amp; Terms</span>
             <span style={{ fontSize: "15px", color: "var(--text-body)" }}>
               Next-Close 15:30 IST
             </span>
@@ -89,14 +91,14 @@ export function MudraFooter({ theme, onBackToTop }: MudraFooterProps) {
             <span style={{ fontSize: "15px", color: "var(--text-body)" }}>
               DPDP Act 2023 Compliant
             </span>
-            <span className="Mudra-mono" style={{ color: "var(--text-muted)", marginTop: "4px", fontSize: "12px" }}>
+            <span className="mudra-mono" style={{ color: "var(--text-muted)", marginTop: "4px", fontSize: "12px" }}>
               STRICTLY-18-PLUS
             </span>
           </div>
 
           {/* Contact Column */}
           <div data-col="foot" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-            <span className="Mudra-eyebrow">Contact &amp; Support</span>
+            <span className="mudra-eyebrow">Contact &amp; Support</span>
             <button
               data-copy-mail=""
               onClick={handleCopy}
@@ -115,7 +117,7 @@ export function MudraFooter({ theme, onBackToTop }: MudraFooterProps) {
               }}
             >
               <span data-copy-label="">{copied ? "Copied" : "support@mudraequities.in"}</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--Mudra-sky-blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--mudra-sky-blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
               </svg>

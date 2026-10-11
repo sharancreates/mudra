@@ -12,7 +12,7 @@ export function MudraWhoWeAre() {
         <div data-g="" style={{ alignItems: "start", rowGap: "32px" }}>
           {/* Left Rail */}
           <div data-col="rail">
-            <span className="Mudra-eyebrow">03 / what is mudra</span>
+            <span className="mudra-eyebrow">03 / what is mudra</span>
           </div>
 
           {/* Main Statement */}
@@ -53,7 +53,7 @@ export function MudraWhoWeAre() {
               <span
                 data-mark=""
                 style={{
-                  background: "var(--Mudra-signal-yellow)",
+                  background: "var(--mudra-signal-yellow)",
                   color: "#262626",
                   padding: "0.02em 0.16em",
                   margin: "0 -0.04em",
@@ -68,7 +68,7 @@ export function MudraWhoWeAre() {
               <span
                 data-mark=""
                 style={{
-                  background: "var(--Mudra-signal-yellow)",
+                  background: "var(--mudra-signal-yellow)",
                   color: "#262626",
                   padding: "0.02em 0.16em",
                   margin: "0 -0.04em",

@@ -72,7 +72,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Modal Header */}
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-full bg-[var(--Mudra-sky-blue)]/15 border border-[var(--Mudra-sky-blue)]/30 text-[var(--Mudra-sky-blue)] flex items-center justify-center mx-auto mb-3 text-xl font-bold font-mono">
+          <div className="w-12 h-12 rounded-full bg-[var(--mudra-sky-blue)]/15 border border-[var(--mudra-sky-blue)]/30 text-[var(--mudra-sky-blue)] flex items-center justify-center mx-auto mb-3 text-xl font-bold font-mono">
             ₹
           </div>
           <h2 className="text-2xl font-bold tracking-tight">
@@ -90,7 +90,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Success Feedback */}
         {isSubmitted ? (
           <div className="p-6 text-center space-y-3">
-            <CheckCircle2 className="w-12 h-12 text-[var(--Mudra-link-green)] mx-auto animate-bounce" />
+            <CheckCircle2 className="w-12 h-12 text-[var(--mudra-link-green)] mx-auto animate-bounce" />
             <h3 className="text-lg font-bold">₹1,00,000 Virtual Wallet Ready!</h3>
             <p className="text-xs text-[var(--text-muted)]">
               Welcome aboard, <span className="font-semibold text-[var(--text-heading)]">{displayName || email}</span>. Initializing your sandbox session...
@@ -156,7 +156,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="trader@college.edu"
-                    className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--Mudra-sky-blue)]"
+                    className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--mudra-sky-blue)]"
                     required
                   />
                 </div>
@@ -174,7 +174,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
                       placeholder="e.g. BullishAarav"
-                      className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--Mudra-sky-blue)]"
+                      className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--mudra-sky-blue)]"
                       required
                     />
                   </div>
@@ -190,10 +190,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsAdult(!isAdult)}
-                      className="mt-0.5 text-[var(--Mudra-sky-blue)]"
+                      className="mt-0.5 text-[var(--mudra-sky-blue)]"
                     >
                       {isAdult ? (
-                        <CheckSquare className="w-4 h-4 text-[var(--Mudra-sky-blue)]" />
+                        <CheckSquare className="w-4 h-4 text-[var(--mudra-sky-blue)]" />
                       ) : (
                         <Square className="w-4 h-4 text-[var(--text-muted)]" />
                       )}
@@ -207,10 +207,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     <button
                       type="button"
                       onClick={() => setAcknowledgedSimulation(!acknowledgedSimulation)}
-                      className="mt-0.5 text-[var(--Mudra-sky-blue)]"
+                      className="mt-0.5 text-[var(--mudra-sky-blue)]"
                     >
                       {acknowledgedSimulation ? (
-                        <CheckSquare className="w-4 h-4 text-[var(--Mudra-sky-blue)]" />
+                        <CheckSquare className="w-4 h-4 text-[var(--mudra-sky-blue)]" />
                       ) : (
                         <Square className="w-4 h-4 text-[var(--text-muted)]" />
                       )}
@@ -224,7 +224,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-3.5 px-4 rounded-full bg-[var(--Mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
+                className="w-full py-3.5 px-4 rounded-full bg-[var(--mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
               >
                 <span>{mode === "register" ? "Create Free Sandbox Account" : "Sign In to Mudra"}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -241,7 +241,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       setMode("signin");
                       setError(null);
                     }}
-                    className="text-[var(--Mudra-sky-blue)] font-semibold hover:underline"
+                    className="text-[var(--mudra-sky-blue)] font-semibold hover:underline"
                   >
                     Sign In
                   </button>
@@ -255,7 +255,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       setMode("register");
                       setError(null);
                     }}
-                    className="text-[var(--Mudra-sky-blue)] font-semibold hover:underline"
+                    className="text-[var(--mudra-sky-blue)] font-semibold hover:underline"
                   >
                     Register for ₹1,00,000 Wallet
                   </button>
@@ -304,7 +304,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="button"
                 onClick={() => setShowLegalNotice(false)}
-                className="w-full py-2.5 bg-[var(--Mudra-sky-blue)] rounded-full text-[#0A0D10] font-bold text-xs mt-2"
+                className="w-full py-2.5 bg-[var(--mudra-sky-blue)] rounded-full text-[#0A0D10] font-bold text-xs mt-2"
               >
                 I Understand
               </button>

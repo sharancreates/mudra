@@ -62,7 +62,7 @@ export function MudraLogoPrimary({ className = "", style = {} }: { className?: s
 export function NseLogoBadge({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 font-mono text-xs font-bold ${className}`} style={{ letterSpacing: "0.05em" }}>
-      <span style={{ padding: "3px 8px", borderRadius: "4px", background: "var(--Mudra-signal-yellow)", color: "#262626" }}>NSE</span>
+      <span style={{ padding: "3px 8px", borderRadius: "4px", background: "var(--mudra-signal-yellow)", color: "#262626" }}>NSE</span>
       <span style={{ color: "var(--text-muted)" }}>National Stock Exchange</span>
     </div>
   );
@@ -71,7 +71,7 @@ export function NseLogoBadge({ className = "" }: { className?: string }) {
 export function BseLogoBadge({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 font-mono text-xs font-bold ${className}`} style={{ letterSpacing: "0.05em" }}>
-      <span style={{ padding: "3px 8px", borderRadius: "4px", background: "var(--Mudra-sky-blue)", color: "#262626" }}>BSE</span>
+      <span style={{ padding: "3px 8px", borderRadius: "4px", background: "var(--mudra-sky-blue)", color: "#262626" }}>BSE</span>
       <span style={{ color: "var(--text-muted)" }}>Bombay Stock Exchange</span>
     </div>
   );

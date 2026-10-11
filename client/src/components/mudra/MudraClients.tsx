@@ -15,7 +15,7 @@ export function MudraClients() {
         {/* Rail and Main Split */}
         <div data-spine-front="" data-g="" style={{ alignItems: "start", rowGap: "32px" }}>
           <div data-col="rail">
-            <span className="Mudra-eyebrow">07 / market sectors</span>
+            <span className="mudra-eyebrow">07 / market sectors</span>
           </div>
           <p
             data-col="main"
@@ -33,7 +33,7 @@ export function MudraClients() {
             <span
               data-mark=""
               style={{
-                background: "var(--Mudra-signal-yellow)",
+                background: "var(--mudra-signal-yellow)",
                 color: "#262626",
                 padding: "0.02em 0.16em",
                 margin: "0 -0.04em",
@@ -81,7 +81,7 @@ export function MudraClients() {
                 Reliance Industries Ltd
               </span>
             </div>
-            <span className="Mudra-eyebrow">Energy &amp; Conglomerate</span>
+            <span className="mudra-eyebrow">Energy &amp; Conglomerate</span>
           </Link>
 
           {/* 2. IT */}
@@ -108,7 +108,7 @@ export function MudraClients() {
                 Tata Consultancy &amp; Infosys
               </span>
             </div>
-            <span className="Mudra-eyebrow">Information Tech</span>
+            <span className="mudra-eyebrow">Information Tech</span>
           </Link>
 
           {/* 3. Banking */}
@@ -135,7 +135,7 @@ export function MudraClients() {
                 HDFC Bank &amp; ICICI Bank
               </span>
             </div>
-            <span className="Mudra-eyebrow">Banking &amp; Finance</span>
+            <span className="mudra-eyebrow">Banking &amp; Finance</span>
           </Link>
 
           {/* 4. Automobile */}
@@ -162,7 +162,7 @@ export function MudraClients() {
                 Tata Motors &amp; Maruti Suzuki
               </span>
             </div>
-            <span className="Mudra-eyebrow">Automobile &amp; EV</span>
+            <span className="mudra-eyebrow">Automobile &amp; EV</span>
           </Link>
 
           {/* 5. FMCG */}
@@ -189,7 +189,7 @@ export function MudraClients() {
                 ITC Ltd &amp; Hindustan Unilever
               </span>
             </div>
-            <span className="Mudra-eyebrow">FMCG &amp; Consumption</span>
+            <span className="mudra-eyebrow">FMCG &amp; Consumption</span>
           </Link>
         </div>
       </div>
