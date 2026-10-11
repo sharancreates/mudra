@@ -138,10 +138,13 @@ async def global_unhandled_exception_handler(request: Request, exc: Exception):
     )
 
 
+from app.api.routes_settlement import router as settlement_router
+
 # 4. Include Routers
 app.include_router(status_router)
 app.include_router(instruments_router)
 app.include_router(orders_router)
+app.include_router(settlement_router)
 
 
 @app.get("/", tags=["Health"])

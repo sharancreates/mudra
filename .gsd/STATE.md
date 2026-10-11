@@ -8,17 +8,15 @@
 ---
 
 ## Current Position
-- **Phase**: Mudra Swiss Design System & Core Trade Loop — **VERIFIED & OPERATIONAL ✅**
-- **Verification Reports**:
-  * Phase 1 (Core Trade Loop): [.gsd/phases/1/VERIFICATION.md](file:///c:/Users/Sharanya%20Nagar/Desktop/Projects/mudra/.gsd/phases/1/VERIFICATION.md) — **PASS (10/10 Must-Haves)**
-  * Mudra Swiss UI & Rebranding: [.gsd/phases/mudra-swiss/VERIFICATION.md](file:///c:/Users/Sharanya%20Nagar/Desktop/Projects/mudra/.gsd/phases/mudra-swiss/VERIFICATION.md) — **PASS (7/7 Must-Haves)**
+- **Phase**: Phase 3 (Full Trade Experience, Settlement & Snapshots)
+- **Status**: Plan 3.1 (Order Settlement Engine `settle_orders()`) — **COMPLETE ✅**
 - **Test Suite Health**:
-  * Python FastAPI: 14/14 pytest tests passed in 0.67s with request tracing and debugging enabled by default.
-  * Node.js / Integration: 18/18 tests passed in 983ms.
-  * Next.js Frontend: `tsc --noEmit` and `next build` 100% clean (0 errors, 9/9 pages generated).
-  * Brand Integrity: 0 occurrences of "indisea" in any file or path across the repository.
+  * Python FastAPI: 18/18 pytest tests passed in 0.19s with request tracing and debugging enabled by default.
+  * Node.js / Integration: 19/19 tests passed in 171ms.
+  * Sells-before-buys execution order empirically verified to release liquidity.
+  * 10% safety buffer excess refund verified.
   * Nightly Reconciliation: 0 ledger discrepancies across all user wallets.
-- **Next Step**: Phase 3 (Settlement Execution Engine `settle_orders()`, Portfolio Snapshots & Daily Cron).
+- **Next Target**: Plan 3.2 (Daily GitHub Actions price ingestion & settlement cron job).
 
 ---
 
@@ -49,21 +47,24 @@ mudra/
 │   │   │   ├── logger.py       # Contextual request-ID logging
 │   │   │   ├── math.py         # Integer paise engine with runtime anti-float guards
 │   │   │   ├── market_adapter.py # 50-stock EOD adapter & IST freshness evaluator
-│   │   │   └── state.py        # Transactional in-memory ledger and wallet state store
+│   │   │   ├── state.py        # Transactional in-memory ledger, wallet, and holding store
+│   │   │   └── settlement.py   # Closing-price order settlement engine (sells before buys)
 │   │   ├── models/schemas.py   # Pydantic schemas conforming to docs/api.md
 │   │   ├── api/
 │   │   │   ├── routes_status.py      # GET /api/status
 │   │   │   ├── routes_instruments.py # GET /api/instruments, GET /api/instruments/{symbol}
-│   │   │   └── routes_orders.py      # POST /api/orders, GET /api/orders
+│   │   │   ├── routes_orders.py      # POST /api/orders, GET /api/orders
+│   │   │   └── routes_settlement.py  # POST /api/settlement/run
 │   │   └── scripts/reconcile.py      # Nightly zero-discrepancy ledger audit
 │   ├── tests/
 │   │   ├── conftest.py         # TestClient fixture
 │   │   ├── test_math.py        # Section 7.3 worked example unit tests
 │   │   ├── test_place_order.py # Order placement, idempotency, validations
 │   │   ├── test_trade_loop.py  # End-to-end integration test
-│   │   └── test_reconciliation.py # Ledger reconciliation audit test
+│   │   ├── test_reconciliation.py # Ledger reconciliation audit test
+│   │   └── test_settlement.py  # Order settlement & buffer refund tests
 │   ├── data/sample_prices.csv  # 12,501 rows of 1-year historical EOD data for 50 stocks
-│   └── supabase/               # SQL Migrations (DDL, auth triggers, RLS, place_order)
+│   └── supabase/migrations/    # Migrations (DDL, auth triggers, RLS, place_order, settle_orders)
 │
 └── package.json                # Root proxy runner
 ```
@@ -72,12 +73,12 @@ mudra/
 
 ## Work Status Breakdown
 
-### Phase 2 Progress (`.gsd/phases/2/`)
-- [x] **Plan 2.1**: FastAPI (Python) Backend Conversion with Debugging by Default (`01-PLAN.md`) — **Complete (14/14 Pytest Tests Passing)**
-- [ ] **Plan 2.2**: Order Settlement Stored Procedure & Daily Price Ingestion Cron (`02-PLAN.md`)
-- [ ] **Plan 2.3**: Daily Portfolio Snapshot Generation & Return Curves (`03-PLAN.md`)
-- [ ] **Plan 2.4**: Watchlist Backend Endpoints (`04-PLAN.md`)
-- [ ] **Plan 2.5**: Concurrency Load Testing (`05-PLAN.md`)
+### Phase 3 Progress (`.gsd/phases/3/`)
+- [x] **Plan 3.1**: Order Settlement Engine `settle_orders()` with Sells-Before-Buys Execution (`01-PLAN.md`) — **Complete (18/18 Pytest Tests Passing)**
+- [ ] **Plan 3.2**: Daily Price Ingestion & Settlement GitHub Actions Cron (`02-PLAN.md`)
+- [ ] **Plan 3.3**: Daily Portfolio Snapshot Generation & Return Curves (`03-PLAN.md`)
+- [ ] **Plan 3.4**: Watchlist Backend Endpoints (`04-PLAN.md`)
+- [ ] **Plan 3.5**: Concurrency Load Testing (`05-PLAN.md`)
 
 ---
 

@@ -16,11 +16,12 @@ class UserWallet:
 
 
 class UserHolding:
-    def __init__(self, user_id: str, symbol: str, qty: int = 0, reserved_qty: int = 0):
+    def __init__(self, user_id: str, symbol: str, qty: int = 0, reserved_qty: int = 0, cost_basis_paise: int = 0):
         self.user_id = user_id
         self.symbol = symbol
         self.qty = qty
         self.reserved_qty = reserved_qty
+        self.cost_basis_paise = cost_basis_paise
 
 
 class OrderRecord:
