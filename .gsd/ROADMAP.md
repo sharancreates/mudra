@@ -64,29 +64,45 @@ updated: 2026-10-10T16:30:00+05:30
 
 ---
 
-### Phase 2: Full Trade Experience & Dashboard (Week 2)
-**Status:** ⬜ Not Started  
-**Objective:** Deliver daily closing price settlement job (`settle_orders()`), portfolio dashboard, P&L calculations, transaction history, and watchlist.  
+### Phase 2: FastAPI (Python) Backend Conversion with Debugging by Default
+**Status:** 🔄 Ready for Execution  
+**Objective:** Convert the Mudra backend from TypeScript/Node route handlers to a standalone FastAPI (Python 3.10+) application under `server/`. Preserve all integer paise rules, PRD Section 7.3 reference acceptance criteria, and JSON contract conformance (`docs/api.md`). Equip the server with systematic debugging by default (structured debug request logging, rich traceback exception handling, anti-float assertion guards, and verbose pytest configuration).  
 **Depends on:** Phase 1  
-**Person B Scope:**
-- Plan 2.1: Order settlement stored procedure `settle_orders(trade_date)` with sells-before-buys ordering and cash releases.
-- Plan 2.2: Daily GitHub Actions price ingestion and settlement cron job (`.github/workflows/daily-prices.yml`).
-- Plan 2.3: Daily portfolio snapshot generation and return calculation (`portfolio_snapshots`).
-- Plan 2.4: Watchlist backend endpoints (`GET / POST / DELETE /api/watchlist`).
-- Plan 2.5: Concurrency load test (20-50 parallel orders leaving no negative balances or duplicate fills).
+**Active Lead (Executing):** Person B (Backend and Data Lead)  
+**Plans:**
+- **Plan 2.1: FastAPI Backend Conversion with Debugging by Default** (`.gsd/phases/2/01-PLAN.md`)
+  * Task 1: Setup Python Environment & Debugging-by-Default Infrastructure (`requirements.txt`, `pytest.ini`, `config.py`, `logger.py`)
+  * Task 2: Implement Integer Paise Trading Math Engine with Anti-Float Guards (`app/core/math.py`, `tests/test_math.py`)
+  * Task 3: Implement Market Data Adapter & Freshness Evaluator (`app/core/market_adapter.py`)
+  * Task 4: Build FastAPI App, Pydantic Schemas, Debug Middleware & Route Handlers (`app/main.py`, `models/schemas.py`, `api/`)
+  * Task 5: Author Pytest Test Suites & Nightly Ledger Reconciliation (`tests/test_place_order.py`, `scripts/reconcile.py`)
+  * Task 6: Connect Person A's Frontend Proxy to FastAPI Backend (`next.config.mjs`, `client/src/lib/api.ts`)
 
 ---
 
-### Phase 3: Leaderboard, Hardening, Mobile Polish & Launch (Week 3)
+### Phase 3: Full Trade Experience & Dashboard (Settlement & Snapshots)
 **Status:** ⬜ Not Started  
-**Objective:** Deploy public-ready MVP on Vercel with leaderboard, automated backups, health monitoring, and launch audit.  
+**Objective:** Deliver daily closing price settlement job (`settle_orders()`), portfolio dashboard, P&L calculations, transaction history, and watchlist.  
 **Depends on:** Phase 2  
 **Person B Scope:**
-- Plan 3.1: Leaderboard SQL query & endpoint (`GET /api/leaderboard`) with 5 trades & 7 days eligibility filter.
-- Plan 3.2: Automated weekly database backup workflow (`.github/workflows/weekly-backup.yml` using `pg_dump`).
-- Plan 3.3: Health monitor and uptime check (`/api/status` + GitHub workflow).
-- Plan 3.4: Rate limiting and abuse protection on API routes.
-- Plan 3.5: Section 15.1 Launch Checklist audit and "No Real Money" verification.
+- Plan 3.1: Order settlement stored procedure `settle_orders(trade_date)` with sells-before-buys ordering and cash releases.
+- Plan 3.2: Daily GitHub Actions price ingestion and settlement cron job (`.github/workflows/daily-prices.yml`).
+- Plan 3.3: Daily portfolio snapshot generation and return calculation (`portfolio_snapshots`).
+- Plan 3.4: Watchlist backend endpoints (`GET / POST / DELETE /api/watchlist`).
+- Plan 3.5: Concurrency load test (20-50 parallel orders leaving no negative balances or duplicate fills).
+
+---
+
+### Phase 4: Leaderboard, Hardening, Mobile Polish & Launch
+**Status:** ⬜ Not Started  
+**Objective:** Deploy public-ready MVP on Vercel with leaderboard, automated backups, health monitoring, and launch audit.  
+**Depends on:** Phase 3  
+**Person B Scope:**
+- Plan 4.1: Leaderboard SQL query & endpoint (`GET /api/leaderboard`) with 5 trades & 7 days eligibility filter.
+- Plan 4.2: Automated weekly database backup workflow (`.github/workflows/weekly-backup.yml` using `pg_dump`).
+- Plan 4.3: Health monitor and uptime check (`/api/status` + GitHub workflow).
+- Plan 4.4: Rate limiting and abuse protection on API routes.
+- Plan 4.5: Section 15.1 Launch Checklist audit and "No Real Money" verification.
 
 ---
 
@@ -94,6 +110,7 @@ updated: 2026-10-10T16:30:00+05:30
 
 | Phase | Description | Active Lead | Status | Target |
 |-------|-------------|-------------|--------|--------|
-| Phase 1 | Foundation & Week 1 Backend Trade Loop | Person B | ✅ Complete | Week 1 |
-| Phase 2 | Full Trade Experience & Settlement | Person B | 🔄 Ready for Execution | Week 2 |
-| Phase 3 | Leaderboard, Hardening & Launch | Person B | ⬜ Not Started | Week 3 |
+| Phase 1 | Foundation & Week 1 Backend Trade Loop | Person B & Person A | ✅ Complete | Week 1 |
+| Phase 2 | FastAPI (Python) Conversion with Debugging by Default | Person B | 🔄 Ready for Execution | Week 1.5 |
+| Phase 3 | Full Trade Experience & Settlement | Person B | ⬜ Not Started | Week 2 |
+| Phase 4 | Leaderboard, Hardening & Launch | Person B | ⬜ Not Started | Week 3 |

@@ -65,3 +65,28 @@ Systematically investigate, debug, and verify end-to-end integration between Per
   - `POST /api/orders` (Idempotent replay) -> 200 OK (returned same order without re-reserving cash)
   - `GET /api/orders` -> 200 OK (order history retrieved correctly)
 
+---
+
+## Session: 2026-10-11 08:45 IST (Handoff to Person B: FastAPI Backend Conversion)
+
+### Objective
+Update project roadmap, state, and phase plans to hand over backend conversion to Person B (Backend & Data Lead) for migration to **FastAPI (Python 3.10+)** with systematic **debugging by default**.
+
+### Accomplished
+1. **Phase 2 Research Prepared** (`.gsd/phases/2/RESEARCH.md`):
+   - Defined FastAPI + Uvicorn + Pydantic v2 technology stack.
+   - Preserved all integer paise accounting rules and `docs/api.md` JSON contracts.
+   - Specified debugging-by-default architecture: request ID tracing middleware, ISO logging, rich traceback exception handling, and anti-float assertion guards.
+2. **Phase 2 Execution Plan Authored** (`.gsd/phases/2/01-PLAN.md`):
+   - Task breakdown for Person B covering requirements, pytest setup (`-v -s --tb=short`), integer paise trading math port, CSV market data adapter, FastAPI routes, and nightly reconciliation script.
+   - Embedded GSD debugging protocol instructions.
+3. **Roadmap & State Synchronized**:
+   - Updated `.gsd/ROADMAP.md` inserting Phase 2 (FastAPI Backend Conversion with Debugging by Default) and renumbering subsequent phases.
+   - Updated `.gsd/STATE.md` with handoff notes for Person B to execute Plan 2.1 via `/execute 2.1`.
+
+### Handoff Notes for Person B
+- Plan file ready at `.gsd/phases/2/01-PLAN.md`.
+- Ensure Python 3.10+ is available.
+- Execute via `/execute 2.1`.
+
+

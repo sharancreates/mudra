@@ -1,22 +1,19 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-11 08:30 IST  
-> **Active Persona:** Person A (Frontend and UX Lead) — Week 1 Debugging & Integration  
-> **Previous Persona:** Person B (Backend and Data Lead) — Week 1 Completed  
+> **Last Updated:** 2026-10-11 08:45 IST  
+> **Active Persona:** Person B (Backend and Data Lead) — Ready for Handoff  
+> **Previous Persona:** Person A (Frontend and UX Lead) — Week 1 Debugged & Plans Prepared  
 > **Active Milestone:** v1.0 MVP  
-> **Active Phase:** Phase 1 (Week 1: Foundation and Trade Loop)  
-> **Status:** Milestone M1 Debugged & Fully Integrated (0 Errors, All 18 Tests Pass, Live Next.js API Routes Verified)
+> **Active Phase:** Phase 2 (FastAPI (Python) Backend Conversion with Debugging by Default)  
+> **Status:** Paused for Session Handoff to Person B (FastAPI Conversion)
 
 ---
 
 ## Current Position
-- **Phase**: Phase 1 (Week 1: Foundation & Trade Loop) — **DEBUGGED & VERIFIED ✅**
-- **Status**: Milestone M1 (Week 1) fully verified end-to-end across both Frontend (Person A) and Backend (Person B).
-- **Frontend / Backend Integration**: 
-  - `client/src/lib/api.ts` wired directly to Next.js route handlers (`/api/instruments`, `/api/orders`, `/api/status`) with offline mock fallback.
-  - `SampleMarketDataAdapter` patched to resolve `sample_prices.csv` regardless of CWD (`client/`, `server/`, or project root) and retain real company name/sector metadata from CSV.
-  - `dashboard/page.tsx` enhanced with active orders execution queue and real-time pending reserved cash tracking.
-- **Target for Next Sprint**: Phase 2 (Week 2: Order Settlement, Portfolio Snapshots, Watchlist, and Concurrency Load Testing).
+- **Phase**: Phase 2 (FastAPI Backend Conversion with Debugging by Default) — **READY FOR EXECUTION 🔄**
+- **Plan to Execute**: `.gsd/phases/2/01-PLAN.md`
+- **Goal for Person B**: Convert the Mudra backend from TypeScript/Node route handlers to a standalone FastAPI (Python 3.10+) service in `server/`, keeping all integer paise financial calculations, reproducing PRD Section 7.3 reference scenario, conforming to `docs/api.md`, and enabling systematic debugging by default.
+- **Frontend Status (Person A)**: 100% verified and operational. Next.js frontend is decoupled and ready to connect to FastAPI via `docs/api.md`.
 
 ---
 
@@ -82,17 +79,34 @@ mudra/
 ---
 
 ## Phase 1 (Week 1) Milestone M1 Status: COMPLETE ✅
-All 6 exit criteria of Milestone M1 (PRD Section 15.1) have been implemented and verified:
-1. User registration trigger creates profile, ₹1,00,000 wallet, and `INIT` ledger row.
-2. 50 NSE stocks explorer with EOD closing prices and freshness evaluation.
-3. Order placement reserves 10% cash buffer + 0.1% fee with next-close execution date.
-4. Pending orders visible in order history.
-5. Direct client table modifications blocked by PostgreSQL RLS perimeter.
-6. Nightly ledger reconciliation audits 0 discrepancies across all accounts.
-2. **Key Math Formulas to Test**:
-   - `trade_value = price_paise * qty`
-   - `fee = round(0.001 * trade_value)`
-   - Buy reservation: `est_price = last_close * 110 / 100`, `cost = est_price * qty + fee`
-   - Reference scenario check (Section 9.3 of PRD): BUY 10 @ 1,400 -> BUY 5 @ 1,420 -> SELL 6 @ 1,450 produces +₹242.86 realized P&L and ₹1,408.07 average cost.
-3. **Database Stored Procedure**: After 1.6, implement Plan 1.7 (`place_order()` SQL function in `server/supabase/migrations/20261010000004_place_order.sql`).
-4. **Client-Server Integration**: When writing route handlers (`server/` or `client/src/app/api/`), adhere strictly to [`docs/api.md`](file:///c:/Users/Sharanya%20Nagar/Desktop/Projects/mudra/docs/api.md) — Person A's frontend is already wired to these exact contracts.
+All 6 exit criteria of Milestone M1 (PRD Section 15.1) have been implemented and verified.
+
+---
+
+## Handoff Instructions for Person B (FastAPI Backend Conversion)
+
+1. **Active Phase**: Phase 2 — `.gsd/phases/2/01-PLAN.md` (`Plan 2.1: FastAPI Backend Conversion with Debugging by Default`).
+2. **Architecture Blueprint**: Review `.gsd/phases/2/RESEARCH.md`.
+3. **Core Mandates for Person B**:
+   - **Convert to FastAPI (Python 3.10+)**: Port backend logic from Next.js route handlers (`client/src/app/api/`) and TypeScript services (`server/src/`) into idiomatic FastAPI in `server/`.
+   - **Debugging by Default**:
+     * Configure `DEBUG = True` and log level `DEBUG` in `server/app/config.py`.
+     * Add request tracing middleware generating `request_id` (`req_...`) and logging duration, method, path, and errors.
+     * Attach global exception handler capturing full Python tracebacks in debug mode.
+     * Configure `pytest.ini` with `-v -s --tb=short`.
+     * Zero float tolerance: assert `isinstance(val, int)` on all monetary fields (integer paise).
+   - **Contract Preservation**: Fulfill `docs/api.md` exactly:
+     * `GET /api/status` (freshness evaluation)
+     * `GET /api/instruments` (query, sector, pagination)
+     * `GET /api/instruments/{symbol}`
+     * `POST /api/orders` (10% buy buffer, 0.1% fee, next close cutoff, idempotency on `client_order_id`)
+     * `GET /api/orders`
+   - **Trading Math Verification**:
+     * Reproduce PRD Section 7.3 reference acceptance scenario in `server/tests/test_math.py`:
+     * BUY 10 @ ₹1,400 -> BUY 5 @ ₹1,420 -> SELL 6 @ ₹1,450 yielding `+₹242.86` realized P&L and `₹1,408.07` average cost.
+   - **Nightly Reconciliation Audit**:
+     * Port `scripts/reconcile_wallets.ts` to `server/app/scripts/reconcile.py` confirming 0 ledger discrepancies.
+   - **Systematic Debugging Protocol**:
+     * If any conversion step encounters unexpected behavior or failing tests, follow the GSD Debugger Protocol (`.agents/skills/debugger/SKILL.md`) and record persistent state in `.gsd/DEBUG.md`.
+4. **How to Resume**:
+   - Run `/execute 2.1` or execute tasks sequentially in `.gsd/phases/2/01-PLAN.md`.
