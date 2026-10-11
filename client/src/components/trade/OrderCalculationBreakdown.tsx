@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { OrderSide } from "@/types/api";
 import { formatINR } from "@/lib/formatters";
 
@@ -28,52 +28,52 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
   const isHoldingsInsufficient = side === "SELL" && qty > availableHoldingQty;
 
   return (
-    <div className="p-4 rounded-xl bg-graphite-dark border border-yaleBlue/40 space-y-2.5 text-xs text-alabaster">
-      <div className="flex justify-between items-center text-alabaster/70">
+    <div className="p-4 rounded-xl bg-[var(--surface-muted)]/70 border border-[var(--border-hairline)] space-y-2.5 text-xs text-[var(--text-body)]">
+      <div className="flex justify-between items-center text-[var(--text-muted)]">
         <span>Reference Gross Value:</span>
-        <span className="font-mono text-white font-semibold">
+        <span className="font-mono text-[var(--text-heading)] font-semibold">
           {formatINR(tradeValue)}
         </span>
       </div>
 
-      <div className="flex justify-between items-center text-alabaster/70">
+      <div className="flex justify-between items-center text-[var(--text-muted)]">
         <span>Simulated Brokerage Fee (0.1%):</span>
-        <span className="font-mono text-white font-semibold">
+        <span className="font-mono text-[var(--text-heading)] font-semibold">
           {formatINR(simulatedFee)}
         </span>
       </div>
 
       {side === "BUY" ? (
         <>
-          <div className="flex justify-between items-center text-alabaster/70">
-            <span>Safety Reservation Buffer (+10%):</span>
-            <span className="font-mono text-amber-300 font-semibold">
+          <div className="flex justify-between items-center text-[var(--text-muted)]">
+            <span>Safety Headroom Buffer (+10%):</span>
+            <span className="font-mono text-[var(--Mudra-signal-yellow)] font-semibold">
               {formatINR(safetyBuffer)}
             </span>
           </div>
 
-          <div className="pt-2 border-t border-alabaster/10 flex justify-between items-center font-bold text-white text-sm">
+          <div className="pt-2 border-t border-[var(--border-hairline)] flex justify-between items-center font-bold text-[var(--text-heading)] text-sm">
             <span>Total Cash to Reserve:</span>
-            <span className="font-mono text-stormyTeal-light">
+            <span className="font-mono text-[var(--Mudra-sky-blue)]">
               {formatINR(totalReserved)}
             </span>
           </div>
 
           <div className="flex justify-between items-center text-[11px] pt-1">
-            <span className="text-alabaster/60">Free Virtual Cash in Wallet:</span>
-            <span className="font-mono text-white">
+            <span className="text-[var(--text-muted)]">Free Cash in Ledger:</span>
+            <span className="font-mono text-[var(--text-heading)]">
               {formatINR(availableCashPaise)}
             </span>
           </div>
 
           {isCashInsufficient ? (
-            <div className="p-2 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px]">
-              ⚠️ Insufficient virtual cash. Reduce share quantity or sell existing holdings.
+            <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-[11px]">
+              âš ï¸ Insufficient free cash. Reduce share quantity or free up capital from other holdings.
             </div>
           ) : (
-            <div className="flex justify-between items-center text-[11px] text-alabaster/60">
-              <span>Cash Remaining After Order:</span>
-              <span className="font-mono text-white">
+            <div className="flex justify-between items-center text-[11px] text-[var(--text-muted)]">
+              <span>Free Cash After Order:</span>
+              <span className="font-mono text-[var(--text-heading)]">
                 {formatINR(cashAfterOrder)}
               </span>
             </div>
@@ -81,23 +81,23 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
         </>
       ) : (
         <>
-          <div className="pt-2 border-t border-alabaster/10 flex justify-between items-center font-bold text-white text-sm">
+          <div className="pt-2 border-t border-[var(--border-hairline)] flex justify-between items-center font-bold text-[var(--text-heading)] text-sm">
             <span>Estimated Net Proceeds:</span>
-            <span className="font-mono text-emerald-400">
+            <span className="font-mono text-[var(--Mudra-link-green)]">
               {formatINR(netProceeds)}
             </span>
           </div>
 
           <div className="flex justify-between items-center text-[11px] pt-1">
-            <span className="text-alabaster/60">Shares Available to Sell:</span>
-            <span className="font-mono text-white">
+            <span className="text-[var(--text-muted)]">Shares Available to Sell:</span>
+            <span className="font-mono text-[var(--text-heading)]">
               {availableHoldingQty} shares
             </span>
           </div>
 
           {isHoldingsInsufficient && (
-            <div className="p-2 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-[11px]">
-              ⚠️ Insufficient shares owned. You currently hold {availableHoldingQty} shares. Short selling is not permitted.
+            <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-[11px]">
+              âš ï¸ Insufficient shares owned. You currently hold {availableHoldingQty} shares. Short selling is disabled.
             </div>
           )}
         </>
@@ -105,3 +105,4 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
     </div>
   );
 };
+

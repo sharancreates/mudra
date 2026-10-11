@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { X, Clock, AlertCircle } from "lucide-react";
@@ -73,15 +73,15 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-graphite border border-yaleBlue/50 rounded-2xl p-6 sm:p-7 shadow-2xl text-white max-h-[92vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-lg bg-[var(--surface-card)] border border-[var(--border-hairline)] rounded-2xl p-6 sm:p-7 shadow-2xl text-[var(--text-heading)] max-h-[92vh] overflow-y-auto">
         {/* Modal Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-alabaster/60 hover:text-white hover:bg-graphite-light transition-colors"
+          className="absolute top-5 right-5 p-1.5 rounded-full text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--surface-muted)] transition-colors border border-[var(--border-hairline)]"
           aria-label="Close"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {completedOrder ? (
@@ -98,36 +98,36 @@ export const OrderModal: React.FC<OrderModalProps> = ({
         ) : (
           <>
             {/* Modal Header */}
-            <div className="border-b border-yaleBlue/30 pb-4 mb-5">
+            <div className="border-b border-[var(--border-hairline)] pb-4 mb-5">
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-bold">{instrument.symbol}</h2>
-                <span className="px-1.5 py-0.5 rounded text-[10px] bg-graphite-dark text-alabaster/70 font-mono">
+                <h2 className="text-xl font-bold font-mono tracking-tight">{instrument.symbol}</h2>
+                <span className="px-2 py-0.5 rounded-full text-[10px] bg-[var(--surface-muted)] text-[var(--text-muted)] font-mono border border-[var(--border-hairline)]">
                   {instrument.exchange}
                 </span>
-                <span className="text-xs text-alabaster/60 truncate max-w-[200px]">
+                <span className="text-xs text-[var(--text-muted)] truncate max-w-[220px]">
                   {instrument.name}
                 </span>
               </div>
             </div>
 
             {/* Next-Close Execution Info Strip */}
-            <div className="mb-5 p-3 rounded-xl bg-yaleBlue/30 border border-yaleBlue/50 flex items-start gap-2.5 text-xs text-alabaster">
-              <Clock className="w-4 h-4 text-stormyTeal-light shrink-0 mt-0.5" />
+            <div className="mb-5 p-3.5 rounded-xl bg-[var(--surface-muted)]/70 border border-[var(--border-hairline)] flex items-start gap-2.5 text-xs text-[var(--text-body)]">
+              <Clock className="w-4 h-4 text-[var(--Mudra-sky-blue)] shrink-0 mt-0.5" />
               <div>
-                <span className="font-semibold text-white">Next Close Execution: </span>
-                Orders clear against next official close (15:30 IST). Reference price may differ from final fill.
+                <span className="font-semibold text-[var(--text-heading)]">Deterministic Next-Close: </span>
+                Orders clear against official 15:30 IST NSE closing auction. Free cash is held in reserve until settlement.
               </div>
             </div>
 
             {/* Buy / Sell Toggle Tabs */}
-            <div className="grid grid-cols-2 p-1 rounded-xl bg-graphite-dark border border-yaleBlue/40 mb-5">
+            <div className="grid grid-cols-2 p-1 rounded-full bg-[var(--surface-muted)] border border-[var(--border-hairline)] mb-5">
               <button
                 type="button"
                 onClick={() => setSide("BUY")}
-                className={`py-2 rounded-lg text-xs font-bold transition-all shadow-sm ${
+                className={`py-2 rounded-full text-xs font-bold transition-all shadow-sm ${
                   side === "BUY"
-                    ? "bg-stormyTeal text-white"
-                    : "text-alabaster/60 hover:text-white"
+                    ? "bg-[var(--Mudra-sky-blue)] text-[#0A0D10]"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-heading)]"
                 }`}
               >
                 BUY / LONG
@@ -135,10 +135,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
               <button
                 type="button"
                 onClick={() => setSide("SELL")}
-                className={`py-2 rounded-lg text-xs font-bold transition-all shadow-sm ${
+                className={`py-2 rounded-full text-xs font-bold transition-all shadow-sm ${
                   side === "SELL"
-                    ? "bg-rose-600 text-white"
-                    : "text-alabaster/60 hover:text-white"
+                    ? "bg-[var(--Mudra-node-red)] text-white"
+                    : "text-[var(--text-muted)] hover:text-[var(--text-heading)]"
                 }`}
               >
                 SELL / EXIT
@@ -146,7 +146,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             </div>
 
             {error && (
-              <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -156,18 +156,18 @@ export const OrderModal: React.FC<OrderModalProps> = ({
               {/* Quantity Stepper */}
               <div>
                 <div className="flex justify-between items-center mb-1.5 text-xs">
-                  <label htmlFor="order-qty-input" className="font-medium text-alabaster/80">
+                  <label htmlFor="order-qty-input" className="font-medium text-[var(--text-body)]">
                     Quantity (Shares)
                   </label>
-                  <span className="font-mono text-alabaster/50">Lot size: 1 share</span>
+                  <span className="font-mono text-[var(--text-muted)] text-[11px]">Lot size: 1 share</span>
                 </div>
-                <div className="flex items-stretch rounded-xl bg-graphite-dark border border-yaleBlue/60 overflow-hidden focus-within:border-stormyTeal transition-colors">
+                <div className="flex items-stretch rounded-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] overflow-hidden focus-within:border-[var(--Mudra-sky-blue)] transition-colors">
                   <button
                     type="button"
                     onClick={() => handleQtyChange(-1)}
-                    className="px-4 py-2.5 text-alabaster hover:text-white hover:bg-graphite-light text-base font-bold transition-colors select-none"
+                    className="px-4 py-2.5 text-[var(--text-heading)] hover:bg-[var(--surface-muted)] text-base font-bold transition-colors select-none"
                   >
-                    −
+                    âˆ’
                   </button>
                   <input
                     id="order-qty-input"
@@ -176,12 +176,12 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     max={1000}
                     value={qty}
                     onChange={(e) => setQty(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-full bg-transparent text-center font-mono font-bold text-white text-base focus:outline-none"
+                    className="w-full bg-transparent text-center font-mono font-bold text-[var(--text-heading)] text-base focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => handleQtyChange(1)}
-                    className="px-4 py-2.5 text-alabaster hover:text-white hover:bg-graphite-light text-base font-bold transition-colors select-none"
+                    className="px-4 py-2.5 text-[var(--text-heading)] hover:bg-[var(--surface-muted)] text-base font-bold transition-colors select-none"
                   >
                     +
                   </button>
@@ -201,17 +201,17 @@ export const OrderModal: React.FC<OrderModalProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-3.5 px-4 rounded-xl font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer ${
+                className={`w-full py-3.5 px-4 rounded-full font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer ${
                   side === "BUY"
-                    ? "bg-stormyTeal hover:bg-stormyTeal-light text-white"
-                    : "bg-rose-600 hover:bg-rose-500 text-white"
+                    ? "bg-[var(--Mudra-sky-blue)] hover:brightness-105 text-[#0A0D10]"
+                    : "bg-[var(--Mudra-node-red)] hover:brightness-110 text-white"
                 } ${isSubmitting ? "opacity-60 cursor-not-allowed" : ""}`}
               >
                 {isSubmitting ? (
-                  <span>Queuing Order...</span>
+                  <span>Queuing Order in Ledger...</span>
                 ) : (
                   <span>
-                    Confirm Virtual {side} Order ({qty} Shares)
+                    Confirm Virtual {side} ({qty} Shares)
                   </span>
                 )}
               </button>
@@ -222,3 +222,4 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     </div>
   );
 };
+

@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { DisclaimerBanner } from "@/components/common/DisclaimerBanner";
+import "@/styles/mudra.css";
 
 export const metadata: Metadata = {
-  title: "Mudra — Virtual Stock Market Simulator for NSE / BSE",
+  title: "Mudra | Indian Equities Simulator — Next-Close Paper Trading",
   description:
-    "Free, educational stock market simulator for Indian equities. Practise trading with ₹1,00,000 of virtual money. No real money, deposits, or brokers.",
+    "Institutional-grade paper trading platform for 50 liquid NSE equities with deterministic 15:30 IST settlement, integer paise ledger, and strict 10% headroom risk reserve.",
+  keywords: [
+    "Mudra",
+    "Indian Equities Simulator",
+    "NSE Paper Trading",
+    "Next Close Settlement",
+    "Paise Ledger",
+    "Stock Market Simulator",
+    "NIFTY 50"
+  ],
 };
 
 export default function RootLayout({
@@ -14,10 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className="bg-[#181d20] text-gray-100 flex flex-col min-h-screen antialiased selection:bg-stormyTeal selection:text-white">
-        <DisclaimerBanner />
-        <div className="flex-1 flex flex-col">{children}</div>
+    <html lang="en">
+      <body className="min-h-screen antialiased selection:bg-[#B1E5FC] selection:text-[#262626]">
+        {children}
       </body>
     </html>
   );

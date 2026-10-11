@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Clock, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
 
 export type FreshnessState = "FRESH" | "DELAYED" | "OUTDATED";
@@ -20,21 +20,21 @@ export const MarketStatusBadge: React.FC<MarketStatusBadgeProps> = ({
     switch (freshness) {
       case "FRESH":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--Mudra-link-green)]/15 text-[var(--Mudra-link-green)] border border-[var(--Mudra-link-green)]/30">
             <CheckCircle2 className="w-3 h-3" />
             Fresh EOD
           </span>
         );
       case "DELAYED":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--Mudra-signal-yellow)]/15 text-[var(--Mudra-signal-yellow)] border border-[var(--Mudra-signal-yellow)]/30">
             <AlertTriangle className="w-3 h-3" />
             Delayed
           </span>
         );
       case "OUTDATED":
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-[var(--Mudra-node-red)]/15 text-[var(--Mudra-node-red)] border border-[var(--Mudra-node-red)]/30">
             <XCircle className="w-3 h-3" />
             Outdated
           </span>
@@ -45,10 +45,10 @@ export const MarketStatusBadge: React.FC<MarketStatusBadgeProps> = ({
   return (
     <div className={`inline-flex items-center gap-2 ${className}`}>
       <span
-        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium ${
+        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
           isOpen
-            ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-            : "bg-graphite-light text-alabaster border border-alabaster/10"
+            ? "bg-[var(--Mudra-link-green)]/15 text-[var(--Mudra-link-green)] border border-[var(--Mudra-link-green)]/30"
+            : "bg-[var(--surface-muted)] text-[var(--text-muted)] border border-[var(--border-hairline)]"
         }`}
       >
         <Clock className="w-3 h-3" />
@@ -56,10 +56,11 @@ export const MarketStatusBadge: React.FC<MarketStatusBadgeProps> = ({
       </span>
       {getFreshnessBadge()}
       {asOfDate && (
-        <span className="text-[11px] text-alabaster/60 font-mono hidden sm:inline">
+        <span className="text-[11px] text-[var(--text-muted)] font-mono hidden sm:inline">
           {asOfDate}
         </span>
       )}
     </div>
   );
 };
+

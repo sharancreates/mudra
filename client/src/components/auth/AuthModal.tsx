@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { X, ShieldCheck, CheckSquare, Square, CheckCircle2, User, Mail, ArrowRight } from "lucide-react";
@@ -59,20 +59,20 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-md bg-graphite border border-yaleBlue/50 rounded-2xl p-6 sm:p-7 shadow-2xl text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+      <div className="relative w-full max-w-md bg-[var(--surface-card)] border border-[var(--border-hairline)] rounded-2xl p-6 sm:p-7 shadow-2xl text-[var(--text-heading)]">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1 rounded-lg text-alabaster/60 hover:text-white hover:bg-graphite-light transition-colors"
+          className="absolute top-5 right-5 p-1.5 rounded-full text-[var(--text-muted)] hover:text-[var(--text-heading)] hover:bg-[var(--surface-muted)] transition-colors border border-[var(--border-hairline)]"
           aria-label="Close"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {/* Modal Header */}
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-xl bg-stormyTeal/20 border border-stormyTeal/40 text-stormyTeal-light flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+          <div className="w-12 h-12 rounded-full bg-[var(--Mudra-sky-blue)]/15 border border-[var(--Mudra-sky-blue)]/30 text-[var(--Mudra-sky-blue)] flex items-center justify-center mx-auto mb-3 text-xl font-bold font-mono">
             ₹
           </div>
           <h2 className="text-2xl font-bold tracking-tight">
@@ -80,7 +80,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               ? "Start with ₹1,00,000 Virtual"
               : "Welcome Back to Mudra"}
           </h2>
-          <p className="text-xs text-alabaster/70 mt-1">
+          <p className="text-xs text-[var(--text-muted)] mt-1">
             {mode === "register"
               ? "Set up your free paper trading account in 60 seconds."
               : "Sign in to access your portfolio and watchlist."}
@@ -90,10 +90,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Success Feedback */}
         {isSubmitted ? (
           <div className="p-6 text-center space-y-3">
-            <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto animate-bounce" />
+            <CheckCircle2 className="w-12 h-12 text-[var(--Mudra-link-green)] mx-auto animate-bounce" />
             <h3 className="text-lg font-bold">₹1,00,000 Virtual Wallet Ready!</h3>
-            <p className="text-xs text-alabaster/80">
-              Welcome aboard, <span className="font-semibold text-white">{displayName || email}</span>. Initializing your sandbox session...
+            <p className="text-xs text-[var(--text-muted)]">
+              Welcome aboard, <span className="font-semibold text-[var(--text-heading)]">{displayName || email}</span>. Initializing your sandbox session...
             </p>
           </div>
         ) : (
@@ -107,7 +107,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 setDisplayName("TraderAarav");
                 setEmail("aarav.demo@gmail.com");
               }}
-              className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl bg-white text-gray-800 font-semibold text-sm hover:bg-gray-100 transition-colors shadow-sm mb-4"
+              className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-full bg-[var(--surface-canvas)] hover:bg-[var(--surface-muted)] text-[var(--text-heading)] border border-[var(--border-hairline)] font-semibold text-xs transition-colors shadow-sm mb-4 cursor-pointer"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
@@ -131,32 +131,32 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </button>
 
             <div className="flex items-center gap-3 my-4">
-              <div className="flex-1 border-t border-alabaster/10" />
-              <span className="text-[11px] uppercase font-mono text-alabaster/50">
+              <div className="flex-1 border-t border-[var(--border-hairline)]" />
+              <span className="text-[10px] uppercase font-mono text-[var(--text-muted)]">
                 or email
               </span>
-              <div className="flex-1 border-t border-alabaster/10" />
+              <div className="flex-1 border-t border-[var(--border-hairline)]" />
             </div>
 
             {error && (
-              <div className="mb-4 p-3 rounded-lg text-xs bg-rose-500/10 border border-rose-500/30 text-rose-300">
+              <div className="mb-4 p-3 rounded-xl text-xs bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400">
                 {error}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-alabaster/80 mb-1">
+                <label className="block text-xs font-medium text-[var(--text-body)] mb-1.5">
                   Email Address
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 text-alabaster/40 absolute left-3 top-3" />
+                  <Mail className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-3" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="trader@college.edu"
-                    className="w-full bg-[#1b2226] border border-alabaster/20 rounded-xl py-2.5 pl-9 pr-3 text-sm text-white placeholder-alabaster/30 focus:outline-none focus:border-stormyTeal"
+                    className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--Mudra-sky-blue)]"
                     required
                   />
                 </div>
@@ -164,38 +164,38 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               {mode === "register" && (
                 <div>
-                  <label className="block text-xs font-medium text-alabaster/80 mb-1">
+                  <label className="block text-xs font-medium text-[var(--text-body)] mb-1.5">
                     Leaderboard Pseudonym
                   </label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-alabaster/40 absolute left-3 top-3" />
+                    <User className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-3" />
                     <input
                       type="text"
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
                       placeholder="e.g. BullishAarav"
-                      className="w-full bg-[#1b2226] border border-alabaster/20 rounded-xl py-2.5 pl-9 pr-3 text-sm text-white placeholder-alabaster/30 focus:outline-none focus:border-stormyTeal"
+                      className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--Mudra-sky-blue)]"
                       required
                     />
                   </div>
-                  <span className="text-[11px] text-alabaster/50 mt-1 block">
+                  <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">
                     Public leaderboard handle. Email is never revealed.
                   </span>
                 </div>
               )}
 
               {mode === "register" && (
-                <div className="space-y-3 pt-2 text-xs text-alabaster/80">
+                <div className="space-y-3 pt-2 text-xs text-[var(--text-body)]">
                   <label className="flex items-start gap-2.5 cursor-pointer select-none">
                     <button
                       type="button"
                       onClick={() => setIsAdult(!isAdult)}
-                      className="mt-0.5 text-stormyTeal-light"
+                      className="mt-0.5 text-[var(--Mudra-sky-blue)]"
                     >
                       {isAdult ? (
-                        <CheckSquare className="w-4 h-4 text-stormyTeal-light" />
+                        <CheckSquare className="w-4 h-4 text-[var(--Mudra-sky-blue)]" />
                       ) : (
-                        <Square className="w-4 h-4 text-alabaster/40" />
+                        <Square className="w-4 h-4 text-[var(--text-muted)]" />
                       )}
                     </button>
                     <span>
@@ -207,12 +207,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     <button
                       type="button"
                       onClick={() => setAcknowledgedSimulation(!acknowledgedSimulation)}
-                      className="mt-0.5 text-stormyTeal-light"
+                      className="mt-0.5 text-[var(--Mudra-sky-blue)]"
                     >
                       {acknowledgedSimulation ? (
-                        <CheckSquare className="w-4 h-4 text-stormyTeal-light" />
+                        <CheckSquare className="w-4 h-4 text-[var(--Mudra-sky-blue)]" />
                       ) : (
-                        <Square className="w-4 h-4 text-alabaster/40" />
+                        <Square className="w-4 h-4 text-[var(--text-muted)]" />
                       )}
                     </button>
                     <span>
@@ -224,14 +224,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-3 px-4 rounded-xl bg-stormyTeal hover:bg-stormyTeal-light text-white font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 mt-4"
+                className="w-full py-3.5 px-4 rounded-full bg-[var(--Mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
               >
                 <span>{mode === "register" ? "Create Free Sandbox Account" : "Sign In to Mudra"}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
 
-            <div className="mt-5 text-center text-xs text-alabaster/60">
+            <div className="mt-5 text-center text-xs text-[var(--text-muted)]">
               {mode === "register" ? (
                 <span>
                   Already have an account?{" "}
@@ -241,7 +241,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       setMode("signin");
                       setError(null);
                     }}
-                    className="text-stormyTeal-light font-semibold hover:underline"
+                    className="text-[var(--Mudra-sky-blue)] font-semibold hover:underline"
                   >
                     Sign In
                   </button>
@@ -255,7 +255,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       setMode("register");
                       setError(null);
                     }}
-                    className="text-stormyTeal-light font-semibold hover:underline"
+                    className="text-[var(--Mudra-sky-blue)] font-semibold hover:underline"
                   >
                     Register for ₹1,00,000 Wallet
                   </button>
@@ -267,7 +267,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="button"
                 onClick={() => setShowLegalNotice(true)}
-                className="text-[11px] text-alabaster/40 hover:text-alabaster/80 underline"
+                className="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-heading)] underline"
               >
                 View Terms of Service & DPDP 2023 Notice
               </button>
@@ -277,15 +277,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
         {/* Legal & DPDP Modal Drawer */}
         {showLegalNotice && (
-          <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/90">
-            <div className="bg-graphite-dark border border-yaleBlue/60 rounded-xl p-5 max-w-md w-full max-h-[80vh] flex flex-col text-xs text-alabaster space-y-3">
-              <div className="flex items-center justify-between border-b border-alabaster/10 pb-3">
-                <h4 className="font-bold text-white text-sm">
+          <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/80">
+            <div className="bg-[var(--surface-card)] border border-[var(--border-hairline)] rounded-2xl p-6 max-w-md w-full max-h-[80vh] flex flex-col text-xs text-[var(--text-body)] space-y-3 shadow-2xl">
+              <div className="flex items-center justify-between border-b border-[var(--border-hairline)] pb-3">
+                <h4 className="font-bold text-[var(--text-heading)] text-sm">
                   Statutory Notice & DPDP 2023 Compliance
                 </h4>
                 <button
                   onClick={() => setShowLegalNotice(false)}
-                  className="p-1 hover:text-white"
+                  className="p-1 text-[var(--text-muted)] hover:text-[var(--text-heading)]"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -295,7 +295,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   <strong>No Financial Advice:</strong> Mudra is an educational simulator for Indian equities. We are not a broker, research analyst, or investment adviser and are not registered with SEBI.
                 </p>
                 <p>
-                  <strong>DPDP Act 2023:</strong> In accordance with India’s Digital Personal Data Protection Act 2023, we collect only minimal credentials (email and display name) strictly to maintain session state and render leaderboards.
+                  <strong>DPDP Act 2023:</strong> In accordance with Indiaâ€™s Digital Personal Data Protection Act 2023, we collect only minimal credentials (email and display name) strictly to maintain session state and render leaderboards.
                 </p>
                 <p>
                   <strong>Virtual Rupee Valuation:</strong> All balances (starting capital of ₹1,00,000) are virtual numbers in our database with zero monetary value.
@@ -304,7 +304,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="button"
                 onClick={() => setShowLegalNotice(false)}
-                className="w-full py-2 bg-stormyTeal rounded-lg text-white font-semibold text-xs mt-2"
+                className="w-full py-2.5 bg-[var(--Mudra-sky-blue)] rounded-full text-[#0A0D10] font-bold text-xs mt-2"
               >
                 I Understand
               </button>
@@ -315,3 +315,4 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     </div>
   );
 };
+

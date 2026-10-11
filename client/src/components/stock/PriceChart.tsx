@@ -17,7 +17,6 @@ export const PriceChart: React.FC<PriceChartProps> = ({
 }) => {
   const [selectedTf, setSelectedTf] = useState<Timeframe>("1M");
 
-  // Synthetic price points tailored to stock reference close
   const points = React.useMemo(() => {
     const base = currentClosePaise;
     const offsets = {
@@ -38,7 +37,6 @@ export const PriceChart: React.FC<PriceChartProps> = ({
   const maxPrice = Math.max(...points.map((p) => p.price));
   const range = maxPrice - minPrice || 1;
 
-  // SVG coordinate calculations
   const width = 800;
   const height = 280;
   const paddingX = 40;
@@ -54,29 +52,44 @@ export const PriceChart: React.FC<PriceChartProps> = ({
   const polygonStr = `${paddingX},${height - paddingY} ${polylineStr} ${width - paddingX},${height - paddingY}`;
 
   return (
-    <div className="w-full bg-graphite/70 border border-yaleBlue/40 rounded-2xl p-4 sm:p-6 shadow-xl">
+    <div
+      style={{
+        width: "100%",
+        background: "var(--surface-card)",
+        border: "1.5px solid var(--border-hairline)",
+        borderRadius: "var(--radius-card)",
+        padding: "24px",
+      }}
+    >
       {/* Chart Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "16px", marginBottom: "20px" }}>
         <div>
-          <span className="text-xs uppercase font-mono tracking-wider text-alabaster/60">
-            Interactive Price Chart
+          <span className="Mudra-eyebrow" style={{ fontSize: "11px" }}>
+            EOD Historical Price Chart
           </span>
-          <span className="text-xs text-white font-medium block mt-0.5">
-            {symbol} Closing History • Timeframe: {selectedTf}
+          <span style={{ display: "block", fontSize: "15px", fontWeight: 700, color: "var(--text-heading)", marginTop: "4px" }}>
+            {symbol} Closing Trajectory · {selectedTf}
           </span>
         </div>
 
         {/* Timeframe Buttons */}
-        <div className="flex items-center gap-1 bg-graphite-dark p-1 rounded-xl border border-yaleBlue/50 text-xs">
+        <div style={{ display: "flex", gap: "4px", background: "var(--surface-canvas)", padding: "4px", borderRadius: "var(--radius-pill)" }}>
           {TIMEFRAMES.map((tf) => (
             <button
               key={tf}
+              type="button"
               onClick={() => setSelectedTf(tf)}
-              className={`px-3 py-1 rounded-lg font-semibold transition-all cursor-pointer ${
-                selectedTf === tf
-                  ? "bg-stormyTeal text-white shadow-sm"
-                  : "text-alabaster/60 hover:text-white hover:bg-yaleBlue/30"
-              }`}
+              style={{
+                padding: "6px 14px",
+                borderRadius: "var(--radius-pill)",
+                border: "none",
+                fontSize: "12px",
+                fontWeight: 600,
+                cursor: "pointer",
+                background: selectedTf === tf ? "var(--text-heading)" : "transparent",
+                color: selectedTf === tf ? "var(--surface-canvas)" : "var(--text-muted)",
+                transition: "all 140ms ease",
+              }}
             >
               {tf}
             </button>
@@ -85,63 +98,72 @@ export const PriceChart: React.FC<PriceChartProps> = ({
       </div>
 
       {/* Responsive SVG Chart Canvas */}
-      <div className="relative w-full h-[260px] sm:h-[300px] overflow-hidden select-none">
-        {/* Horizontal reference gridlines */}
-        <div className="absolute inset-x-0 top-4 border-b border-yaleBlue/20 flex justify-end pr-2 text-[10px] font-mono text-alabaster/40">
+      <div style={{ position: "relative", width: "100%", height: "260px", overflow: "hidden", userSelect: "none" }}>
+        <div style={{ position: "absolute", left: 0, right: 0, top: "12px", borderBottom: "1px dashed var(--border-hairline)", textAlign: "right", paddingRight: "8px", fontSize: "11px", fontFamily: "var(--font-mono)", color: "var(--text-muted)" }}>
           {formatINR(maxPrice)}
         </div>
-        <div className="absolute inset-x-0 top-1/2 border-b border-yaleBlue/20 flex justify-end pr-2 text-[10px] font-mono text-alabaster/40">
+        <div style={{ position: "absolute", left: 0, right: 0, top: "50%", borderBottom: "1px dashed var(--border-hairline)", textAlign: "right", paddingRight: "8px", fontSize: "11px", fontFamily: "var(--font-mono)", color: "var(--text-muted)" }}>
           {formatINR(Math.round((maxPrice + minPrice) / 2))}
         </div>
-        <div className="absolute inset-x-0 bottom-6 border-b border-yaleBlue/20 flex justify-end pr-2 text-[10px] font-mono text-alabaster/40">
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: "24px", borderBottom: "1px dashed var(--border-hairline)", textAlign: "right", paddingRight: "8px", fontSize: "11px", fontFamily: "var(--font-mono)", color: "var(--text-muted)" }}>
           {formatINR(minPrice)}
         </div>
 
         <svg
-          className="w-full h-full overflow-visible"
+          style={{ width: "100%", height: "100%", overflow: "visible" }}
           viewBox={`0 0 ${width} ${height}`}
           preserveAspectRatio="none"
         >
           <defs>
             <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#3c6e71" stopOpacity="0.4" />
-              <stop offset="70%" stopColor="#3c6e71" stopOpacity="0.08" />
-              <stop offset="100%" stopColor="#3c6e71" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0.32" />
+              <stop offset="70%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="var(--Mudra-sky-blue)" stopOpacity="0" />
             </linearGradient>
           </defs>
 
-          {/* Area fill */}
           <polygon fill="url(#chartGradient)" points={polygonStr} />
-
-          {/* Price line */}
           <polyline
             fill="none"
-            stroke="#3c6e71"
+            stroke="var(--Mudra-sky-blue)"
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
             points={polylineStr}
           />
 
-          {/* Latest point circle */}
           {svgPoints.length > 0 && (
             <circle
               cx={width - paddingX}
               cy={svgPoints[svgPoints.length - 1].split(",")[1]}
-              r="4.5"
-              fill="#3c6e71"
-              stroke="#ffffff"
-              strokeWidth="2"
+              r="5"
+              fill="var(--Mudra-sky-blue)"
+              stroke="var(--surface-card)"
+              strokeWidth="2.5"
             />
           )}
         </svg>
       </div>
 
       {/* Chart Footer Notice */}
-      <div className="mt-3 flex items-center justify-between text-[11px] font-mono text-alabaster/50 border-t border-alabaster/10 pt-3">
-        <span>Source: EOD Reference Archive</span>
-        <span>Next execution executes at official 15:30 IST close</span>
+      <div
+        className="Mudra-mono"
+        style={{
+          marginTop: "16px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          fontSize: "12px",
+          color: "var(--text-muted)",
+          borderTop: "1px solid var(--border-hairline)",
+          paddingTop: "12px",
+        }}
+      >
+        <span>Source: NSE EOD Reference Archive</span>
+        <span>Orders queue for 15:30 IST next-close</span>
       </div>
     </div>
   );
 };
+
+

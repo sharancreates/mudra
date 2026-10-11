@@ -9,6 +9,7 @@
     "start": "npm --prefix client run start",
     "type-check": "npm --prefix client run type-check",
     "lint": "npm --prefix client run lint",
+    "test": "npx tsx --test tests/integration/*.ts tests/trading/*.ts",
     "server:generate-data": "npm --prefix server run generate-data"
   }
 }

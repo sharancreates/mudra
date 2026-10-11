@@ -69,3 +69,11 @@
   }
   ```
   Permitted error codes: `not_authenticated`, `bad_quantity`, `unknown_instrument`, `insufficient_cash`, `insufficient_holdings`, `market_data_unavailable`, `rate_limited`, `duplicate_ignored`.
+
+---
+
+## ADR-008: Indisea Website Pixel-Perfect Frontend Architecture
+- **Date**: 2026-10-11
+- **Status**: Accepted
+- **Context**: Recreate reference website https://indisea.com/ with pixel-perfect visual fidelity, layout, typography, animations, interactions, and responsive behavior.
+- **Decision**: Implement as a Next.js 14 client application with exact CSS tokens, fluid clamp scales, Google Fonts IBM Plex, and interactive SVG diagrams.

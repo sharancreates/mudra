@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Instrument } from "@/types/api";
 import { formatINR } from "@/lib/formatters";
 
@@ -14,29 +14,69 @@ export const KeyStatistics: React.FC<KeyStatisticsProps> = ({ instrument }) => {
 
   const stats = [
     { label: "Previous Close", value: formatINR(prevClose) },
-    { label: "Lot Size", value: "1 Unit (No Fractions)" },
+    { label: "Lot Size", value: "1 Share (No Fractions)" },
     { label: "52-Week High", value: formatINR(week52High) },
     { label: "52-Week Low", value: formatINR(week52Low) },
-    { label: "Settlement Rule", value: "Next Close (15:30 IST)" },
-    { label: "Simulated Brokerage", value: "0.1% Flat per Side" },
+    { label: "Settlement Rule", value: "Next Close 15:30 IST" },
+    { label: "Simulated Fee", value: "0.1% Flat per Side" },
   ];
 
   return (
-    <div className="w-full bg-graphite/70 border border-yaleBlue/40 rounded-2xl p-5 sm:p-6 shadow-xl">
-      <h3 className="text-sm font-bold uppercase font-mono tracking-wider text-alabaster/70 mb-4">
+    <div
+      style={{
+        width: "100%",
+        background: "var(--surface-card)",
+        border: "1.5px solid var(--border-hairline)",
+        borderRadius: "var(--radius-card)",
+        padding: "24px",
+      }}
+    >
+      <h3
+        className="Mudra-eyebrow"
+        style={{
+          fontSize: "11px",
+          marginBottom: "16px",
+          color: "var(--text-muted)",
+        }}
+      >
         Instrument Key Metrics
       </h3>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
+          gap: "12px",
+        }}
+      >
         {stats.map((item, idx) => (
           <div
             key={idx}
-            className="p-3.5 rounded-xl bg-graphite-dark/70 border border-yaleBlue/30"
+            style={{
+              padding: "14px",
+              borderRadius: "var(--radius-md)",
+              background: "var(--surface-canvas)",
+              border: "1px solid var(--border-hairline)",
+            }}
           >
-            <span className="text-[11px] text-alabaster/60 block mb-1">
+            <span
+              style={{
+                fontSize: "11px",
+                color: "var(--text-muted)",
+                display: "block",
+                marginBottom: "4px",
+              }}
+            >
               {item.label}
             </span>
-            <span className="text-sm font-semibold text-white font-mono">
+            <span
+              style={{
+                fontSize: "13px",
+                fontWeight: 700,
+                color: "var(--text-heading)",
+                fontFamily: "var(--font-mono)",
+              }}
+            >
               {item.value}
             </span>
           </div>
@@ -45,3 +85,5 @@ export const KeyStatistics: React.FC<KeyStatisticsProps> = ({ instrument }) => {
     </div>
   );
 };
+
+

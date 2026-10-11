@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowDownRight, Star, ExternalLink } from "lucide-react";
+import { ArrowUpRight, ArrowDownRight, Star } from "lucide-react";
 import { Instrument } from "@/types/api";
 import { formatINR, formatBps } from "@/lib/formatters";
 
@@ -14,7 +14,6 @@ interface StockTableProps {
 
 export const StockTable: React.FC<StockTableProps> = ({
   instruments,
-  onSelectInstrument,
   onResetFilters,
 }) => {
   const [watchlist, setWatchlist] = useState<Set<string>>(new Set(["RELIANCE", "TCS"]));
@@ -35,17 +34,39 @@ export const StockTable: React.FC<StockTableProps> = ({
 
   if (instruments.length === 0) {
     return (
-      <div className="py-16 text-center bg-graphite/40 border border-yaleBlue/30 rounded-2xl p-8">
-        <h3 className="text-lg font-bold text-white">No matching instruments found</h3>
-        <p className="text-xs text-alabaster/70 mt-1 max-w-sm mx-auto">
+      <div
+        style={{
+          padding: "64px 24px",
+          textAlign: "center",
+          background: "var(--surface-card)",
+          border: "1.5px solid var(--border-hairline)",
+          borderRadius: "var(--radius-card)",
+        }}
+      >
+        <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--text-heading)", margin: 0 }}>
+          No matching instruments found
+        </h3>
+        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginTop: "8px" }}>
           Try adjusting your search query or selecting &quot;All&quot; sectors.
         </p>
         {onResetFilters && (
           <button
+            type="button"
             onClick={onResetFilters}
-            className="mt-4 px-4 py-2 rounded-lg bg-graphite-light border border-yaleBlue/60 text-xs font-mono text-alabaster hover:text-white"
+            style={{
+              marginTop: "16px",
+              padding: "8px 20px",
+              borderRadius: "var(--radius-pill)",
+              border: "1.5px solid var(--border-hairline)",
+              background: "var(--surface-canvas)",
+              color: "var(--text-heading)",
+              fontSize: "12px",
+              fontWeight: 600,
+              fontFamily: "var(--font-mono)",
+              cursor: "pointer",
+            }}
           >
-            Reset Search Filters
+            Reset Filters
           </button>
         )}
       </div>
@@ -53,19 +74,36 @@ export const StockTable: React.FC<StockTableProps> = ({
   }
 
   return (
-    <div className="w-full overflow-x-auto rounded-2xl border border-yaleBlue/40 bg-graphite/70 shadow-xl">
-      <table className="w-full text-left border-collapse text-xs sm:text-sm">
+    <div
+      style={{
+        width: "100%",
+        overflowX: "auto",
+        borderRadius: "var(--radius-card)",
+        border: "1.5px solid var(--border-hairline)",
+        background: "var(--surface-card)",
+      }}
+    >
+      <table style={{ width: "100%", textAlign: "left", borderCollapse: "collapse", fontSize: "14px" }}>
         <thead>
-          <tr className="border-b border-yaleBlue/30 bg-[#1e262b]/80 text-[11px] uppercase tracking-wider text-alabaster/60 font-mono">
-            <th className="py-3.5 px-4 w-12 text-center">★</th>
-            <th className="py-3.5 px-4 font-semibold">Instrument</th>
-            <th className="py-3.5 px-4 font-semibold hidden md:table-cell">Sector</th>
-            <th className="py-3.5 px-4 font-semibold text-right">EOD Close</th>
-            <th className="py-3.5 px-4 font-semibold text-right">Day Change</th>
-            <th className="py-3.5 px-4 font-semibold text-right w-28">Action</th>
+          <tr
+            style={{
+              borderBottom: "1.5px solid var(--border-hairline)",
+              fontSize: "11px",
+              letterSpacing: "0.07em",
+              textTransform: "uppercase",
+              color: "var(--text-muted)",
+              fontFamily: "var(--font-mono)",
+            }}
+          >
+            <th style={{ padding: "14px 16px", width: "48px", textAlign: "center" }}>â˜…</th>
+            <th style={{ padding: "14px 16px", fontWeight: 600 }}>Instrument</th>
+            <th className="hidden md:table-cell" style={{ padding: "14px 16px", fontWeight: 600 }}>Sector</th>
+            <th style={{ padding: "14px 16px", fontWeight: 600, textAlign: "right" }}>EOD Close</th>
+            <th style={{ padding: "14px 16px", fontWeight: 600, textAlign: "right" }}>Day Change</th>
+            <th style={{ padding: "14px 16px", fontWeight: 600, textAlign: "right", width: "120px" }}>Action</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-yaleBlue/20 font-sans">
+        <tbody style={{ fontFamily: "var(--font-sans)" }}>
           {instruments.map((stock) => {
             const isStarred = watchlist.has(stock.symbol);
             const isPositive = stock.change_bps >= 0;
@@ -73,79 +111,152 @@ export const StockTable: React.FC<StockTableProps> = ({
             return (
               <tr
                 key={stock.symbol}
-                className="hover:bg-graphite-light/40 transition-colors group"
+                style={{
+                  borderBottom: "1px solid var(--border-hairline)",
+                  transition: "background 140ms ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-sunken)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
               >
                 {/* Watchlist star */}
-                <td className="py-3.5 px-4 text-center">
+                <td style={{ padding: "16px", textAlign: "center" }}>
                   <button
+                    type="button"
                     onClick={(e) => toggleWatchlist(stock.symbol, e)}
-                    className="p-1 text-alabaster/40 hover:text-amber-400 transition-colors"
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: isStarred ? "var(--Mudra-signal-yellow)" : "var(--text-muted)",
+                      cursor: "pointer",
+                      padding: 0,
+                    }}
                     aria-label={`Toggle watchlist for ${stock.symbol}`}
                   >
                     <Star
-                      className={`w-4 h-4 ${
-                        isStarred ? "text-amber-400 fill-amber-400" : ""
-                      }`}
+                      className="w-4 h-4"
+                      style={{
+                        fill: isStarred ? "var(--Mudra-signal-yellow)" : "none",
+                      }}
                     />
                   </button>
                 </td>
 
                 {/* Symbol & Name */}
-                <td className="py-3.5 px-4">
+                <td style={{ padding: "16px" }}>
                   <Link
                     href={`/stock/${stock.symbol}`}
-                    className="flex flex-col group-hover:text-stormyTeal-light transition-colors"
+                    style={{ textDecoration: "none", color: "inherit", display: "flex", flexDirection: "column" }}
                   >
-                    <div className="flex items-center gap-1.5 font-bold text-white group-hover:text-stormyTeal-light">
-                      <span>{stock.symbol}</span>
-                      <span className="text-[10px] px-1 py-0.2 rounded bg-graphite-dark text-alabaster/60 font-mono">
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <span style={{ fontWeight: 700, fontSize: "15px", color: "var(--text-heading)" }}>
+                        {stock.symbol}
+                      </span>
+                      <span
+                        className="Mudra-mono"
+                        style={{
+                          fontSize: "10px",
+                          fontWeight: 600,
+                          padding: "1px 6px",
+                          borderRadius: "var(--radius-xs)",
+                          background: "var(--surface-sunken)",
+                          color: "var(--text-muted)",
+                        }}
+                      >
                         {stock.exchange}
                       </span>
                     </div>
-                    <span className="text-xs text-alabaster/60 truncate max-w-[180px] sm:max-w-xs">
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        color: "var(--text-muted)",
+                        marginTop: "2px",
+                        maxWidth: "260px",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
                       {stock.name}
                     </span>
                   </Link>
                 </td>
 
                 {/* Sector */}
-                <td className="py-3.5 px-4 hidden md:table-cell text-xs text-alabaster/70">
-                  <span className="px-2 py-0.5 rounded-full bg-yaleBlue/30 text-alabaster/80 text-[11px]">
+                <td className="hidden md:table-cell" style={{ padding: "16px" }}>
+                  <span
+                    className="Mudra-eyebrow"
+                    style={{
+                      fontSize: "11px",
+                      padding: "3px 10px",
+                      borderRadius: "var(--radius-pill)",
+                      border: "1px solid var(--border-hairline)",
+                      background: "var(--surface-canvas)",
+                    }}
+                  >
                     {stock.sector}
                   </span>
                 </td>
 
                 {/* Last Close Price */}
-                <td className="py-3.5 px-4 text-right font-mono font-semibold text-white">
+                <td
+                  style={{
+                    padding: "16px",
+                    textAlign: "right",
+                    fontFamily: "var(--font-mono)",
+                    fontWeight: 700,
+                    fontSize: "15px",
+                    color: "var(--text-heading)",
+                  }}
+                >
                   {formatINR(stock.last_close_paise)}
                 </td>
 
                 {/* Day Change % */}
-                <td className="py-3.5 px-4 text-right font-mono font-semibold">
+                <td style={{ padding: "16px", textAlign: "right" }}>
                   <span
-                    className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-xs ${
-                      isPositive
-                        ? "bg-emerald-500/10 text-emerald-400"
-                        : "bg-rose-500/10 text-rose-400"
-                    }`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "2px",
+                      padding: "3px 8px",
+                      borderRadius: "var(--radius-xs)",
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      background: isPositive ? "rgba(7, 162, 64, 0.12)" : "rgba(201, 33, 33, 0.12)",
+                      color: isPositive ? "var(--Mudra-link-green)" : "var(--Mudra-node-red)",
+                    }}
                   >
-                    {isPositive ? (
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    ) : (
-                      <ArrowDownRight className="w-3.5 h-3.5" />
-                    )}
+                    {isPositive ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
                     {formatBps(stock.change_bps)}
                   </span>
                 </td>
 
                 {/* Actions */}
-                <td className="py-3.5 px-4 text-right">
+                <td style={{ padding: "16px", textAlign: "right" }}>
                   <Link
                     href={`/stock/${stock.symbol}`}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-stormyTeal hover:bg-stormyTeal-light text-white font-medium text-xs transition-colors shadow-sm"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      padding: "6px 16px",
+                      borderRadius: "var(--radius-pill)",
+                      background: "var(--text-heading)",
+                      color: "var(--surface-canvas)",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      textDecoration: "none",
+                      transition: "opacity 160ms ease",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                   >
-                    Trade
-                    <ExternalLink className="w-3 h-3" />
+                    <span>Trade</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
                   </Link>
                 </td>
               </tr>
@@ -156,3 +267,5 @@ export const StockTable: React.FC<StockTableProps> = ({
     </div>
   );
 };
+
+

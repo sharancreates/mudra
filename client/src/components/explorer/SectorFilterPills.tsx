@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 
@@ -17,7 +17,8 @@ export const SectorFilterPills: React.FC<SectorFilterPillsProps> = ({
 }) => {
   return (
     <div
-      className={`flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs ${className}`}
+      className={`flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar ${className}`}
+      style={{ scrollbarWidth: "none" }}
     >
       {sectors.map((sector) => {
         const isSelected = selectedSector === sector;
@@ -26,11 +27,19 @@ export const SectorFilterPills: React.FC<SectorFilterPillsProps> = ({
             key={sector}
             type="button"
             onClick={() => onSelectSector(sector)}
-            className={`px-3.5 py-1.5 rounded-full font-medium whitespace-nowrap transition-all cursor-pointer border ${
-              isSelected
-                ? "bg-stormyTeal border-stormyTeal text-white shadow-sm"
-                : "bg-graphite/60 border-yaleBlue/40 text-alabaster/70 hover:text-white hover:bg-graphite-light"
-            }`}
+            style={{
+              padding: "7px 16px",
+              borderRadius: "var(--radius-pill)",
+              fontSize: "12px",
+              fontWeight: 600,
+              fontFamily: "var(--font-sans)",
+              whiteSpace: "nowrap",
+              cursor: "pointer",
+              transition: "all 160ms ease",
+              border: isSelected ? "1.5px solid var(--Mudra-signal-yellow)" : "1.5px solid var(--border-hairline)",
+              background: isSelected ? "var(--Mudra-signal-yellow)" : "var(--surface-card)",
+              color: isSelected ? "#262626" : "var(--text-body)",
+            }}
           >
             {sector}
           </button>
@@ -39,3 +48,5 @@ export const SectorFilterPills: React.FC<SectorFilterPillsProps> = ({
     </div>
   );
 };
+
+

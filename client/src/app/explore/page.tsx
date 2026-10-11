@@ -1,12 +1,12 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import Link from "next/link";
-import { ArrowLeft, SlidersHorizontal, Info } from "lucide-react";
+import { SlidersHorizontal, Info } from "lucide-react";
 import { SearchBar } from "@/components/explorer/SearchBar";
 import { SectorFilterPills } from "@/components/explorer/SectorFilterPills";
 import { StockTable } from "@/components/explorer/StockTable";
 import { MarketStatusBadge } from "@/components/common/MarketStatusBadge";
+import { MudraShell } from "@/components/mudra/MudraShell";
 import { getInstruments } from "@/lib/api";
 import { Instrument } from "@/types/api";
 
@@ -50,7 +50,6 @@ export default function ExplorePage() {
       );
     }
 
-    // Neutral sorting (no advice)
     return [...list].sort((a, b) => {
       if (sortBy === "name") return a.symbol.localeCompare(b.symbol);
       if (sortBy === "price") return b.last_close_paise - a.last_close_paise;
@@ -60,83 +59,148 @@ export default function ExplorePage() {
   }, [instruments, searchQuery, selectedSector, sortBy]);
 
   return (
-    <div className="flex-1 flex flex-col w-full max-w-6xl mx-auto px-4 sm:px-6 py-8">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="p-2 rounded-xl bg-graphite border border-yaleBlue/40 text-alabaster hover:text-white hover:bg-graphite-light transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-          </Link>
+    <MudraShell activeNav="explore">
+      <div data-wrap="" style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 24px" }}>
+        {/* Eyebrow */}
+        <div style={{ marginBottom: "16px" }}>
+          <span className="Mudra-eyebrow">01 / nse 50 equities directory</span>
+        </div>
+
+        {/* Display Heading & Market Status */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            flexWrap: "wrap",
+            gap: "24px",
+            marginBottom: "40px",
+          }}
+        >
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1
+              style={{
+                margin: 0,
+                fontSize: "clamp(36px, min(6.4vw, 72px), 92px)",
+                fontWeight: "var(--weight-display)",
+                letterSpacing: "var(--tracking-display)",
+                lineHeight: 0.94,
+                color: "var(--text-heading)",
+              }}
+            >
               Market Explorer
             </h1>
-            <p className="text-xs text-alabaster/70">
-              Browse 50 liquid NSE instruments with official EOD quotes
+            <p
+              style={{
+                margin: "16px 0 0 0",
+                fontSize: "16px",
+                lineHeight: 1.55,
+                color: "var(--text-muted)",
+                maxWidth: "60ch",
+              }}
+            >
+              Browse 50 liquid NSE benchmark equities with official next-close settlement quotes, sector allocations, and live integer paise trading.
             </p>
           </div>
-        </div>
-        <MarketStatusBadge isOpen={false} freshness="FRESH" asOfDate="09 Oct 2026" />
-      </div>
 
-      {/* Controls Bar: Search & Sort */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 mb-4">
-        <div className="flex-1">
-          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          <MarketStatusBadge isOpen={false} freshness="FRESH" asOfDate="09 Oct 2026" />
         </div>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 bg-graphite/80 border border-yaleBlue/40 rounded-xl px-3 py-2 text-xs text-alabaster">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-alabaster/60" />
-            <span className="text-alabaster/60">Sort:</span>
+
+        {/* Search & Sort Controls Bar */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "16px",
+            marginBottom: "20px",
+            flexWrap: "wrap",
+          }}
+        >
+          <div style={{ flex: "1 1 340px" }}>
+            <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              background: "var(--surface-card)",
+              border: "1.5px solid var(--border-hairline)",
+              borderRadius: "var(--radius-pill)",
+              padding: "0 20px",
+              height: "52px",
+            }}
+          >
+            <SlidersHorizontal className="w-4 h-4" style={{ color: "var(--text-muted)" }} />
+            <span style={{ fontSize: "12px", fontFamily: "var(--font-mono)", color: "var(--text-muted)", textTransform: "uppercase" }}>
+              Sort:
+            </span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-transparent text-white font-medium focus:outline-none cursor-pointer"
+              style={{
+                background: "transparent",
+                border: "none",
+                fontSize: "13px",
+                fontWeight: 600,
+                fontFamily: "var(--font-sans)",
+                color: "var(--text-heading)",
+                outline: "none",
+                cursor: "pointer",
+              }}
             >
-              <option value="name" className="bg-graphite text-white">
-                Symbol (A-Z)
-              </option>
-              <option value="price" className="bg-graphite text-white">
-                Close Price
-              </option>
-              <option value="change" className="bg-graphite text-white">
-                Day Change %
-              </option>
+              <option value="name">Symbol (A-Z)</option>
+              <option value="price">Close Price (High to Low)</option>
+              <option value="change">Day Change % (Top Gainers)</option>
             </select>
           </div>
         </div>
-      </div>
 
-      {/* Sector Filter Chips */}
-      <div className="mb-6">
-        <SectorFilterPills
-          sectors={SECTORS}
-          selectedSector={selectedSector}
-          onSelectSector={setSelectedSector}
-        />
-      </div>
+        {/* Sector Filter Chips */}
+        <div style={{ marginBottom: "28px" }}>
+          <SectorFilterPills
+            sectors={SECTORS}
+            selectedSector={selectedSector}
+            onSelectSector={setSelectedSector}
+          />
+        </div>
 
-      {/* Stock Table */}
-      <div className="flex-1">
-        <StockTable
-          instruments={filteredInstruments}
-          onResetFilters={() => {
-            setSearchQuery("");
-            setSelectedSector("All");
+        {/* Stock Table */}
+        <div style={{ marginBottom: "36px" }}>
+          <StockTable
+            instruments={filteredInstruments}
+            onResetFilters={() => {
+              setSearchQuery("");
+              setSelectedSector("All");
+            }}
+          />
+        </div>
+
+        {/* Educational Notice Banner */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "14px",
+            padding: "16px 24px",
+            borderRadius: "var(--radius-card)",
+            background: "var(--surface-card)",
+            border: "1px solid var(--border-hairline)",
+            color: "var(--text-muted)",
+            fontSize: "13px",
+            lineHeight: 1.5,
           }}
-        />
+        >
+          <Info className="w-4 h-4 shrink-0" style={{ color: "var(--Mudra-sky-blue)" }} />
+          <span>
+            Orders placed on any instrument will execute at the official closing price during the next session settlement (15:30 IST) with 0.1% simulated brokerage fee.
+          </span>
+        </div>
       </div>
-
-      {/* Educational Notice Footer */}
-      <div className="mt-8 p-4 rounded-xl bg-graphite/40 border border-yaleBlue/30 flex items-center gap-3 text-xs text-alabaster/70">
-        <Info className="w-4 h-4 text-stormyTeal-light shrink-0" />
-        <span>
-          Orders placed on any instrument will execute at the official closing price during next session settlement (15:30 IST).
-        </span>
-      </div>
-    </div>
+    </MudraShell>
   );
 }
+
+
