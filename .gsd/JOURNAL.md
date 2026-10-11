@@ -89,4 +89,30 @@ Update project roadmap, state, and phase plans to hand over backend conversion t
 - Ensure Python 3.10+ is available.
 - Execute via `/execute 2.1`.
 
+---
+
+## Session: 2026-10-11 16:40 IST (Audit & Verification: Milestone M1 Complete)
+
+### Objective
+Execute systematic `/verify` and `/debug` audit on Week 1 / Milestone M1 across both Frontend (Next.js 14) and Backend (FastAPI Python) implementations.
+
+### Issues Diagnosed & Debugged
+- **Missing FastAPI dependencies in host Python environment**:
+  * *Symptom*: Initial `pytest` execution failed with `ModuleNotFoundError: No module named 'fastapi'`.
+  * *Fix*: Installed `server/requirements.txt` (`fastapi`, `uvicorn`, `pydantic`, `httpx`, `python-multipart`).
+  * *Verification*: `pytest server/tests/ -v -s` passed 14/14 tests in 0.71s.
+
+### Verification Results
+1. **FastAPI Backend (`server/`)**:
+   - 14/14 pytest tests passed in 0.71s.
+   - PRD Section 7.3 reference worked example reproduces to the paisa (+₹242.86 realized P&L, ₹1,408.07 avg cost).
+   - Live HTTP probe verified: `GET /api/status` (200), `GET /api/instruments` (200), `POST /api/orders` (201), idempotent replay (200/201).
+   - Nightly ledger reconciliation script (`reconcile.py`) clean with 0 discrepancies.
+2. **Next.js Frontend (`client/`)**:
+   - `npm run type-check` (`tsc --noEmit`) passes with 0 errors.
+   - `npm run build` compiles all 9 routes and pages cleanly.
+   - Live dev probe confirmed all pages (`/`, `/explore`, `/stock/RELIANCE`, `/dashboard`) serve HTTP 200.
+3. **Verdict**: **PASS (10/10 Must-Haves Satisfied)**. Documented in `.gsd/phases/1/VERIFICATION.md`.
+
+
 
