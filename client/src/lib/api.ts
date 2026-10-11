@@ -95,6 +95,23 @@ export async function getInstrumentDetail(
 }
 
 export async function getPortfolio(): Promise<PortfolioSummary> {
+  try {
+    const res = await fetch("/api/portfolio");
+    if (res.ok) {
+      const data = await res.json();
+      return {
+        cash_paise: Number(data.cash_paise),
+        reserved_paise: Number(data.reserved_paise),
+        holdings: data.holdings || [],
+        equity_paise: Number(data.equity_paise),
+        realized_paise: Number(data.realized_paise || 0),
+        prices_as_of: data.prices_as_of || "2026-10-09",
+      };
+    }
+  } catch {
+    // Network / SSR fallback
+  }
+
   const basePortfolio = { ...(portfolioFixture as PortfolioSummary) };
 
   // Calculate dynamic reserved cash from pending buy orders
@@ -122,6 +139,39 @@ export async function getPortfolio(): Promise<PortfolioSummary> {
   }
 
   return basePortfolio;
+}
+
+export async function getPortfolioHistory(
+  range = "ALL"
+): Promise<{ points: Array<{ date: string; equity_paise: number }> }> {
+  try {
+    const res = await fetch(`/api/portfolio/history?range=${encodeURIComponent(range)}`);
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch {
+    // Fallback
+  }
+  return {
+    points: [
+      { date: "2026-10-09", equity_paise: 10000000 }
+    ]
+  };
+}
+
+export async function getLedger(
+  page = 1,
+  limit = 50
+): Promise<{ items: any[]; next: number | null }> {
+  try {
+    const res = await fetch(`/api/ledger?page=${page}&limit=${limit}`);
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch {
+    // Fallback
+  }
+  return { items: [], next: null };
 }
 
 export async function getStatus(): Promise<StatusResponse> {

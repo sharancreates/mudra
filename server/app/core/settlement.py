@@ -118,6 +118,10 @@ def settle_orders(
                     entry_type="TRADE_SELL",
                     cash_delta_paise=trade_val_paise,
                     balance_after_paise=wallet.cash_paise + fee_paise,
+                    realized_pl_paise=realized_pl_paise,
+                    symbol=symbol,
+                    qty=order.qty,
+                    price_paise=close_price_paise,
                     created_at=now_iso,
                 )
             )
@@ -128,6 +132,7 @@ def settle_orders(
                     entry_type="FEE",
                     cash_delta_paise=-fee_paise,
                     balance_after_paise=wallet.cash_paise,
+                    symbol=symbol,
                     created_at=now_iso,
                 )
             )
@@ -188,6 +193,9 @@ def settle_orders(
                     entry_type="TRADE_BUY",
                     cash_delta_paise=-trade_val_paise,
                     balance_after_paise=wallet.cash_paise + fee_paise,
+                    symbol=symbol,
+                    qty=order.qty,
+                    price_paise=close_price_paise,
                     created_at=now_iso,
                 )
             )
@@ -198,6 +206,7 @@ def settle_orders(
                     entry_type="FEE",
                     cash_delta_paise=-fee_paise,
                     balance_after_paise=wallet.cash_paise,
+                    symbol=symbol,
                     created_at=now_iso,
                 )
             )

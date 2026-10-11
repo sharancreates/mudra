@@ -87,7 +87,7 @@ updated: 2026-10-10T16:30:00+05:30
 **Person B Scope:**
 - [x] Plan 3.1: Order settlement stored procedure `settle_orders(trade_date)` with sells-before-buys ordering and cash releases.
 - [x] Plan 3.2: Daily GitHub Actions price ingestion and settlement cron job (`.github/workflows/daily-prices.yml`).
-- [ ] Plan 3.3: Daily portfolio snapshot generation and return calculation (`portfolio_snapshots`).
+- [x] Plan 3.3: Daily portfolio snapshot generation and return calculation (`portfolio_snapshots`).
 - [ ] Plan 3.4: Watchlist backend endpoints (`GET / POST / DELETE /api/watchlist`).
 - [ ] Plan 3.5: Concurrency load test (20-50 parallel orders leaving no negative balances or duplicate fills).
 

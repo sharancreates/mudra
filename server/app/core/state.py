@@ -62,6 +62,10 @@ class LedgerEntry:
         entry_type: str,
         cash_delta_paise: int,
         balance_after_paise: int,
+        realized_pl_paise: Optional[int] = None,
+        symbol: Optional[str] = None,
+        qty: Optional[int] = None,
+        price_paise: Optional[int] = None,
         created_at: Optional[str] = None,
     ):
         self.id = entry_id
@@ -69,6 +73,10 @@ class LedgerEntry:
         self.entry_type = entry_type
         self.cash_delta_paise = cash_delta_paise
         self.balance_after_paise = balance_after_paise
+        self.realized_pl_paise = realized_pl_paise
+        self.symbol = symbol
+        self.qty = qty
+        self.price_paise = price_paise
         self.created_at = created_at or datetime.now(timezone.utc).isoformat()
 
 
