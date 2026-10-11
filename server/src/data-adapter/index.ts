@@ -27,6 +27,7 @@ interface CsvPriceRow {
 export class SampleMarketDataAdapter implements IMarketDataAdapter {
   private instrumentsMap = new Map<string, Instrument>();
   private priceHistoryMap = new Map<string, PricePoint[]>();
+  private metadataMap = new Map<string, { name: string; sector: string; exchange: 'NSE' | 'BSE'; isin: string }>();
   private latestDate = '2026-10-09';
 
   constructor(csvPath?: string) {
@@ -34,8 +35,25 @@ export class SampleMarketDataAdapter implements IMarketDataAdapter {
   }
 
   private loadData(explicitPath?: string) {
-    const filePath = explicitPath || path.resolve(process.cwd(), 'data', 'sample_prices.csv');
-    if (!fs.existsSync(filePath)) {
+    let filePath = explicitPath;
+    if (!filePath) {
+      const candidates = [
+        path.resolve(process.cwd(), 'data', 'sample_prices.csv'),
+        path.resolve(process.cwd(), 'server', 'data', 'sample_prices.csv'),
+        path.resolve(process.cwd(), '..', 'data', 'sample_prices.csv'),
+        path.resolve(process.cwd(), '..', 'server', 'data', 'sample_prices.csv'),
+        path.resolve(__dirname, '../../data/sample_prices.csv'),
+        path.resolve(__dirname, '../../../data/sample_prices.csv'),
+        path.resolve(__dirname, '../../../server/data/sample_prices.csv'),
+      ];
+      for (const cand of candidates) {
+        if (fs.existsSync(cand)) {
+          filePath = cand;
+          break;
+        }
+      }
+    }
+    if (!filePath || !fs.existsSync(filePath)) {
       return;
     }
 
@@ -61,6 +79,10 @@ export class SampleMarketDataAdapter implements IMarketDataAdapter {
       const close_paise = BigInt(parts[9].trim());
       const volume = Number(parts[10].trim());
       const source = parts[11].trim();
+
+      if (!this.metadataMap.has(symbol)) {
+        this.metadataMap.set(symbol, { name, sector, exchange, isin });
+      }
 
       if (!this.priceHistoryMap.has(symbol)) {
         this.priceHistoryMap.set(symbol, []);
@@ -91,13 +113,13 @@ export class SampleMarketDataAdapter implements IMarketDataAdapter {
         change_bps = Number(((BigInt(latest.close_paise) - BigInt(prev.close_paise)) * 10000n) / BigInt(prev.close_paise));
       }
 
-      const sampleRow = history[0]; // has first metadata
+      const meta = this.metadataMap.get(symbol);
       this.instrumentsMap.set(symbol, {
         id: symbol,
         symbol,
-        exchange: 'NSE',
-        name: symbol,
-        sector: 'Equities',
+        exchange: meta?.exchange || 'NSE',
+        name: meta?.name || symbol,
+        sector: meta?.sector || 'Equities',
         last_close_paise: latest.close_paise,
         change_bps,
         as_of: latest.date,

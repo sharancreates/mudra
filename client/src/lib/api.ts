@@ -14,15 +14,40 @@ import {
 import instrumentsFixture from "@/mocks/instruments.json";
 import portfolioFixture from "@/mocks/portfolio.json";
 
-// In-memory orders store for mock interactivity during Week 1
-let ordersStore: OrderItem[] = [];
+// In-memory orders store for client-side persistence and instant feedback
+let localOrdersStore: OrderItem[] = [];
 
 export async function getInstruments(
   query = "",
   sector = ""
 ): Promise<Instrument[]> {
-  let list = instrumentsFixture as Instrument[];
+  try {
+    const params = new URLSearchParams();
+    if (query.trim()) params.set("q", query.trim());
+    if (sector && sector !== "All") params.set("sector", sector);
 
+    const res = await fetch(`/api/instruments?${params.toString()}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data.items) && data.items.length > 0) {
+        return data.items.map((inst: any) => ({
+          id: inst.symbol,
+          symbol: inst.symbol,
+          name: inst.name || inst.symbol,
+          exchange: inst.exchange || "NSE",
+          sector: inst.sector || "Equities",
+          last_close_paise: Number(inst.last_close_paise),
+          change_bps: inst.change_bps || 0,
+          as_of: inst.as_of,
+          tradable: inst.tradable !== false,
+        }));
+      }
+    }
+  } catch {
+    // Network / SSR fallback
+  }
+
+  let list = instrumentsFixture as Instrument[];
   if (query.trim()) {
     const q = query.toLowerCase().trim();
     list = list.filter(
@@ -31,19 +56,37 @@ export async function getInstruments(
         inst.name.toLowerCase().includes(q)
     );
   }
-
   if (sector && sector !== "All") {
     list = list.filter(
       (inst) => inst.sector.toLowerCase() === sector.toLowerCase()
     );
   }
-
   return list;
 }
 
 export async function getInstrumentDetail(
   symbol: string
 ): Promise<Instrument | null> {
+  try {
+    const res = await fetch(`/api/instruments/${encodeURIComponent(symbol)}`);
+    if (res.ok) {
+      const inst = await res.json();
+      return {
+        id: inst.symbol,
+        symbol: inst.symbol,
+        name: inst.name || inst.symbol,
+        exchange: inst.exchange || "NSE",
+        sector: inst.sector || "Equities",
+        last_close_paise: Number(inst.last_close_paise),
+        change_bps: inst.change_bps || 0,
+        as_of: inst.as_of,
+        tradable: inst.tradable !== false,
+      };
+    }
+  } catch {
+    // Fallback
+  }
+
   const list = instrumentsFixture as Instrument[];
   const found = list.find(
     (inst) => inst.symbol.toUpperCase() === symbol.toUpperCase()
@@ -52,10 +95,49 @@ export async function getInstrumentDetail(
 }
 
 export async function getPortfolio(): Promise<PortfolioSummary> {
-  return portfolioFixture as PortfolioSummary;
+  const basePortfolio = { ...(portfolioFixture as PortfolioSummary) };
+
+  // Calculate dynamic reserved cash from pending buy orders
+  const pendingBuyOrders = localOrdersStore.filter(
+    (o) => o.status === "PENDING" && o.side === "BUY"
+  );
+
+  if (pendingBuyOrders.length > 0) {
+    let pendingReserved = 0;
+    for (const ord of pendingBuyOrders) {
+      const inst = (instrumentsFixture as Instrument[]).find(
+        (i) => i.symbol === ord.symbol
+      );
+      const price = inst?.last_close_paise || 140000;
+      const tradeValue = Math.round(price * 1.1) * ord.qty;
+      const fee = Math.round(tradeValue * 0.001);
+      pendingReserved += tradeValue + fee;
+    }
+
+    basePortfolio.reserved_paise += pendingReserved;
+    basePortfolio.cash_paise = Math.max(
+      0,
+      basePortfolio.cash_paise - pendingReserved
+    );
+  }
+
+  return basePortfolio;
 }
 
 export async function getStatus(): Promise<StatusResponse> {
+  try {
+    const res = await fetch("/api/status");
+    if (res.ok) {
+      const data = await res.json();
+      return {
+        prices_as_of: data.prices_as_of,
+        state: data.state,
+        market_open: data.market_open,
+      };
+    }
+  } catch {
+    // Fallback
+  }
   return {
     prices_as_of: "2026-10-09",
     state: "FRESH",
@@ -68,12 +150,53 @@ export async function placeOrder(req: OrderRequest): Promise<OrderResponse> {
     throw new Error("Invalid quantity: must be an integer greater than 0");
   }
 
+  // Attempt backend API call
+  try {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        symbol: req.symbol,
+        side: req.side,
+        qty: req.qty,
+        client_order_id:
+          req.client_order_id ||
+          `cli_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      const orderItem: OrderItem = {
+        id: data.order_id,
+        symbol: req.symbol.toUpperCase(),
+        side: req.side,
+        qty: req.qty,
+        status: data.status,
+        reason: null,
+        fill_price_paise: null,
+        created_at: new Date().toISOString(),
+      };
+      localOrdersStore.unshift(orderItem);
+      return data;
+    } else {
+      const errJson = await res.json().catch(() => null);
+      if (errJson?.error?.message) {
+        throw new Error(errJson.error.message);
+      }
+    }
+  } catch (err: any) {
+    if (err.message && !err.message.includes("fetch")) {
+      throw err;
+    }
+  }
+
+  // Fallback in-memory handler
   const inst = await getInstrumentDetail(req.symbol);
   if (!inst) {
     throw new Error(`Unknown instrument: ${req.symbol}`);
   }
 
-  // Calculate reservation with 10% safety buffer + 0.1% fee
   const estPrice = Math.round(inst.last_close_paise * 1.1);
   const tradeValue = estPrice * req.qty;
   const estFee = Math.round(tradeValue * 0.001);
@@ -93,7 +216,7 @@ export async function placeOrder(req: OrderRequest): Promise<OrderResponse> {
     created_at: new Date().toISOString(),
   };
 
-  ordersStore.unshift(orderItem);
+  localOrdersStore.unshift(orderItem);
 
   return {
     order_id: orderId,
@@ -104,5 +227,16 @@ export async function placeOrder(req: OrderRequest): Promise<OrderResponse> {
 }
 
 export async function getOrderHistory(): Promise<OrderItem[]> {
-  return ordersStore;
+  try {
+    const res = await fetch("/api/orders");
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data.items) && data.items.length > 0) {
+        return data.items;
+      }
+    }
+  } catch {
+    // Fallback
+  }
+  return localOrdersStore;
 }

@@ -15,17 +15,19 @@ import {
   Sparkles,
 } from "lucide-react";
 import { MarketStatusBadge } from "@/components/common/MarketStatusBadge";
-import { getPortfolio } from "@/lib/api";
-import { PortfolioSummary } from "@/types/api";
+import { getPortfolio, getOrderHistory } from "@/lib/api";
+import { PortfolioSummary, OrderItem } from "@/types/api";
 import { formatINR, formatBps } from "@/lib/formatters";
 
 export default function DashboardPage() {
   const [portfolio, setPortfolio] = useState<PortfolioSummary | null>(null);
+  const [orders, setOrders] = useState<OrderItem[]>([]);
   const [range, setRange] = useState<"1M" | "6M" | "ALL">("1M");
   const [showFormulaTooltip, setShowFormulaTooltip] = useState(false);
 
   useEffect(() => {
     getPortfolio().then((data) => setPortfolio(data));
+    getOrderHistory().then((data) => setOrders(data));
   }, []);
 
   const totalValue = portfolio?.equity_paise || 10071020;
@@ -337,6 +339,81 @@ export default function DashboardPage() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      {/* SECTION 4: ORDERS & EXECUTION QUEUE */}
+      <section className="bg-graphite/70 border border-yaleBlue/40 rounded-2xl p-5 sm:p-6 shadow-xl mt-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Clock className="w-5 h-5 text-stormyTeal-light" />
+            <h2 className="text-lg font-bold text-white tracking-tight">Order Queue &amp; History</h2>
+          </div>
+          <span className="text-xs font-mono text-alabaster/60">
+            Next settlement: 15:30 IST
+          </span>
+        </div>
+
+        {orders.length === 0 ? (
+          <div className="py-8 text-center text-alabaster/50 text-xs">
+            No active or pending orders in queue. Orders placed during market hours settle at 15:30 IST.
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr className="border-b border-yaleBlue/30 text-[11px] uppercase tracking-wider text-alabaster/60 font-mono">
+                  <th className="py-3 px-3">Order ID</th>
+                  <th className="py-3 px-3">Security</th>
+                  <th className="py-3 px-3">Side</th>
+                  <th className="py-3 px-3 text-right">Qty</th>
+                  <th className="py-3 px-3 text-right">Status</th>
+                  <th className="py-3 px-3 text-right">Target Session</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-yaleBlue/20 font-sans">
+                {orders.map((ord) => (
+                  <tr key={ord.id} className="hover:bg-graphite-light/40 transition-colors">
+                    <td className="py-3 px-3 font-mono text-alabaster/60 text-xs">{ord.id}</td>
+                    <td className="py-3 px-3 font-bold text-white">
+                      <Link href={`/stock/${ord.symbol}`} className="hover:text-stormyTeal-light">
+                        {ord.symbol}
+                      </Link>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded text-[11px] font-bold font-mono ${
+                          ord.side === "BUY"
+                            ? "bg-stormyTeal/20 text-stormyTeal-light border border-stormyTeal/40"
+                            : "bg-rose-500/20 text-rose-400 border border-rose-500/40"
+                        }`}
+                      >
+                        {ord.side}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-right font-mono text-white">{ord.qty}</td>
+                    <td className="py-3 px-3 text-right font-mono">
+                      <span
+                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold ${
+                          ord.status === "PENDING"
+                            ? "bg-amber-500/10 text-amber-400 border border-amber-500/30"
+                            : ord.status === "FILLED"
+                            ? "bg-emerald-500/10 text-emerald-400"
+                            : "bg-rose-500/10 text-rose-400"
+                        }`}
+                      >
+                        {ord.status === "PENDING" && <Clock className="w-3 h-3" />}
+                        {ord.status}
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-right font-mono text-alabaster/70 text-xs">
+                      Next Close (15:30 IST)
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </section>
     </div>
   );

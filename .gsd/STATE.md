@@ -1,17 +1,21 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-10 20:00 IST  
-> **Active Persona:** Person B (Backend and Data Lead) — Ready for Handoff  
-> **Previous Persona:** Person A (Frontend and UX Lead) — Week 1 Completed  
+> **Last Updated:** 2026-10-11 08:30 IST  
+> **Active Persona:** Person A (Frontend and UX Lead) — Week 1 Debugging & Integration  
+> **Previous Persona:** Person B (Backend and Data Lead) — Week 1 Completed  
 > **Active Milestone:** v1.0 MVP  
 > **Active Phase:** Phase 1 (Week 1: Foundation and Trade Loop)  
-> **Status:** Paused for Session Handoff to Person B
+> **Status:** Milestone M1 Debugged & Fully Integrated (0 Errors, All 18 Tests Pass, Live Next.js API Routes Verified)
 
 ---
 
 ## Current Position
-- **Phase**: Phase 1 (Week 1: Foundation & Trade Loop) — **COMPLETE ✅**
+- **Phase**: Phase 1 (Week 1: Foundation & Trade Loop) — **DEBUGGED & VERIFIED ✅**
 - **Status**: Milestone M1 (Week 1) fully verified end-to-end across both Frontend (Person A) and Backend (Person B).
+- **Frontend / Backend Integration**: 
+  - `client/src/lib/api.ts` wired directly to Next.js route handlers (`/api/instruments`, `/api/orders`, `/api/status`) with offline mock fallback.
+  - `SampleMarketDataAdapter` patched to resolve `sample_prices.csv` regardless of CWD (`client/`, `server/`, or project root) and retain real company name/sector metadata from CSV.
+  - `dashboard/page.tsx` enhanced with active orders execution queue and real-time pending reserved cash tracking.
 - **Target for Next Sprint**: Phase 2 (Week 2: Order Settlement, Portfolio Snapshots, Watchlist, and Concurrency Load Testing).
 
 ---
