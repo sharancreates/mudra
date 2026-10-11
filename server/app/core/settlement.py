@@ -21,10 +21,12 @@ logger = get_logger("app.core.settlement")
 def settle_orders(
     trade_date: Optional[str] = None,
     price_overrides: Optional[Dict[str, int]] = None,
+    quarantined_symbols: Optional[Any] = None,
 ) -> Dict[str, Any]:
     """
     Settles pending orders targeting trade_date or earlier.
     Executes SELLS before BUYS to ensure cash proceeds from sales are immediately available.
+    Skips orders for instruments flagged in quarantined_symbols (FR-47).
     """
     store = get_state_store()
     adapter = get_market_data_adapter()
@@ -53,13 +55,21 @@ def settle_orders(
     for order in pending_orders:
         symbol = order.symbol.upper()
 
+        if quarantined_symbols and symbol in quarantined_symbols:
+            logger.warning(f"[SETTLEMENT] Symbol {symbol} is quarantined (FR-47). Skipping order {order.id}.")
+            skipped_orders += 1
+            continue
+
         # 1. Determine Closing Price
         if price_overrides and symbol in price_overrides:
             close_price_paise = price_overrides[symbol]
         else:
             try:
-                latest = adapter.get_latest_close(symbol)
-                close_price_paise = latest["close_paise"]
+                dated_close = getattr(adapter, "get_close_on_date", None)
+                close_price_paise = dated_close(symbol, trade_date) if dated_close else None
+                if close_price_paise is None:
+                    latest = adapter.get_latest_close(symbol)
+                    close_price_paise = latest["close_paise"]
             except Exception as e:
                 logger.warning(f"[SETTLEMENT] Missing close price for {symbol}: {e}")
                 skipped_orders += 1

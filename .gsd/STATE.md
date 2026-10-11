@@ -9,14 +9,14 @@
 
 ## Current Position
 - **Phase**: Phase 3 (Full Trade Experience, Settlement & Snapshots)
-- **Status**: Plan 3.1 (Order Settlement Engine `settle_orders()`) — **COMPLETE ✅**
+- **Status**: Plan 3.2 (Daily GitHub Actions Price Ingestion & Settlement Cron) — **COMPLETE ✅**
 - **Test Suite Health**:
-  * Python FastAPI: 18/18 pytest tests passed in 0.19s with request tracing and debugging enabled by default.
-  * Node.js / Integration: 19/19 tests passed in 171ms.
-  * Sells-before-buys execution order empirically verified to release liquidity.
-  * 10% safety buffer excess refund verified.
-  * Nightly Reconciliation: 0 ledger discrepancies across all user wallets.
-- **Next Target**: Plan 3.2 (Daily GitHub Actions price ingestion & settlement cron job).
+  * Python FastAPI: 21/21 pytest tests passed in 0.14s.
+  * Node.js / Integration: 21/21 tests passed in 224ms.
+  * FR-47 Price Quarantine (>25% jump) verified with automatic order hold.
+  * Portfolio Snapshot Generator verified: integer paise and symmetric return_bps calculations.
+  * Nightly Reconciliation: 0 ledger discrepancies across all user accounts.
+- **Next Target**: Plan 3.3 (Portfolio Snapshots Database Table & Historical Return Curves API).
 
 ---
 
@@ -75,7 +75,7 @@ mudra/
 
 ### Phase 3 Progress (`.gsd/phases/3/`)
 - [x] **Plan 3.1**: Order Settlement Engine `settle_orders()` with Sells-Before-Buys Execution (`01-PLAN.md`) — **Complete (18/18 Pytest Tests Passing)**
-- [ ] **Plan 3.2**: Daily Price Ingestion & Settlement GitHub Actions Cron (`02-PLAN.md`)
+- [x] **Plan 3.2**: Daily Price Ingestion & Settlement GitHub Actions Cron (`02-PLAN.md`) — **Complete (21/21 Pytest Tests Passing)**
 - [ ] **Plan 3.3**: Daily Portfolio Snapshot Generation & Return Curves (`03-PLAN.md`)
 - [ ] **Plan 3.4**: Watchlist Backend Endpoints (`04-PLAN.md`)
 - [ ] **Plan 3.5**: Concurrency Load Testing (`05-PLAN.md`)

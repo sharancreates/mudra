@@ -72,6 +72,26 @@ class LedgerEntry:
         self.created_at = created_at or datetime.now(timezone.utc).isoformat()
 
 
+class PortfolioSnapshot:
+    def __init__(
+        self,
+        user_id: str,
+        snapshot_date: str,
+        cash_paise: int,
+        holdings_value_paise: int,
+        equity_paise: int,
+        return_bps: int,
+        created_at: Optional[str] = None,
+    ):
+        self.user_id = user_id
+        self.snapshot_date = snapshot_date
+        self.cash_paise = cash_paise
+        self.holdings_value_paise = holdings_value_paise
+        self.equity_paise = equity_paise
+        self.return_bps = return_bps
+        self.created_at = created_at or datetime.now(timezone.utc).isoformat()
+
+
 class StateStore:
     def __init__(self):
         self.wallets: Dict[str, UserWallet] = {}
@@ -79,6 +99,7 @@ class StateStore:
         self.orders: Dict[str, OrderRecord] = {}  # key: order_id
         self.client_orders: Dict[str, str] = {}  # key: f"{user_id}:{client_order_id}" -> order_id
         self.ledger: List[LedgerEntry] = []
+        self.snapshots: Dict[str, PortfolioSnapshot] = {}  # key: f"{user_id}:{snapshot_date}"
 
     def get_or_create_wallet(self, user_id: str) -> UserWallet:
         if user_id not in self.wallets:
@@ -102,6 +123,7 @@ class StateStore:
         self.orders.clear()
         self.client_orders.clear()
         self.ledger.clear()
+        self.snapshots.clear()
 
 
 state_store = StateStore()

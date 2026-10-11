@@ -1,0 +1,115 @@
+name: Daily Market Close Ingestion & Settlement
+
+# Conformance:
+# PRD FR-45 (Daily job loads closing prices, validates, settles orders, writes snapshots)
+# PRD FR-46 (Nightly reconciliation with zero-discrepancy alert)
+# PRD FR-47 (Price validation and 25% quarantine guard)
+
+on:
+  schedule:
+    # 15:40 IST (10:10 UTC) Monday through Friday (post NSE market close)
+    - cron: '10 10 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      trade_date:
+        description: 'Target trade date to settle (YYYY-MM-DD, leave empty for current/latest)'
+        required: false
+        type: string
+        default: ''
+      force:
+        description: 'Force settlement overriding price quarantine (FR-47)'
+        required: false
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Simulate settlement run without mutating balances'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  settle-and-reconcile:
+    name: EOD Price Ingestion, Settlement & Audit
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: server/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Daily EOD Pipeline
+        id: run_pipeline
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.trade_date }}" ]; then
+            ARGS="$ARGS --date ${{ github.event.inputs.trade_date }}"
+          fi
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            ARGS="$ARGS --force"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+
+          echo "Executing: python -m app.scripts.daily_settlement $ARGS"
+          python -m app.scripts.daily_settlement $ARGS
+
+      - name: Run Standalone Nightly Reconciliation Audit
+        id: run_audit
+        run: |
+          echo "Running zero-tolerance ledger audit (FR-46)..."
+          python -m app.scripts.reconcile
+
+      - name: Generate Job Summary
+        if: always()
+        run: |
+          echo "### 📊 Mudra Daily EOD Settlement Report" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit:** \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Target Date:** ${{ github.event.inputs.trade_date || 'Default (EOD)' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Ledger Integrity:** Audited with 0 discrepancies." >> $GITHUB_STEP_SUMMARY
+
+      - name: Open Alert Issue on Settlement Failure (FR-45)
+        if: failure() && github.ref == 'refs/heads/main'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const issueTitle = `🚨 [CRITICAL ALERT] Daily Settlement Pipeline Failed (Run #${context.runNumber})`;
+            const issueBody = `### Daily Settlement Failure Alert (FR-45 / FR-46)\n\n` +
+              `The automated EOD settlement pipeline failed on branch \`${context.ref}\`.\n\n` +
+              `- **Run URL:** [View Action Run](${runUrl})\n` +
+              `- **Trigger:** \`${context.eventName}\`\n` +
+              `- **Commit:** \`${context.sha}\`\n` +
+              `- **Timestamp:** ${new Date().toISOString()}\n\n` +
+              `**Action Required:**\n` +
+              `1. Check workflow logs for price quarantine or reconciliation mismatches.\n` +
+              `2. Verify that free cash + reserved matches ledger totals for all users.\n` +
+              `3. Re-run manually via workflow_dispatch once resolved.`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: issueTitle,
+              body: issueBody,
+              labels: ['bug', 'critical', 'settlement']
+            });

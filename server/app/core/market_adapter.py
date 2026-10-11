@@ -171,6 +171,14 @@ class SampleMarketDataAdapter:
             "source": inst["source"],
         }
 
+    def get_close_on_date(self, symbol: str, trade_date: str) -> Optional[int]:
+        sym = symbol.strip().upper()
+        history = self.price_history_map.get(sym, [])
+        for row in history:
+            if row.get("date") == trade_date:
+                return row.get("close_paise")
+        return None
+
     def get_historical_prices(self, symbol: str, range_str: str = "1Y") -> List[Dict[str, Any]]:
         sym = symbol.strip().upper()
         history = self.price_history_map.get(sym, [])
@@ -246,6 +254,9 @@ class SimulatedMarketDataAdapter:
             "as_of": inst["as_of"],
             "source": "SIMULATED",
         }
+
+    def get_close_on_date(self, symbol: str, trade_date: str) -> Optional[int]:
+        return self.base_prices.get(symbol.strip().upper())
 
     def get_status(self) -> Dict[str, Any]:
         return {

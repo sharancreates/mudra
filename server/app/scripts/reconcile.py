@@ -9,25 +9,25 @@ Zero-Tolerance: Exits with 0 if clean, non-zero if any discrepancy is found.
 """
 
 import sys
-from typing import Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 from app.core.logger import get_logger
 from app.core.state import get_state_store
 
 logger = get_logger("app.scripts.reconcile")
 
 
-def audit_ledger_integrity() -> Tuple[bool, int, List[Dict]]:
-    store = get_state_store()
+def audit_ledger_integrity(store: Optional[Any] = None) -> Tuple[bool, int, List[Dict]]:
+    state = store or get_state_store()
 
     # Sum ledger cash deltas per user
     ledger_totals: Dict[str, int] = {}
-    for entry in store.ledger:
+    for entry in state.ledger:
         ledger_totals[entry.user_id] = ledger_totals.get(entry.user_id, 0) + entry.cash_delta_paise
 
     mismatches = []
-    audited_count = len(store.wallets)
+    audited_count = len(state.wallets)
 
-    for user_id, wallet in store.wallets.items():
+    for user_id, wallet in state.wallets.items():
         wallet_total = wallet.cash_paise + wallet.reserved_paise
         ledger_sum = ledger_totals.get(user_id, 0)
 
