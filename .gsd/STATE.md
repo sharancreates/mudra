@@ -9,14 +9,14 @@
 
 ## Current Position
 - **Phase**: Phase 3 (Full Trade Experience, Settlement & Snapshots)
-- **Status**: Plan 3.4A (Person A Frontend Integration: Live Curves, Audit Ledger & Watchlist UI) — **COMPLETE ✅**
+- **Status**: Plan 3.4 (Watchlist Backend Endpoints: GET / POST / DELETE /api/watchlist) — **COMPLETE ✅**
 - **Test Suite Health**:
-  * Python FastAPI: 23/23 pytest tests passed in 0.20s.
-  * Node.js / Integration: 22/22 tests passed in 280ms.
-  * PRD Section 7.3 Reference Acceptance Scenario verified to the paisa (+₹242.86 realized, +₹467.34 unrealized, ₹1,00,710.20 equity).
-  * Live historical equity curves (/api/portfolio/history) and immutable transaction ledger (/api/ledger) fully integrated into Next.js Dashboard.
+  * Python FastAPI: 27/27 pytest tests passed in 0.50s.
+  * Node.js / Integration: 24/24 tests passed in 340ms.
+  * Watchlist CRUD, 50-stock capacity limit (FR-38), market data enrichment, and idempotency verified.
+  * Live historical equity curves (/api/portfolio/history) and immutable transaction ledger (/api/ledger) active.
   * Nightly Reconciliation: 0 ledger discrepancies across all user accounts.
-- **Next Target**: Plan 3.4 (Watchlist Backend Endpoints: GET / POST / DELETE /api/watchlist for Person B).
+- **Next Target**: Plan 3.5 (Concurrency Load Testing: 20-50 parallel orders leaving no negative balances or duplicate fills).
 
 ## Last Session Summary (Person A)
 1. **Snake Companion Removal**:
@@ -91,7 +91,7 @@ mudra/
 - [x] **Plan 3.2**: Daily Price Ingestion & Settlement GitHub Actions Cron (`02-PLAN.md`) — **Complete (21/21 Pytest Tests Passing)**
 - [x] **Plan 3.3**: Daily Portfolio Snapshot Generation & Return Curves (`03-PLAN.md`) — **Complete (23/23 Pytest Tests Passing)**
 - [x] **Plan 3.4A**: Person A Frontend Integration — Live Portfolio Curves, Audit Ledger & Watchlist UI (`04A-PLAN.md`) — **Complete ✅**
-- [ ] **Plan 3.4**: Watchlist Backend Endpoints (`04-PLAN.md`)
+- [x] **Plan 3.4**: Watchlist Backend Endpoints (`04-PLAN.md`) — **Complete (27/27 Pytest Tests Passing)**
 - [ ] **Plan 3.5**: Concurrency Load Testing (`05-PLAN.md`)
 
 ---

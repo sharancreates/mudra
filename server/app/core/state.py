@@ -3,7 +3,7 @@ In-Memory Transactional State & Ledger Store
 Allows deterministic test runs and standalone local execution.
 """
 
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 import uuid
 from datetime import datetime, timezone
 
@@ -108,6 +108,7 @@ class StateStore:
         self.client_orders: Dict[str, str] = {}  # key: f"{user_id}:{client_order_id}" -> order_id
         self.ledger: List[LedgerEntry] = []
         self.snapshots: Dict[str, PortfolioSnapshot] = {}  # key: f"{user_id}:{snapshot_date}"
+        self.watchlists: Dict[str, Dict[str, str]] = {}  # key: user_id -> {symbol: added_at}
 
     def get_or_create_wallet(self, user_id: str) -> UserWallet:
         if user_id not in self.wallets:
@@ -125,6 +126,38 @@ class StateStore:
             )
         return self.wallets[user_id]
 
+    def get_user_watchlist(self, user_id: str) -> List[Dict[str, str]]:
+        if user_id not in self.watchlists:
+            return []
+        return [
+            {"symbol": sym, "added_at": added_at}
+            for sym, added_at in sorted(self.watchlists[user_id].items())
+        ]
+
+    def add_to_watchlist(self, user_id: str, symbol: str) -> Dict[str, Any]:
+        sym = symbol.strip().upper()
+        if user_id not in self.watchlists:
+            self.watchlists[user_id] = {}
+
+        if sym in self.watchlists[user_id]:
+            return {"symbol": sym, "status": "already_present", "watchlist_count": len(self.watchlists[user_id])}
+
+        if len(self.watchlists[user_id]) >= 50:
+            raise ValueError("watchlist_limit_reached")
+
+        now_iso = datetime.now(timezone.utc).isoformat()
+        self.watchlists[user_id][sym] = now_iso
+        return {"symbol": sym, "status": "added", "watchlist_count": len(self.watchlists[user_id])}
+
+    def remove_from_watchlist(self, user_id: str, symbol: str) -> Dict[str, Any]:
+        sym = symbol.strip().upper()
+        if user_id in self.watchlists:
+            self.watchlists[user_id].pop(sym, None)
+            count = len(self.watchlists[user_id])
+        else:
+            count = 0
+        return {"symbol": sym, "status": "removed", "watchlist_count": count}
+
     def reset(self) -> None:
         self.wallets.clear()
         self.holdings.clear()
@@ -132,6 +165,7 @@ class StateStore:
         self.client_orders.clear()
         self.ledger.clear()
         self.snapshots.clear()
+        self.watchlists.clear()
 
 
 state_store = StateStore()

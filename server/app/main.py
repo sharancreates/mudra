@@ -70,7 +70,11 @@ async def debug_logging_middleware(request: Request, call_next):
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     req_id = request_id_ctx.get() or f"req_{secrets.token_hex(4)}"
 
-    if isinstance(exc.detail, dict) and "code" in exc.detail:
+    if isinstance(exc.detail, dict) and "error" in exc.detail:
+        payload = exc.detail
+        if "request_id" not in payload["error"]:
+            payload["error"]["request_id"] = req_id
+    elif isinstance(exc.detail, dict) and "code" in exc.detail:
         payload = {"error": exc.detail}
         if "request_id" not in payload["error"]:
             payload["error"]["request_id"] = req_id
@@ -140,6 +144,7 @@ async def global_unhandled_exception_handler(request: Request, exc: Exception):
 
 from app.api.routes_settlement import router as settlement_router
 from app.api.routes_portfolio import router as portfolio_router
+from app.api.routes_watchlist import router as watchlist_router
 
 # 4. Include Routers
 app.include_router(status_router)
@@ -147,6 +152,7 @@ app.include_router(instruments_router)
 app.include_router(orders_router)
 app.include_router(settlement_router)
 app.include_router(portfolio_router)
+app.include_router(watchlist_router)
 
 
 @app.get("/", tags=["Health"])
