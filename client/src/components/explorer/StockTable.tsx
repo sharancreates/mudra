@@ -1,10 +1,12 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, ArrowDownRight, Star } from "lucide-react";
 import { Instrument } from "@/types/api";
 import { formatINR, formatBps } from "@/lib/formatters";
+
+import { useWatchlist } from "@/lib/watchlist";
 
 interface StockTableProps {
   instruments: Instrument[];
@@ -16,21 +18,7 @@ export const StockTable: React.FC<StockTableProps> = ({
   instruments,
   onResetFilters,
 }) => {
-  const [watchlist, setWatchlist] = useState<Set<string>>(new Set(["RELIANCE", "TCS"]));
-
-  const toggleWatchlist = (symbol: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setWatchlist((prev) => {
-      const next = new Set(prev);
-      if (next.has(symbol)) {
-        next.delete(symbol);
-      } else {
-        next.add(symbol);
-      }
-      return next;
-    });
-  };
+  const { isStarred, toggle } = useWatchlist();
 
   if (instruments.length === 0) {
     return (
@@ -105,7 +93,7 @@ export const StockTable: React.FC<StockTableProps> = ({
         </thead>
         <tbody style={{ fontFamily: "var(--font-sans)" }}>
           {instruments.map((stock) => {
-            const isStarred = watchlist.has(stock.symbol);
+            const starred = isStarred(stock.symbol);
             const isPositive = stock.change_bps >= 0;
 
             return (
@@ -122,11 +110,11 @@ export const StockTable: React.FC<StockTableProps> = ({
                 <td style={{ padding: "16px", textAlign: "center" }}>
                   <button
                     type="button"
-                    onClick={(e) => toggleWatchlist(stock.symbol, e)}
+                    onClick={(e) => toggle(stock.symbol, e)}
                     style={{
                       background: "none",
                       border: "none",
-                      color: isStarred ? "var(--mudra-signal-yellow)" : "var(--text-muted)",
+                      color: starred ? "var(--mudra-signal-yellow)" : "var(--text-muted)",
                       cursor: "pointer",
                       padding: 0,
                     }}
@@ -135,7 +123,7 @@ export const StockTable: React.FC<StockTableProps> = ({
                     <Star
                       className="w-4 h-4"
                       style={{
-                        fill: isStarred ? "var(--mudra-signal-yellow)" : "none",
+                        fill: starred ? "var(--mudra-signal-yellow)" : "none",
                       }}
                     />
                   </button>

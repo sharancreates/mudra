@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { X, Clock, AlertCircle } from "lucide-react";
@@ -167,7 +167,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     onClick={() => handleQtyChange(-1)}
                     className="px-4 py-2.5 text-[var(--text-heading)] hover:bg-[var(--surface-muted)] text-base font-bold transition-colors select-none"
                   >
-                    âˆ’
+                    -
                   </button>
                   <input
                     id="order-qty-input"

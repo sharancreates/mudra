@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -6,13 +6,15 @@ import { ArrowLeft, Star, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { Instrument } from "@/types/api";
 import { formatINR, formatBps } from "@/lib/formatters";
 import { MarketStatusBadge } from "@/components/common/MarketStatusBadge";
+import { useWatchlist } from "@/lib/watchlist";
 
 interface StockHeaderProps {
   instrument: Instrument;
 }
 
 export const StockHeader: React.FC<StockHeaderProps> = ({ instrument }) => {
-  const [isStarred, setIsStarred] = useState(false);
+  const { isStarred, toggle } = useWatchlist();
+  const starred = isStarred(instrument.symbol);
   const isPositive = instrument.change_bps >= 0;
 
   return (
@@ -79,20 +81,20 @@ export const StockHeader: React.FC<StockHeaderProps> = ({ instrument }) => {
             </span>
             <button
               type="button"
-              onClick={() => setIsStarred(!isStarred)}
+              onClick={(e) => toggle(instrument.symbol, e)}
               style={{
                 background: "none",
                 border: "none",
-                color: isStarred ? "var(--mudra-signal-yellow)" : "var(--text-muted)",
+                color: starred ? "var(--mudra-signal-yellow)" : "var(--text-muted)",
                 cursor: "pointer",
                 padding: 0,
               }}
-              aria-label="Star"
+              aria-label={`Toggle watchlist for ${instrument.symbol}`}
             >
               <Star
                 className="w-5 h-5"
                 style={{
-                  fill: isStarred ? "var(--mudra-signal-yellow)" : "none",
+                  fill: starred ? "var(--mudra-signal-yellow)" : "none",
                 }}
               />
             </button>

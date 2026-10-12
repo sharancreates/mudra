@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { OrderSide } from "@/types/api";
 import { formatINR } from "@/lib/formatters";
 
@@ -68,7 +68,7 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
 
           {isCashInsufficient ? (
             <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-[11px]">
-              âš ï¸ Insufficient free cash. Reduce share quantity or free up capital from other holdings.
+              ⚠️ Insufficient free cash. Reduce share quantity or free up capital from other holdings.
             </div>
           ) : (
             <div className="flex justify-between items-center text-[11px] text-[var(--text-muted)]">
@@ -97,7 +97,7 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
 
           {isHoldingsInsufficient && (
             <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-[11px]">
-              âš ï¸ Insufficient shares owned. You currently hold {availableHoldingQty} shares. Short selling is disabled.
+              ⚠️ Insufficient shares owned. You currently hold {availableHoldingQty} shares. Short selling is disabled.
             </div>
           )}
         </>
@@ -105,4 +105,3 @@ export const OrderCalculationBreakdown: React.FC<OrderCalculationBreakdownProps>
     </div>
   );
 };
-

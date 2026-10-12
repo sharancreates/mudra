@@ -82,10 +82,27 @@
 
 ## ADR-009: Interactive Geometric Swiss Snake Companion ("Mudra Navigator")
 - **Date**: 2026-10-11
-- **Status**: Accepted
+- **Status**: Superseded by ADR-010
 - **Context**: User requested an interactive web snake or virtual avatar that dynamically accompanies navigation, scrolling, and interaction.
+- **Decision**: Implemented initial kinematic prototype.
+
+---
+
+## ADR-010: Removal of Snake Companion
+- **Date**: 2026-10-11
+- **Status**: Accepted
+- **Context**: User explicitly directed to remove the snake animation ("remove the snake i do not want it") in favor of a clean, distraction-free institutional fintech interface.
+- **Decision**: Completely removed `<MudraSnake />` from DOM, unmounted from all shells and landing pages, and neutralized background animation listeners.
+
+---
+
+## ADR-011: Person A Phase 3 Frontend Plan (Approach A)
+- **Date**: 2026-10-12
+- **Status**: Accepted
+- **Context**: Person B completed Plan 3.3 (portfolio snapshots, equity curve history API `/api/portfolio/history`, and transaction ledger `/api/ledger`). Person A's frontend must consume these live endpoints, eliminate hardcoded mock curves, expose the immutable transaction audit ledger, and prepare the watchlist interaction for Plan 3.4.
 - **Decision**:
-  1. **Visual Form**: Articulated multi-segment geometric ribbon snake with calibrated node segments, styled in Mudra Sky Blue (`#3BBFF7`) and Signal Yellow (`#EEA02B`) with hairline node borders.
-  2. **Kinematic Behavior**: Smooth scroll-driven progression that glides along the vertical spine as the user scrolls, combined with elastic spring-damped momentum toward cursor movement on desktop.
-  3. **Omnipresent Deployment**: Embedded inside `MudraShell` and `page.tsx` so it follows users across all application routes (`/`, `/explore`, `/dashboard`, `/stock/[symbol]`).
-  4. **Non-Intrusive Performance**: Rendered on a hardware-accelerated 2D canvas with `pointer-events: none` (zero click interference), adaptive frame throttling, and mobile touch support.
+  1. **Dynamic Equity Curve**: Replace hardcoded points with real data from `getPortfolioHistory(range)`. Handle single-point / empty-history states gracefully with baseline zero-division safeguards.
+  2. **Audit Ledger UI**: Implement tabbed or dedicated transaction ledger in `client/src/app/dashboard/page.tsx` displaying exact paise credits/debits, 0.1% fees, and timestamps.
+  3. **Watchlist Scaffold**: Implement star/bookmark toggles on Explorer and Stock Detail pages, with in-memory / local storage persistence ready for Person B's Plan 3.4 API sync.
+  4. **15:30 IST Settlement Transparency**: Add next-close execution banner and timer for pending orders.
+

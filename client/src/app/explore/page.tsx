@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useMemo } from "react";
 import { SlidersHorizontal, Info } from "lucide-react";
@@ -9,9 +9,11 @@ import { MarketStatusBadge } from "@/components/common/MarketStatusBadge";
 import { MudraShell } from "@/components/mudra/MudraShell";
 import { getInstruments } from "@/lib/api";
 import { Instrument } from "@/types/api";
+import { useWatchlist } from "@/lib/watchlist";
 
 const SECTORS = [
   "All",
+  "Watchlist",
   "Banking",
   "IT",
   "Energy",
@@ -28,6 +30,7 @@ export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSector, setSelectedSector] = useState("All");
   const [sortBy, setSortBy] = useState<"name" | "price" | "change">("name");
+  const { isStarred } = useWatchlist();
 
   useEffect(() => {
     getInstruments().then((data) => setInstruments(data));
@@ -44,7 +47,9 @@ export default function ExplorePage() {
       );
     }
 
-    if (selectedSector !== "All") {
+    if (selectedSector === "Watchlist") {
+      list = list.filter((i) => isStarred(i.symbol));
+    } else if (selectedSector !== "All") {
       list = list.filter(
         (i) => i.sector.toLowerCase() === selectedSector.toLowerCase()
       );
@@ -56,7 +61,7 @@ export default function ExplorePage() {
       if (sortBy === "change") return b.change_bps - a.change_bps;
       return 0;
     });
-  }, [instruments, searchQuery, selectedSector, sortBy]);
+  }, [instruments, searchQuery, selectedSector, sortBy, isStarred]);
 
   return (
     <MudraShell activeNav="explore">

@@ -84,7 +84,15 @@ updated: 2026-10-10T16:30:00+05:30
 **Status:** 🟡 In Progress  
 **Objective:** Deliver daily closing price settlement job (`settle_orders()`), portfolio dashboard, P&L calculations, transaction history, and watchlist.  
 **Depends on:** Phase 2  
-**Person B Scope:**
+
+**Person A Scope (Frontend & UX):**
+- [x] Plan 3.4A: Live Portfolio Curves, Audit Ledger & Watchlist UI (`04A-PLAN.md`) — **Complete ✅**
+  * Dynamic SVG equity curve bound to `getPortfolioHistory(range)` with 1M/6M/ALL timeframes.
+  * Append-only transaction audit ledger table from `/api/ledger`.
+  * Client-side watchlist starring & filter across Explorer and Stock Detail.
+  * Next-close 15:30 IST settlement queue banner.
+
+**Person B Scope (Backend & Data):**
 - [x] Plan 3.1: Order settlement stored procedure `settle_orders(trade_date)` with sells-before-buys ordering and cash releases.
 - [x] Plan 3.2: Daily GitHub Actions price ingestion and settlement cron job (`.github/workflows/daily-prices.yml`).
 - [x] Plan 3.3: Daily portfolio snapshot generation and return calculation (`portfolio_snapshots`).
