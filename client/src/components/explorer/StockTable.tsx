@@ -10,52 +10,120 @@ import { useWatchlist } from "@/lib/watchlist";
 
 interface StockTableProps {
   instruments: Instrument[];
+  activeSector?: string;
+  searchQuery?: string;
   onSelectInstrument?: (instrument: Instrument) => void;
   onResetFilters?: () => void;
 }
 
 export const StockTable: React.FC<StockTableProps> = ({
   instruments,
+  activeSector,
+  searchQuery,
   onResetFilters,
 }) => {
   const { isStarred, toggle } = useWatchlist();
 
   if (instruments.length === 0) {
+    const isWatchlist = activeSector === "Watchlist";
+
     return (
       <div
         style={{
-          padding: "64px 24px",
+          padding: "72px 24px",
           textAlign: "center",
           background: "var(--surface-card)",
           border: "1.5px solid var(--border-hairline)",
           borderRadius: "var(--radius-card)",
         }}
       >
-        <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--text-heading)", margin: 0 }}>
-          No matching instruments found
-        </h3>
-        <p style={{ fontSize: "14px", color: "var(--text-muted)", marginTop: "8px" }}>
-          Try adjusting your search query or selecting &quot;All&quot; sectors.
-        </p>
-        {onResetFilters && (
-          <button
-            type="button"
-            onClick={onResetFilters}
-            style={{
-              marginTop: "16px",
-              padding: "8px 20px",
-              borderRadius: "var(--radius-pill)",
-              border: "1.5px solid var(--border-hairline)",
-              background: "var(--surface-canvas)",
-              color: "var(--text-heading)",
-              fontSize: "12px",
-              fontWeight: 600,
-              fontFamily: "var(--font-mono)",
-              cursor: "pointer",
-            }}
-          >
-            Reset Filters
-          </button>
+        {isWatchlist ? (
+          <div>
+            <div
+              style={{
+                width: "52px",
+                height: "52px",
+                borderRadius: "50%",
+                background: "rgba(238, 160, 43, 0.12)",
+                border: "1.5px solid rgba(238, 160, 43, 0.35)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "0 auto 18px",
+                color: "var(--mudra-signal-yellow)",
+              }}
+            >
+              <Star className="w-6 h-6" style={{ fill: "var(--mudra-signal-yellow)" }} />
+            </div>
+            <h3 style={{ fontSize: "20px", fontWeight: 700, color: "var(--text-heading)", margin: 0 }}>
+              Your Watchlist is Empty
+            </h3>
+            <p
+              style={{
+                fontSize: "14px",
+                color: "var(--text-muted)",
+                marginTop: "10px",
+                maxWidth: "48ch",
+                marginInline: "auto",
+                lineHeight: 1.55,
+              }}
+            >
+              You haven&apos;t pinned any securities yet. Click the star icon next to any of the 50 liquid Nifty 50 stocks in the market table to monitor priority securities here.
+            </p>
+            {onResetFilters && (
+              <button
+                type="button"
+                onClick={onResetFilters}
+                style={{
+                  marginTop: "20px",
+                  padding: "10px 24px",
+                  borderRadius: "var(--radius-pill)",
+                  border: "none",
+                  background: "var(--text-heading)",
+                  color: "var(--surface-canvas)",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  transition: "opacity 140ms ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                Browse All 50 Stocks
+              </button>
+            )}
+          </div>
+        ) : (
+          <div>
+            <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--text-heading)", margin: 0 }}>
+              {searchQuery?.trim()
+                ? `No instruments matching "${searchQuery.trim()}"`
+                : "No matching instruments found"}
+            </h3>
+            <p style={{ fontSize: "14px", color: "var(--text-muted)", marginTop: "8px" }}>
+              Try adjusting your search query or selecting &quot;All&quot; sectors.
+            </p>
+            {onResetFilters && (
+              <button
+                type="button"
+                onClick={onResetFilters}
+                style={{
+                  marginTop: "16px",
+                  padding: "8px 20px",
+                  borderRadius: "var(--radius-pill)",
+                  border: "1.5px solid var(--border-hairline)",
+                  background: "var(--surface-canvas)",
+                  color: "var(--text-heading)",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  fontFamily: "var(--font-mono)",
+                  cursor: "pointer",
+                }}
+              >
+                Reset Filters
+              </button>
+            )}
+          </div>
         )}
       </div>
     );

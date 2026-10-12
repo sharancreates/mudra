@@ -176,6 +176,8 @@ export default function ExplorePage() {
         <div style={{ marginBottom: "36px" }}>
           <StockTable
             instruments={filteredInstruments}
+            activeSector={selectedSector}
+            searchQuery={searchQuery}
             onResetFilters={() => {
               setSearchQuery("");
               setSelectedSector("All");
