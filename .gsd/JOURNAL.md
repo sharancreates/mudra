@@ -1,5 +1,40 @@
 # JOURNAL.md — Project Activity & Session Log
 
+## Session: 2026-10-12 08:10 IST (Person A: Frontend & UX Lead — Plan 3.4A Integration)
+
+### Objective
+Clean up snake animations per user direction, discuss and execute Plan 3.4A (dynamic SVG portfolio history curves, immutable transaction audit ledger, and global watchlist management), and synchronize state for session handoff.
+
+### Accomplished
+1. **Snake Companion Removal**:
+   - Completely unmounted `<MudraSnake />` from `page.tsx` and `MudraShell.tsx`.
+   - Neutralized `MudraSnake.tsx` and `MudraSpine.tsx` so they return `null` with zero SVG nodes, zero `requestAnimationFrame` loops, and zero scroll event listeners.
+   - Pushed commit `310f3e3` to remote.
+2. **Phase 3 Plan 3.4A Execution (Approach A)**:
+   - Wired live `getPortfolioHistory(range)` to the Next.js Dashboard SVG performance curve with timeframe selection (`1M`, `6M`, `ALL`), interactive hover crosshair markers, and formatted tooltips.
+   - Built a tabbed workspace on the Dashboard exposing the immutable Transaction Audit Ledger from `/api/ledger`.
+   - Created reactive `useWatchlist()` hook in `client/src/lib/watchlist.ts` with `localStorage` persistence, custom window event synchronization, and optimistic backend sync.
+   - Added active star toggles on Explorer cards (`StockTable.tsx`) and Stock Detail headers (`StockHeader.tsx`), plus a dedicated "Watchlist" filter pill on `explore/page.tsx`.
+   - Added 15:30 IST Next-Close Settlement notice banner and cleaned up UTF-8 character encoding in `OrderModal.tsx` and `OrderCalculationBreakdown.tsx`.
+3. **Commit & Push**:
+   - Staged, verified, and committed (`09dd0e0`), then pushed to `origin/main`.
+
+### Verification
+- [x] Dynamic equity curve binds smoothly to `getPortfolioHistory(range)` with zero-division safeguard.
+- [x] Transaction audit ledger renders chronological records with exact paise formatting and color-coded entry badges.
+- [x] Watchlist starring functions across both Explorer and Stock Detail and persists across page reloads.
+- [x] 15:30 IST settlement queue notice and pending orders count render correctly.
+
+### Paused Because
+Person A's Phase 3 Frontend scope (Plan 3.4A) is complete and verified. Ready for Person B to implement Plan 3.4 (`Watchlist backend endpoints: GET / POST / DELETE /api/watchlist`).
+
+### Handoff Notes for Next Session
+- Active branch is `main`, clean, and fully pushed to remote (`origin/main`).
+- Next plan to execute: Plan 3.4 (Person B: Watchlist backend endpoints).
+- Watchlist frontend hook (`client/src/lib/watchlist.ts`) is pre-wired to hit `/api/watchlist` once Person B deploys the route handlers.
+
+---
+
 ## Session: 2026-10-10 20:00 IST (Person A: Frontend & UX Lead)
 
 ### Objective

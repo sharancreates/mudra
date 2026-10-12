@@ -1,22 +1,35 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-11 16:40 IST  
-> **Active Milestone:** v1.0 MVP (Milestone M1 Complete)  
+> **Last Updated:** 2026-10-12 08:10 IST  
+> **Active Milestone:** v1.0 MVP (Phase 3 in Progress)  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Milestone M1 (Week 1 Trade Loop) Fully Verified & Tested ✅
+> **Status:** Paused at 2026-10-12 08:10 IST (Plan 3.4A Frontend Integration Complete ✅)
 
 ---
 
 ## Current Position
 - **Phase**: Phase 3 (Full Trade Experience, Settlement & Snapshots)
-- **Status**: Plan 3.3 (Portfolio Snapshots Database Table & Historical Return Curves API) — **COMPLETE ✅**
+- **Status**: Plan 3.4A (Person A Frontend Integration: Live Curves, Audit Ledger & Watchlist UI) — **COMPLETE ✅**
 - **Test Suite Health**:
   * Python FastAPI: 23/23 pytest tests passed in 0.20s.
   * Node.js / Integration: 22/22 tests passed in 280ms.
   * PRD Section 7.3 Reference Acceptance Scenario verified to the paisa (+₹242.86 realized, +₹467.34 unrealized, ₹1,00,710.20 equity).
-  * Historical equity curve endpoints (/api/portfolio/history) and transaction ledger (/api/ledger) verified.
+  * Live historical equity curves (/api/portfolio/history) and immutable transaction ledger (/api/ledger) fully integrated into Next.js Dashboard.
   * Nightly Reconciliation: 0 ledger discrepancies across all user accounts.
-- **Next Target**: Plan 3.4 (Watchlist Backend Endpoints: GET / POST / DELETE /api/watchlist).
+- **Next Target**: Plan 3.4 (Watchlist Backend Endpoints: GET / POST / DELETE /api/watchlist for Person B).
+
+## Last Session Summary (Person A)
+1. **Snake Companion Removal**:
+   - Cleanly removed `<MudraSnake />` from `page.tsx` and `MudraShell.tsx`.
+   - Neutralized `MudraSnake.tsx` and `MudraSpine.tsx` so they return `null` with 0 event listeners or animation loops.
+2. **Plan 3.4A Execution**:
+   - Replaced mock equity chart points with dynamic `getPortfolioHistory(range)` (`1M`, `6M`, `ALL`) with interactive SVG hover tooltips.
+   - Built tabbed workspace on the Dashboard exposing the immutable Transaction Audit Ledger querying `/api/ledger`.
+   - Created client-side reactive `useWatchlist()` hook in `client/src/lib/watchlist.ts` with cross-component sync and `localStorage` persistence.
+   - Added Watchlist filter pill on Explorer and active star toggles on Explorer and Stock Detail pages.
+   - Added 15:30 IST next-close settlement queue transparency banner.
+3. **Commit & Push**:
+   - Staged, verified, committed (`09dd0e0`), and pushed to remote `main`.
 
 ---
 
