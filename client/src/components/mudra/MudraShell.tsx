@@ -9,7 +9,7 @@ import { AuthModal } from "@/components/auth/AuthModal";
 interface MudraShellProps {
   children: React.ReactNode;
   headerPolarity?: "light" | "dark";
-  activeNav?: "home" | "explore" | "dashboard" | "stock" | "leaderboard";
+  activeNav?: "home" | "explore" | "dashboard" | "stock" | "leaderboard" | "terms";
 }
 
 export function MudraShell({

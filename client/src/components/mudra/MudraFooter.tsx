@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -91,6 +91,17 @@ export function MudraFooter({ theme, onBackToTop }: MudraFooterProps) {
             <span style={{ fontSize: "15px", color: "var(--text-body)" }}>
               DPDP Act 2023 Compliant
             </span>
+            <Link
+              href="/terms"
+              style={{
+                fontSize: "15px",
+                color: "var(--mudra-sky-blue)",
+                textDecoration: "none",
+                fontWeight: 600,
+              }}
+            >
+              Terms &amp; Disclaimers →
+            </Link>
             <span className="mudra-mono" style={{ color: "var(--text-muted)", marginTop: "4px", fontSize: "12px" }}>
               STRICTLY-18-PLUS
             </span>
@@ -144,6 +155,16 @@ export function MudraFooter({ theme, onBackToTop }: MudraFooterProps) {
             <span style={{ fontSize: "13px", color: "var(--text-muted)" }}>
               Copyright 2026 Mudra Equities Lab · Virtual ₹1,00,000 capital has no real monetary value
             </span>
+            <Link
+              href="/terms"
+              style={{
+                fontSize: "13px",
+                color: "var(--text-muted)",
+                textDecoration: "underline",
+              }}
+            >
+              Statutory Disclaimers
+            </Link>
           </div>
 
           <button
