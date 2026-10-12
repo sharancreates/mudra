@@ -113,7 +113,7 @@ updated: 2026-10-10T16:30:00+05:30
   * Pinned "Your Standing" progress tracker card.
   * Header and overlay menu navigation integration.
   * Mobile floating action bar on stock detail page.
-- [ ] Plan 4.2A: Milestone M2 Launch-Readiness Polish & Statutory Compliance (`02A-PLAN.md`) — **Planned 📋**
+- [x] Plan 4.2A: Milestone M2 Launch-Readiness Polish & Statutory Compliance (`02A-PLAN.md`) — **Complete ✅**
   * Dedicated Watchlist empty state & filter reset in Explorer (`StockTable.tsx`).
   * Fresh user 0-trade onboarding state on Portfolio Dashboard.
   * Dedicated `/terms` statutory disclaimer page satisfying PRD §15.1 and footer integration.

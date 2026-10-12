@@ -1,34 +1,34 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-12 18:55 IST  
-> **Active Milestone:** v1.0 MVP (Phase 4 in Progress)  
+> **Last Updated:** 2026-10-12 19:40 IST  
+> **Active Milestone:** v1.0 MVP (Milestone M2 Launch-Readiness)  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Phase 4 Plan 4.1A Complete ✅ — Public Leaderboard UI & Mobile Polish Verified
+> **Status:** Plan 4.2A Complete ✅ — Launch-Readiness Polish & Statutory Compliance Finalized
 
 ---
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.2A (Milestone M2 Launch-Readiness Polish & Statutory Compliance) — **PLANNED 📋**
-- **Test Suite Health**:
-  * Python FastAPI: 30/30 pytest tests passed in 1.74s.
-  * Node.js / Integration: 27/27 tests passed in 259ms.
-  * Public `/leaderboard` route live with Top 3 podium, Section 2.4 eligibility gates, and pinned user standing.
-  * Nightly Reconciliation: 0 ledger discrepancies across all user accounts.
-- **Next Target**: `/execute 4.2A` (Execute Plan 4.2A Launch-Readiness Polish).
+- **Status**: Plan 4.2A (Milestone M2 Launch-Readiness Polish & Statutory Compliance) — **COMPLETE ✅**
+- **Person A Deliverables**: 100% Launch-Ready for Milestone M2.
+  * Public `/leaderboard` live with Section 2.4 anti-outlier rankings and user standing card.
+  * Explorer Watchlist empty state with 1-click filter reset.
+  * Dashboard 0-trade onboarding card ("Getting Started with Mudra" 3 pillars) and empty holding fallbacks.
+  * Dedicated [`/terms`](file:///client/src/app/terms/page.tsx) statutory disclaimer page compliant with PRD §15.1.
+  * Production OpenGraph, Twitter card, theme color (`#0B0E14`), and mobile viewport metadata.
+- **Next Target**: Plan 4.1 (Person B: Leaderboard SQL query & endpoint `GET /api/leaderboard` with 5 trades & 7 days eligibility filter).
 
 ## Last Session Summary (Person A)
-1. **Snake Companion Removal**:
-   - Cleanly removed `<MudraSnake />` from `page.tsx` and `MudraShell.tsx`.
-   - Neutralized `MudraSnake.tsx` and `MudraSpine.tsx` so they return `null` with 0 event listeners or animation loops.
-2. **Plan 3.4A Execution**:
-   - Replaced mock equity chart points with dynamic `getPortfolioHistory(range)` (`1M`, `6M`, `ALL`) with interactive SVG hover tooltips.
-   - Built tabbed workspace on the Dashboard exposing the immutable Transaction Audit Ledger querying `/api/ledger`.
-   - Created client-side reactive `useWatchlist()` hook in `client/src/lib/watchlist.ts` with cross-component sync and `localStorage` persistence.
-   - Added Watchlist filter pill on Explorer and active star toggles on Explorer and Stock Detail pages.
-   - Added 15:30 IST next-close settlement queue transparency banner.
-3. **Commit & Push**:
-   - Staged, verified, committed (`09dd0e0`), and pushed to remote `main`.
+1. **Plan 4.2A Execution**:
+   - Built dedicated Swiss Watchlist & Search empty states in `StockTable.tsx` and `explore/page.tsx`.
+   - Built 3-pillar "Getting Started with Mudra" onboarding card and table fallback states in `dashboard/page.tsx`.
+   - Created dedicated `/terms` page containing comprehensive PRD §15.1 disclosures (no SEBI registration, no real money, DPDP compliance, 18+).
+   - Wired footer links to `/terms` in `MudraFooter.tsx` and enabled `"terms"` in `MudraShell.tsx`.
+   - Configured full OpenGraph, Twitter card, and theme-color viewport exports in `layout.tsx`.
+2. **Commit Manifest**:
+   - `a7b37b5`: feat(ui): add dedicated watchlist and search empty states in explorer
+   - `1f350cb`: feat(ui): add fresh user 0-trade onboarding guide and empty state tables to dashboard
+   - `4c2871f`: feat(legal): add statutory /terms page, footer compliance links, and production metadata
 
 ---
 
