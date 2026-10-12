@@ -9,13 +9,13 @@
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.1A (Public Leaderboard UI, Trader Rankings & Mobile Polish) — **COMPLETE ✅**
+- **Status**: Plan 4.2A (Milestone M2 Launch-Readiness Polish & Statutory Compliance) — **PLANNED 📋**
 - **Test Suite Health**:
   * Python FastAPI: 30/30 pytest tests passed in 1.74s.
   * Node.js / Integration: 27/27 tests passed in 259ms.
   * Public `/leaderboard` route live with Top 3 podium, Section 2.4 eligibility gates, and pinned user standing.
   * Nightly Reconciliation: 0 ledger discrepancies across all user accounts.
-- **Next Target**: Plan 4.1 (Person B: Leaderboard SQL query & endpoint `/api/leaderboard` with 5 trades & 7 days eligibility filter).
+- **Next Target**: `/execute 4.2A` (Execute Plan 4.2A Launch-Readiness Polish).
 
 ## Last Session Summary (Person A)
 1. **Snake Companion Removal**:

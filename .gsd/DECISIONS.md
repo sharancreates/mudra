@@ -96,6 +96,7 @@
 
 ---
 
+
 ## ADR-011: Person A Phase 3 Frontend Plan (Approach A)
 - **Date**: 2026-10-12
 - **Status**: Accepted
@@ -105,4 +106,18 @@
   2. **Audit Ledger UI**: Implement tabbed or dedicated transaction ledger in `client/src/app/dashboard/page.tsx` displaying exact paise credits/debits, 0.1% fees, and timestamps.
   3. **Watchlist Scaffold**: Implement star/bookmark toggles on Explorer and Stock Detail pages, with in-memory / local storage persistence ready for Person B's Plan 3.4 API sync.
   4. **15:30 IST Settlement Transparency**: Add next-close execution banner and timer for pending orders.
+
+---
+
+## ADR-012: Launch-Readiness Polish & Statutory Compliance (Plan 4.2A)
+- **Date**: 2026-10-12
+- **Status**: Accepted
+- **Context**: To achieve Milestone M2 Launch-Readiness per PRD §15.1, Person A has 4 targeted frontend requirements: empty-state handling for watchlists, 0-trade onboarding guidance on the dashboard, statutory SEBI/DPDP disclaimers via a dedicated `/terms` route, and production OpenGraph/PWA metadata.
+- **Decision**:
+  1. **Option A Selected**: Bundle all 4 tasks into a unified, high-polish Plan 4.2A (`02A-PLAN.md`).
+  2. **Watchlist UX**: Implement dedicated empty state in `StockTable.tsx` when user has 0 starred stocks, offering clear explanatory text and 1-click filter reset.
+  3. **New User Onboarding**: Provide a "Getting Started with Mudra" 3-pillar guide on the Dashboard for users with 0 trades, clarifying ₹1L virtual money, 15:30 IST close, and 10% risk headroom.
+  4. **Statutory & Legal Clarity**: Implement `/terms` route with comprehensive PRD §15.1 compliance disclaimers (no SEBI registration, no real money, 18+ requirement, no banking integrations), linked from `MudraFooter`.
+  5. **SEO & PWA**: Expand `layout.tsx` with full OpenGraph, Twitter card metadata, and mobile viewport configuration.
+
 

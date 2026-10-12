@@ -113,6 +113,11 @@ updated: 2026-10-10T16:30:00+05:30
   * Pinned "Your Standing" progress tracker card.
   * Header and overlay menu navigation integration.
   * Mobile floating action bar on stock detail page.
+- [ ] Plan 4.2A: Milestone M2 Launch-Readiness Polish & Statutory Compliance (`02A-PLAN.md`) — **Planned 📋**
+  * Dedicated Watchlist empty state & filter reset in Explorer (`StockTable.tsx`).
+  * Fresh user 0-trade onboarding state on Portfolio Dashboard.
+  * Dedicated `/terms` statutory disclaimer page satisfying PRD §15.1 and footer integration.
+  * Production OpenGraph, Twitter card, theme color, and mobile PWA viewport metadata (`layout.tsx`).
 
 **Person B Scope (Backend & Data):**
 - Plan 4.1: Leaderboard SQL query & endpoint (`GET /api/leaderboard`) with 5 trades & 7 days eligibility filter.
