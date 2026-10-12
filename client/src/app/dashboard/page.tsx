@@ -13,6 +13,7 @@ import {
   History,
   CheckCircle2,
   TrendingUp,
+  X,
 } from "lucide-react";
 import { MarketStatusBadge } from "@/components/common/MarketStatusBadge";
 import { MudraShell } from "@/components/mudra/MudraShell";
@@ -38,6 +39,7 @@ export default function DashboardPage() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [activeBottomTab, setActiveBottomTab] = useState<"orders" | "ledger">("orders");
   const [showFormulaTooltip, setShowFormulaTooltip] = useState(false);
+  const [dismissOnboarding, setDismissOnboarding] = useState(false);
 
   useEffect(() => {
     getPortfolio().then((data) => setPortfolio(data));
@@ -198,6 +200,175 @@ export default function DashboardPage() {
             </Link>
           </div>
         </div>
+
+        {/* Getting Started Guide for New Accounts (0-Trade Onboarding) */}
+        {(!portfolio?.holdings || portfolio.holdings.length === 0) && orders.length === 0 && !dismissOnboarding && (
+          <section
+            style={{
+              background: "var(--surface-card)",
+              border: "1.5px solid var(--border-hairline)",
+              borderRadius: "var(--radius-card)",
+              padding: "28px 32px",
+              marginBottom: "28px",
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: "16px",
+                marginBottom: "20px",
+              }}
+            >
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+                  <span className="mudra-eyebrow" style={{ color: "var(--mudra-sky-blue)" }}>
+                    00 / quick start guide
+                  </span>
+                  <span
+                    className="mudra-mono"
+                    style={{
+                      fontSize: "10px",
+                      padding: "1px 6px",
+                      borderRadius: "var(--radius-xs)",
+                      background: "rgba(59, 191, 247, 0.12)",
+                      color: "var(--mudra-sky-blue)",
+                      fontWeight: 600,
+                    }}
+                  >
+                    NEW ACCOUNT
+                  </span>
+                </div>
+                <h2 style={{ margin: 0, fontSize: "22px", fontWeight: 700, color: "var(--text-heading)" }}>
+                  Getting Started with Mudra Simulator
+                </h2>
+                <p style={{ margin: "6px 0 0 0", fontSize: "14px", color: "var(--text-muted)", maxWidth: "68ch" }}>
+                  Your paper trading account is initialized with virtual ₹1,00,000. Mudra operates as an honest closing-price simulator with zero real-world financial risk.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setDismissOnboarding(true)}
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "var(--text-muted)",
+                  cursor: "pointer",
+                  padding: "4px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                aria-label="Dismiss guide"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* 3 Core Simulation Pillars */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: "16px",
+                marginBottom: "24px",
+              }}
+            >
+              <div
+                style={{
+                  padding: "18px 20px",
+                  background: "var(--surface-canvas)",
+                  border: "1px solid var(--border-hairline)",
+                  borderRadius: "var(--radius-sm)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                  <ShieldCheck className="w-4 h-4" style={{ color: "var(--mudra-link-green)" }} />
+                  <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--text-heading)" }}>
+                    1. Virtual ₹1,00,000 Capital
+                  </span>
+                </div>
+                <p style={{ margin: 0, fontSize: "12px", lineHeight: 1.55, color: "var(--text-muted)" }}>
+                  Integer paise ledger guarantees mathematical correctness. Practice buying and selling without risking real money.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  padding: "18px 20px",
+                  background: "var(--surface-canvas)",
+                  border: "1px solid var(--border-hairline)",
+                  borderRadius: "var(--radius-sm)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                  <Clock className="w-4 h-4" style={{ color: "var(--mudra-sky-blue)" }} />
+                  <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--text-heading)" }}>
+                    2. 15:30 IST Next-Close Settlement
+                  </span>
+                </div>
+                <p style={{ margin: 0, fontSize: "12px", lineHeight: 1.55, color: "var(--text-muted)" }}>
+                  Orders placed during the day queue and fill at the official closing bell, preventing paper-trading delusions.
+                </p>
+              </div>
+
+              <div
+                style={{
+                  padding: "18px 20px",
+                  background: "var(--surface-canvas)",
+                  border: "1px solid var(--border-hairline)",
+                  borderRadius: "var(--radius-sm)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                  <TrendingUp className="w-4 h-4" style={{ color: "var(--mudra-signal-yellow)" }} />
+                  <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--text-heading)" }}>
+                    3. 10% Risk Safety Headroom
+                  </span>
+                </div>
+                <p style={{ margin: 0, fontSize: "12px", lineHeight: 1.55, color: "var(--text-muted)" }}>
+                  Market buy orders reserve a 10% cash buffer to shield your wallet from adverse price movement before 15:30 IST.
+                </p>
+              </div>
+            </div>
+
+            {/* Primary CTA */}
+            <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
+              <Link
+                href="/explore"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "10px 22px",
+                  borderRadius: "var(--radius-pill)",
+                  background: "var(--text-heading)",
+                  color: "var(--surface-canvas)",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
+              >
+                <span>Place Your First Simulated Trade</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/leaderboard"
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "var(--text-muted)",
+                  textDecoration: "none",
+                }}
+              >
+                View Public Leaderboard →
+              </Link>
+            </div>
+          </section>
+        )}
 
         {/* 4 Swiss Metric Cards */}
         <section
@@ -628,79 +799,108 @@ export default function DashboardPage() {
                 </tr>
               </thead>
               <tbody style={{ fontFamily: "var(--font-sans)" }}>
-                {portfolio?.holdings.map((h) => {
-                  const isPositive = h.unrealized_paise >= 0;
-                  return (
-                    <tr
-                      key={h.symbol}
-                      style={{
-                        borderBottom: "1px solid var(--border-hairline)",
-                        transition: "background 140ms ease",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-sunken)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-                    >
-                      <td style={{ padding: "16px" }}>
-                        <Link
-                          href={`/stock/${h.symbol}`}
-                          style={{
-                            fontWeight: 700,
-                            color: "var(--text-heading)",
-                            textDecoration: "none",
-                            display: "block",
-                          }}
-                        >
-                          {h.symbol}
-                        </Link>
-                        <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>{h.name || h.symbol}</span>
-                      </td>
-                      <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
-                        {h.qty}
-                      </td>
-                      <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", color: "var(--text-muted)" }}>
-                        {formatINR(h.avg_paise)}
-                      </td>
-                      <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--text-heading)" }}>
-                        {formatINR(h.value_paise)}
-                      </td>
-                      <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
-                        <span
-                          style={{
-                            display: "inline-block",
-                            padding: "3px 8px",
-                            borderRadius: "var(--radius-xs)",
-                            fontSize: "12px",
-                            fontWeight: 600,
-                            background: isPositive ? "rgba(7, 162, 64, 0.12)" : "rgba(201, 33, 33, 0.12)",
-                            color: isPositive ? "var(--mudra-link-green)" : "var(--mudra-node-red)",
-                          }}
-                        >
-                          {isPositive ? "+" : ""}
-                          {formatINR(h.unrealized_paise)}
-                          {h.unrealized_bps ? ` (${formatBps(h.unrealized_bps)})` : ""}
-                        </span>
-                      </td>
-                      <td style={{ padding: "16px", textAlign: "right" }}>
-                        <Link
-                          href={`/stock/${h.symbol}`}
-                          style={{
-                            display: "inline-flex",
-                            alignItems: "center",
-                            padding: "6px 16px",
-                            borderRadius: "var(--radius-pill)",
-                            background: "var(--text-heading)",
-                            color: "var(--surface-canvas)",
-                            fontSize: "12px",
-                            fontWeight: 600,
-                            textDecoration: "none",
-                          }}
-                        >
-                          Trade
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
+                {portfolio?.holdings && portfolio.holdings.length > 0 ? (
+                  portfolio.holdings.map((h) => {
+                    const isPositive = h.unrealized_paise >= 0;
+                    return (
+                      <tr
+                        key={h.symbol}
+                        style={{
+                          borderBottom: "1px solid var(--border-hairline)",
+                          transition: "background 140ms ease",
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-sunken)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                      >
+                        <td style={{ padding: "16px" }}>
+                          <Link
+                            href={`/stock/${h.symbol}`}
+                            style={{
+                              fontWeight: 700,
+                              color: "var(--text-heading)",
+                              textDecoration: "none",
+                              display: "block",
+                            }}
+                          >
+                            {h.symbol}
+                          </Link>
+                          <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>{h.name || h.symbol}</span>
+                        </td>
+                        <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
+                          {h.qty}
+                        </td>
+                        <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", color: "var(--text-muted)" }}>
+                          {formatINR(h.avg_paise)}
+                        </td>
+                        <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", fontWeight: 700, color: "var(--text-heading)" }}>
+                          {formatINR(h.value_paise)}
+                        </td>
+                        <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)" }}>
+                          <span
+                            style={{
+                              display: "inline-block",
+                              padding: "3px 8px",
+                              borderRadius: "var(--radius-xs)",
+                              fontSize: "12px",
+                              fontWeight: 600,
+                              background: isPositive ? "rgba(7, 162, 64, 0.12)" : "rgba(201, 33, 33, 0.12)",
+                              color: isPositive ? "var(--mudra-link-green)" : "var(--mudra-node-red)",
+                            }}
+                          >
+                            {isPositive ? "+" : ""}
+                            {formatINR(h.unrealized_paise)}
+                            {h.unrealized_bps ? ` (${formatBps(h.unrealized_bps)})` : ""}
+                          </span>
+                        </td>
+                        <td style={{ padding: "16px", textAlign: "right" }}>
+                          <Link
+                            href={`/stock/${h.symbol}`}
+                            style={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              padding: "6px 16px",
+                              borderRadius: "var(--radius-pill)",
+                              background: "var(--text-heading)",
+                              color: "var(--surface-canvas)",
+                              fontSize: "12px",
+                              fontWeight: 600,
+                              textDecoration: "none",
+                            }}
+                          >
+                            Trade
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={6} style={{ padding: "48px 24px", textAlign: "center" }}>
+                      <p style={{ margin: 0, fontSize: "14px", color: "var(--text-muted)" }}>
+                        No active stock positions in your portfolio yet.
+                      </p>
+                      <Link
+                        href="/explore"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          marginTop: "14px",
+                          padding: "8px 22px",
+                          borderRadius: "var(--radius-pill)",
+                          background: "var(--text-heading)",
+                          color: "var(--surface-canvas)",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          textDecoration: "none",
+                        }}
+                      >
+                        <span>Explore 50 Nifty Equities</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -868,74 +1068,84 @@ export default function DashboardPage() {
                     </tr>
                   </thead>
                   <tbody style={{ fontFamily: "var(--font-sans)" }}>
-                    {orders.map((ord) => (
-                      <tr
-                        key={ord.id}
-                        style={{
-                          borderBottom: "1px solid var(--border-hairline)",
-                          transition: "background 140ms ease",
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-sunken)")}
-                        onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-                      >
-                        <td className="mudra-mono" style={{ padding: "16px", fontSize: "12px", color: "var(--text-muted)" }}>
-                          {ord.id}
-                        </td>
-                        <td style={{ padding: "16px", fontWeight: 700 }}>
-                          <Link href={`/stock/${ord.symbol}`} style={{ color: "var(--text-heading)", textDecoration: "none" }}>
-                            {ord.symbol}
-                          </Link>
-                        </td>
-                        <td style={{ padding: "16px" }}>
-                          <span
-                            className="mudra-mono"
-                            style={{
-                              display: "inline-block",
-                              padding: "3px 8px",
-                              borderRadius: "var(--radius-xs)",
-                              fontSize: "11px",
-                              fontWeight: 700,
-                              background: ord.side === "BUY" ? "rgba(59, 191, 247, 0.15)" : "rgba(201, 33, 33, 0.15)",
-                              color: ord.side === "BUY" ? "var(--mudra-sky-blue)" : "var(--mudra-node-red)",
-                            }}
-                          >
-                            {ord.side}
+                    {orders.length > 0 ? (
+                      orders.map((ord) => (
+                        <tr
+                          key={ord.id}
+                          style={{
+                            borderBottom: "1px solid var(--border-hairline)",
+                            transition: "background 140ms ease",
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.background = "var(--surface-sunken)")}
+                          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                        >
+                          <td className="mudra-mono" style={{ padding: "16px", fontSize: "12px", color: "var(--text-muted)" }}>
+                            {ord.id}
+                          </td>
+                          <td style={{ padding: "16px", fontWeight: 700 }}>
+                            <Link href={`/stock/${ord.symbol}`} style={{ color: "var(--text-heading)", textDecoration: "none" }}>
+                              {ord.symbol}
+                            </Link>
+                          </td>
+                          <td style={{ padding: "16px" }}>
+                            <span
+                              className="mudra-mono"
+                              style={{
+                                display: "inline-block",
+                                padding: "3px 8px",
+                                borderRadius: "var(--radius-xs)",
+                                fontSize: "11px",
+                                fontWeight: 700,
+                                background: ord.side === "BUY" ? "rgba(59, 191, 247, 0.15)" : "rgba(201, 33, 33, 0.15)",
+                                color: ord.side === "BUY" ? "var(--mudra-sky-blue)" : "var(--mudra-node-red)",
+                              }}
+                            >
+                              {ord.side}
+                            </span>
+                          </td>
+                          <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
+                            {ord.qty}
+                          </td>
+                          <td style={{ padding: "16px", textAlign: "right" }}>
+                            <span
+                              className="mudra-mono"
+                              style={{
+                                display: "inline-block",
+                                padding: "3px 8px",
+                                borderRadius: "var(--radius-pill)",
+                                fontSize: "11px",
+                                fontWeight: 600,
+                                background:
+                                  ord.status === "PENDING"
+                                    ? "rgba(238, 160, 43, 0.15)"
+                                    : ord.status === "FILLED"
+                                    ? "rgba(7, 162, 64, 0.15)"
+                                    : "rgba(201, 33, 33, 0.15)",
+                                color:
+                                  ord.status === "PENDING"
+                                    ? "var(--mudra-signal-yellow)"
+                                    : ord.status === "FILLED"
+                                    ? "var(--mudra-link-green)"
+                                    : "var(--mudra-node-red)",
+                              }}
+                            >
+                              {ord.status}
+                            </span>
+                          </td>
+                          <td className="mudra-mono" style={{ padding: "16px", textAlign: "right", fontSize: "12px", color: "var(--text-muted)" }}>
+                            Next Close (15:30 IST)
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={6} style={{ padding: "48px 24px", textAlign: "center" }}>
+                          <span style={{ fontSize: "14px", color: "var(--text-muted)" }}>
+                            No orders currently queued for 15:30 IST settlement.
                           </span>
-                        </td>
-                        <td style={{ padding: "16px", textAlign: "right", fontFamily: "var(--font-mono)", fontWeight: 600 }}>
-                          {ord.qty}
-                        </td>
-                        <td style={{ padding: "16px", textAlign: "right" }}>
-                          <span
-                            className="mudra-mono"
-                            style={{
-                              display: "inline-block",
-                              padding: "3px 8px",
-                              borderRadius: "var(--radius-pill)",
-                              fontSize: "11px",
-                              fontWeight: 600,
-                              background:
-                                ord.status === "PENDING"
-                                  ? "rgba(238, 160, 43, 0.15)"
-                                  : ord.status === "FILLED"
-                                  ? "rgba(7, 162, 64, 0.15)"
-                                  : "rgba(201, 33, 33, 0.15)",
-                              color:
-                                ord.status === "PENDING"
-                                  ? "var(--mudra-signal-yellow)"
-                                  : ord.status === "FILLED"
-                                  ? "var(--mudra-link-green)"
-                                  : "var(--mudra-node-red)",
-                            }}
-                          >
-                            {ord.status}
-                          </span>
-                        </td>
-                        <td className="mudra-mono" style={{ padding: "16px", textAlign: "right", fontSize: "12px", color: "var(--text-muted)" }}>
-                          Next Close (15:30 IST)
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>
