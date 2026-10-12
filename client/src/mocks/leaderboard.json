@@ -1,0 +1,112 @@
+[
+  {
+    "rank": 1,
+    "user_id": "usr_vikram_k",
+    "display_name": "Vikram K. (Nifty Alpha)",
+    "equity_paise": 14285000,
+    "return_bps": 4285,
+    "trades_count": 34,
+    "days_active": 45,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 2,
+    "user_id": "usr_ananya_sharma",
+    "display_name": "Ananya Sharma",
+    "equity_paise": 13620000,
+    "return_bps": 3620,
+    "trades_count": 28,
+    "days_active": 38,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 3,
+    "user_id": "usr_rohit_deshmukh",
+    "display_name": "Rohit Deshmukh",
+    "equity_paise": 12845000,
+    "return_bps": 2845,
+    "trades_count": 42,
+    "days_active": 52,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 4,
+    "user_id": "usr_priya_nair",
+    "display_name": "Priya Nair",
+    "equity_paise": 12150000,
+    "return_bps": 2150,
+    "trades_count": 19,
+    "days_active": 29,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 5,
+    "user_id": "usr_arjun_singh",
+    "display_name": "Arjun S. (Value Momentum)",
+    "equity_paise": 11890000,
+    "return_bps": 1890,
+    "trades_count": 22,
+    "days_active": 31,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 6,
+    "user_id": "usr_kavita_reddy",
+    "display_name": "Kavita Reddy",
+    "equity_paise": 11420000,
+    "return_bps": 1420,
+    "trades_count": 15,
+    "days_active": 21,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 7,
+    "user_id": "usr_siddharth_m",
+    "display_name": "Siddharth Mehta",
+    "equity_paise": 11080000,
+    "return_bps": 1080,
+    "trades_count": 12,
+    "days_active": 18,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 8,
+    "user_id": "usr_meera_iyer",
+    "display_name": "Meera Iyer",
+    "equity_paise": 10710200,
+    "return_bps": 710,
+    "trades_count": 9,
+    "days_active": 14,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 9,
+    "user_id": "usr_tanmay_joshi",
+    "display_name": "Tanmay Joshi",
+    "equity_paise": 10450000,
+    "return_bps": 450,
+    "trades_count": 7,
+    "days_active": 11,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  },
+  {
+    "rank": 10,
+    "user_id": "usr_deepa_patel",
+    "display_name": "Deepa Patel",
+    "equity_paise": 10230000,
+    "return_bps": 230,
+    "trades_count": 6,
+    "days_active": 9,
+    "is_eligible": true,
+    "as_of": "2026-10-09"
+  }
+]

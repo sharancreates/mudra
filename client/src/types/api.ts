@@ -77,3 +77,29 @@ export interface ApiErrorResponse {
     request_id: string;
   };
 }
+
+export interface LeaderboardItem {
+  rank: number;
+  user_id: string;
+  display_name: string;
+  equity_paise: number;
+  return_bps: number;
+  trades_count: number;
+  days_active: number;
+  is_eligible: boolean;
+  as_of: string;
+}
+
+export interface LeaderboardResponse {
+  items: LeaderboardItem[];
+  user_standing?: {
+    rank: number | null;
+    equity_paise: number;
+    return_bps: number;
+    trades_count: number;
+    days_active: number;
+    is_eligible: boolean;
+  };
+  as_of: string;
+}
+

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -12,6 +12,7 @@ interface MudraHeaderProps {
   headerPolarity: "light" | "dark";
   onOpenAuth: () => void;
   user: { email: string; displayName: string } | null;
+  activeNav?: "home" | "explore" | "dashboard" | "stock" | "leaderboard";
 }
 
 export function MudraHeader({
@@ -21,6 +22,7 @@ export function MudraHeader({
   headerPolarity,
   onOpenAuth,
   user,
+  activeNav = "home",
 }: MudraHeaderProps) {
   // Dynamic polarity: when over dark sections, text is #FAFAF9; when over stone canvas, text is #262626
   const effectiveTheme = menuOpen ? (theme === "dark" ? "light" : "dark") : headerPolarity;
@@ -79,16 +81,34 @@ export function MudraHeader({
             href="/explore"
             style={{
               fontSize: "14px",
-              fontWeight: 500,
+              fontWeight: activeNav === "explore" ? 700 : 500,
               color: "inherit",
               textDecoration: "none",
-              padding: "6px 12px",
+              padding: "6px 14px",
               borderRadius: "var(--radius-pill)",
-              transition: "opacity 160ms ease",
+              background: activeNav === "explore" ? (isDark ? "rgba(250, 250, 249, 0.12)" : "rgba(38, 38, 38, 0.08)") : "transparent",
+              transition: "all 160ms ease",
             }}
             className="hidden sm:inline-block hover:opacity-80"
           >
             Explore
+          </Link>
+
+          <Link
+            href="/leaderboard"
+            style={{
+              fontSize: "14px",
+              fontWeight: activeNav === "leaderboard" ? 700 : 500,
+              color: "inherit",
+              textDecoration: "none",
+              padding: "6px 14px",
+              borderRadius: "var(--radius-pill)",
+              background: activeNav === "leaderboard" ? (isDark ? "rgba(250, 250, 249, 0.12)" : "rgba(38, 38, 38, 0.08)") : "transparent",
+              transition: "all 160ms ease",
+            }}
+            className="hidden md:inline-block hover:opacity-80"
+          >
+            Leaderboard
           </Link>
 
           {user ? (

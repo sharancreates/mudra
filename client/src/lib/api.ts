@@ -10,9 +10,12 @@ import {
   OrderItem,
   PortfolioSummary,
   StatusResponse,
+  LeaderboardItem,
+  LeaderboardResponse,
 } from "@/types/api";
 import instrumentsFixture from "@/mocks/instruments.json";
 import portfolioFixture from "@/mocks/portfolio.json";
+import leaderboardFixture from "@/mocks/leaderboard.json";
 
 // In-memory orders store for client-side persistence and instant feedback
 let localOrdersStore: OrderItem[] = [];
@@ -290,3 +293,30 @@ export async function getOrderHistory(): Promise<OrderItem[]> {
   }
   return localOrdersStore;
 }
+
+export async function getLeaderboard(
+  range = "ALL"
+): Promise<LeaderboardResponse> {
+  try {
+    const res = await fetch(`/api/leaderboard?range=${encodeURIComponent(range)}`);
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch {
+    // Offline / dev fallback
+  }
+
+  return {
+    items: leaderboardFixture as LeaderboardItem[],
+    user_standing: {
+      rank: 8,
+      equity_paise: 10071020,
+      return_bps: 71,
+      trades_count: 5,
+      days_active: 7,
+      is_eligible: true,
+    },
+    as_of: "2026-10-09",
+  };
+}
+

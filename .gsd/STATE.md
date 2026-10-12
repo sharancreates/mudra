@@ -1,22 +1,21 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-12 16:55 IST  
-> **Active Milestone:** v1.0 MVP (Phase 3 Complete ✅)  
+> **Last Updated:** 2026-10-12 18:55 IST  
+> **Active Milestone:** v1.0 MVP (Phase 4 in Progress)  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Phase 3 Complete ✅ — Concurrency Load Testing & Anti-Race Thread Hardening Verified
+> **Status:** Phase 4 Plan 4.1A Complete ✅ — Public Leaderboard UI & Mobile Polish Verified
 
 ---
 
 ## Current Position
-- **Phase**: Phase 3 (Full Trade Experience, Settlement & Snapshots) — **COMPLETE ✅**
-- **Status**: Plan 3.5 (Concurrency Load Testing & Anti-Race Thread Hardening) — **COMPLETE ✅**
+- **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
+- **Status**: Plan 4.1A (Public Leaderboard UI, Trader Rankings & Mobile Polish) — **COMPLETE ✅**
 - **Test Suite Health**:
   * Python FastAPI: 30/30 pytest tests passed in 1.74s.
   * Node.js / Integration: 27/27 tests passed in 259ms.
-  * Concurrency Stress: 50 single-user parallel orders (never negative, clean 400s), 200 multi-user parallel orders (0 deadlocks), 10 parallel idempotency replays (1 order created).
+  * Public `/leaderboard` route live with Top 3 podium, Section 2.4 eligibility gates, and pinned user standing.
   * Nightly Reconciliation: 0 ledger discrepancies across all user accounts.
-  * Standalone Benchmark: `python -m app.scripts.load_test` verified with throughput & latency distributions.
-- **Next Target**: Milestone M2 / Phase 4 (Deployment, Polish, and Production Readiness).
+- **Next Target**: Plan 4.1 (Person B: Leaderboard SQL query & endpoint `/api/leaderboard` with 5 trades & 7 days eligibility filter).
 
 ## Last Session Summary (Person A)
 1. **Snake Companion Removal**:

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
@@ -23,6 +23,7 @@ export function MudraMenu({
     { num: "02", label: "Explore Market", href: "/explore", field: "yellow", color: "var(--accent-type-yellow)" },
     { num: "03", label: "Portfolio", href: "/dashboard", field: "green", color: "var(--accent-type-green)" },
     { num: "04", label: "Trade Stock", href: "/stock/RELIANCE", field: "red", color: "var(--mudra-node-red)" },
+    { num: "05", label: "Leaderboard", href: "/leaderboard", field: "yellow", color: "var(--mudra-signal-yellow)" },
   ];
 
   const getFieldBg = () => {

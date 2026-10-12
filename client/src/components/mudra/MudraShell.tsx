@@ -9,12 +9,13 @@ import { AuthModal } from "@/components/auth/AuthModal";
 interface MudraShellProps {
   children: React.ReactNode;
   headerPolarity?: "light" | "dark";
-  activeNav?: "home" | "explore" | "dashboard" | "stock";
+  activeNav?: "home" | "explore" | "dashboard" | "stock" | "leaderboard";
 }
 
 export function MudraShell({
   children,
   headerPolarity = "light",
+  activeNav = "home",
 }: MudraShellProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -86,6 +87,7 @@ export function MudraShell({
         headerPolarity={headerPolarity}
         onOpenAuth={() => setAuthModalOpen(true)}
         user={user}
+        activeNav={activeNav}
       />
 
       {/* Fullscreen Overlay Menu */}

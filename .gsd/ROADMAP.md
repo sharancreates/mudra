@@ -102,10 +102,19 @@ updated: 2026-10-10T16:30:00+05:30
 ---
 
 ### Phase 4: Leaderboard, Hardening, Mobile Polish & Launch
-**Status:** ⬜ Not Started  
+**Status:** 🟡 In Progress  
 **Objective:** Deploy public-ready MVP on Vercel with leaderboard, automated backups, health monitoring, and launch audit.  
 **Depends on:** Phase 3  
-**Person B Scope:**
+
+**Person A Scope (Frontend & UX):**
+- [x] Plan 4.1A: Public Leaderboard UI, Trader Rankings & Mobile Polish (`01A-PLAN.md`) — **Complete ✅**
+  * Public `/leaderboard` page with Top 3 podium cards & rankings table.
+  * PRD Section 2.4 anti-outlier eligibility gate (>= 5 trades, 7+ days).
+  * Pinned "Your Standing" progress tracker card.
+  * Header and overlay menu navigation integration.
+  * Mobile floating action bar on stock detail page.
+
+**Person B Scope (Backend & Data):**
 - Plan 4.1: Leaderboard SQL query & endpoint (`GET /api/leaderboard`) with 5 trades & 7 days eligibility filter.
 - Plan 4.2: Automated weekly database backup workflow (`.github/workflows/weekly-backup.yml` using `pg_dump`).
 - Plan 4.3: Health monitor and uptime check (`/api/status` + GitHub workflow).
