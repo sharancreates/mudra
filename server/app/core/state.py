@@ -180,7 +180,7 @@ class StateStore:
 
             eligible_traders = [m for m in user_metrics.values() if m["is_eligible"]]
 
-            if len(eligible_traders) < 3:
+            if len(eligible_traders) == 0:
                 demo_benchmarks = [
                     {"user_id": "usr_vikram_k", "display_name": "Vikram K. (Nifty Alpha)", "equity_paise": 14285000, "return_bps": 4285, "trades_count": 34, "days_active": 45, "is_eligible": True, "as_of": as_of},
                     {"user_id": "usr_ananya_sharma", "display_name": "Ananya Sharma", "equity_paise": 13620000, "return_bps": 3620, "trades_count": 28, "days_active": 38, "is_eligible": True, "as_of": as_of},
