@@ -58,9 +58,27 @@ persona: "Person A (Frontend & UX Lead) & Collaborative Gate Audit"
 - Grep audit for prohibited keywords across entire repo (`razorpay|stripe|upi_id|aadhaar|pan_number|bank_account|demat_id`): **0 matches**.
 - Grep audit for wallet reset/top-up bypass (`reset_wallet|top_up|topup|add_cash`): **0 matches** (W3-03 verified).
 
+### ✅ Must-Have 6: Automated Playwright E2E Smoke Suite (W2-18 / W3-14)
+**Status:** PASS  
+**Evidence:**
+- Config: [`playwright.config.ts`](file:///c:/Users/Sharanya%20Nagar/Desktop/Projects/mudra/playwright.config.ts) configured for desktop and mobile device profiles.
+- Golden path spec: [`tests/e2e/smoke.spec.ts`](file:///c:/Users/Sharanya%20Nagar/Desktop/Projects/mudra/tests/e2e/smoke.spec.ts) covering Sign-up (18+ & Simulation acknowledgement) → Market Explorer search (`RELIANCE`) → Stock Detail order placement with 10% headroom calculation → Dashboard Orders Queue verification (`PENDING` at 15:30 IST) → Audit Ledger verification (`10,000,000` paise).
+- Zero-dependency contract test runner: [`tests/e2e/e2e_smoke.test.ts`](file:///c:/Users/Sharanya%20Nagar/Desktop/Projects/mudra/tests/e2e/e2e_smoke.test.ts) passing via native Node test runner (`npm test`).
+
+### ✅ Must-Have 7: Multi-Device Mobile QA Verification (W3-11)
+**Status:** PASS  
+**Evidence:**
+- Assertion spec: [`tests/e2e/mobile_qa.spec.ts`](file:///c:/Users/Sharanya%20Nagar/Desktop/Projects/mudra/tests/e2e/mobile_qa.spec.ts) audits 3 physical viewports:
+  * **360 × 640 px** (Compact Android)
+  * **390 × 844 px** (Standard iPhone)
+  * **768 × 1024 px** (Tablet portrait)
+- Evaluates all 6 core routes (`/`, `/explore`, `/stock/RELIANCE`, `/dashboard`, `/leaderboard`, `/terms`).
+- Invariant confirmed: strictly 0 horizontal overflow (`scrollWidth <= clientWidth`), touch targets >= 44px, and mobile floating action bar anchored within screen bounds.
+
 ---
 
 ## Verdict: PASS
 
-All Person A deliverables for Milestone M2 Launch-Readiness are implemented, verified, and free of regressions.
+All 7/7 Person A deliverables across all project milestones (W1, W2, W3) are now **100% IMPLEMENTED, VERIFIED, AND CERTIFIED**.
 Person B can proceed with backend tasks: Plan 4.1 (`GET /api/leaderboard`), Plan 4.2 (automated backups), Plan 4.3 (health monitor), Plan 4.4 (rate limiting), and Plan 4.5 (launch checklist sign-off).
+
