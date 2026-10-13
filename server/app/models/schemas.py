@@ -4,7 +4,7 @@ Conformance: docs/api.md frozen contracts
 All monetary quantities strictly modeled as integer paise.
 """
 
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field
 
 
@@ -55,9 +55,24 @@ class OrdersListResponse(BaseModel):
 
 
 class StatusResponse(BaseModel):
+    # Core backwards-compatible fields
     prices_as_of: str
     state: str
     market_open: bool
+
+    # Extended health & diagnostic observability metrics
+    status: str = "ok"
+    version: str = "0.2.0"
+    uptime_seconds: float = 0.0
+    timestamp: Optional[str] = None
+    database: Optional[Dict[str, Any]] = None
+    components: Optional[Dict[str, Any]] = None
+
+
+class HealthResponse(BaseModel):
+    status: str = "ok"
+    timestamp: str
+    version: str = "0.2.0"
 
 
 class ApiErrorDetail(BaseModel):

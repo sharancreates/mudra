@@ -23,6 +23,13 @@ from app.api.routes_orders import router as orders_router
 logger = get_logger("app.main")
 settings = get_settings()
 
+APP_START_TIME = time.time()
+
+
+def get_app_uptime_seconds() -> float:
+    return round(max(0.0, time.time() - APP_START_TIME), 2)
+
+
 app = FastAPI(
     title="Mudra Virtual Trading API",
     version="0.2.0",
