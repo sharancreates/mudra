@@ -16,6 +16,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import get_settings
 from app.core.logger import get_logger, request_id_ctx
+from app.core.rate_limit import get_rate_limiter
 from app.api.routes_status import router as status_router
 from app.api.routes_instruments import router as instruments_router
 from app.api.routes_orders import router as orders_router
@@ -72,7 +73,50 @@ async def debug_logging_middleware(request: Request, call_next):
         request_id_ctx.reset(token)
 
 
-# 3. Standardized Error Exception Handlers matching docs/api.md
+# 3. Rate Limiting & Abuse Protection Middleware (ADR-007, PRD NFR-3)
+@app.middleware("http")
+async def rate_limiting_middleware(request: Request, call_next):
+    limiter = get_rate_limiter()
+    result = limiter.check_rate_limit(request)
+
+    if result is not None and not result.allowed:
+        req_id = request_id_ctx.get() or request.headers.get("X-Request-ID") or f"req_{secrets.token_hex(4)}"
+        logger.warning(
+            f"[RATE_LIMIT] Client {limiter.resolve_client_key(request)} exceeded tier '{result.tier}' "
+            f"(limit: {result.limit}/min, retry after: {result.reset_after}s)"
+        )
+        reset_epoch = int(time.time() + result.reset_after)
+        return JSONResponse(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            content={
+                "error": {
+                    "code": "rate_limited",
+                    "message": "Too many requests. Please slow down.",
+                    "request_id": req_id,
+                }
+            },
+            headers={
+                "X-Request-ID": req_id,
+                "Retry-After": str(result.reset_after),
+                "X-RateLimit-Limit": str(result.limit),
+                "X-RateLimit-Remaining": "0",
+                "X-RateLimit-Reset": str(reset_epoch),
+            },
+        )
+
+    response = await call_next(request)
+
+    # Attach rate limit diagnostic headers if request belongs to a rate-limited tier
+    if result is not None:
+        reset_epoch = int(time.time() + result.reset_after)
+        response.headers["X-RateLimit-Limit"] = str(result.limit)
+        response.headers["X-RateLimit-Remaining"] = str(result.remaining)
+        response.headers["X-RateLimit-Reset"] = str(reset_epoch)
+
+    return response
+
+
+# 4. Standardized Error Exception Handlers matching docs/api.md
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     req_id = request_id_ctx.get() or f"req_{secrets.token_hex(4)}"

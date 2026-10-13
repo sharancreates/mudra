@@ -14,6 +14,10 @@ class Settings(BaseSettings):
     HOST: str = "127.0.0.1"
     PORT: int = 8000
     DATA_CSV_PATH: str = "data/sample_prices.csv"
+    RATE_LIMIT_ENABLED: bool = True
+    RATE_LIMIT_ORDERS_PER_MINUTE: int = 20
+    RATE_LIMIT_MUTATIONS_PER_MINUTE: int = 60
+    RATE_LIMIT_READS_PER_MINUTE: int = 120
 
     def resolve_data_csv_path(self) -> Path:
         """
