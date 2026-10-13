@@ -119,7 +119,9 @@ def verify_backup_archive(filepath: str | Path) -> Dict[str, Any]:
 
 
 def serialize_entity(obj: Any) -> Any:
-    """Helper to serialize dataclasses or dict-like objects to primitive types."""
+    """Helper to serialize dataclasses, standard classes with __dict__, or dict-like objects."""
+    if hasattr(obj, "__dict__"):
+        return {k: serialize_entity(v) for k, v in obj.__dict__.items() if not k.startswith("_")}
     if is_dataclass(obj):
         return asdict(obj)
     if isinstance(obj, dict):
