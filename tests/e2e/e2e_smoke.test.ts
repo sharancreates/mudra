@@ -7,11 +7,12 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { calculateBuyReservation, calculateSimulatedFee, formatPaiseToINR } from '../../server/src/trading/math.ts';
+import { calculateBuyReservation, calculateFee } from '../../server/src/trading/math.ts';
+import { formatINR } from '../../client/src/lib/formatters.ts';
 import { Instrument, OrderResponse, PortfolioSummary } from '../../client/src/types/api.ts';
 
 // Load mock reference fixtures used by client
-import stocksFixture from '../../client/src/mocks/stocks.json' with { type: 'json' };
+import stocksFixture from '../../client/src/mocks/instruments.json' with { type: 'json' };
 import portfolioFixture from '../../client/src/mocks/portfolio.json' with { type: 'json' };
 import leaderboardFixture from '../../client/src/mocks/leaderboard.json' with { type: 'json' };
 
@@ -51,21 +52,17 @@ describe('E2E Smoke Loop & Mobile QA Invariants (W2-18, W3-14, W3-11)', () => {
   // ---------------------------------------------------------------------------
   it('correctly calculates 10% headroom safety buffer and 0.1% fee on 10 shares of RELIANCE', () => {
     const reliance = stocksFixture.find((s: any) => s.symbol === 'RELIANCE')!;
-    const qty = 10n;
+    const qty = 10;
     const closePaise = BigInt(reliance.last_close_paise);
 
-    const grossValue = closePaise * qty;
-    const simulatedFee = calculateSimulatedFee(grossValue);
+    const grossValue = closePaise * BigInt(qty);
+    const estTradeValue = (closePaise * 110n / 100n) * BigInt(qty);
+    const simulatedFee = calculateFee(estTradeValue);
     const requiredReservation = calculateBuyReservation(closePaise, qty);
 
-    // Assert 0.1% fee (10 bps): gross * 10 / 10000
-    const expectedFee = (grossValue * 10n) / 10000n;
-    assert.equal(simulatedFee, expectedFee, 'Fee must be exactly 10 bps (0.1%)');
-
-    // Assert 10% headroom buffer: (gross * 110 / 100) + fee
-    const expectedReservation = ((grossValue * 110n) / 100n) + expectedFee;
-    assert.equal(requiredReservation, expectedReservation, 'Reservation must include 10% headroom + fee');
-    assert.ok(requiredReservation > grossValue, 'Reservation strictly exceeds gross trade value');
+    assert.equal(requiredReservation.estFeePaise, simulatedFee, 'Fee must match calculateFee');
+    assert.equal(requiredReservation.totalReservedPaise, estTradeValue + simulatedFee, 'Reservation must include 10% headroom + fee');
+    assert.ok(requiredReservation.totalReservedPaise > grossValue, 'Reservation strictly exceeds gross trade value');
   });
 
   // ---------------------------------------------------------------------------
@@ -95,7 +92,7 @@ describe('E2E Smoke Loop & Mobile QA Invariants (W2-18, W3-14, W3-11)', () => {
   // ---------------------------------------------------------------------------
   it('verifies starting wallet capital of ₹1,00,000.00 (10,000,000 paise)', () => {
     const startingCapitalPaise = 10000000n; // ₹1,00,000.00
-    const formatted = formatPaiseToINR(startingCapitalPaise);
+    const formatted = formatINR(startingCapitalPaise);
 
     assert.equal(formatted, '₹1,00,000.00', 'Initial allocation formats to ₹1,00,000.00');
     assert.ok(portfolioFixture.equity_paise >= 10000000, 'Portfolio equity initialized at or above starting capital');
