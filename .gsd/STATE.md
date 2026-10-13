@@ -1,22 +1,22 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-13 18:40 IST  
+> **Last Updated:** 2026-10-13 19:55 IST  
 > **Active Milestone:** v1.0 MVP (Milestone M2 Launch-Readiness)  
 > **Active Persona:** Collaborative (Person B: Backend & Data Lead)  
-> **Status:** Plan 4.3 Complete ✅ — Health Monitor, Uptime Check & Status API Verified
+> **Status:** Plan 4.4 Complete ✅ — Rate Limiting & Abuse Protection Verified
 
 ---
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.3 (Health monitor and uptime check `/api/status` & `/api/health` + GitHub workflow) — **COMPLETE ✅**
+- **Status**: Plan 4.4 (Rate limiting and abuse protection on API routes) — **COMPLETE ✅**
 - **Person B Deliverables**:
-  * Enhanced `GET /api/status` with server uptime, database mode, and component telemetry while preserving backwards compatibility.
-  * Added lightweight liveness probe `GET /api/health`.
-  * Standalone CLI utility `server/app/scripts/healthcheck.py` for health diagnostics and latency SLA evaluation.
-  * Recurring GitHub Actions uptime monitor `.github/workflows/health-monitor.yml` running every 30 minutes with failure alerting.
-  * Pytest (`server/tests/test_health_status.py`) and Node test (`tests/trading/uptime_workflow.test.ts`) passing 100%.
-- **Next Target**: Plan 4.4 (Person B: Rate limiting and abuse protection on API routes).
+  * Thread-safe in-memory sliding-window rate limiter `server/app/core/rate_limit.py`.
+  * Mounted `rate_limiting_middleware` returning HTTP 429 with ADR-007 compliant `code: "rate_limited"` and `Retry-After`, `X-RateLimit-*` headers.
+  * Tiered rate limits: orders (20/min), mutations (60/min), reads (120/min), exempt (health/status probes).
+  * Strict client isolation (per `user_id` for authenticated calls, per IP for anonymous calls).
+  * Pytest suite (`server/tests/test_rate_limit.py`) and TypeScript test (`tests/trading/rate_limit.test.ts`) passing 100%.
+- **Next Target**: Plan 4.5 (Person B: Section 15.1 Launch Checklist audit and "No Real Money" verification).
 
 ## Last Session Summary (Person A)
 1. **Plan 4.3A Execution**:

@@ -127,7 +127,7 @@ updated: 2026-10-10T16:30:00+05:30
 - [x] Plan 4.1: Leaderboard SQL query & endpoint (`GET /api/leaderboard`) with 5 trades & 7 days eligibility filter. — **Complete ✅**
 - [x] Plan 4.2: Automated weekly database backup workflow (`.github/workflows/weekly-backup.yml` using `pg_dump`). — **Complete ✅**
 - [x] Plan 4.3: Health monitor and uptime check (`/api/status` + GitHub workflow). — **Complete ✅**
-- Plan 4.4: Rate limiting and abuse protection on API routes.
+- [x] Plan 4.4: Rate limiting and abuse protection on API routes. — **Complete ✅**
 - Plan 4.5: Section 15.1 Launch Checklist audit and "No Real Money" verification.
 
 ---
