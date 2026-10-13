@@ -16,12 +16,20 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import get_settings
 from app.core.logger import get_logger, request_id_ctx
+from app.core.rate_limit import get_rate_limiter
 from app.api.routes_status import router as status_router
 from app.api.routes_instruments import router as instruments_router
 from app.api.routes_orders import router as orders_router
 
 logger = get_logger("app.main")
 settings = get_settings()
+
+APP_START_TIME = time.time()
+
+
+def get_app_uptime_seconds() -> float:
+    return round(max(0.0, time.time() - APP_START_TIME), 2)
+
 
 app = FastAPI(
     title="Mudra Virtual Trading API",
@@ -65,7 +73,50 @@ async def debug_logging_middleware(request: Request, call_next):
         request_id_ctx.reset(token)
 
 
-# 3. Standardized Error Exception Handlers matching docs/api.md
+# 3. Rate Limiting & Abuse Protection Middleware (ADR-007, PRD NFR-3)
+@app.middleware("http")
+async def rate_limiting_middleware(request: Request, call_next):
+    limiter = get_rate_limiter()
+    result = limiter.check_rate_limit(request)
+
+    if result is not None and not result.allowed:
+        req_id = request_id_ctx.get() or request.headers.get("X-Request-ID") or f"req_{secrets.token_hex(4)}"
+        logger.warning(
+            f"[RATE_LIMIT] Client {limiter.resolve_client_key(request)} exceeded tier '{result.tier}' "
+            f"(limit: {result.limit}/min, retry after: {result.reset_after}s)"
+        )
+        reset_epoch = int(time.time() + result.reset_after)
+        return JSONResponse(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            content={
+                "error": {
+                    "code": "rate_limited",
+                    "message": "Too many requests. Please slow down.",
+                    "request_id": req_id,
+                }
+            },
+            headers={
+                "X-Request-ID": req_id,
+                "Retry-After": str(result.reset_after),
+                "X-RateLimit-Limit": str(result.limit),
+                "X-RateLimit-Remaining": "0",
+                "X-RateLimit-Reset": str(reset_epoch),
+            },
+        )
+
+    response = await call_next(request)
+
+    # Attach rate limit diagnostic headers if request belongs to a rate-limited tier
+    if result is not None:
+        reset_epoch = int(time.time() + result.reset_after)
+        response.headers["X-RateLimit-Limit"] = str(result.limit)
+        response.headers["X-RateLimit-Remaining"] = str(result.remaining)
+        response.headers["X-RateLimit-Reset"] = str(reset_epoch)
+
+    return response
+
+
+# 4. Standardized Error Exception Handlers matching docs/api.md
 @app.exception_handler(StarletteHTTPException)
 async def http_exception_handler(request: Request, exc: StarletteHTTPException):
     req_id = request_id_ctx.get() or f"req_{secrets.token_hex(4)}"
@@ -145,6 +196,7 @@ async def global_unhandled_exception_handler(request: Request, exc: Exception):
 from app.api.routes_settlement import router as settlement_router
 from app.api.routes_portfolio import router as portfolio_router
 from app.api.routes_watchlist import router as watchlist_router
+from app.api.routes_leaderboard import router as leaderboard_router
 
 # 4. Include Routers
 app.include_router(status_router)
@@ -153,6 +205,7 @@ app.include_router(orders_router)
 app.include_router(settlement_router)
 app.include_router(portfolio_router)
 app.include_router(watchlist_router)
+app.include_router(leaderboard_router)
 
 
 @app.get("/", tags=["Health"])
