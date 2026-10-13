@@ -1,21 +1,20 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-13 17:15 IST  
+> **Last Updated:** 2026-10-13 17:35 IST  
 > **Active Milestone:** v1.0 MVP (Milestone M2 Launch-Readiness)  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Plan 4.1 Complete ✅ — Leaderboard SQL, Anti-Outlier Filter & API Endpoint Verified
+> **Status:** Plan 4.2 Complete ✅ — Automated Weekly Database Backup Workflow & Script Verified
 
 ---
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.1 (Leaderboard SQL query, Anti-Outlier Filter & API Endpoint) — **COMPLETE ✅**
+- **Status**: Plan 4.2 (Automated weekly database backup workflow `.github/workflows/weekly-backup.yml` using `pg_dump` & `backup.py`) — **COMPLETE ✅**
 - **Person B Deliverables**:
-  * PostgreSQL migration `20261010000008_leaderboard.sql` defining `get_leaderboard()`.
-  * `StateStore.get_leaderboard()` enforcing PRD §2.4 (>= 5 filled trades & >= 7 active days).
-  * FastAPI route `GET /api/leaderboard` supporting `range` query and authenticated `user_standing`.
-  * Pytest suite (`server/tests/test_leaderboard.py`) and TypeScript test (`tests/trading/leaderboard.test.ts`) passing 100%.
-- **Next Target**: Plan 4.2 (Person B: Automated weekly database backup workflow `.github/workflows/weekly-backup.yml` using `pg_dump`).
+  * GitHub Actions workflow `.github/workflows/weekly-backup.yml` running every Sunday 00:00 UTC (`0 0 * * 0`) with `workflow_dispatch` and 30-day artifact retention.
+  * Backup & state export utility `server/app/scripts/backup.py` with `pg_dump` execution, StateStore JSON snapshot, gzip compression, and SHA256 checksum validation.
+  * Pytest suite (`server/tests/test_backup.py`) and Node test (`tests/trading/backup_workflow.test.ts`) passing 100%.
+- **Next Target**: Plan 4.3 (Person B: Health monitor and uptime check `/api/status` + GitHub workflow).
 
 ## Last Session Summary (Person A)
 1. **Plan 4.3A Execution**:

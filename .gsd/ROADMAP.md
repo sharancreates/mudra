@@ -125,7 +125,7 @@ updated: 2026-10-10T16:30:00+05:30
 
 **Person B Scope (Backend & Data):**
 - [x] Plan 4.1: Leaderboard SQL query & endpoint (`GET /api/leaderboard`) with 5 trades & 7 days eligibility filter. — **Complete ✅**
-- Plan 4.2: Automated weekly database backup workflow (`.github/workflows/weekly-backup.yml` using `pg_dump`).
+- [x] Plan 4.2: Automated weekly database backup workflow (`.github/workflows/weekly-backup.yml` using `pg_dump`). — **Complete ✅**
 - Plan 4.3: Health monitor and uptime check (`/api/status` + GitHub workflow).
 - Plan 4.4: Rate limiting and abuse protection on API routes.
 - Plan 4.5: Section 15.1 Launch Checklist audit and "No Real Money" verification.
