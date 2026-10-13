@@ -1,25 +1,21 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-13 12:25 IST  
+> **Last Updated:** 2026-10-13 17:15 IST  
 > **Active Milestone:** v1.0 MVP (Milestone M2 Launch-Readiness)  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Plan 4.3A Complete ✅ — Playwright E2E Suite & Multi-Device Mobile QA Verified
+> **Status:** Plan 4.1 Complete ✅ — Leaderboard SQL, Anti-Outlier Filter & API Endpoint Verified
 
 ---
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.3A (Playwright E2E Suite & Multi-Device Mobile QA Verification) — **COMPLETE ✅**
-- **Person A Deliverables**: **100% COMPLETE & VERIFIED** across all milestones:
-  * Public `/leaderboard` live with Section 2.4 anti-outlier rankings and user standing card.
-  * Explorer Watchlist empty state with 1-click filter reset.
-  * Dashboard 0-trade onboarding card ("Getting Started with Mudra" 3 pillars) and empty holding fallbacks.
-  * Dedicated [`/terms`](file:///client/src/app/terms/page.tsx) statutory disclaimer page compliant with PRD §15.1.
-  * Production OpenGraph, Twitter card, theme color (`#0B0E14`), and mobile viewport metadata.
-  * W2-18 / W3-14: Playwright E2E Golden Path smoke test suite authored (`tests/e2e/smoke.spec.ts`).
-  * W3-11: Multi-device mobile QA assertion suite for 360px, 390px, and 768px viewports (`tests/e2e/mobile_qa.spec.ts`).
-  * Standalone zero-dependency contract test runner (`tests/e2e/e2e_smoke.test.ts`).
-- **Next Target**: Plan 4.1 (Person B: Leaderboard SQL query & endpoint `GET /api/leaderboard` with 5 trades & 7 days eligibility filter).
+- **Status**: Plan 4.1 (Leaderboard SQL query, Anti-Outlier Filter & API Endpoint) — **COMPLETE ✅**
+- **Person B Deliverables**:
+  * PostgreSQL migration `20261010000008_leaderboard.sql` defining `get_leaderboard()`.
+  * `StateStore.get_leaderboard()` enforcing PRD §2.4 (>= 5 filled trades & >= 7 active days).
+  * FastAPI route `GET /api/leaderboard` supporting `range` query and authenticated `user_standing`.
+  * Pytest suite (`server/tests/test_leaderboard.py`) and TypeScript test (`tests/trading/leaderboard.test.ts`) passing 100%.
+- **Next Target**: Plan 4.2 (Person B: Automated weekly database backup workflow `.github/workflows/weekly-backup.yml` using `pg_dump`).
 
 ## Last Session Summary (Person A)
 1. **Plan 4.3A Execution**:
