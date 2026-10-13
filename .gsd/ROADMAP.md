@@ -118,6 +118,10 @@ updated: 2026-10-10T16:30:00+05:30
   * Fresh user 0-trade onboarding state on Portfolio Dashboard.
   * Dedicated `/terms` statutory disclaimer page satisfying PRD §15.1 and footer integration.
   * Production OpenGraph, Twitter card, theme color, and mobile PWA viewport metadata (`layout.tsx`).
+- [ ] Plan 4.3A: Playwright E2E Suite & Multi-Device Mobile QA Verification (`03A-PLAN.md`) — **Planned 📋**
+  * Automated headless browser smoke test: Sign-up → Place Market Order → View Queue → Check Ledger (W2-18, W3-14).
+  * Multi-viewport assertion suite across 360px, 390px, and 768px viewports with zero horizontal overflow (W3-11).
+  * Touch target accessibility verification (>= 44px).
 
 **Person B Scope (Backend & Data):**
 - Plan 4.1: Leaderboard SQL query & endpoint (`GET /api/leaderboard`) with 5 trades & 7 days eligibility filter.

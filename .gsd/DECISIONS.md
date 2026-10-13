@@ -120,4 +120,17 @@
   4. **Statutory & Legal Clarity**: Implement `/terms` route with comprehensive PRD §15.1 compliance disclaimers (no SEBI registration, no real money, 18+ requirement, no banking integrations), linked from `MudraFooter`.
   5. **SEO & PWA**: Expand `layout.tsx` with full OpenGraph, Twitter card metadata, and mobile viewport configuration.
 
+---
+
+## ADR-013: Playwright E2E Smoke Automation & Multi-Viewport Mobile QA (Plan 4.3A)
+- **Date**: 2026-10-13
+- **Status**: Accepted
+- **Context**: Person A's final two items on the StockSim India Weekly Deliverables Checklist (W2-18, W3-14, W3-11) require an automated Playwright smoke test covering the full trade lifecycle (Sign-up → Place Market Order → View Queue → Check Ledger) and empirical multi-device mobile QA across 360px, 390px, and 768px viewports with zero horizontal overflow.
+- **Decision**:
+  1. **Option A Selected**: Implement a dual programmatic suite pairing the end-to-end user smoke flow with automated viewport assertion tests.
+  2. **Deterministic Mock Mode**: Tests run against the Next.js client with mock data fallbacks, guaranteeing 100% determinism, speed, and reliability in CI environments.
+  3. **Multi-Viewport Invariant**: Programmatically assert `document.documentElement.scrollWidth <= window.innerWidth` across all 6 core routes (`/`, `/explore`, `/stock/RELIANCE`, `/dashboard`, `/leaderboard`, `/terms`) at 360px, 390px, and 768px, ensuring zero horizontal scroll regressions.
+  4. **Accessibility Verification**: Assert interactive touch targets meet >= 44px height/width requirements for mobile usability.
+
+
 

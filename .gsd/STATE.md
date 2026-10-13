@@ -9,14 +9,15 @@
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.2A (Milestone M2 Launch-Readiness Polish & Statutory Compliance) — **COMPLETE ✅**
-- **Person A Deliverables**: 100% Launch-Ready for Milestone M2.
+- **Status**: Plan 4.3A (Playwright E2E Suite & Multi-Device Mobile QA Verification) — **PLANNED 📋**
+- **Person A Deliverables**:
   * Public `/leaderboard` live with Section 2.4 anti-outlier rankings and user standing card.
   * Explorer Watchlist empty state with 1-click filter reset.
   * Dashboard 0-trade onboarding card ("Getting Started with Mudra" 3 pillars) and empty holding fallbacks.
   * Dedicated [`/terms`](file:///client/src/app/terms/page.tsx) statutory disclaimer page compliant with PRD §15.1.
   * Production OpenGraph, Twitter card, theme color (`#0B0E14`), and mobile viewport metadata.
-- **Next Target**: Plan 4.1 (Person B: Leaderboard SQL query & endpoint `GET /api/leaderboard` with 5 trades & 7 days eligibility filter).
+  * Next up: Golden-path Playwright smoke loop and multi-device viewport tests (360px, 390px, 768px).
+- **Next Target**: `/execute 4.3A` (Execute Plan 4.3A Playwright E2E Suite & Mobile QA).
 
 ## Last Session Summary (Person A)
 1. **Plan 4.2A Execution**:
