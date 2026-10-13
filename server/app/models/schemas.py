@@ -69,3 +69,30 @@ class ApiErrorDetail(BaseModel):
 
 class ApiErrorResponse(BaseModel):
     error: ApiErrorDetail
+
+
+class LeaderboardItem(BaseModel):
+    rank: Optional[int] = None
+    user_id: str
+    display_name: str
+    equity_paise: int
+    return_bps: int
+    trades_count: int
+    days_active: int
+    is_eligible: bool
+    as_of: str
+
+
+class UserStanding(BaseModel):
+    rank: Optional[int] = None
+    equity_paise: int
+    return_bps: int
+    trades_count: int
+    days_active: int
+    is_eligible: bool
+
+
+class LeaderboardResponse(BaseModel):
+    items: List[LeaderboardItem]
+    user_standing: Optional[UserStanding] = None
+    as_of: str
