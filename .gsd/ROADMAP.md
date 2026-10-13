@@ -138,5 +138,5 @@ updated: 2026-10-10T16:30:00+05:30
 |-------|-------------|-------------|--------|--------|
 | Phase 1 | Foundation & Week 1 Backend Trade Loop | Person B & Person A | ✅ Complete | Week 1 |
 | Phase 2 | FastAPI (Python) Conversion with Debugging by Default | Person B | ✅ Complete | Week 1.5 |
-| Phase 3 | Full Trade Experience & Settlement | Person B | 🟡 In Progress | Week 2 |
-| Phase 4 | Leaderboard, Hardening & Launch | Person B | ⬜ Not Started | Week 3 |
+| Phase 3 | Full Trade Experience & Settlement | Person B & Person A | ✅ Complete | Week 2 |
+| Phase 4 | Leaderboard, Hardening & Launch | Person A (Done ✅) / Person B | 🟡 In Progress | Week 3 |
