@@ -145,6 +145,7 @@ async def global_unhandled_exception_handler(request: Request, exc: Exception):
 from app.api.routes_settlement import router as settlement_router
 from app.api.routes_portfolio import router as portfolio_router
 from app.api.routes_watchlist import router as watchlist_router
+from app.api.routes_leaderboard import router as leaderboard_router
 
 # 4. Include Routers
 app.include_router(status_router)
@@ -153,6 +154,7 @@ app.include_router(orders_router)
 app.include_router(settlement_router)
 app.include_router(portfolio_router)
 app.include_router(watchlist_router)
+app.include_router(leaderboard_router)
 
 
 @app.get("/", tags=["Health"])
