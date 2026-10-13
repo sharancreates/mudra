@@ -9,7 +9,13 @@
     "start": "npm --prefix client run start",
     "type-check": "npm --prefix client run type-check",
     "lint": "npm --prefix client run lint",
-    "test": "npx tsx --test tests/integration/*.ts tests/trading/*.ts",
+    "test": "npx tsx --test tests/integration/*.ts tests/trading/*.ts tests/e2e/e2e_smoke.test.ts",
+    "test:e2e": "playwright test tests/e2e",
+    "test:e2e:smoke": "playwright test tests/e2e/smoke.spec.ts",
+    "test:e2e:mobile": "playwright test tests/e2e/mobile_qa.spec.ts",
     "server:generate-data": "npm --prefix server run generate-data"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
   }
 }
