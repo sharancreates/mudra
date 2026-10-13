@@ -1,35 +1,35 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-12 19:40 IST  
+> **Last Updated:** 2026-10-13 12:25 IST  
 > **Active Milestone:** v1.0 MVP (Milestone M2 Launch-Readiness)  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Plan 4.2A Complete ✅ — Launch-Readiness Polish & Statutory Compliance Finalized
+> **Status:** Plan 4.3A Complete ✅ — Playwright E2E Suite & Multi-Device Mobile QA Verified
 
 ---
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.3A (Playwright E2E Suite & Multi-Device Mobile QA Verification) — **PLANNED 📋**
-- **Person A Deliverables**:
+- **Status**: Plan 4.3A (Playwright E2E Suite & Multi-Device Mobile QA Verification) — **COMPLETE ✅**
+- **Person A Deliverables**: **100% COMPLETE & VERIFIED** across all milestones:
   * Public `/leaderboard` live with Section 2.4 anti-outlier rankings and user standing card.
   * Explorer Watchlist empty state with 1-click filter reset.
   * Dashboard 0-trade onboarding card ("Getting Started with Mudra" 3 pillars) and empty holding fallbacks.
   * Dedicated [`/terms`](file:///client/src/app/terms/page.tsx) statutory disclaimer page compliant with PRD §15.1.
   * Production OpenGraph, Twitter card, theme color (`#0B0E14`), and mobile viewport metadata.
-  * Next up: Golden-path Playwright smoke loop and multi-device viewport tests (360px, 390px, 768px).
-- **Next Target**: `/execute 4.3A` (Execute Plan 4.3A Playwright E2E Suite & Mobile QA).
+  * W2-18 / W3-14: Playwright E2E Golden Path smoke test suite authored (`tests/e2e/smoke.spec.ts`).
+  * W3-11: Multi-device mobile QA assertion suite for 360px, 390px, and 768px viewports (`tests/e2e/mobile_qa.spec.ts`).
+  * Standalone zero-dependency contract test runner (`tests/e2e/e2e_smoke.test.ts`).
+- **Next Target**: Plan 4.1 (Person B: Leaderboard SQL query & endpoint `GET /api/leaderboard` with 5 trades & 7 days eligibility filter).
 
 ## Last Session Summary (Person A)
-1. **Plan 4.2A Execution**:
-   - Built dedicated Swiss Watchlist & Search empty states in `StockTable.tsx` and `explore/page.tsx`.
-   - Built 3-pillar "Getting Started with Mudra" onboarding card and table fallback states in `dashboard/page.tsx`.
-   - Created dedicated `/terms` page containing comprehensive PRD §15.1 disclosures (no SEBI registration, no real money, DPDP compliance, 18+).
-   - Wired footer links to `/terms` in `MudraFooter.tsx` and enabled `"terms"` in `MudraShell.tsx`.
-   - Configured full OpenGraph, Twitter card, and theme-color viewport exports in `layout.tsx`.
+1. **Plan 4.3A Execution**:
+   - Created `playwright.config.ts` configuring Chromium Desktop, Android (360px), iPhone (390px), and Tablet (768px).
+   - Authored `tests/e2e/smoke.spec.ts` covering Sign-up → Explore Search → Order Placement with 10% headroom → Orders Queue → Ledger audit.
+   - Authored `tests/e2e/mobile_qa.spec.ts` testing all 6 core routes for strictly 0 horizontal overflow and touch targets >= 44px.
+   - Added `tests/e2e/e2e_smoke.test.ts` for native Node test runner.
+   - Configured `npm run test:e2e`, `npm run test:e2e:smoke`, `npm run test:e2e:mobile` in `package.json`.
 2. **Commit Manifest**:
-   - `a7b37b5`: feat(ui): add dedicated watchlist and search empty states in explorer
-   - `1f350cb`: feat(ui): add fresh user 0-trade onboarding guide and empty state tables to dashboard
-   - `4c2871f`: feat(legal): add statutory /terms page, footer compliance links, and production metadata
+   - `13482f0`: feat(test): add playwright e2e smoke suite and multi-device mobile qa assertions
 
 ---
 
