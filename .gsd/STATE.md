@@ -1,20 +1,22 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-13 17:35 IST  
+> **Last Updated:** 2026-10-13 18:40 IST  
 > **Active Milestone:** v1.0 MVP (Milestone M2 Launch-Readiness)  
-> **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Plan 4.2 Complete ✅ — Automated Weekly Database Backup Workflow & Script Verified
+> **Active Persona:** Collaborative (Person B: Backend & Data Lead)  
+> **Status:** Plan 4.3 Complete ✅ — Health Monitor, Uptime Check & Status API Verified
 
 ---
 
 ## Current Position
 - **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch)
-- **Status**: Plan 4.2 (Automated weekly database backup workflow `.github/workflows/weekly-backup.yml` using `pg_dump` & `backup.py`) — **COMPLETE ✅**
+- **Status**: Plan 4.3 (Health monitor and uptime check `/api/status` & `/api/health` + GitHub workflow) — **COMPLETE ✅**
 - **Person B Deliverables**:
-  * GitHub Actions workflow `.github/workflows/weekly-backup.yml` running every Sunday 00:00 UTC (`0 0 * * 0`) with `workflow_dispatch` and 30-day artifact retention.
-  * Backup & state export utility `server/app/scripts/backup.py` with `pg_dump` execution, StateStore JSON snapshot, gzip compression, and SHA256 checksum validation.
-  * Pytest suite (`server/tests/test_backup.py`) and Node test (`tests/trading/backup_workflow.test.ts`) passing 100%.
-- **Next Target**: Plan 4.3 (Person B: Health monitor and uptime check `/api/status` + GitHub workflow).
+  * Enhanced `GET /api/status` with server uptime, database mode, and component telemetry while preserving backwards compatibility.
+  * Added lightweight liveness probe `GET /api/health`.
+  * Standalone CLI utility `server/app/scripts/healthcheck.py` for health diagnostics and latency SLA evaluation.
+  * Recurring GitHub Actions uptime monitor `.github/workflows/health-monitor.yml` running every 30 minutes with failure alerting.
+  * Pytest (`server/tests/test_health_status.py`) and Node test (`tests/trading/uptime_workflow.test.ts`) passing 100%.
+- **Next Target**: Plan 4.4 (Person B: Rate limiting and abuse protection on API routes).
 
 ## Last Session Summary (Person A)
 1. **Plan 4.3A Execution**:
