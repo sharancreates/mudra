@@ -117,6 +117,25 @@ export function MudraShell({
     router.push("/dashboard");
   };
 
+  const handleSignOut = async () => {
+    setUser(null);
+    try {
+      localStorage.removeItem("mudra_user");
+    } catch (e) {}
+
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        await supabase.auth.signOut();
+      } catch (err) {
+        console.warn("[MUDRA AUTH] Supabase signOut notice:", err);
+      }
+    }
+
+    // Explicitly navigate to home ("/") upon sign-out
+    router.push("/");
+  };
+
   const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -147,6 +166,7 @@ export function MudraShell({
         onOpenAuth={() => setAuthModalOpen(true)}
         user={user}
         activeNav={activeNav}
+        onSignOut={handleSignOut}
       />
 
       {/* Fullscreen Overlay Menu */}
@@ -155,6 +175,9 @@ export function MudraShell({
         theme={theme}
         onToggleTheme={toggleTheme}
         onClose={() => setMenuOpen(false)}
+        user={user}
+        onSignOut={handleSignOut}
+        onOpenAuth={() => setAuthModalOpen(true)}
       />
 
       {/* Page Content */}

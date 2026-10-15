@@ -13,6 +13,7 @@ interface MudraHeaderProps {
   onOpenAuth: () => void;
   user: { email: string; displayName: string } | null;
   activeNav?: "home" | "explore" | "dashboard" | "stock" | "leaderboard";
+  onSignOut?: () => void;
 }
 
 export function MudraHeader({
@@ -23,6 +24,7 @@ export function MudraHeader({
   onOpenAuth,
   user,
   activeNav = "home",
+  onSignOut,
 }: MudraHeaderProps) {
   // Dynamic polarity: when over dark sections, text is #FAFAF9; when over stone canvas, text is #262626
   const effectiveTheme = menuOpen ? (theme === "dark" ? "light" : "dark") : headerPolarity;
@@ -112,22 +114,43 @@ export function MudraHeader({
           </Link>
 
           {user ? (
-            <Link
-              href="/dashboard"
-              style={{
-                fontSize: "13px",
-                fontWeight: 600,
-                color: "#262626",
-                background: "var(--mudra-signal-yellow)",
-                textDecoration: "none",
-                padding: "8px 16px",
-                borderRadius: "var(--radius-pill)",
-                transition: "opacity 160ms ease",
-              }}
-              className="hover:opacity-90"
-            >
-              Portfolio
-            </Link>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Link
+                href="/dashboard"
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color: "#262626",
+                  background: "var(--mudra-signal-yellow)",
+                  textDecoration: "none",
+                  padding: "8px 16px",
+                  borderRadius: "var(--radius-pill)",
+                  transition: "opacity 160ms ease",
+                }}
+                className="hover:opacity-90"
+              >
+                Portfolio
+              </Link>
+              <button
+                type="button"
+                onClick={onSignOut}
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  color: "inherit",
+                  background: isDark ? "rgba(250, 250, 249, 0.08)" : "rgba(38, 38, 38, 0.06)",
+                  border: isDark ? "1px solid rgba(250, 250, 249, 0.2)" : "1px solid rgba(38, 38, 38, 0.15)",
+                  padding: "7px 14px",
+                  borderRadius: "var(--radius-pill)",
+                  cursor: "pointer",
+                  transition: "all 160ms ease",
+                }}
+                className="hidden sm:inline-block hover:opacity-80"
+                title={`Signed in as ${user.displayName}`}
+              >
+                Sign Out
+              </button>
+            </div>
           ) : (
             <button
               onClick={onOpenAuth}

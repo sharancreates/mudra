@@ -8,6 +8,9 @@ interface MudraMenuProps {
   theme: "light" | "dark";
   onToggleTheme: () => void;
   onClose: () => void;
+  user?: { email: string; displayName: string } | null;
+  onSignOut?: () => void;
+  onOpenAuth?: () => void;
 }
 
 export function MudraMenu({
@@ -15,6 +18,9 @@ export function MudraMenu({
   theme,
   onToggleTheme,
   onClose,
+  user,
+  onSignOut,
+  onOpenAuth,
 }: MudraMenuProps) {
   const [activeField, setActiveField] = useState<string | null>(null);
 
@@ -22,8 +28,7 @@ export function MudraMenu({
     { num: "01", label: "Home", href: "/", field: "blue", color: "var(--accent-type-blue)" },
     { num: "02", label: "Explore Market", href: "/explore", field: "yellow", color: "var(--accent-type-yellow)" },
     { num: "03", label: "Portfolio", href: "/dashboard", field: "green", color: "var(--accent-type-green)" },
-    { num: "04", label: "Trade Stock", href: "/stock/RELIANCE", field: "red", color: "var(--mudra-node-red)" },
-    { num: "05", label: "Leaderboard", href: "/leaderboard", field: "yellow", color: "var(--mudra-signal-yellow)" },
+    { num: "04", label: "Leaderboard", href: "/leaderboard", field: "yellow", color: "var(--mudra-signal-yellow)" },
   ];
 
   const getFieldBg = () => {
@@ -125,6 +130,101 @@ export function MudraMenu({
               </span>
             </Link>
           ))}
+
+          {user ? (
+            <div
+              style={{
+                marginTop: "28px",
+                padding: "16px 20px",
+                borderRadius: "var(--radius-card)",
+                border: "1.5px solid var(--border-hairline)",
+                background: "var(--surface-card)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "12px",
+                maxWidth: "420px",
+                transform: isOpen ? "translateY(0)" : "translateY(24px)",
+                opacity: isOpen ? 1 : 0,
+                transition: "all 400ms cubic-bezier(0.16, 1, 0.3, 1) 420ms",
+              }}
+            >
+              <div>
+                <span
+                  style={{
+                    fontSize: "11px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.07em",
+                    color: "var(--text-muted)",
+                    display: "block",
+                    fontFamily: "var(--font-mono)",
+                  }}
+                >
+                  Active Trader
+                </span>
+                <span
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: 700,
+                    color: "var(--text-heading)",
+                  }}
+                >
+                  {user.displayName}
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onSignOut?.();
+                }}
+                style={{
+                  padding: "8px 18px",
+                  borderRadius: "var(--radius-pill)",
+                  border: "1.5px solid var(--border-hairline)",
+                  background: "var(--surface-canvas)",
+                  color: "var(--text-heading)",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  transition: "all 140ms ease",
+                }}
+                className="hover:opacity-85"
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <div
+              style={{
+                marginTop: "24px",
+                transform: isOpen ? "translateY(0)" : "translateY(24px)",
+                opacity: isOpen ? 1 : 0,
+                transition: "all 400ms cubic-bezier(0.16, 1, 0.3, 1) 420ms",
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenAuth?.();
+                }}
+                style={{
+                  padding: "10px 22px",
+                  borderRadius: "var(--radius-pill)",
+                  background: "var(--text-heading)",
+                  color: "var(--surface-canvas)",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  border: "none",
+                  cursor: "pointer",
+                }}
+                className="hover:opacity-90"
+              >
+                Sign In to Mudra
+              </button>
+            </div>
+          )}
         </nav>
 
         {/* Right side canvas reacting to menu hover */}
