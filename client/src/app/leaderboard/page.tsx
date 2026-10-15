@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { MarketStatusBadge } from "@/components/common/MarketStatusBadge";
 import { MudraShell } from "@/components/mudra/MudraShell";
+import { AuthModal } from "@/components/auth/AuthModal";
 import { getLeaderboard, getPortfolio } from "@/lib/api";
 import { LeaderboardItem, LeaderboardResponse, PortfolioSummary } from "@/types/api";
 import { formatINR, formatBps } from "@/lib/formatters";
@@ -27,6 +28,8 @@ export default function LeaderboardPage() {
   const [timeframe, setTimeframe] = useState<"ALL" | "1M" | "1W">("ALL");
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<{ email: string; displayName: string } | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -35,16 +38,20 @@ export default function LeaderboardPage() {
         setUser(JSON.parse(savedUser));
       }
     } catch {}
-
-    getPortfolio().then((p) => setPortfolio(p));
+    setAuthChecked(true);
   }, []);
 
   useEffect(() => {
+    if (!user) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
+    getPortfolio().then((p) => setPortfolio(p));
     getLeaderboard(timeframe)
       .then((res) => setData(res))
       .finally(() => setLoading(false));
-  }, [timeframe]);
+  }, [user, timeframe]);
 
   const items = data?.items || [];
   const top1 = items[0];
@@ -144,8 +151,92 @@ export default function LeaderboardPage() {
           </div>
         </div>
 
-        {/* PRD Section 2.4 Anti-Outlier Eligibility Banner */}
-        <div
+        {/* Auth Gate Check: Only authenticated users see rankings */}
+        {!user ? (
+          <div
+            data-auth-gate=""
+            style={{
+              marginTop: "40px",
+              padding: "56px 32px",
+              borderRadius: "var(--radius-card)",
+              border: "1.5px solid var(--border-hairline)",
+              background: "var(--surface-card)",
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "18px",
+              maxWidth: "600px",
+              margin: "40px auto 0 auto",
+            }}
+          >
+            <div
+              style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "999px",
+                background: "rgba(238, 160, 43, 0.15)",
+                border: "1.5px solid rgba(238, 160, 43, 0.35)",
+                color: "var(--mudra-signal-yellow)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <ShieldCheck className="w-7 h-7" />
+            </div>
+
+            <h2
+              style={{
+                fontSize: "24px",
+                fontWeight: 700,
+                color: "var(--text-heading)",
+                margin: 0,
+              }}
+            >
+              Leaderboard Access Restricted
+            </h2>
+
+            <p
+              style={{
+                fontSize: "14px",
+                lineHeight: 1.6,
+                color: "var(--text-muted)",
+                margin: 0,
+                maxWidth: "48ch",
+              }}
+            >
+              Verified trader rankings and institutional performance standings are exclusive to registered Mudra accounts. Sign in or create a free sandbox account to view the leaderboard and track your standing.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => setAuthModalOpen(true)}
+              style={{
+                marginTop: "10px",
+                padding: "12px 28px",
+                borderRadius: "var(--radius-pill)",
+                background: "var(--mudra-signal-yellow)",
+                color: "#262626",
+                fontWeight: 700,
+                fontSize: "14px",
+                border: "none",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                transition: "opacity 160ms ease, transform 160ms ease",
+              }}
+              className="hover:opacity-90 active:scale-95"
+            >
+              <span>Sign In / Join Sandbox</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* PRD Section 2.4 Anti-Outlier Eligibility Banner */}
+            <div
           style={{
             display: "flex",
             alignItems: "center",
@@ -679,7 +770,19 @@ export default function LeaderboardPage() {
             </table>
           </div>
         </section>
+          </>
+        )}
       </div>
+
+      {/* Authentication Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        onSuccess={(authed) => {
+          setUser(authed);
+          setAuthModalOpen(false);
+        }}
+      />
     </MudraShell>
   );
 }
