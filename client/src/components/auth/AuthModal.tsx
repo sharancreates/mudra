@@ -1,7 +1,18 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
-import { X, ShieldCheck, CheckSquare, Square, CheckCircle2, User, Mail, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import {
+  X,
+  CheckSquare,
+  Square,
+  CheckCircle2,
+  User,
+  Mail,
+  Lock,
+  ArrowRight,
+} from "lucide-react";
+import { getSupabase } from "@/lib/supabase";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -14,31 +25,88 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   onClose,
   onSuccess,
 }) => {
+  const router = useRouter();
   const [mode, setMode] = useState<"register" | "signin">("register");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [isAdult, setIsAdult] = useState(false);
   const [acknowledgedSimulation, setAcknowledgedSimulation] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showLegalNotice, setShowLegalNotice] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleGoogleSignIn = async () => {
+    setError(null);
+    setIsLoading(true);
+
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        const { error: oauthError } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: `${window.location.origin}/dashboard`,
+          },
+        });
+        if (oauthError) {
+          setError(oauthError.message);
+          setIsLoading(false);
+        }
+      } catch (err: any) {
+        setError(err?.message || "Google OAuth sign-in encountered an error.");
+        setIsLoading(false);
+      }
+    } else {
+      // Local development fallback when running without remote Supabase credentials
+      const demoUser = {
+        email: "aarav.demo@gmail.com",
+        displayName: displayName.trim() || "TraderAarav",
+      };
+      setIsAdult(true);
+      setAcknowledgedSimulation(true);
+      setIsSubmitted(true);
+      setIsLoading(false);
+
+      setTimeout(() => {
+        if (onSuccess) {
+          onSuccess(demoUser);
+        }
+        try {
+          localStorage.setItem("mudra_user", JSON.stringify(demoUser));
+        } catch (e) {}
+        onClose();
+        router.push("/dashboard");
+      }, 900);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (!email || !email.includes("@")) {
+    const trimmedEmail = email.trim();
+    const trimmedDisplayName = displayName.trim();
+
+    if (!trimmedEmail || !trimmedEmail.includes("@") || !trimmedEmail.includes(".")) {
       setError("Please provide a valid email address.");
       return;
     }
 
+    if (!password || password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (!trimmedDisplayName || trimmedDisplayName.length < 3) {
+      setError("Leaderboard pseudonym must be at least 3 characters.");
+      return;
+    }
+
     if (mode === "register") {
-      if (!displayName || displayName.trim().length < 3) {
-        setError("Display name must be at least 3 characters.");
-        return;
-      }
       if (!isAdult) {
         setError("You must declare that you are 18 years of age or older.");
         return;
@@ -49,13 +117,61 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       }
     }
 
+    setIsLoading(true);
+    const authedUser = {
+      email: trimmedEmail,
+      displayName: trimmedDisplayName,
+    };
+
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        if (mode === "register") {
+          const { error: signUpError } = await supabase.auth.signUp({
+            email: trimmedEmail,
+            password: password,
+            options: {
+              data: {
+                pseudonym: trimmedDisplayName,
+                full_name: trimmedDisplayName,
+              },
+            },
+          });
+          if (signUpError) {
+            setError(signUpError.message);
+            setIsLoading(false);
+            return;
+          }
+        } else {
+          const { error: signInError } = await supabase.auth.signInWithPassword({
+            email: trimmedEmail,
+            password: password,
+          });
+          if (signInError) {
+            setError(signInError.message);
+            setIsLoading(false);
+            return;
+          }
+        }
+      } catch (err: any) {
+        console.warn("[MUDRA AUTH] Supabase client warning:", err?.message || err);
+      }
+    }
+
     setIsSubmitted(true);
+    setIsLoading(false);
+
+    try {
+      localStorage.setItem("mudra_user", JSON.stringify(authedUser));
+    } catch (e) {}
+
     setTimeout(() => {
       if (onSuccess) {
-        onSuccess({ email, displayName: displayName || email.split("@")[0] });
+        onSuccess(authedUser);
       }
       onClose();
-    }, 1500);
+      router.push("/dashboard");
+    }, 1000);
   };
 
   return (
@@ -83,7 +199,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <p className="text-xs text-[var(--text-muted)] mt-1">
             {mode === "register"
               ? "Set up your free paper trading account in 60 seconds."
-              : "Sign in to access your portfolio and watchlist."}
+              : "Sign in with your email, password, and pseudonym."}
           </p>
         </div>
 
@@ -93,7 +209,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <CheckCircle2 className="w-12 h-12 text-[var(--mudra-link-green)] mx-auto animate-bounce" />
             <h3 className="text-lg font-bold">₹1,00,000 Virtual Wallet Ready!</h3>
             <p className="text-xs text-[var(--text-muted)]">
-              Welcome aboard, <span className="font-semibold text-[var(--text-heading)]">{displayName || email}</span>. Initializing your sandbox session...
+              Welcome aboard, <span className="font-semibold text-[var(--text-heading)]">{displayName || email}</span>. Directing to your Portfolio Dashboard...
             </p>
           </div>
         ) : (
@@ -101,13 +217,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             {/* Google OAuth Button */}
             <button
               type="button"
-              onClick={() => {
-                setIsAdult(true);
-                setAcknowledgedSimulation(true);
-                setDisplayName("TraderAarav");
-                setEmail("aarav.demo@gmail.com");
-              }}
-              className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-full bg-[var(--surface-canvas)] hover:bg-[var(--surface-muted)] text-[var(--text-heading)] border border-[var(--border-hairline)] font-semibold text-xs transition-colors shadow-sm mb-4 cursor-pointer"
+              onClick={handleGoogleSignIn}
+              disabled={isLoading}
+              className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-full bg-[var(--surface-canvas)] hover:bg-[var(--surface-muted)] text-[var(--text-heading)] border border-[var(--border-hairline)] font-semibold text-xs transition-colors shadow-sm mb-4 cursor-pointer disabled:opacity-50"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
@@ -133,7 +245,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <div className="flex items-center gap-3 my-4">
               <div className="flex-1 border-t border-[var(--border-hairline)]" />
               <span className="text-[10px] uppercase font-mono text-[var(--text-muted)]">
-                or email
+                or email credentials
               </span>
               <div className="flex-1 border-t border-[var(--border-hairline)]" />
             </div>
@@ -145,6 +257,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Email Address */}
               <div>
                 <label className="block text-xs font-medium text-[var(--text-body)] mb-1.5">
                   Email Address
@@ -162,27 +275,49 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 </div>
               </div>
 
-              {mode === "register" && (
-                <div>
-                  <label className="block text-xs font-medium text-[var(--text-body)] mb-1.5">
-                    Leaderboard Pseudonym
-                  </label>
-                  <div className="relative">
-                    <User className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-3" />
-                    <input
-                      type="text"
-                      value={displayName}
-                      onChange={(e) => setDisplayName(e.target.value)}
-                      placeholder="e.g. BullishAarav"
-                      className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--mudra-sky-blue)]"
-                      required
-                    />
-                  </div>
-                  <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">
-                    Public leaderboard handle. Email is never revealed.
-                  </span>
+              {/* Password */}
+              <div>
+                <label className="block text-xs font-medium text-[var(--text-body)] mb-1.5">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-3" />
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--mudra-sky-blue)]"
+                    required
+                    minLength={6}
+                  />
                 </div>
-              )}
+                <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">
+                  Must be at least 6 characters.
+                </span>
+              </div>
+
+              {/* Leaderboard Pseudonym */}
+              <div>
+                <label className="block text-xs font-medium text-[var(--text-body)] mb-1.5">
+                  Leaderboard Pseudonym
+                </label>
+                <div className="relative">
+                  <User className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-3" />
+                  <input
+                    type="text"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    placeholder="e.g. BullishAarav"
+                    className="w-full bg-[var(--surface-canvas)] border border-[var(--border-hairline)] rounded-full py-2.5 pl-10 pr-4 text-xs font-mono text-[var(--text-heading)] placeholder-[var(--text-muted)]/50 focus:outline-none focus:border-[var(--mudra-sky-blue)]"
+                    required
+                    minLength={3}
+                  />
+                </div>
+                <span className="text-[11px] text-[var(--text-muted)] mt-1.5 block">
+                  Public trading pseudonym. Real identity is never revealed.
+                </span>
+              </div>
 
               {mode === "register" && (
                 <div className="space-y-3 pt-2 text-xs text-[var(--text-body)]">
@@ -224,9 +359,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-3.5 px-4 rounded-full bg-[var(--mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer"
+                disabled={isLoading}
+                className="w-full py-3.5 px-4 rounded-full bg-[var(--mudra-sky-blue)] hover:brightness-105 text-[#0A0D10] font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 mt-4 cursor-pointer disabled:opacity-60"
               >
-                <span>{mode === "register" ? "Create Free Sandbox Account" : "Sign In to Mudra"}</span>
+                <span>
+                  {isLoading
+                    ? "Authenticating..."
+                    : mode === "register"
+                    ? "Create Free Sandbox Account"
+                    : "Sign In to Mudra"}
+                </span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
@@ -295,7 +437,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   <strong>No Financial Advice:</strong> Mudra is an educational simulator for Indian equities. We are not a broker, research analyst, or investment adviser and are not registered with SEBI.
                 </p>
                 <p>
-                  <strong>DPDP Act 2023:</strong> In accordance with Indiaâ€™s Digital Personal Data Protection Act 2023, we collect only minimal credentials (email and display name) strictly to maintain session state and render leaderboards.
+                  <strong>DPDP Act 2023:</strong> In accordance with India’s Digital Personal Data Protection Act 2023, we collect only minimal credentials (email, password, and pseudonym) strictly to maintain session state and render leaderboards.
                 </p>
                 <p>
                   <strong>Virtual Rupee Valuation:</strong> All balances (starting capital of ₹1,00,000) are virtual numbers in our database with zero monetary value.
@@ -315,4 +457,3 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     </div>
   );
 };
-

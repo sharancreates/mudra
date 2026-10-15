@@ -50,6 +50,10 @@ test.describe('Mudra E2E Golden Path Smoke Suite', () => {
     // Fill registration credentials
     await page.getByPlaceholder(/name|pseudonym/i).fill('Aarav Student');
     await page.getByPlaceholder(/email/i).fill('aarav@mudra.test');
+    const passwordInput = page.getByPlaceholder(/password/i);
+    if (await passwordInput.isVisible()) {
+      await passwordInput.fill('SecurePass123!');
+    }
 
     // Both 18+ and Simulation checkboxes are strictly required
     const adultCheckbox = page.locator('button:has-text("18 years of age"), div:has-text("18 years of age")').first();

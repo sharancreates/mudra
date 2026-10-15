@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { MudraHeader } from "./MudraHeader";
 import { MudraMenu } from "./MudraMenu";
 import { MudraFooter } from "./MudraFooter";
 import { AuthModal } from "@/components/auth/AuthModal";
+import { getSupabase } from "@/lib/supabase";
 
 interface MudraShellProps {
   children: React.ReactNode;
@@ -17,6 +19,7 @@ export function MudraShell({
   headerPolarity = "light",
   activeNav = "home",
 }: MudraShellProps) {
+  const router = useRouter();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [menuOpen, setMenuOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -39,6 +42,61 @@ export function MudraShell({
     } catch (e) {
       document.documentElement.setAttribute("data-theme", "light");
     }
+
+    // Subscribe to Supabase auth state changes (e.g. Google OAuth return)
+    const supabase = getSupabase();
+    if (supabase) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user) {
+          const meta = session.user.user_metadata || {};
+          const displayName =
+            meta.pseudonym ||
+            meta.full_name ||
+            meta.name ||
+            session.user.email?.split("@")[0] ||
+            "MudraTrader";
+          const authed = {
+            email: session.user.email || "",
+            displayName,
+          };
+          setUser(authed);
+          try {
+            localStorage.setItem("mudra_user", JSON.stringify(authed));
+          } catch (e) {}
+        }
+      });
+
+      const { data: authListener } = supabase.auth.onAuthStateChange(
+        (event, session) => {
+          if (session?.user && (event === "SIGNED_IN" || event === "USER_UPDATED")) {
+            const meta = session.user.user_metadata || {};
+            const displayName =
+              meta.pseudonym ||
+              meta.full_name ||
+              meta.name ||
+              session.user.email?.split("@")[0] ||
+              "MudraTrader";
+            const authed = {
+              email: session.user.email || "",
+              displayName,
+            };
+            setUser(authed);
+            try {
+              localStorage.setItem("mudra_user", JSON.stringify(authed));
+            } catch (e) {}
+          } else if (event === "SIGNED_OUT") {
+            setUser(null);
+            try {
+              localStorage.removeItem("mudra_user");
+            } catch (e) {}
+          }
+        }
+      );
+
+      return () => {
+        authListener?.subscription?.unsubscribe();
+      };
+    }
   }, []);
 
   const toggleTheme = () => {
@@ -56,6 +114,7 @@ export function MudraShell({
       localStorage.setItem("mudra_user", JSON.stringify(authedUser));
     } catch (e) {}
     setAuthModalOpen(false);
+    router.push("/dashboard");
   };
 
   const handleBackToTop = () => {
