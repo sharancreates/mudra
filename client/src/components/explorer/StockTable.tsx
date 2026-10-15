@@ -151,12 +151,11 @@ export const StockTable: React.FC<StockTableProps> = ({
               fontFamily: "var(--font-mono)",
             }}
           >
-            <th style={{ padding: "14px 16px", width: "48px", textAlign: "center" }}>â˜…</th>
+            <th style={{ padding: "14px 16px", width: "48px", textAlign: "center" }}>★</th>
             <th style={{ padding: "14px 16px", fontWeight: 600 }}>Instrument</th>
             <th className="hidden md:table-cell" style={{ padding: "14px 16px", fontWeight: 600 }}>Sector</th>
             <th style={{ padding: "14px 16px", fontWeight: 600, textAlign: "right" }}>EOD Close</th>
             <th style={{ padding: "14px 16px", fontWeight: 600, textAlign: "right" }}>Day Change</th>
-            <th style={{ padding: "14px 16px", fontWeight: 600, textAlign: "right", width: "120px" }}>Action</th>
           </tr>
         </thead>
         <tbody style={{ fontFamily: "var(--font-sans)" }}>
@@ -286,34 +285,6 @@ export const StockTable: React.FC<StockTableProps> = ({
                     {isPositive ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
                     {formatBps(stock.change_bps)}
                   </span>
-                </td>
-
-                {/* Actions */}
-                <td style={{ padding: "16px", textAlign: "right" }}>
-                  <Link
-                    href={`/stock/${stock.symbol}`}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      padding: "6px 16px",
-                      borderRadius: "var(--radius-pill)",
-                      background: "var(--text-heading)",
-                      color: "var(--surface-canvas)",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      textDecoration: "none",
-                      transition: "opacity 160ms ease",
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                  >
-                    <span>Trade</span>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </Link>
                 </td>
               </tr>
             );
