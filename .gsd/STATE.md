@@ -1,20 +1,22 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-15 19:55 IST  
+> **Last Updated:** 2026-10-15 20:05 IST  
 > **Active Milestone:** v1.0 MVP Polish & Hardening  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Phase 5 Planned 📋 — Auth, Navigation Flow Polish & Route Guards
+> **Status:** Plan 5.1 Complete ✅ — Enhanced Authentication & Google OAuth
 
 ---
 
 ## Current Position
-- **Phase**: Phase 5 (Auth & Navigation Flow Polish) — **PLANNED 📋**
-- **Status**: Planning complete across 3 atomic plans (ready for `/execute 5.1`).
-- **Phase 5 Objectives**:
-  * **Plan 5.1**: Enhanced Authentication — require email, password, and pseudonym on sign-in/registration; integrate Supabase Google OAuth with `/dashboard` landing.
-  * **Plan 5.2**: Navigation Clean-up & Sign-Out Redirection — remove trade action buttons and Action column from Market Explorer (`StockTable.tsx`), remove "Trade Stock" from hamburger menu (`MudraMenu.tsx`), and redirect sign-out to home (`/`).
-  * **Plan 5.3**: Protected Routes & Auth-Gated Leaderboard Verification — gate `/leaderboard` so rankings are hidden from unauthenticated visitors, presenting a locked auth gate with Sign In CTA, and author comprehensive automated test suite.
-- **Next Step**: Run `/execute 5.1` to execute enhanced authentication and Google OAuth.
+- **Phase**: Phase 5 (Auth & Navigation Flow Polish) — **IN PROGRESS 🟡**
+- **Status**: Plan 5.1 (Enhanced Authentication — Email, Password, Pseudonym & Google OAuth) — **COMPLETE ✅**
+- **Plan 5.1 Deliverables**:
+  * Created `client/src/lib/supabase.ts` singleton client getter with resilient session persistence and URL session parsing.
+  * Upgraded `AuthModal.tsx` to strictly require email address, secure password (min 6 chars), and leaderboard pseudonym (min 3 chars).
+  * Wired "Continue with Google" to real Supabase Google OAuth (`signInWithOAuth`) with `/dashboard` landing and local dev fallback.
+  * Connected successful authentication to automatic `/dashboard` navigation via Next.js `useRouter`.
+  * Synchronized OAuth session state via `onAuthStateChange` in `MudraShell.tsx`.
+- **Next Target**: Plan 5.2 (Navigation Clean-up & Sign-Out Redirection — remove trade buttons in explorer, remove trade stock in menu, redirect sign-out to `/`).
 
 ---
 
@@ -90,7 +92,7 @@ mudra/
 - [x] **Plan 4.3A**: Playwright E2E Suite & Multi-Device Mobile QA (`03A-PLAN.md`) — **Complete ✅**
 
 ### Phase 5 Progress (`.gsd/phases/5/`)
-- [ ] **Plan 5.1**: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`) — **Ready**
+- [x] **Plan 5.1**: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`) — **Complete ✅**
 - [ ] **Plan 5.2**: Navigation Clean-up & Sign-Out Redirection (`02-PLAN.md`) — **Ready**
 - [ ] **Plan 5.3**: Protected Routes & Auth-Gated Leaderboard Verification (`03-PLAN.md`) — **Ready**
 

@@ -139,12 +139,12 @@ updated: 2026-10-10T16:30:00+05:30
 ---
 
 ### Phase 5: Auth & Navigation Flow Polish
-**Status:** 📋 Planned  
+**Status:** 🟡 In Progress  
 **Objective:** Deliver streamlined authentication (email + password + pseudonym, Google OAuth, landing on `/dashboard`), sign-out redirection to `/`, cleaned Market Explorer (zero trade buttons), uncluttered hamburger navigation (removed Trade Stock), and auth-gated Leaderboard.  
 **Depends on:** Phase 4  
 
 **Plans:**
-- [ ] Plan 5.1: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`)
+- [x] Plan 5.1: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`) — **Complete ✅**
   * Add password field and pseudonym validation to sign-in and register modes in `AuthModal.tsx`.
   * Integrate client-side Supabase Google OAuth (`signInWithOAuth`) with `/dashboard` redirect.
   * Direct successful credential or OAuth sign-in to `/dashboard`.
@@ -166,4 +166,4 @@ updated: 2026-10-10T16:30:00+05:30
 | Phase 2 | FastAPI (Python) Conversion with Debugging by Default | Person B | ✅ Complete | Week 1.5 |
 | Phase 3 | Full Trade Experience & Settlement | Person B & Person A | ✅ Complete | Week 2 |
 | Phase 4 | Leaderboard, Hardening, Mobile Polish & Launch | Person B & Person A | ✅ Complete | Week 3 |
-| Phase 5 | Auth & Navigation Flow Polish | Person A & Person B | 📋 Planned | Week 4 |
+| Phase 5 | Auth & Navigation Flow Polish | Person A & Person B | 🟡 In Progress | Week 4 |
