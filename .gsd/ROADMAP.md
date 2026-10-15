@@ -147,8 +147,7 @@ updated: 2026-10-10T16:30:00+05:30
 - [x] Plan 5.1: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`) — **Complete ✅**
   * Add password field and pseudonym validation to sign-in and register modes in `AuthModal.tsx`.
   * Integrate client-side Supabase Google OAuth (`signInWithOAuth`) with `/dashboard` redirect.
-  * Direct successful credential or OAuth sign-in to `/dashboard`.
-- [ ] Plan 5.2: Navigation Clean-up & Sign-Out Redirection (`02-PLAN.md`)
+- [x] Plan 5.2: Navigation Clean-up & Sign-Out Redirection (`02-PLAN.md`) — **Complete ✅**
   * Remove trade action buttons and Action table column from Market Explorer (`StockTable.tsx`).
   * Remove "Trade Stock" link from the hamburger overlay menu (`MudraMenu.tsx`) and renumber items 01 to 04.
   * Add Sign Out action in `MudraHeader` and `MudraMenu` that clears local and Supabase session and redirects directly to home (`/`).

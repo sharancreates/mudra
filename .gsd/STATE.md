@@ -1,22 +1,22 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-15 20:05 IST  
+> **Last Updated:** 2026-10-15 20:10 IST  
 > **Active Milestone:** v1.0 MVP Polish & Hardening  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Plan 5.1 Complete ✅ — Enhanced Authentication & Google OAuth
+> **Status:** Plan 5.2 Complete ✅ — Navigation Clean-up & Sign-Out Redirection
 
 ---
 
 ## Current Position
 - **Phase**: Phase 5 (Auth & Navigation Flow Polish) — **IN PROGRESS 🟡**
-- **Status**: Plan 5.1 (Enhanced Authentication — Email, Password, Pseudonym & Google OAuth) — **COMPLETE ✅**
-- **Plan 5.1 Deliverables**:
-  * Created `client/src/lib/supabase.ts` singleton client getter with resilient session persistence and URL session parsing.
-  * Upgraded `AuthModal.tsx` to strictly require email address, secure password (min 6 chars), and leaderboard pseudonym (min 3 chars).
-  * Wired "Continue with Google" to real Supabase Google OAuth (`signInWithOAuth`) with `/dashboard` landing and local dev fallback.
-  * Connected successful authentication to automatic `/dashboard` navigation via Next.js `useRouter`.
-  * Synchronized OAuth session state via `onAuthStateChange` in `MudraShell.tsx`.
-- **Next Target**: Plan 5.2 (Navigation Clean-up & Sign-Out Redirection — remove trade buttons in explorer, remove trade stock in menu, redirect sign-out to `/`).
+- **Status**: Plan 5.2 (Navigation Clean-up & Sign-Out Redirection) — **COMPLETE ✅**
+- **Plan 5.2 Deliverables**:
+  * Removed "Action" column header and "Trade" action button cells from Market Explorer ([`StockTable.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/explorer/StockTable.tsx)). All rows cleanly navigate to `/stock/[symbol]`.
+  * Removed redundant "Trade Stock" link from hamburger menu ([`MudraMenu.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraMenu.tsx)), establishing focused 4-item numbering (01 Home, 02 Explore Market, 03 Portfolio, 04 Leaderboard).
+  * Added active trader status card and dedicated "Sign Out" button to `MudraMenu.tsx`.
+  * Added distinct "Sign Out" action button next to "Portfolio" in [`MudraHeader.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraHeader.tsx).
+  * Implemented `handleSignOut()` in [`MudraShell.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraShell.tsx): purges `mudra_user` from `localStorage`, signs out of Supabase, and explicitly redirects the user directly to home (`/`).
+- **Next Target**: Plan 5.3 (Protected Routes & Auth-Gated Leaderboard Verification — gate `/leaderboard` so rankings are hidden from unauthenticated visitors, presenting a locked auth gate with Sign In CTA, and author automated test suite).
 
 ---
 
@@ -93,7 +93,7 @@ mudra/
 
 ### Phase 5 Progress (`.gsd/phases/5/`)
 - [x] **Plan 5.1**: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`) — **Complete ✅**
-- [ ] **Plan 5.2**: Navigation Clean-up & Sign-Out Redirection (`02-PLAN.md`) — **Ready**
+- [x] **Plan 5.2**: Navigation Clean-up & Sign-Out Redirection (`02-PLAN.md`) — **Complete ✅**
 - [ ] **Plan 5.3**: Protected Routes & Auth-Gated Leaderboard Verification (`03-PLAN.md`) — **Ready**
 
 ---
