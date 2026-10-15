@@ -84,6 +84,9 @@ export function MudraShell({
             try {
               localStorage.setItem("mudra_user", JSON.stringify(authed));
             } catch (e) {}
+            if (event === "SIGNED_IN") {
+              router.push("/dashboard");
+            }
           } else if (event === "SIGNED_OUT") {
             setUser(null);
             try {
