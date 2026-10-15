@@ -1,28 +1,20 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-13 20:05 IST  
-> **Active Milestone:** v1.0 MVP (Milestone M2 Launch-Readiness) — **COMPLETE ✅**  
-> **Active Persona:** Collaborative (Person B & Person A)  
-> **Status:** Phase 4 & Milestone M2 Complete ✅ — Launch Checklist Audit Verified
+> **Last Updated:** 2026-10-15 19:55 IST  
+> **Active Milestone:** v1.0 MVP Polish & Hardening  
+> **Active Persona:** Collaborative (Person A & Person B)  
+> **Status:** Phase 5 Planned 📋 — Auth, Navigation Flow Polish & Route Guards
 
 ---
 
 ## Current Position
-- **Phase**: Phase 4 (Leaderboard, Hardening, Mobile Polish & Launch) — **COMPLETE ✅**
-- **Status**: Plan 4.5 (Section 15.1 Launch Checklist audit & "No Real Money" verification) — **COMPLETE ✅**
-- **Milestone M2 Launch Status**: **100% Ready for Production Deployment**
-- **Plan 4.5 Deliverables**:
-  * Automated pre-launch audit runner `server/app/scripts/launch_audit.py` auditing 5 essential pillars.
-  * Verified 0 payment gateways (`razorpay`, `stripe`, etc.) and 0 banking PII collection fields across the entire repo.
-  * Proved absolute enforcement of "The No-Reset Rule" (zero wallet reset, top-up, or deposit cheat endpoints).
-  * Enforced integer paise precision across schemas, state, and math engine with zero float contamination.
-  * Confirmed statutory SEBI broker disclaimers, 18+ age gate, and DPDP disclosures across client routes.
-  * Verified PostgreSQL `SECURITY DEFINER` stored procedures and revoked direct client writes on financial tables.
-  * Dual Pytest (`server/tests/test_launch_audit.py`) and Node.js (`tests/trading/launch_audit.test.ts`) suites passing 100%.
-- **Test Suite Health**:
-  * Pytest: 52/52 tests passing (100%).
-  * Node.js Test Runner: 55/55 tests passing (100%).
-  * Playwright E2E: Mobile QA & Smoke specs configured across 4 viewports.
+- **Phase**: Phase 5 (Auth & Navigation Flow Polish) — **PLANNED 📋**
+- **Status**: Planning complete across 3 atomic plans (ready for `/execute 5.1`).
+- **Phase 5 Objectives**:
+  * **Plan 5.1**: Enhanced Authentication — require email, password, and pseudonym on sign-in/registration; integrate Supabase Google OAuth with `/dashboard` landing.
+  * **Plan 5.2**: Navigation Clean-up & Sign-Out Redirection — remove trade action buttons and Action column from Market Explorer (`StockTable.tsx`), remove "Trade Stock" from hamburger menu (`MudraMenu.tsx`), and redirect sign-out to home (`/`).
+  * **Plan 5.3**: Protected Routes & Auth-Gated Leaderboard Verification — gate `/leaderboard` so rankings are hidden from unauthenticated visitors, presenting a locked auth gate with Sign In CTA, and author comprehensive automated test suite.
+- **Next Step**: Run `/execute 5.1` to execute enhanced authentication and Google OAuth.
 
 ---
 
@@ -96,6 +88,11 @@ mudra/
 - [x] **Plan 4.1A**: Public Leaderboard UI & Mobile Polish (`01A-PLAN.md`) — **Complete ✅**
 - [x] **Plan 4.2A**: Milestone M2 Launch Polish & Statutory Compliance (`02A-PLAN.md`) — **Complete ✅**
 - [x] **Plan 4.3A**: Playwright E2E Suite & Multi-Device Mobile QA (`03A-PLAN.md`) — **Complete ✅**
+
+### Phase 5 Progress (`.gsd/phases/5/`)
+- [ ] **Plan 5.1**: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`) — **Ready**
+- [ ] **Plan 5.2**: Navigation Clean-up & Sign-Out Redirection (`02-PLAN.md`) — **Ready**
+- [ ] **Plan 5.3**: Protected Routes & Auth-Gated Leaderboard Verification (`03-PLAN.md`) — **Ready**
 
 ---
 

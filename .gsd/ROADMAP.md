@@ -138,6 +138,26 @@ updated: 2026-10-10T16:30:00+05:30
 
 ---
 
+### Phase 5: Auth & Navigation Flow Polish
+**Status:** 📋 Planned  
+**Objective:** Deliver streamlined authentication (email + password + pseudonym, Google OAuth, landing on `/dashboard`), sign-out redirection to `/`, cleaned Market Explorer (zero trade buttons), uncluttered hamburger navigation (removed Trade Stock), and auth-gated Leaderboard.  
+**Depends on:** Phase 4  
+
+**Plans:**
+- [ ] Plan 5.1: Enhanced Authentication — Email, Password, Pseudonym & Google OAuth (`01-PLAN.md`)
+  * Add password field and pseudonym validation to sign-in and register modes in `AuthModal.tsx`.
+  * Integrate client-side Supabase Google OAuth (`signInWithOAuth`) with `/dashboard` redirect.
+  * Direct successful credential or OAuth sign-in to `/dashboard`.
+- [ ] Plan 5.2: Navigation Clean-up & Sign-Out Redirection (`02-PLAN.md`)
+  * Remove trade action buttons and Action table column from Market Explorer (`StockTable.tsx`).
+  * Remove "Trade Stock" link from the hamburger overlay menu (`MudraMenu.tsx`) and renumber items 01 to 04.
+  * Add Sign Out action in `MudraHeader` and `MudraMenu` that clears local and Supabase session and redirects directly to home (`/`).
+- [ ] Plan 5.3: Protected Routes & Auth-Gated Leaderboard Verification (`03-PLAN.md`)
+  * Gate `/leaderboard` so rankings are only viewable by authenticated users; show an attractive locked auth prompt when logged out.
+  * Author automated test suite `tests/trading/auth_navigation.test.ts` verifying all 7 items and run full regression checks.
+
+---
+
 ## Progress Summary
 
 | Phase | Description | Active Lead | Status | Target |
@@ -146,3 +166,4 @@ updated: 2026-10-10T16:30:00+05:30
 | Phase 2 | FastAPI (Python) Conversion with Debugging by Default | Person B | ✅ Complete | Week 1.5 |
 | Phase 3 | Full Trade Experience & Settlement | Person B & Person A | ✅ Complete | Week 2 |
 | Phase 4 | Leaderboard, Hardening, Mobile Polish & Launch | Person B & Person A | ✅ Complete | Week 3 |
+| Phase 5 | Auth & Navigation Flow Polish | Person A & Person B | 📋 Planned | Week 4 |
