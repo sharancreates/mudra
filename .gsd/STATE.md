@@ -1,22 +1,25 @@
 # STATE.md — Current Project State: Mudra
 
-> **Last Updated:** 2026-10-15 20:10 IST  
+> **Last Updated:** 2026-10-15 20:25 IST  
 > **Active Milestone:** v1.0 MVP Polish & Hardening  
 > **Active Persona:** Collaborative (Person A & Person B)  
-> **Status:** Plan 5.2 Complete ✅ — Navigation Clean-up & Sign-Out Redirection
+> **Status:** Phase 5 Complete ✅ — Auth & Navigation Flow Polish
 
 ---
 
 ## Current Position
-- **Phase**: Phase 5 (Auth & Navigation Flow Polish) — **IN PROGRESS 🟡**
-- **Status**: Plan 5.2 (Navigation Clean-up & Sign-Out Redirection) — **COMPLETE ✅**
-- **Plan 5.2 Deliverables**:
-  * Removed "Action" column header and "Trade" action button cells from Market Explorer ([`StockTable.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/explorer/StockTable.tsx)). All rows cleanly navigate to `/stock/[symbol]`.
-  * Removed redundant "Trade Stock" link from hamburger menu ([`MudraMenu.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraMenu.tsx)), establishing focused 4-item numbering (01 Home, 02 Explore Market, 03 Portfolio, 04 Leaderboard).
-  * Added active trader status card and dedicated "Sign Out" button to `MudraMenu.tsx`.
-  * Added distinct "Sign Out" action button next to "Portfolio" in [`MudraHeader.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraHeader.tsx).
-  * Implemented `handleSignOut()` in [`MudraShell.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraShell.tsx): purges `mudra_user` from `localStorage`, signs out of Supabase, and explicitly redirects the user directly to home (`/`).
-- **Next Target**: Plan 5.3 (Protected Routes & Auth-Gated Leaderboard Verification — gate `/leaderboard` so rankings are hidden from unauthenticated visitors, presenting a locked auth gate with Sign In CTA, and author automated test suite).
+- **Phase**: Phase 5 (Auth & Navigation Flow Polish) — **COMPLETE ✅**
+- **Status**: Plan 5.3 (Protected Routes & Auth-Gated Leaderboard Verification) — **COMPLETE ✅**
+- **Phase 5 Deliverables (All 7 Requirements Implemented & Verified)**:
+  1. **Sign-Out Route Redirection**: Signing out in [`MudraHeader.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraHeader.tsx) or [`MudraMenu.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraMenu.tsx) clears `mudra_user` from `localStorage`, signs out of Supabase, and redirects directly to home (`/`) via [`MudraShell.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraShell.tsx).
+  2. **Market Explorer Clean-up**: Removed "Action" column header and "Trade" action button cells from Market Explorer ([`StockTable.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/explorer/StockTable.tsx)). All rows navigate to `/stock/[symbol]`.
+  3. **Auth-Gated Leaderboard**: Unauthenticated visitors on [`/leaderboard`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/app/leaderboard/page.tsx) are gated by an access-restricted card (`data-auth-gate`) with a direct "Sign In / Join Sandbox" CTA button. Rankings are visible exclusively to logged-in users.
+  4. **Hamburger Navigation Clean-up**: Removed "Trade Stock" link from [`MudraMenu.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/mudra/MudraMenu.tsx); menu is numbered 01 to 04 (Home, Explore Market, Portfolio, Leaderboard) with trader profile card and Sign Out.
+  5. **Enhanced Credentials**: [`AuthModal.tsx`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/components/auth/AuthModal.tsx) strictly requires email address, password (>= 6 chars), and leaderboard pseudonym (>= 3 chars) across both sign-in and register modes.
+  6. **Supabase Google OAuth**: "Continue with Google" in `AuthModal.tsx` integrates with `supabase.auth.signInWithOAuth` via [`supabase.ts`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/client/src/lib/supabase.ts).
+  7. **Post-Sign-In Landing on /dashboard**: Successful authentication instantly navigates to `/dashboard` both from `AuthModal.tsx` and via Supabase `SIGNED_IN` event in `MudraShell.tsx`.
+- **Automated Test Suite**: [`tests/trading/auth_navigation.test.ts`](file:///c:/Users/MANAV/Desktop/Adani%20Uni/Projects/mudra/tests/trading/auth_navigation.test.ts) passing all 7 requirement assertions.
+- **Regression Parity**: `npm test` (62/62 passing), `pytest server/tests/` (52/52 passing), `launch_audit.py` (5/5 pillars passing).
 
 ---
 
